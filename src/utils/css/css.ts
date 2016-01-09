@@ -1,20 +1,22 @@
 /// <reference path="../../../typings/tsd.d.ts" />
-var style = {
 
+let constFont = 15;
+
+let style = {
 
     font: {
         fontSize: {
-            XS: 6,
-            S: 8,
-            M: 10,
-            L: 12,
-            XL: 15,
-            XL2: 17,
-            XL3: 20,
-            XL4: 35
+            XS: constFont - 8,
+            S: constFont - 7,
+            M: constFont - 5,
+            L: constFont - 3,
+            XL: constFont,
+            XL2: constFont + 2,
+            XL3: constFont + 5,
+            XL4: constFont + 20
         },
         color: {
-            light : 'white',
+            light: 'white',
             default: 'black',
             select: 'blue',
             hint: 'gray',

@@ -11,15 +11,19 @@ let style = {
         background: 'red'
     },
 
-    text: {
+    container: {
         position: 'absolute',
         top: '45%',
         left: 0,
         width: '100%',
-        textAlign: 'center',
+        textAlign: 'center'
+    },
+
+    text: {
         color: css.font.color.light,
         fontSize: css.font.fontSize.XL3,
-    }
+        paddingBottom: 20
+    },
 }
 
 export = utils.union(css, {
@@ -29,5 +33,9 @@ export = utils.union(css, {
 
     getText() {
         return style.text;
-    }
+    },
+
+    getContainer() {
+        return style.container;
+    },
 });

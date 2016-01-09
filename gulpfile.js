@@ -23,7 +23,8 @@ gulp.task('clean', function () {
     return gulp.src([config.app.path + '/**/*']).pipe(vinylPaths(del));
 });
 
-gulp.task('copy', ['clean'], function () {
+
+gulp.task('copy', function () {
     return gulp.src([config.codePath + '/**/*']).pipe(gulp.dest(config.app.path));
 });
 
@@ -44,7 +45,7 @@ gulp.task('compile-js', ['copy'], function () {
 
 
 gulp.task("watch", function () {
-    return gulp.watch([config.codePath + '/**/*.ts'], { cwd: config.codePath }, ['compile-js']);
+    return gulp.watch([config.codePath + '/**/*.ts'], { cwd: config.codePath }, ['compile-js', 'clean']);
 })
 
 gulp.task("default", ['compile-js', 'watch'], function(){
