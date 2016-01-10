@@ -1,5 +1,5 @@
-import css = require('../utils/css/css');
-import utils = require('../utils/utils');
+import css = require('../../utils/css/css');
+import utils = require('../../utils/utils');
 
 let style = {
     panel: {

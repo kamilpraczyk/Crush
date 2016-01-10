@@ -1,25 +1,27 @@
 
 import React = require('react');
 import ReactDOM = require('react-dom');
-import GreetingsView = require('../greetings/GreetingsView');
+import components = require('../components/components');
 
 class Home {
 
     constructor(public el: HTMLElement) { }
 
     show() {
-        ReactDOM.render(React.createElement(GreetingsView, {
+      
+        return this.showEntries();//
+        
+        ReactDOM.render(components.GreetingsView({
             onClick: function() {
                 console.log('in');
-            }
-        }), this.el);
+            }}), this.el);
+    }
+
+    showEntries() {
+        console.log('showEntries');
+        ReactDOM.render(components.EntriesView({}), this.el);
     }
 }
 
 export = Home;
-
-
-
-
-
 

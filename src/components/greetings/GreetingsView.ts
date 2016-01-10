@@ -1,16 +1,16 @@
 
-/// <reference path="../../typings/tsd.d.ts" />
-import dictionary = require('../utils/dictionary');
+/// <reference path="../../../typings/tsd.d.ts" />
+import dictionary = require('../../utils/dictionary');
 import React = require('react');
 import GreetingsCss = require('./GreetingsCss');
-import components = require('../components/components');
+import components = require('../../components/components');
 
 const GreetingsView = React.createClass({
 
     propTypes: {
         onClick: React.PropTypes.func.isRequired
     },
-    
+
     getDefaultProps() {
         return {
             onClick: null
@@ -26,7 +26,7 @@ const GreetingsView = React.createClass({
             name: dictionary.GREET_START(),
             onClick: this.props.onClick
         });
-        
+
         let container = React.DOM.div({
             style: GreetingsCss.getContainer()
         }, text, button);
@@ -37,4 +37,4 @@ const GreetingsView = React.createClass({
     }
 });
 
-export = GreetingsView;
+export = React.createFactory(GreetingsView); 

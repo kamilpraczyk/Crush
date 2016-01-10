@@ -5,6 +5,7 @@ var del = require('del');
 var vinylPaths = require('vinyl-paths');
 var tsify = require('tsify');
 var source = require('vinyl-source-stream');
+var uglify = require('gulp-uglify');
 
 var tsconfig = require('./tsconfig.json');
 
@@ -44,11 +45,18 @@ gulp.task('compile-js', ['copy'], function () {
 });
 
 
+gulp.task('compress', ['compile-js'], function () {
+    return gulp.src(config.publicPath + '/*.js')
+        .pipe(uglify())
+        .pipe(gulp.dest(config.publicPath));
+});
+
+
 gulp.task("watch", function () {
-    return gulp.watch([config.codePath + '/**/*.ts'], { cwd: config.codePath }, ['compile-js', 'clean']);
+    return gulp.watch([config.codePath + '/**/*.ts'], { cwd: config.codePath }, ['compress', 'clean']);
 })
 
-gulp.task("default", ['compile-js', 'watch'], function () {
+gulp.task("default", ['compress', 'watch'], function () {
 
 });
 
