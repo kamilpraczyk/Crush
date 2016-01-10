@@ -13,7 +13,7 @@ let style = {
 
     container: {
         position: 'absolute',
-        top: '45%',
+        top: '40%',
         left: 0,
         width: '100%',
         textAlign: 'center'

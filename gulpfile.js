@@ -20,11 +20,11 @@ var config = {
 };
 
 gulp.task('clean', function () {
-    return gulp.src([config.app.path + '/**/*']).pipe(vinylPaths(del));
+    return gulp.src([config.app.path + '/']).pipe(vinylPaths(del));
 });
 
 
-gulp.task('copy', function () {
+gulp.task('copy', ['clean'], function () {
     return gulp.src([config.codePath + '/**/*']).pipe(gulp.dest(config.app.path));
 });
 
@@ -48,7 +48,7 @@ gulp.task("watch", function () {
     return gulp.watch([config.codePath + '/**/*.ts'], { cwd: config.codePath }, ['compile-js', 'clean']);
 })
 
-gulp.task("default", ['compile-js', 'watch'], function(){
-    
+gulp.task("default", ['compile-js', 'watch'], function () {
+
 });
 

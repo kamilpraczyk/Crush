@@ -6,17 +6,27 @@ import GreetingsCss = require('./GreetingsCss');
 import components = require('../components/components');
 
 const GreetingsView = React.createClass({
-    render: function() {
+
+    propTypes: {
+        onClick: React.PropTypes.func.isRequired
+    },
+    
+    getDefaultProps() {
+        return {
+            onClick: null
+        }
+    },
+
+    render() {
         let text = React.DOM.div({
             style: GreetingsCss.getText()
         }, dictionary.GREET_HELLO({ name: 'Jadie' }));
 
         let button = components.Button({
             name: dictionary.GREET_START(),
-            onClick: function() {
-                console.log('click!!!');
-            }
+            onClick: this.props.onClick
         });
+        
         let container = React.DOM.div({
             style: GreetingsCss.getContainer()
         }, text, button);

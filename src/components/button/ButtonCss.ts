@@ -1,7 +1,7 @@
 import css = require('../../utils/css/css');
 import utils = require('../../utils/utils');
 
-let style = {
+let styles = {
 
     button: {
         backgroundColor: '#44c767',
@@ -20,19 +20,20 @@ let style = {
     },
 
     buttonActive: {
-        backgroundColor: '#5cbf2a'
-    },
-    buttonHover: {
-
         position: 'relative',
+        backgroundColor: '#5cbf2a',
         top: 1
     },
 }
 
 export = utils.union(css, {
 
-    getButton() {
-        return style.button;
+    getButton(active: boolean) {
+        let style = styles.button;
+        if (active)
+            style = utils.union(style, styles.buttonActive);
+
+        return style;
     },
 
 
