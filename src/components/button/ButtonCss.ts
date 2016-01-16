@@ -19,20 +19,25 @@ let styles = {
         textShadow: '0px 1px 0px #2f6627'
     },
 
-    buttonActive: {
+    active: {
         position: 'relative',
         backgroundColor: '#5cbf2a',
         top: 1
+    },
+    isExpand: {
+       width : '100%',
+       height : '100%'
     },
 }
 
 export = utils.union(css, {
 
-    getButton(active: boolean) {
+    getButton(options: { active: boolean, isExpand: boolean }) {
         let style = styles.button;
-        if (active)
-            style = utils.union(style, styles.buttonActive);
-
+        if (options.active)
+            style = css.get(style, styles.active);
+        if (options.isExpand)
+            style =css.get(style, styles.isExpand);
         return style;
     },
 

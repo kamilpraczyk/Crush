@@ -3,38 +3,44 @@
 import dictionary = require('../../utils/dictionary');
 import React = require('react');
 import GreetingsCss = require('./GreetingsCss');
-import components = require('../../components/components');
+import ButtonView = require('../../components/button/ButtonView');
 
-const GreetingsView = React.createClass({
+interface GreetingsViewPropsFace {
+    name : string,
+    onClick: Function
+}
+interface GreetingsViewStateFace { }
 
-    propTypes: {
-        onClick: React.PropTypes.func.isRequired
-    },
+class GreetingsView extends React.Component<GreetingsViewPropsFace, GreetingsViewStateFace>{
 
-    getDefaultProps() {
-        return {
-            onClick: null
-        }
-    },
 
-    render() {
-        let text = React.DOM.div({
+    constructor(props: GreetingsViewPropsFace) {
+        super(props)
+    }
+
+    getText() {
+        return React.DOM.div({
             style: GreetingsCss.getText()
-        }, dictionary.GREET_HELLO({ name: 'Jadie' }));
-
-        let button = components.Button({
+        }, dictionary.GREET_HELLO({ name: this.props.name }));
+    }
+    getButton() {
+        return ButtonView({
             name: dictionary.GREET_START(),
             onClick: this.props.onClick
         });
+    }
 
-        let container = React.DOM.div({
+    getContainer() {
+        return React.DOM.div({
             style: GreetingsCss.getContainer()
-        }, text, button);
+        }, this.getText(), this.getButton());
+    }
 
+    public render() {
         return React.DOM.div({
             style: GreetingsCss.getPanel()
-        }, container);
+        }, this.getContainer());
     }
-});
+};
 
 export = React.createFactory(GreetingsView); 

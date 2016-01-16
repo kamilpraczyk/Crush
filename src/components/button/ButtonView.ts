@@ -1,27 +1,41 @@
 import React = require('react');
 import ButtonCss = require('./ButtonCss');
 
+interface ButtonViewPropsFace {
+    name: string,
+    onClick: Function,
+    isExpand?: boolean,
+}
 
-const ButtonView = React.createClass({
+interface ButtonViewStateFace {
+    active: boolean
+}
 
-    getInitialState() {
-        return {
+class ButtonView extends React.Component<ButtonViewPropsFace, ButtonViewStateFace>{
+
+    constructor(props: ButtonViewPropsFace) {
+        super(props)
+        this.state = {
             active: false
-        };
-    },
+        }
+        this.clickHandler = this.clickHandler.bind(this);
+    }
 
-     clickHandler(e: Event) {
+    clickHandler(e: any) {
         e.preventDefault();
         this.setState({ active: true });
         this.props.onClick();
-    },
+    }
 
-    render() {
+    public render() {
         return React.DOM.button({
-            style: ButtonCss.getButton(this.state.active),
+            style: ButtonCss.getButton({
+                active: this.state.active,
+                isExpand: this.props.isExpand
+            }),
             onClick: this.clickHandler
         }, this.props.name);
     }
-});
+};
 
 export =  React.createFactory(ButtonView);

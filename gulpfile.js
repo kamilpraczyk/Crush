@@ -3,9 +3,11 @@ var browserify = require('browserify');
 var ts = require("gulp-typescript");
 var del = require('del');
 var vinylPaths = require('vinyl-paths');
+var buffer = require('vinyl-buffer');
 var tsify = require('tsify');
 var source = require('vinyl-source-stream');
 var uglify = require('gulp-uglify');
+var sourcemaps = require('gulp-sourcemaps');
 
 var tsconfig = require('./tsconfig.json');
 
@@ -34,7 +36,8 @@ gulp.task('compile-js', ['copy'], function () {
 
     return browserify({
         basedir: config.app.path,
-        plugin: [["tsify", tsconfig.compilerOptions]]
+        plugin: [["tsify", tsconfig.compilerOptions]],
+        debug: true
     })
         .add(config.app.path + '/' + config.app.main)
         .plugin(tsify)
@@ -47,16 +50,21 @@ gulp.task('compile-js', ['copy'], function () {
 
 gulp.task('compress', ['compile-js'], function () {
     return gulp.src(config.publicPath + '/*.js')
+        .pipe(sourcemaps.init())
         .pipe(uglify())
+        .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(config.publicPath));
 });
 
-
 gulp.task("watch", function () {
-    return gulp.watch([config.codePath + '/**/*.ts'], { cwd: config.codePath }, ['compress', 'clean']);
+    return gulp.watch([config.codePath + '/**/*.ts'], { cwd: config.codePath }, ['compile-js', 'clean']);
 })
 
-gulp.task("default", ['compress', 'watch'], function () {
+gulp.task("default", ['compile-js', 'watch'], function () {
+
+});
+
+gulp.task("build", ['compress'], function () {
 
 });
 
