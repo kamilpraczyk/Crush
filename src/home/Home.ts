@@ -28,8 +28,9 @@ class Home {
         this.boardRegion = regions.boardRegion;
         this.settingsRegion = regions.settingsRegion;
         this.greetingsRegion = regions.greetingsRegion;
-       // this.showGreetings();
+        // this.showGreetings();
         this.showSettings();
+        this.showBoard();
     }
 
     showGreetings() {
@@ -45,9 +46,10 @@ class Home {
             rootList: []
         }), this.settingsRegion);
     }
-     
-    showBoard(){
-        
+
+    showBoard() {
+        ReactDOM.render(components.BoardView({
+        }), this.boardRegion);
     }
 
 

@@ -8,7 +8,8 @@ import ButtonView = require('../../../button/ButtonView');
 
 interface SwitcherViewPropsFace {
     id: string,
-    name: string
+    name: string,
+    active : boolean
 }
 interface SwitcherViewStateFace {}
 
@@ -27,12 +28,12 @@ class SwitcherView extends React.Component<SwitcherViewPropsFace, SwitcherViewSt
         return ButtonView({
             name: this.props.name,
             onClick: this.handleClick,
-            isExpand: true
+            isExpandWidth: true,
+            isActive : this.props.active
         });
     }
 
     public render() {
-        console.log('switcher', this.props);
         return React.DOM.div({
             style: SwitchCss.getPanel()
         }, this.getButton());

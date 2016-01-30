@@ -3,6 +3,16 @@ import utils = require('../../utils/utils');
 
 let styles = {
 
+    panelMinimalized : {
+        position: 'absolute',
+        top : 10,
+        right : 10,
+        border : '1px solid black',
+        width : 90,
+        height : 90,
+        cursor : css.cursor.pointer 
+    },
+    
     panel: {
         position: 'absolute',
         top: 0,
@@ -71,6 +81,10 @@ export = utils.union(css, {
 
     getPanelContent() {
         return styles.panelContent;
+    },
+    
+    getPanelMinimalized(){
+      return styles.panelMinimalized;  
     },
 
     getPanelSelection() {

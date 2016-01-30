@@ -14,7 +14,8 @@ const AppDispatcher = utils.union3({}, Dispatcher.prototype, {
             source: 'VIEW_ACTION',
             action: action
         });
-    }
+    },
+    
 
 });
 
@@ -22,4 +23,5 @@ export = {
     handleViewAction: AppDispatcher.handleViewAction,
     register: AppDispatcher.register,
     dispatch: AppDispatcher.dispatch,
+    waitFor : AppDispatcher.waitFor
 };

@@ -10,7 +10,7 @@ let styles = {
     },
     
     button : {
-      color : 'red'
+      color : '#AAA'
     }
 }
 

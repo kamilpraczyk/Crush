@@ -44,7 +44,19 @@ Dispatcher.prototype = utils.union3({}, Dispatcher.prototype, {
             });
         });
         _promises = [];
-    }
+    },
+    
+    
+    /**
+   * @param  {array} promiseIndexes
+   * @param  {function} callback
+   */
+  waitFor: function(promiseIndexes: Array<any>, callback:Function) {
+    var selectedPromises = promiseIndexes.map(function(index) {
+      return _promises[index];
+    });
+    return Promise.all(selectedPromises).then(callback);
+  }
 });
 
 export = Dispatcher;

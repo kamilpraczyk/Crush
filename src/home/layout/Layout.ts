@@ -15,19 +15,22 @@ class Layout extends React.Component<LayoutPropsFace, LayoutStateFace>{
 
     _getSettingsRegionEl() {
         return React.DOM.div({
-            ref: 'settingsRegion'
+            ref: 'settingsRegion',
+            key: 'settingsRegion'
         });
     }
 
     _getBoardRegionEl() {
         return React.DOM.div({
-            ref: 'boardRegion'
+            ref: 'boardRegion',
+            key: 'boardRegion'
         });
     }
 
     _getGreetingsRegionEl() {
         return React.DOM.div({
-            ref: 'greetingsRegion'
+            ref: 'greetingsRegion',
+            key: 'greetingsRegion'
         });
     }
 

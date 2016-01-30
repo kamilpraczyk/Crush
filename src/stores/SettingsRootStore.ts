@@ -12,6 +12,8 @@ let _ids = {
     settings: 'settingsss'
 }
 
+let _isMinimalized = true;
+
 let _activeRoot = _ids.lessons;
 
 let _rootList = {
@@ -32,24 +34,22 @@ let _rootList = {
 };
 
 
-function onClickRootItem(id: string): boolean {
+function onClickRootItem(id: string) {
 
     if (id === _ids.close) {
-        //close menu
-        console.log('close!!');
-        return false;
+        _isMinimalized = true;
     } else {
+        _isMinimalized = false;
         if (_rootList[_activeRoot])
             _rootList[_activeRoot].active = false
 
         _activeRoot = id;
         _rootList[_activeRoot].active = true;
     }
-    return true;
 }
 
 
-const Store =createStore( {
+const Store = createStore({
 
     getRootList: function() {
         return _rootList;
@@ -59,6 +59,10 @@ const Store =createStore( {
         return _activeRoot;
     },
 
+    isMinimalized: function() {
+        return _isMinimalized;
+    },
+
     ids: _ids,
 
     dispatcherIndex: AppDispatcher.register(function(payload: { action: any }) {
@@ -66,9 +70,14 @@ const Store =createStore( {
 
         switch (action.actionType) {
             case Constants.ROOT_ITEM_CLICK:
-                if (onClickRootItem(action.id))
-                    Store.emitChange();
+                onClickRootItem(action.id)
+                Store.emitChange();
                 break;
+            case Constants.MAXIMALIZE_SETTINGS:
+                _isMinimalized = false;
+                Store.emitChange();
+                break;
+
         }
         return true;
     })

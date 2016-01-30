@@ -12,7 +12,8 @@ const RootStore = SettingRootStore.Store;
 
 function getState() {
     return {
-        rootList: RootStore.getRootList()
+        rootList: RootStore.getRootList(),
+        isMinimalized: RootStore.isMinimalized()
     };
 }
 
@@ -21,7 +22,8 @@ interface RootViewPropsFace {
 }
 
 interface RootViewStateFace {
-    rootList: { item: any, id: string }
+    rootList: { item: any, id: string },
+    isMinimalized: boolean
 }
 
 class SettingRootView extends React.Component<RootViewPropsFace, RootViewStateFace> {
@@ -31,6 +33,7 @@ class SettingRootView extends React.Component<RootViewPropsFace, RootViewStateFa
         super(props);
         this.state = getState();
         this.onChange = this.onChange.bind(this);
+        this._onMinimalizeClick = this._onMinimalizeClick.bind(this);
     }
 
     public componentDidMount() {
@@ -47,6 +50,10 @@ class SettingRootView extends React.Component<RootViewPropsFace, RootViewStateFa
 
     _onRootClick(id: string) {
         SettingsRootActions.requestRootItem(id);
+    }
+
+    _onMinimalizeClick() {
+        SettingsRootActions.requestMaximalizeSettings();
     }
 
     getPanelSelection() {
@@ -91,7 +98,7 @@ class SettingRootView extends React.Component<RootViewPropsFace, RootViewStateFa
         }, this.getRootList());
     }
 
-    public render() {
+    getMaximalized() {
         console.log(this.state);
         let panelContent = React.DOM.div({
             style: SettingsRootCss.getPanelContent()
@@ -100,6 +107,20 @@ class SettingRootView extends React.Component<RootViewPropsFace, RootViewStateFa
         return React.DOM.div({
             style: SettingsRootCss.getPanel()
         }, panelContent);
+    }
+
+    getMinimalized() {
+        return React.DOM.div({
+            style: SettingsRootCss.getPanelMinimalized(),
+            onClick: this._onMinimalizeClick
+        });
+    }
+
+    public render() {
+        if (this.state.isMinimalized) {
+            return this.getMinimalized();
+        }
+        return this.getMaximalized();
     }
 
 }

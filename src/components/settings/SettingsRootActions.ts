@@ -10,6 +10,12 @@ const Actions = {
             id: id
         });
     },
+    
+    requestMaximalizeSettings: function() {
+        AppDispatcher.handleViewAction({
+            actionType: Constants.MAXIMALIZE_SETTINGS
+        });
+    },
 
 
 

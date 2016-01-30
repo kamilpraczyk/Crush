@@ -3,8 +3,13 @@ import _ = require("underscore");
 
 export = {
     union,
-    union3
+    union3,
+    first
 };
+
+function first(obj: any) {
+    for (var a in obj) return a;
+}
 
 function union<T, U>(first: T, second: U): T & U {
     let result = <T & U>{};

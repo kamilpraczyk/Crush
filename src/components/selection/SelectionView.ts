@@ -4,6 +4,8 @@ import _ = require('underscore');
 import SelectionCss = require('./SelectionCss');
 import SelectionStore = require('../../stores/SelectionStore');
 import SwitcherView = require('./views/switcher/SwitcherView');
+import {LessonMapFace, LessonFace} from '../../stores/settingStores/LessonsInterfaces';
+import {SettingMapFace, SettingFace} from '../../stores/settingStores/SettingInterfaces';
 
 function getState() {
     return {
@@ -14,7 +16,7 @@ interface SelectionViewPropsFace {
 
 }
 interface SelectionViewStateFace {
-    list: Array<any>
+    list: LessonMapFace
 }
 
 class SelectionView extends React.Component<SelectionViewPropsFace, SelectionViewStateFace>{
@@ -39,11 +41,14 @@ class SelectionView extends React.Component<SelectionViewPropsFace, SelectionVie
     }
 
     getList() {
-        return _.map(this.state.list, function(item: any, id: string) {
-            return SwitcherView(_.extend({
-                key: id,
-                id: id
-            }, item));
+        return _.map(this.state.list, function(item: LessonFace | SettingFace, id: string) {
+            if (!item.hide) {
+                return SwitcherView(_.extend({
+                    key: id,
+                    id: id
+                }, item));
+            }
+            return null;
         });
     }
 
