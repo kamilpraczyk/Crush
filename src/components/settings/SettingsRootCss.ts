@@ -10,7 +10,7 @@ let styles = {
         border : '1px solid black',
         width : 90,
         height : 90,
-        cursor : css.cursor.pointer 
+        cursor : css.cursor.pointer
     },
     
     panel: {
@@ -69,6 +69,10 @@ let styles = {
     itemText: {
         textTransform: 'capitalize'
     },
+    
+    icon : {
+        fontSize : 40
+    }
 
 
 }
@@ -112,8 +116,9 @@ export = utils.union(css, {
 
     getItemText() {
         return styles.itemText;
+    },
+    
+    getIcon(){
+        return styles.icon;
     }
-
-
-
 });

@@ -2,50 +2,44 @@ import React = require('react');
 import BoardCss = require('./BoardCss');
 import BoardStore = require('../../stores/board/BoardStore');
 import DrawView = require('./draw/DrawView');
+import QuatroView = require('./quatro/QuatroView');
+import {BoardFace, BoardsArrayFaces} from '../../stores/board/BoardInterfaces';
+const {div} = React.DOM;
 
-function getState() {
-    return {
-        data: BoardStore.getData()
+function getView() {
+    let ids = BoardStore.getSettingsIds()
+    switch (BoardStore.getActiveSettingId()) {
+        case ids.draw:
+            return DrawView()
+        case ids.qutro:
+            return QuatroView()
     }
 }
 
-interface BoardViewPropsFace {
-}
 
-interface BoardViewStateFace {
-    data: any
-}
+class BoardView extends React.Component<{}, {}>{
 
-class BoardView extends React.Component<BoardViewPropsFace, BoardViewStateFace>{
-
-    constructor(props: BoardViewPropsFace) {
-        super(props)
-        this.state = getState();
+    constructor() {
+        super();
         this.onChange = this.onChange.bind(this);
     }
 
     onChange() {
-        this.setState(getState())
+        this.setState({})
     }
 
-
-    public componentDidMount() {
+    componentDidMount() {
         BoardStore.addChangeListener(this.onChange);
     }
 
-    public componentWillUnmount() {
+    componentWillUnmount() {
         BoardStore.removeChangeListener(this.onChange);
     }
 
-    getDrawView() {
-        return DrawView();
-    }
-
-    public render() {
-        console.log(this.state.data);
-        return React.DOM.div({
+    render() {
+        return div({
             style: BoardCss.getPanel()
-        }, this.getDrawView());
+        }, getView());
     }
 };
 

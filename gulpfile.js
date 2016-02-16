@@ -8,9 +8,12 @@ var tsify = require('tsify');
 var source = require('vinyl-source-stream');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
+var runSequence = require('run-sequence');
+
+
 
 var tsconfig = require('./tsconfig.json');
-
+var cordova = require("cordova-lib").cordova;
 
 var config = {
     codePath: __dirname + '/src',// where is code
@@ -19,6 +22,9 @@ var config = {
         path: __dirname + '/temp', //where is copied code of app
         main: 'app.ts',
         result: 'app.js'
+    },
+    cordova: {
+        result: 'www/js/'
     }
 };
 
@@ -27,12 +33,12 @@ gulp.task('clean', function () {
 });
 
 
-gulp.task('copy', ['clean'], function () {
+gulp.task('copy', function () {
     return gulp.src([config.codePath + '/**/*']).pipe(gulp.dest(config.app.path));
 });
 
 
-gulp.task('compile-js', ['copy'], function () {
+gulp.task('compile-js', function () {
 
     return browserify({
         basedir: config.app.path,
@@ -48,23 +54,58 @@ gulp.task('compile-js', ['copy'], function () {
 });
 
 
-gulp.task('compress', ['compile-js'], function () {
+gulp.task('compress', function () {
     return gulp.src(config.publicPath + '/*.js')
         .pipe(sourcemaps.init())
         .pipe(uglify())
-        .pipe(sourcemaps.write('./'))
+    //.pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(config.publicPath));
 });
 
+
+gulp.task('toCordova', function () {
+    return gulp.src([config.publicPath + '/**/*']).pipe(gulp.dest(config.cordova.result));
+});
+
+
+
+gulp.task("package", function () {
+
+    return cordova.build({
+        "platforms": ["browser"],//android ios windows wp8
+        "options": {
+            argv: ["--release", "--gradleArg=--no-daemon"]
+        }
+
+    }, function () {
+        cordova.plugins(
+            'add',
+            "cc.fovea.cordova.purchase",
+            {"options":{ variable:["BILLING_KEY=MIIBAQAB"]}}
+
+            );
+            cordova.run({
+                "platforms": ["browser"]
+           })
+
+    });
+    
+    
+    //   "options": ["BILLING_KEY='MIIB...AQAB'"]
+    //       ]
+    //    }
+});
+
+
+
 gulp.task("watch", function () {
-    return gulp.watch([config.codePath + '/**/*.ts'], { cwd: config.codePath }, ['compile-js', 'clean']);
+    return gulp.watch([config.codePath + '/**/*.ts', config.codePath + '/**/*.js'], { cwd: config.codePath }, ['default', 'clean']);
 })
 
-gulp.task("default", ['compile-js', 'watch'], function () {
-
+gulp.task("default", function (cb) {
+    runSequence('clean', 'copy', 'compile-js', 'toCordova', 'package', 'clean', 'watch', cb);
 });
 
-gulp.task("build", ['compress'], function () {
-
+gulp.task("build", function (cb) {
+    runSequence('clean', 'copy', 'compile-js', 'compress', 'toCordova', 'package', 'clean', 'watch', cb);
 });
-

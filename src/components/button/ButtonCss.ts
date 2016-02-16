@@ -1,14 +1,14 @@
 import css = require('../../utils/css/css');
 import utils = require('../../utils/utils');
 
-let normal = 'rgb(122, 127, 130)';
-let active = '#3498db';
-let pressed = '#56BAFD';
+let normal = 'rgb(154, 93, 35)';
+let active = 'rgb(204, 152, 75)';
+let pressed = 'rgb(208, 161, 110)';
 
 let styles = {
 
     button: {
-        textTransform : 'capitalize',
+        textTransform: 'capitalize',
         backgroundColor: normal,
         MozBorderRadius: 28,
         WebkitBorderRadius: 28,

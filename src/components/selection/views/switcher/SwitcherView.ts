@@ -4,14 +4,14 @@ import _ = require('underscore');
 import SwitchCss = require('./SwitchCss');
 import SwitcherActions = require('./SwitcherActions');
 import ButtonView = require('../../../button/ButtonView');
-
+const {div} = React.DOM;
 
 interface SwitcherViewPropsFace {
     id: string,
     name: string,
-    active : boolean
+    active: boolean
 }
-interface SwitcherViewStateFace {}
+interface SwitcherViewStateFace { }
 
 class SwitcherView extends React.Component<SwitcherViewPropsFace, SwitcherViewStateFace>{
 
@@ -29,12 +29,12 @@ class SwitcherView extends React.Component<SwitcherViewPropsFace, SwitcherViewSt
             name: this.props.name,
             onClick: this.handleClick,
             isExpandWidth: true,
-            isActive : this.props.active
+            isActive: this.props.active
         });
     }
 
     public render() {
-        return React.DOM.div({
+        return div({
             style: SwitchCss.getPanel()
         }, this.getButton());
     }

@@ -1,60 +1,67 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 import {SettingMapFace, SettingFace} from './SettingInterfaces';
-import AppDispatcher = require('../../dispatcher/AppDispatcher');
 import Constants = require('../../constants/Constants');
-import { createStore }from '../../utils/store/utilsStore';
+import BaseStore from '../../utils/store/BaseStore';
 import utils = require('../../utils/utils');
 
+let ids = {
+    draw: 'draw',
+    qutro: 'qutro'
+}
+
 let _setting: SettingMapFace = {
-    'draw': {
-        name: 'draw',
+    [ids.draw]: {
+        name: 'Write',
         disable: false,
         active: false,
     },
-    'setting2': {
-        name: 'setting 2',
+    [ids.qutro]: {
+        name: '4 pictures',
         disable: false,
         active: false
     }
 };
 
-let _active = utils.first(_setting);
+let _active = ids.qutro;
 
 _setting[_active].active = true;
 
 function onSwitchAction(id: string) {
-    if (_setting[id]) {
-        _setting[id].active = !_setting[id].active;
+    if (ids[id]) {
+        _setting[_active].active = false;
+        _setting[id].active = true;
+        _active = id;
     }
 }
 
-
-const Store = createStore({
-    getAll: function(): any {
+class SettingStore extends BaseStore {
+    constructor(){
+        super()
+    }
+    getAll() {
         return _setting;
-    },
-    getItem: function(id: string): any {
+    }
+    getItem(id: string) {
         return _setting[id]
-    },
-    getActiveItem: function() {
-        return _setting[_active];
-    },
-    getActiveId: function() {
+    }
+    getActiveId() {
         return _active;
-    },
+    }
+    getIds() {
+        return ids;
+    }
 
-
-    dispatcherIndex: AppDispatcher.register(function(payload: { action: any }) {
+    dispatcherIndex = this.register(function(payload: { action: any }) {
         var action = payload.action;
 
         switch (action.actionType) {
             case Constants.SWITCH_ACTION:
-                onSwitchAction(action.id)
+                onSwitchAction(action.id);
                 break;
         }
         return true;
     })
 
-});
-
-export = Store;
+};
+const settingStore = new SettingStore();
+export = settingStore;

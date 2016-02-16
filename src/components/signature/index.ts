@@ -358,8 +358,7 @@ class SignaturePad extends React.Component<SignaturePadPropsFace, SignaturePadSt
             ref: 'cv',
             style: {
                 width: '100%',
-                height: '100%',
-                border: '1px solid gray'
+                height: '100%'
             }
         })
    

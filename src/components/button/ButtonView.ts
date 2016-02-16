@@ -1,8 +1,10 @@
 import React = require('react');
 import ButtonCss = require('./ButtonCss');
+const {div, button} = React.DOM;
 
 interface ButtonViewPropsFace {
     name: string,
+    icon?: string,
     onClick: Function,
     isExpand?: boolean,
     isActive?: boolean,
@@ -44,7 +46,14 @@ class ButtonView extends React.Component<ButtonViewPropsFace, ButtonViewStateFac
 
 
     public render() {
-        return React.DOM.button({
+        let icon = null as any;
+        if(this.props.icon){
+            icon = div({
+                className :  this.props.icon
+            })
+        }
+        
+        return button({
             style: ButtonCss.getButton({
                 pressed: this.state.pressed,
                 isExpand: this.props.isExpand,
@@ -52,7 +61,7 @@ class ButtonView extends React.Component<ButtonViewPropsFace, ButtonViewStateFac
                 isActive: this.props.isActive
             }),
             onClick: this.clickHandler
-        }, this.props.name);
+        },icon? icon : this.props.name);
     }
 };
 

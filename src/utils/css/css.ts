@@ -1,6 +1,7 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 import _ = require("underscore");
-let constFont = 15;
+let constFont = 4.5;
+let constPoint = 'vh'
 
 let style = {
 
@@ -14,21 +15,32 @@ let style = {
         return res;
     },
 
-    cursor :{
-        normal : 'default',
-        pointer : 'pointer'
+
+    animate: function(callback: Function, object?: any) {
+        if (callback) {
+            return function(e: any) {
+                var call = object ? _.partial(callback, object, _.extend({}, e) as any) : callback;
+                call();
+            };
+        }
+        return null;
+    },
+
+    cursor: {
+        normal: 'default',
+        pointer: 'pointer'
     },
 
     font: {
         fontSize: {
-            XS: constFont - 8,
-            S: constFont - 7,
-            M: constFont - 5,
-            L: constFont - 3,
-            XL: constFont,
-            XL2: constFont + 2,
-            XL3: constFont + 5,
-            XL4: constFont + 20
+            XS: constFont - 0.8 + constPoint,
+            S: constFont - 0.7 + constPoint,
+            M: constFont - 0.5 + constPoint,
+            L: constFont - 0.3 + constPoint,
+            XL: constFont + constPoint,
+            XL2: constFont + 0.2 + constPoint,
+            XL3: constFont + 0.5 + constPoint,
+            XL4: constFont + 2.0 + constPoint
         },
         color: {
             light: 'white',
@@ -36,6 +48,19 @@ let style = {
             select: 'blue',
             hint: 'gray',
             disable: 'lightgray'
+        }
+    },
+
+    themes: {
+        standard: {
+            backgroundImage: 'url("img/wood.jpg")',
+        },
+
+        draw: {
+            canvasBackgroundColor: 'transparent'
+        },
+        quatro: {
+
         }
     }
 

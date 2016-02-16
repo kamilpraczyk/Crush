@@ -16,9 +16,16 @@
         "react": "0.14.6",
         "react-dom": "0.14.6",
         "underscore": "1.8.3",
-        "es6-promise" : "3.0.2",
-        "gulp-uglify" : "1.5.1",
-        "gulp-sourcemaps":"1.6.0",
-        "vinyl-buffer":"1.0.0"
+        "es6-promise": "3.0.2",
+        "gulp-uglify": "1.5.1",
+        "gulp-sourcemaps": "1.6.0",
+        "vinyl-buffer": "1.0.0",
+        "mp.cc.fovea.cordova.purchase": "4.0.0",
+        "cordova-android": "^3.5.1",
+        "run-sequence": "1.1.5"
+    },
+    "devDependencies": {
+        "gulp": "latest",
+        "cordova-lib": "6.0.0"
     }
 }

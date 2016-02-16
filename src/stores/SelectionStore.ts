@@ -1,16 +1,14 @@
 /// <reference path="../../typings/tsd.d.ts" />
-import AppDispatcher = require('../dispatcher/AppDispatcher');
 import Constants = require('../constants/Constants');
-import { createStore }from '../utils/store/utilsStore';
+import BaseStore from '../utils/store/BaseStore';
 import SettingsRootStore = require('./SettingsRootStore');
 
 import LessonStore = require('./settingStores/LessonStore');
 import SettingStore = require('./settingStores/SettingStore');
 
-const ids = SettingsRootStore.ids;
-
 const getList = function(): any {
-    switch (SettingsRootStore.Store.getActiveRoot()) {
+    const ids = SettingsRootStore.getIds();
+    switch (SettingsRootStore.getActiveRoot()) {
         case ids.settings:
             return SettingStore.getAll();
         case ids.lessons:
@@ -18,31 +16,34 @@ const getList = function(): any {
     }
 }
 
+class SelectionStore extends BaseStore {
 
-const Store = createStore({
+    constructor() {
+        super()
+    }
 
-    getList: function() {
+    getList() {
         return getList();
-    },
+    }
 
-    dispatcherIndex: AppDispatcher.register(function(payload: { action: any }) {
+    dispatcherIndex = this.register((payload: { action: any })=> {
         var action = payload.action;
 
         switch (action.actionType) {
 
             case Constants.SWITCH_ACTION:
-                AppDispatcher.waitFor([SettingStore.dispatcherIndex, LessonStore.dispatcherIndex], function() {
-                    Store.emitChange();
+                this.waitFor([SettingStore.dispatcherIndex, LessonStore.dispatcherIndex], () => {
+                    this.emitChange();
                 });
 
                 break;
             case Constants.ROOT_ITEM_CLICK:
-                Store.emitChange();
+                this.emitChange();
                 break;
         }
         return true;
     })
+}
 
-});
-
-export = Store;
+const selectionStore = new SelectionStore();
+export = selectionStore;

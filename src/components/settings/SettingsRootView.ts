@@ -7,22 +7,21 @@ import SettingsRootCss = require('./SettingsRootCss');
 import SettingsRootActions = require('./SettingsRootActions');
 import SettingRootStore = require('../../stores/SettingsRootStore');
 import SelectionView = require('../selection/SelectionView')
-
-const RootStore = SettingRootStore.Store;
+import {RootFace, RootFaces } from '../../stores/SettingsRootInterfaces';
+const {div} = React.DOM;
 
 function getState() {
     return {
-        rootList: RootStore.getRootList(),
-        isMinimalized: RootStore.isMinimalized()
+        rootList: SettingRootStore.getRootList(),
+        isMinimalized: SettingRootStore.isMinimalized()
     };
 }
-
 
 interface RootViewPropsFace {
 }
 
 interface RootViewStateFace {
-    rootList: { item: any, id: string },
+    rootList: RootFaces,
     isMinimalized: boolean
 }
 
@@ -37,11 +36,11 @@ class SettingRootView extends React.Component<RootViewPropsFace, RootViewStateFa
     }
 
     public componentDidMount() {
-        RootStore.addChangeListener(this.onChange);
+        SettingRootStore.addChangeListener(this.onChange);
     }
 
     public componentWillUnmount() {
-        RootStore.removeChangeListener(this.onChange);
+        SettingRootStore.removeChangeListener(this.onChange);
     }
 
     onChange() {
@@ -57,18 +56,23 @@ class SettingRootView extends React.Component<RootViewPropsFace, RootViewStateFa
     }
 
     getPanelSelection() {
-        return React.DOM.div({
+        return div({
             key: 'panelSelection',
             style: SettingsRootCss.getPanelSelection()
         }, SelectionView());
     }
 
     getItem(item: any, id: string) {
-        let text = React.DOM.div({
-            style: SettingsRootCss.getItemText(),
-        }, item.name);
+        let icon = div({
+            className: item.icon,
+            style: SettingsRootCss.getIcon()
+        });
 
-        return React.DOM.div({
+        let text = div({
+            style: SettingsRootCss.getItemText(),
+        }, item.icon ? icon : item.name);
+
+        return div({
             style: SettingsRootCss.getItem(item.active),
             onClick: function() {
                 this._onRootClick(id)
@@ -79,38 +83,37 @@ class SettingRootView extends React.Component<RootViewPropsFace, RootViewStateFa
     getRootList() {
         let list = _.map(this.state.rootList, function(item: any, id: string) {
             if (!item.disable) {
-                return React.DOM.div({
+                return div({
                     key: id,
                     style: SettingsRootCss.getRootItem(),
                 }, this.getItem(item, id));
             }
             return null;
         }, this);
-        return React.DOM.div({
+        return div({
             style: SettingsRootCss.getRootList(),
         }, list);
     }
 
     getPanelRoot() {
-        return React.DOM.div({
+        return div({
             key: 'panelRoot',
             style: SettingsRootCss.getPanelRoot()
         }, this.getRootList());
     }
 
     getMaximalized() {
-        console.log(this.state);
-        let panelContent = React.DOM.div({
+        let panelContent = div({
             style: SettingsRootCss.getPanelContent()
         }, this.getPanelSelection(), this.getPanelRoot());
 
-        return React.DOM.div({
+        return div({
             style: SettingsRootCss.getPanel()
         }, panelContent);
     }
 
     getMinimalized() {
-        return React.DOM.div({
+        return div({
             style: SettingsRootCss.getPanelMinimalized(),
             onClick: this._onMinimalizeClick
         });

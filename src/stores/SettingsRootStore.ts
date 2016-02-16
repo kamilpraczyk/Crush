@@ -1,15 +1,16 @@
 /// <reference path="../../typings/tsd.d.ts" />
-import AppDispatcher = require('../dispatcher/AppDispatcher');
 import Constants = require('../constants/Constants');
 import utils = require('../utils/utils');
 import _ = require('underscore');
-import { createStore }from '../utils/store/utilsStore';
+import {RootFace, RootFaces } from './SettingsRootInterfaces';
+import BaseStore from '../utils/store/BaseStore';
 
 
-let _ids = {
+
+const _ids = {
     close: 'close',
-    lessons: 'lessonsxx',
-    settings: 'settingsss'
+    lessons: 'lessons',
+    settings: 'setting'
 }
 
 let _isMinimalized = true;
@@ -19,19 +20,23 @@ let _activeRoot = _ids.lessons;
 let _rootList = {
 
     [_ids.close]: {
-        name: 'X'
+        icon: 'icon-cancel',
+        active: false,
+        disable: false
     },
     [_ids.lessons]: {
         name: 'lessons',
+        icon: 'icon-graduation-cap',
         active: true,
         disable: false
     },
     [_ids.settings]: {
         name: 'settings',
+        icon: 'icon-sliders',
         active: false,
         disable: false
     }
-};
+} as RootFaces;
 
 
 function onClickRootItem(id: string) {
@@ -49,42 +54,47 @@ function onClickRootItem(id: string) {
 }
 
 
-const Store = createStore({
+class SettingRootStore extends BaseStore {
+    private ids = _ids
 
-    getRootList: function() {
+    constructor() {
+        super()
+    }
+
+    getIds() {
+        return this.ids;
+    }
+
+    getRootList() {
         return _rootList;
-    },
+    }
 
-    getActiveRoot: function() {
+    getActiveRoot() {
         return _activeRoot;
-    },
+    }
 
-    isMinimalized: function() {
+    isMinimalized() {
         return _isMinimalized;
-    },
+    }
 
-    ids: _ids,
-
-    dispatcherIndex: AppDispatcher.register(function(payload: { action: any }) {
-        var action = payload.action;
+    dispatcherIndex = this.register((payload: { action: any }) => {
+        let action = payload.action;
 
         switch (action.actionType) {
             case Constants.ROOT_ITEM_CLICK:
                 onClickRootItem(action.id)
-                Store.emitChange();
+                this.emitChange();
                 break;
             case Constants.MAXIMALIZE_SETTINGS:
                 _isMinimalized = false;
-                Store.emitChange();
+                this.emitChange();
                 break;
 
         }
         return true;
     })
 
-})
-
-export = {
-    Store: Store,
-    ids: _ids
 }
+
+const settingRootStore = new SettingRootStore();
+export = settingRootStore;

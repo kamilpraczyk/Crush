@@ -1,7 +1,6 @@
 import {LessonMapFace, LessonFace} from './LessonsInterfaces';
-import AppDispatcher = require('../../dispatcher/AppDispatcher');
 import Constants = require('../../constants/Constants');
-import { createStore }from '../../utils/store/utilsStore';
+import BaseStore from '../../utils/store/BaseStore';
 import utils = require('../../utils/utils');
 
 let _lessons: LessonMapFace = {
@@ -10,23 +9,27 @@ let _lessons: LessonMapFace = {
         name: 'all',
         amount: 5,
         disable: false,
-        active: false
+        active: false,
+        hide: true,
+        lessons: []//???
     },
 
-    lesson1: {
-        name: 'lesson 1',
+    animals: {
+        name: 'animals',
         disable: false,
         active: false,
-        hide: true
+        lessons: require('../../lessons/animals')
     },
+    
     lesson2: {
         name: 'lesson 2',
         disable: false,
-        active: false
+        active: false,
+        lessons: require('../../lessons/lesson2')
     }
 };
 
-let _active = utils.first(_lessons);
+let _active = 'animals';
 
 _lessons[_active].active = true;
 
@@ -38,21 +41,26 @@ function onSwitchAction(id: string) {
     }
 }
 
-const Store = createStore({
-    getAll: function(): LessonMapFace {
-        return _lessons;
-    },
-    getItem: function(id: string): LessonFace {
-        return _lessons[id]
-    },
-    getActiveItem: function() {
-        return _lessons[_active];
-    },
-    getActiveId: function() {
-        return _active;
-    },
+class LessonStore extends BaseStore {
+    constructor() {
+        super()
+    }
 
-    dispatcherIndex: AppDispatcher.register(function(payload: { action: any }) {
+    getAll(): LessonMapFace {
+        return _lessons;
+    }
+    getItem(id: string): LessonFace {
+        return _lessons[id]
+    }
+    getActiveId() {
+        return _active;
+    }
+    getLessons() {
+        console.log('_active',_active,  _lessons[_active]);
+        return _lessons[_active].lessons;
+    }
+
+    dispatcherIndex = this.register((payload: { action: any }) => {
         var action = payload.action;
 
         switch (action.actionType) {
@@ -63,7 +71,7 @@ const Store = createStore({
         return true;
     })
 
-});
+};
 
-
-export = Store;
+const lessonStore = new LessonStore();
+export = lessonStore;

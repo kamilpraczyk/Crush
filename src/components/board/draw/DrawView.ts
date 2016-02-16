@@ -1,48 +1,34 @@
 import React = require('react');
-import ReactDOM = require('react-dom');
 import DrawCss = require('./DrawCss');
-import BoardStore = require('../../../stores/board/BoardStore');
-import DrawActions = require('./DrawActions');
 import Signature = require('../../signature/index');
-import MenuView = require('./MenuView');
+import MenuActions = require('../menu/MenuActions');
+import MenuView = require('../menu/MenuView');
+import {BoardFace} from '../../../stores/board/BoardInterfaces';
+import BoardStore = require('../../../stores/board/BoardStore');
+const {div} = React.DOM;
+
+interface DrawStateFace {
+    lessonData: BoardFace
+}
 
 function getState() {
-    return {
-        data: BoardStore.getData()
-    }
+    return BoardStore.getDrawState();
 }
 
-interface DrawViewPropsFace {
-}
+class DrawView extends React.Component<{}, DrawStateFace>{
 
-interface DrawViewStateFace {
-    data: any
-}
+    signatureClear = null as Function;
 
-class DrawView extends React.Component<DrawViewPropsFace, DrawViewStateFace>{
-
-    public signatureClear = null as Function;
-
-    constructor(props: DrawViewPropsFace) {
-        super(props)
+    constructor() {
+        super();
         this.state = getState();
-        this.onChange = this.onChange.bind(this);
         this.onGetInterfaceClear = this.onGetInterfaceClear.bind(this);
         this.clearSignature = this.clearSignature.bind(this);
     }
 
-    onChange() {
-        console.log('change draw view!!!');
-        this.setState(getState())
+    componentWillReceiveProps(nextProps: BoardFace) {
+        this.setState(getState());
         this.clearSignature();
-    }
-
-    public componentDidMount() {
-        BoardStore.addChangeListener(this.onChange);
-    }
-
-    public componentWillUnmount() {
-        BoardStore.removeChangeListener(this.onChange);
     }
 
     clearSignature() {
@@ -54,8 +40,8 @@ class DrawView extends React.Component<DrawViewPropsFace, DrawViewStateFace>{
         let menu = [
             {
                 id: 'prev',
-                name: 'prev',
-                onClick: DrawActions.requestPrev
+                icon: 'icon-right-open',
+                onClick: MenuActions.requestPrev
             },
             {
                 id: 'clear',
@@ -64,13 +50,13 @@ class DrawView extends React.Component<DrawViewPropsFace, DrawViewStateFace>{
             },
             {
                 id: 'next',
-                name: 'next',
-                onClick: DrawActions.requestNext
+                icon: 'icon-left-open',
+                onClick: MenuActions.requestNext
             }
         ];
 
 
-        return React.DOM.div({
+        return div({
             style: DrawCss.getMenu(),
         }, MenuView({
             menu: menu
@@ -78,9 +64,9 @@ class DrawView extends React.Component<DrawViewPropsFace, DrawViewStateFace>{
     }
 
     getText() {
-        return React.DOM.div({
+        return div({
             style: DrawCss.getText()
-        }, this.state.data.name)
+        }, this.state.lessonData.name)
     }
 
     onGetInterfaceClear(onClear: Function) {
@@ -88,15 +74,16 @@ class DrawView extends React.Component<DrawViewPropsFace, DrawViewStateFace>{
     }
 
     getSignature() {
-        return React.DOM.div({
+        return div({
             style: DrawCss.getSignature(),
         }, Signature({
             onGetInterface: this.onGetInterfaceClear
         }));
     }
 
-    public render() {
-        return React.DOM.div({
+
+    render() {
+        return div({
             style: DrawCss.getPanel()
         }, this.getSignature(), this.getText(), this.getMenu());
     }

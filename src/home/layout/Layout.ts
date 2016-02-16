@@ -2,6 +2,8 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 import React = require('react');
 import ReactDOM = require('react-dom');
+const {div} = React.DOM;
+
 interface LayoutPropsFace {
     onComponentDidMount: Function
 }
@@ -14,21 +16,21 @@ class Layout extends React.Component<LayoutPropsFace, LayoutStateFace>{
     }
 
     _getSettingsRegionEl() {
-        return React.DOM.div({
+        return div({
             ref: 'settingsRegion',
             key: 'settingsRegion'
         });
     }
 
     _getBoardRegionEl() {
-        return React.DOM.div({
+        return div({
             ref: 'boardRegion',
             key: 'boardRegion'
         });
     }
 
     _getGreetingsRegionEl() {
-        return React.DOM.div({
+        return div({
             ref: 'greetingsRegion',
             key: 'greetingsRegion'
         });
@@ -43,7 +45,7 @@ class Layout extends React.Component<LayoutPropsFace, LayoutStateFace>{
     }
 
     public render() {
-        return React.DOM.div({}, this._getBoardRegionEl(), this._getSettingsRegionEl(), this._getGreetingsRegionEl());
+        return div({}, this._getBoardRegionEl(), this._getSettingsRegionEl(), this._getGreetingsRegionEl());
     }
 };
 

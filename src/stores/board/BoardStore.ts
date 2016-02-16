@@ -1,41 +1,27 @@
 /// <reference path="../../../typings/tsd.d.ts" />
-import AppDispatcher = require('../../dispatcher/AppDispatcher');
 import Constants = require('../../constants/Constants');
 import utils = require('../../utils/utils');
 import _ = require('underscore');
-import { createStore }from '../../utils/store/utilsStore';
+import BaseStore from '../../utils/store/BaseStore';
+
 import LessonStore = require('../settingStores/LessonStore');
-import {BoardsArrayFaces} from './BoardInterfaces';
+import SettingStore = require('../settingStores/SettingStore');
+import storageQuatro = require('./storageQuatro');
 
-import lesson1 = require('./lesson1');
-import lesson2 = require('./lesson2');
+import {BoardFace, BoardsArrayFaces} from './BoardInterfaces';
 
-let list = [] as BoardsArrayFaces;
+let list = LessonStore.getLessons();
 let _index = 0;
+
 let lastActiveLesson = null as string;
 
-function loadLesson(): boolean {
-    let lessonId = LessonStore.getActiveId();
-    if (lastActiveLesson !== lessonId) {
-        lastActiveLesson = lessonId;
-        _index = 0;
-        switch (lessonId) {
-            case 'lesson1':
-                list = lesson1;
-                break;
-            case 'lesson2':
-                list = lesson2;
-                break;
-            case 'all':
-                list = lesson1.concat(lesson2);
-                break;
-        }
-        return true;
-    }
-    return false;
-};
+function loadLesson() {
 
-loadLesson();
+    if (list !== LessonStore.getLessons()) {
+        list = LessonStore.getLessons();
+        _index = 0
+    }
+}
 
 function onNext() {
     if (_index === list.length - 1) {
@@ -43,6 +29,7 @@ function onNext() {
     } else {
         _index++;
     }
+    storageQuatro.reset();
 }
 
 function onPrev() {
@@ -51,40 +38,64 @@ function onPrev() {
     } else {
         _index--;
     }
+    storageQuatro.reset();
 }
 
-const Store = createStore({
+class BoardStore extends BaseStore {
 
-    getData: function() {
-        return list[_index];
-    },
+    constructor() {
+        super()
+    }
 
-    dispatcherIndex: AppDispatcher.register(function(payload: { action: any }) {
+    getSettingsIds() {
+        return SettingStore.getIds();
+    }
+
+    getActiveSettingId() {
+        return SettingStore.getActiveId();
+    }
+
+    getQuatroState() {
+        return storageQuatro.getState(list[_index], list);
+    }
+
+    getDrawState() {
+        return {
+            lessonData: list[_index]
+        }
+    }
+
+    dispatcherIndex = this.register((payload: { action: any }) => {
         var action = payload.action;
 
         switch (action.actionType) {
 
-            case Constants.SWITCH_ACTION:
-                AppDispatcher.waitFor([LessonStore.dispatcherIndex], function() {
-                    loadLesson() && Store.emitChange();
-                });
+            case Constants.CHOOSE_PICTURE:
+                storageQuatro.setPressedPictureId(action.id);
+                this.emitChange()
+                break;
 
+            case Constants.SWITCH_ACTION:
+                this.waitFor([LessonStore.dispatcherIndex], () => {
+                    loadLesson()
+                    this.emitChange()
+                });
                 break;
 
             case Constants.BOARD_PREV:
                 onPrev();
-                Store.emitChange();
-                break;
-            case Constants.BOARD_NEXT:
-                onNext();
-                Store.emitChange();
+                this.emitChange();
                 break;
 
+            case Constants.BOARD_NEXT:
+                onNext();
+                this.emitChange();
+                break;
 
         }
         return true;
     })
+}
 
-})
-
-export =  Store;
+const boardStore = new BoardStore();
+export = boardStore;

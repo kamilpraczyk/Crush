@@ -4,9 +4,10 @@ import dictionary = require('../../utils/dictionary');
 import React = require('react');
 import GreetingsCss = require('./GreetingsCss');
 import ButtonView = require('../../components/button/ButtonView');
+const {div} = React.DOM;
 
 interface GreetingsViewPropsFace {
-    name : string,
+    name: string,
     onClick: Function
 }
 interface GreetingsViewStateFace { }
@@ -19,7 +20,7 @@ class GreetingsView extends React.Component<GreetingsViewPropsFace, GreetingsVie
     }
 
     getText() {
-        return React.DOM.div({
+        return div({
             style: GreetingsCss.getText()
         }, dictionary.GREET_HELLO({ name: this.props.name }));
     }
@@ -31,13 +32,13 @@ class GreetingsView extends React.Component<GreetingsViewPropsFace, GreetingsVie
     }
 
     getContainer() {
-        return React.DOM.div({
+        return div({
             style: GreetingsCss.getContainer()
         }, this.getText(), this.getButton());
     }
 
     public render() {
-        return React.DOM.div({
+        return div({
             style: GreetingsCss.getPanel()
         }, this.getContainer());
     }

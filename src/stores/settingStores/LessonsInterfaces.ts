@@ -5,7 +5,8 @@ export interface LessonFace {
     disable: boolean,
     active : boolean,
     amount? : number,
-    hide? : boolean
+    hide? : boolean,
+    lessons : Array<any>
 }
 
 export interface LessonMapFace {

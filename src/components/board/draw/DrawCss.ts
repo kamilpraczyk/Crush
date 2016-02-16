@@ -7,13 +7,14 @@ let styles = {
         position: 'absolute',
         width: '100%',
         height: '100%',
-        backgroundColor: 'white',
+        display: 'table',
     },
 
     signature: {
+        display: 'table-row',
         width: '100%',
         height: '100%',
-        background: '#EEE'
+        background: css.themes.draw.canvasBackgroundColor
     },
 
     text: {
@@ -24,9 +25,9 @@ let styles = {
         textAlign: 'center',
         fontSize: css.font.fontSize.XL
     },
-        
-    menu  : {
-        position: 'absolute',
+
+    menu: {
+        display: 'table-row',
         bottom: 0,
         left: 0,
         width: '100%'

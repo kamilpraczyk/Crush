@@ -6,6 +6,7 @@ import SelectionStore = require('../../stores/SelectionStore');
 import SwitcherView = require('./views/switcher/SwitcherView');
 import {LessonMapFace, LessonFace} from '../../stores/settingStores/LessonsInterfaces';
 import {SettingMapFace, SettingFace} from '../../stores/settingStores/SettingInterfaces';
+const {div} = React.DOM;
 
 function getState() {
     return {
@@ -53,7 +54,7 @@ class SelectionView extends React.Component<SelectionViewPropsFace, SelectionVie
     }
 
     public render() {
-        return React.DOM.div({
+        return div({
             style: SelectionCss.getPanel()
         }, this.getList());
     }
