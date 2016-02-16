@@ -2,25 +2,20 @@ import React = require('react');
 import QuatroCss = require('./QuatroCss');
 import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
-import {BoardFace} from '../../../stores/board/BoardInterfaces';
 import BoardStore = require('../../../stores/board/BoardStore');
 import Signature = require('../../signature/index');
 import MenuActions = require('../menu/MenuActions');
 import MenuView = require('../menu/MenuView');
 const {div} = React.DOM;
 
-interface QuatroStateFace {
-    quatroPressedPictureId: string,
-    quatroPictures: Array<BoardFace>,
-    text: string,
-    lessonData: BoardFace
-}
 
 function getState() {
     return BoardStore.getQuatroState()
 }
+const state = getState();
+declare type State = typeof state;
 
-class QuatroView extends React.Component<{}, QuatroStateFace>{
+class QuatroView extends React.Component<{}, State>{
 
     constructor() {
         super();

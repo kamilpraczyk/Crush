@@ -1,5 +1,5 @@
 /// <reference path="../../typings/tsd.d.ts" />
-import {BoardsArrayFaces} from '../stores/board/BoardInterfaces';
+import {BoardFaces} from '../stores/lesson/interface';
 
 export =[
     {
@@ -11,4 +11,4 @@ export =[
         name: 'Love',
         pic : 'img/logo.png'
     }
-]as BoardsArrayFaces
+]as BoardFaces

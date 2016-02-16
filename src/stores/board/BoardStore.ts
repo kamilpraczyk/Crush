@@ -4,11 +4,10 @@ import utils = require('../../utils/utils');
 import _ = require('underscore');
 import BaseStore from '../../utils/store/BaseStore';
 
-import LessonStore = require('../settingStores/LessonStore');
-import SettingStore = require('../settingStores/SettingStore');
+import LessonStore = require('../lesson/LessonStore');
+import SettingStore = require('../setting/SettingStore');
 import storageQuatro = require('./storageQuatro');
-
-import {BoardFace, BoardsArrayFaces} from './BoardInterfaces';
+import storageRadio = require('./storageRadio');
 
 let list = LessonStore.getLessons();
 let _index = 0;
@@ -63,6 +62,10 @@ class BoardStore extends BaseStore {
         return {
             lessonData: list[_index]
         }
+    }
+
+    getRadioStage() {
+        return storageRadio.getState(list[_index]);
     }
 
     dispatcherIndex = this.register((payload: { action: any }) => {

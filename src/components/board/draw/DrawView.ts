@@ -3,19 +3,16 @@ import DrawCss = require('./DrawCss');
 import Signature = require('../../signature/index');
 import MenuActions = require('../menu/MenuActions');
 import MenuView = require('../menu/MenuView');
-import {BoardFace} from '../../../stores/board/BoardInterfaces';
 import BoardStore = require('../../../stores/board/BoardStore');
 const {div} = React.DOM;
-
-interface DrawStateFace {
-    lessonData: BoardFace
-}
 
 function getState() {
     return BoardStore.getDrawState();
 }
+const state = getState();
+declare type State = typeof state;
 
-class DrawView extends React.Component<{}, DrawStateFace>{
+class DrawView extends React.Component<{}, State>{
 
     signatureClear = null as Function;
 
@@ -26,7 +23,7 @@ class DrawView extends React.Component<{}, DrawStateFace>{
         this.clearSignature = this.clearSignature.bind(this);
     }
 
-    componentWillReceiveProps(nextProps: BoardFace) {
+    componentWillReceiveProps() {
         this.setState(getState());
         this.clearSignature();
     }
@@ -80,7 +77,6 @@ class DrawView extends React.Component<{}, DrawStateFace>{
             onGetInterface: this.onGetInterfaceClear
         }));
     }
-
 
     render() {
         return div({

@@ -3,7 +3,6 @@ import BoardCss = require('./BoardCss');
 import BoardStore = require('../../stores/board/BoardStore');
 import DrawView = require('./draw/DrawView');
 import QuatroView = require('./quatro/QuatroView');
-import {BoardFace, BoardsArrayFaces} from '../../stores/board/BoardInterfaces';
 const {div} = React.DOM;
 
 function getView() {

@@ -1,17 +1,17 @@
 /// <reference path="../../../typings/tsd.d.ts" />
-import {BoardFace, BoardsArrayFaces} from './BoardInterfaces';
+import {BoardFace, BoardFaces} from '../lesson/interface';
 import _ = require('underscore');
 
-let quatroPictures = [] as any;
+let quatroPictures = [] as BoardFace[];
 let lastIdQuatro = null as string;
 let _quatroPressedPictureId = null as string;
 
-function generateQuatroPictures(board: BoardFace, boards: BoardsArrayFaces) {
+function generateQuatroPictures(board: BoardFace, boards: BoardFaces) {
     let id = board.id;
     if (lastIdQuatro !== id) {
         _quatroPressedPictureId = null;
 
-        quatroPictures = _.sample(boards, 4);
+        quatroPictures = _.sample(boards, 4) as BoardFace[];
         let index = _.indexOf(quatroPictures, board);
         if (index === -1) {
             quatroPictures[_.random(0, quatroPictures.length - 1)] = _.clone(board);
@@ -30,8 +30,7 @@ function setPressedPictureId(id: string) {
 }
 
 
-function getState(board: BoardFace, boards: BoardsArrayFaces) {
-    console.log('board',board);
+function getState(board: BoardFace, boards: BoardFaces) {
     generateQuatroPictures(board, boards);
     return {
         quatroPressedPictureId: _quatroPressedPictureId,

@@ -1,4 +1,4 @@
-import {LessonMapFace, LessonFace} from './LessonsInterfaces';
+import {LessonMapFace, LessonFace} from '../lesson/interface';
 import Constants = require('../../constants/Constants');
 import BaseStore from '../../utils/store/BaseStore';
 import utils = require('../../utils/utils');
@@ -20,7 +20,7 @@ let _lessons: LessonMapFace = {
         active: false,
         lessons: require('../../lessons/animals')
     },
-    
+
     lesson2: {
         name: 'lesson 2',
         disable: false,
@@ -56,7 +56,6 @@ class LessonStore extends BaseStore {
         return _active;
     }
     getLessons() {
-        console.log('_active',_active,  _lessons[_active]);
         return _lessons[_active].lessons;
     }
 

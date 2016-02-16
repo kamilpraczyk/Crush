@@ -1,5 +1,5 @@
 /// <reference path="../../../typings/tsd.d.ts" />
-import {SettingMapFace, SettingFace} from './SettingInterfaces';
+import {SettingMapFace, SettingFace} from './interface';
 import Constants = require('../../constants/Constants');
 import BaseStore from '../../utils/store/BaseStore';
 import utils = require('../../utils/utils');

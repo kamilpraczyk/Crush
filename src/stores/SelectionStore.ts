@@ -3,10 +3,12 @@ import Constants = require('../constants/Constants');
 import BaseStore from '../utils/store/BaseStore';
 import SettingsRootStore = require('./SettingsRootStore');
 
-import LessonStore = require('./settingStores/LessonStore');
-import SettingStore = require('./settingStores/SettingStore');
+import LessonStore = require('./lesson/LessonStore');
+import SettingStore = require('./setting/SettingStore');
+import {LessonMapFace} from './lesson/interface';
+import {SettingMapFace} from './setting/interface';
 
-const getList = function(): any {
+const getList = function(): LessonMapFace | SettingMapFace {
     const ids = SettingsRootStore.getIds();
     switch (SettingsRootStore.getActiveRoot()) {
         case ids.settings:
@@ -26,7 +28,7 @@ class SelectionStore extends BaseStore {
         return getList();
     }
 
-    dispatcherIndex = this.register((payload: { action: any })=> {
+    dispatcherIndex = this.register((payload: { action: any }) => {
         var action = payload.action;
 
         switch (action.actionType) {
