@@ -1,9 +1,8 @@
 import React = require('react');
 import DrawCss = require('./DrawCss');
 import Signature = require('../../signature/index');
-import MenuActions = require('../menu/MenuActions');
-import MenuView = require('../menu/MenuView');
 import BoardStore = require('../../../stores/board/BoardStore');
+import MenuFactory = require('../menu/MenuFactory');
 const {div} = React.DOM;
 
 function getState() {
@@ -33,31 +32,13 @@ class DrawView extends React.Component<{}, State>{
     }
 
     getMenu() {
-
-        let menu = [
-            {
-                id: 'prev',
-                icon: 'icon-right-open',
-                onClick: MenuActions.requestPrev
-            },
-            {
-                id: 'clear',
-                name: 'clear',
-                onClick: this.clearSignature
-            },
-            {
-                id: 'next',
-                icon: 'icon-left-open',
-                onClick: MenuActions.requestNext
-            }
-        ];
-
-
         return div({
             style: DrawCss.getMenu(),
-        }, MenuView({
-            menu: menu
-        }))
+        }, MenuFactory([{
+            id: 'clear',
+            name: 'clear',
+            onClick: this.clearSignature
+        }]))
     }
 
     getText() {
@@ -80,6 +61,7 @@ class DrawView extends React.Component<{}, State>{
 
     render() {
         return div({
+            key: 'drawView',
             style: DrawCss.getPanel()
         }, this.getSignature(), this.getText(), this.getMenu());
     }

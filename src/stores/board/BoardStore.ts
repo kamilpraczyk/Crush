@@ -6,8 +6,7 @@ import BaseStore from '../../utils/store/BaseStore';
 
 import LessonStore = require('../lesson/LessonStore');
 import SettingStore = require('../setting/SettingStore');
-import storageQuatro = require('./storageQuatro');
-import storageRadio = require('./storageRadio');
+import storageHelper = require('./storageHelper');
 
 let list = LessonStore.getLessons();
 let _index = 0;
@@ -28,7 +27,7 @@ function onNext() {
     } else {
         _index++;
     }
-    storageQuatro.reset();
+    storageHelper.reset();
 }
 
 function onPrev() {
@@ -37,7 +36,7 @@ function onPrev() {
     } else {
         _index--;
     }
-    storageQuatro.reset();
+    storageHelper.reset();
 }
 
 class BoardStore extends BaseStore {
@@ -55,7 +54,7 @@ class BoardStore extends BaseStore {
     }
 
     getQuatroState() {
-        return storageQuatro.getState(list[_index], list);
+        return storageHelper.getState(list[_index]);
     }
 
     getDrawState() {
@@ -65,7 +64,7 @@ class BoardStore extends BaseStore {
     }
 
     getRadioStage() {
-        return storageRadio.getState(list[_index]);
+        return storageHelper.getState(list[_index]);
     }
 
     dispatcherIndex = this.register((payload: { action: any }) => {
@@ -74,12 +73,15 @@ class BoardStore extends BaseStore {
         switch (action.actionType) {
 
             case Constants.CHOOSE_PICTURE:
-                storageQuatro.setPressedPictureId(action.id);
+            case Constants.CHOOSE_RADIO:
+
+                storageHelper.setPressedAnswer(action.id);
                 this.emitChange()
                 break;
 
             case Constants.SWITCH_ACTION:
-                this.waitFor([LessonStore.dispatcherIndex], () => {
+                this.waitFor([LessonStore.dispatcherIndex, SettingStore.dispatcherIndex], () => {
+                    console.log('switch board store!!!');
                     loadLesson()
                     this.emitChange()
                 });

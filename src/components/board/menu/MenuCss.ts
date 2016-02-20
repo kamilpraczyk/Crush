@@ -13,12 +13,6 @@ let styles = {
         display: 'table-cell',
         textAlign: 'center',
         height: '100%',
-    },
-
-    separator: {
-        display: 'table-cell',
-        width: 2,
-        background: 'white'
     }
 
 }
@@ -31,12 +25,7 @@ export = utils.union(css, {
 
     getItem() {
         return styles.item;
-    },
-
-    getSeparator() {
-        return styles.separator;;
-    },
-
+    }
 
 
 });

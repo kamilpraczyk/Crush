@@ -3,16 +3,19 @@ import utils = require('../../utils/utils');
 
 let styles = {
 
-    panelMinimalized : {
+    panelMinimalized: {
         position: 'absolute',
-        top : 10,
-        right : 10,
-        border : '1px solid black',
-        width : 90,
-        height : 90,
-        cursor : css.cursor.pointer
+        top: 0,
+        right: 0,
+        border: '1px solid black',
+        width: css.status.width,
+        height: css.status.height,
+        maxHeight: css.status.maxHeight,
+        maxWidth: css.status.maxWidth,
+        cursor: css.cursor.pointer,
+        borderRadius: css.borderRadius
     },
-    
+
     panel: {
         position: 'absolute',
         top: 0,
@@ -57,22 +60,7 @@ let styles = {
     item: {
         display: 'table-cell',
         width: '100%',
-        border: '1px solid black',
-        cursor: css.cursor.pointer,
-        textAlign: 'center',
     },
-
-    itemActive: {
-        background: 'rgba(55,55,55, 0.3)'
-    },
-
-    itemText: {
-        textTransform: 'capitalize'
-    },
-    
-    icon : {
-        fontSize : 40
-    }
 
 
 }
@@ -86,9 +74,9 @@ export = utils.union(css, {
     getPanelContent() {
         return styles.panelContent;
     },
-    
-    getPanelMinimalized(){
-      return styles.panelMinimalized;  
+
+    getPanelMinimalized() {
+        return styles.panelMinimalized;
     },
 
     getPanelSelection() {
@@ -107,18 +95,8 @@ export = utils.union(css, {
         return styles.rootItem;
     },
 
-    getItem(active: boolean) {
-        let style = styles.item;
-        if (active)
-            style = css.get(style, styles.itemActive);
-        return style;
+    getItem() {
+        return styles.item;
     },
 
-    getItemText() {
-        return styles.itemText;
-    },
-    
-    getIcon(){
-        return styles.icon;
-    }
 });

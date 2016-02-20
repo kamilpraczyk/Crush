@@ -26,10 +26,16 @@ let _lessons: LessonMapFace = {
         disable: false,
         active: false,
         lessons: require('../../lessons/lesson2')
+    },
+    grammar: {
+        name: 'Grammar',
+        disable: false,
+        active: false,
+        lessons: require('../../lessons/grammar')
     }
 };
 
-let _active = 'animals';
+let _active = 'grammar';
 
 _lessons[_active].active = true;
 
@@ -64,6 +70,7 @@ class LessonStore extends BaseStore {
 
         switch (action.actionType) {
             case Constants.SWITCH_ACTION:
+             console.log('switch lesson store');
                 onSwitchAction(action.id)
                 break;
         }

@@ -6,7 +6,8 @@ import utils = require('../../utils/utils');
 
 let ids = {
     draw: 'draw',
-    qutro: 'qutro'
+    qutro: 'qutro',
+    radio: 'radio'
 }
 
 let _setting: SettingMapFace = {
@@ -19,10 +20,15 @@ let _setting: SettingMapFace = {
         name: '4 pictures',
         disable: false,
         active: false
+    },
+    [ids.radio]: {
+        name: 'Grammar sentences',
+        disable: false,
+        active: false
     }
 };
 
-let _active = ids.qutro;
+let _active = ids.radio;
 
 _setting[_active].active = true;
 
@@ -35,7 +41,7 @@ function onSwitchAction(id: string) {
 }
 
 class SettingStore extends BaseStore {
-    constructor(){
+    constructor() {
         super()
     }
     getAll() {
@@ -55,7 +61,8 @@ class SettingStore extends BaseStore {
         var action = payload.action;
 
         switch (action.actionType) {
-            case Constants.SWITCH_ACTION:
+            case Constants.SWITCH_ACTION:           
+             console.log('switch setting store');
                 onSwitchAction(action.id);
                 break;
         }

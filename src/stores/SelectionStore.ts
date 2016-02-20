@@ -35,6 +35,7 @@ class SelectionStore extends BaseStore {
 
             case Constants.SWITCH_ACTION:
                 this.waitFor([SettingStore.dispatcherIndex, LessonStore.dispatcherIndex], () => {
+                   console.log('switch selection store');
                     this.emitChange();
                 });
 

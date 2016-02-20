@@ -6,7 +6,6 @@ import {RootFace, RootFaces } from './SettingsRootInterfaces';
 import BaseStore from '../utils/store/BaseStore';
 
 
-
 const _ids = {
     close: 'close',
     lessons: 'lessons',

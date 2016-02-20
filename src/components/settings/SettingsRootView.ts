@@ -1,10 +1,11 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 import React = require('react');
 import { Component, PropTypes } from 'react';
-
+import ButtonView = require('../../components/button/ButtonView');
 import _ = require('underscore');
 import SettingsRootCss = require('./SettingsRootCss');
-import SettingsRootActions = require('./SettingsRootActions');
+import AppDispatcher = require('../../dispatcher/AppDispatcher');
+import Constants = require('../../constants/Constants');
 import SettingRootStore = require('../../stores/SettingsRootStore');
 import SelectionView = require('../selection/SelectionView')
 import {RootFace, RootFaces } from '../../stores/SettingsRootInterfaces';
@@ -17,29 +18,103 @@ function getState() {
     };
 }
 
-interface RootViewPropsFace {
+const state = getState();
+declare type State = typeof state;
+
+
+
+function _onMinimalizeClick() {
+    AppDispatcher.handleViewAction({
+        actionType: Constants.MAXIMALIZE_SETTINGS
+    });
 }
 
-interface RootViewStateFace {
-    rootList: RootFaces,
-    isMinimalized: boolean
+function getMinimalized() {
+    return div({
+        style: SettingsRootCss.getPanelMinimalized(),
+        onClick: _onMinimalizeClick
+    });
 }
 
-class SettingRootView extends React.Component<RootViewPropsFace, RootViewStateFace> {
+
+function getMaximalized(state: State) {
+    let panelContent = div({
+        style: SettingsRootCss.getPanelContent()
+    }, getPanelSelection(), getPanelRoot(state));
+
+    return div({
+        style: SettingsRootCss.getPanel()
+    }, panelContent);
+}
+
+function _onRootClick(id: string) {
+    AppDispatcher.handleViewAction({
+        actionType: Constants.ROOT_ITEM_CLICK,
+        id: id
+    });
+}
 
 
-    constructor(props: RootViewPropsFace) {
-        super(props);
+function getPanelRoot(state: State) {
+    return div({
+        key: 'panelRoot',
+        style: SettingsRootCss.getPanelRoot()
+    }, getRootList(state));
+}
+
+function getPanelSelection() {
+    return div({
+        key: 'panelSelection',
+        style: SettingsRootCss.getPanelSelection()
+    }, SelectionView());
+}
+
+
+
+function getItem(item: any, id: string) {
+          
+    //buttonPerfect
+    return div({
+        style: SettingsRootCss.getItem(),
+    }, ButtonView({
+        name: item.name,
+        icon: item.icon,
+        onClick: _.partial(_onRootClick, id),
+        isExpandWidth: true,
+        isExpand: true,
+        isActive: item.active
+    }));
+}
+
+function getRootList(state: State) {
+    let list = _.map(state.rootList, function(item: any, id: string) {
+        if (!item.disable) {
+            return div({
+                key: id,
+                style: SettingsRootCss.getRootItem(),
+            }, getItem(item, id));
+        }
+        return null;
+    });
+    return div({
+        style: SettingsRootCss.getRootList(),
+    }, list);
+}
+
+
+class SettingRootView extends React.Component<{}, State> {
+
+    constructor() {
+        super();
         this.state = getState();
         this.onChange = this.onChange.bind(this);
-        this._onMinimalizeClick = this._onMinimalizeClick.bind(this);
     }
 
-    public componentDidMount() {
+    componentDidMount() {
         SettingRootStore.addChangeListener(this.onChange);
     }
 
-    public componentWillUnmount() {
+    componentWillUnmount() {
         SettingRootStore.removeChangeListener(this.onChange);
     }
 
@@ -47,85 +122,12 @@ class SettingRootView extends React.Component<RootViewPropsFace, RootViewStateFa
         this.setState(getState());
     }
 
-    _onRootClick(id: string) {
-        SettingsRootActions.requestRootItem(id);
-    }
-
-    _onMinimalizeClick() {
-        SettingsRootActions.requestMaximalizeSettings();
-    }
-
-    getPanelSelection() {
-        return div({
-            key: 'panelSelection',
-            style: SettingsRootCss.getPanelSelection()
-        }, SelectionView());
-    }
-
-    getItem(item: any, id: string) {
-        let icon = div({
-            className: item.icon,
-            style: SettingsRootCss.getIcon()
-        });
-
-        let text = div({
-            style: SettingsRootCss.getItemText(),
-        }, item.icon ? icon : item.name);
-
-        return div({
-            style: SettingsRootCss.getItem(item.active),
-            onClick: function() {
-                this._onRootClick(id)
-            }.bind(this)
-        }, text);
-    }
-
-    getRootList() {
-        let list = _.map(this.state.rootList, function(item: any, id: string) {
-            if (!item.disable) {
-                return div({
-                    key: id,
-                    style: SettingsRootCss.getRootItem(),
-                }, this.getItem(item, id));
-            }
-            return null;
-        }, this);
-        return div({
-            style: SettingsRootCss.getRootList(),
-        }, list);
-    }
-
-    getPanelRoot() {
-        return div({
-            key: 'panelRoot',
-            style: SettingsRootCss.getPanelRoot()
-        }, this.getRootList());
-    }
-
-    getMaximalized() {
-        let panelContent = div({
-            style: SettingsRootCss.getPanelContent()
-        }, this.getPanelSelection(), this.getPanelRoot());
-
-        return div({
-            style: SettingsRootCss.getPanel()
-        }, panelContent);
-    }
-
-    getMinimalized() {
-        return div({
-            style: SettingsRootCss.getPanelMinimalized(),
-            onClick: this._onMinimalizeClick
-        });
-    }
-
-    public render() {
+    render() {
         if (this.state.isMinimalized) {
-            return this.getMinimalized();
+            return getMinimalized();
         }
-        return this.getMaximalized();
+        return getMaximalized(this.state);
     }
-
 }
 
 export =  React.createFactory(SettingRootView); 

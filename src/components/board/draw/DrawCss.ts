@@ -4,7 +4,6 @@ import utils = require('../../../utils/utils');
 let styles = {
 
     panel: {
-        position: 'absolute',
         width: '100%',
         height: '100%',
         display: 'table',
@@ -28,8 +27,6 @@ let styles = {
 
     menu: {
         display: 'table-row',
-        bottom: 0,
-        left: 0,
         width: '100%'
     }
 

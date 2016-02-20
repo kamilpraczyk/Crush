@@ -1,10 +1,10 @@
 import css = require('../../../utils/css/css');
 import utils = require('../../../utils/utils');
+import _ = require('underscore');
 
 let styles = {
 
     panel: {
-        position: 'absolute',
         display: 'table',
         width: '100%',
         height: '100%',
@@ -19,13 +19,13 @@ let styles = {
     quatro: {
         width: '100%',
         height: '100%',
-        display: 'table'
+        display: 'table',
+        borderSpacing: 0
     },
 
     line: {
         display: 'table-row',
         textAlign: 'center',
-        padding: 10
     },
 
     lineText: {
@@ -35,10 +35,13 @@ let styles = {
         backgroundColor: 'rgba(255, 255, 255, 0.60)'
     },
 
-    common: {
-        margin: 5,
+
+    item: {
         display: 'inline-block',
-        width: '40%',
+        verdicalAlign: 'middle',
+        boxSizing: 'border-box',
+        textAlign: 'center',
+        width: 'calc(50% - ' + css.borderWidth * 2 + css.borderWidthUnit + ')',
         height: '100%',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
@@ -46,22 +49,8 @@ let styles = {
         MozBackgroundSize: 'contain',
         OBackgroundSize: 'contain',
         backgroundSize: 'contain',
-        cursor: css.cursor.pointer,
-        boxSizing: 'border-box',
-        border: '10px solid transparent',
-        borderRadius: 10
     },
 
-    good: {
-        border: '10px solid #67FF67'
-    },
-
-    bad: {
-        border: '10px solid #FF5656'
-    },
-
-    item: {
-    },
 
     text: {
         textAlign: 'center',
@@ -70,8 +59,6 @@ let styles = {
 
     menu: {
         display: 'table-row',
-        bottom: 0,
-        left: 0,
         width: '100%'
     }
 
@@ -112,18 +99,22 @@ export = utils.union(css, {
         return css.get(styles.text);
     },
 
-    getItem(url: string, pressedId: string, tabId: string, id: string) {
-        let style = css.get(styles.item, styles.common);
+    getItem(selectedAnswer: string, currentAnswer: string, correctAnswers: string[], url?: string) {
+        let style = css.get(styles.item, css.answer.normal);
 
-        if (pressedId === tabId) {
-            if (pressedId === id) {
-                style = css.get(style, styles.good);
+        if (selectedAnswer === currentAnswer) {
+            if (_.contains(correctAnswers, selectedAnswer)) {
+                style = css.get(style, css.answer.good);
             } else {
-                style = css.get(style, styles, styles.bad);
+                style = css.get(style, css.answer.bad);
             }
         }
-        return addUrl(style, url);
+        if (url) {
+            style = addUrl(style, url);
+        }
+        return style;
     },
+
 
     getMenu() {
         return styles.menu;

@@ -1,25 +1,22 @@
 import css = require('../../utils/css/css');
 import utils = require('../../utils/utils');
 
-let normal = 'rgb(154, 93, 35)';
-let active = 'rgb(204, 152, 75)';
-let pressed = 'rgb(208, 161, 110)';
-
-let styles = {
+const styles = {
 
     button: {
+        backgroundColor: css.button.background.normal,
+        color: css.button.color.normal,
+        border: css.button.border.normal,
         textTransform: 'capitalize',
-        backgroundColor: normal,
         MozBorderRadius: 28,
         WebkitBorderRadius: 28,
         borderRadius: 28,
-        border: '1px solid rgb(67, 77, 85)',
         display: 'inline-block',
         cursor: 'pointer',
-        color: '#ffffff',
         fontFamily: 'Arial',
         fontSize: css.font.fontSize.XL,
-        padding: '16px 31px',
+        height: '7vh',
+        minHeight: 35,
         textDecoration: 'none',
         textShadow: '0px 1px 0px #2f6627',
         margin: 0,
@@ -27,8 +24,10 @@ let styles = {
 
     pressed: {
         position: 'relative',
-        backgroundColor: pressed,
-        top: 1
+        top: 1,
+        backgroundColor: css.button.background.focus,
+        color: css.button.color.focus,
+        border: css.button.border.focus
     },
     isExpand: {
         width: '100%',
@@ -40,8 +39,9 @@ let styles = {
     },
 
     isActive: {
-        backgroundColor: active,
-        border: '1px solid ' + normal
+        backgroundColor: css.button.background.active,
+        color: css.button.color.active,
+        border: css.button.border.active
     }
 }
 

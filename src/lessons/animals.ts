@@ -1,44 +1,75 @@
 /// <reference path="../../typings/tsd.d.ts" />
 import {BoardFaces} from '../stores/lesson/interface';
+import _ = require('underscore');
+const s = 'img/animals/';
 
-let s = 'img/animals/';
+const a = {
+    camel: s + 'camel.png',
+    cat: s + 'cat.png',
+    cow: s + 'cow.png',
+    donky: s + 'donky.png',
+    lamb: s + 'lamb.png',
+    lion: s + 'lion.png',
+    rat: s + 'rat.png',
+    rabbit: s + 'rabbit.png',
+    tiger: s + 'tiger.png',
+    wolf: s + 'wolf.png',
+}
+
+function getRest(group: any, exclude: any): string[] {
+    return _.chain(group).values().without(exclude).value();
+}
 
 export =[
     {
         id: 'camel',
         name: 'Camel',
-        pic: s + 'camel.jpg'
+        correct: [a.camel],
+        incorrect: getRest(a, a.camel)
     }, {
         id: 'cat',
         name: 'Cat',
-        pic: s + 'cat.jpg'
+        correct: [a.cat],
+        incorrect: getRest(a, a.cat)
     }, {
         id: 'cow',
         name: "Cow",
-        pic: s + 'cow.jpg'
+        correct: [a.cow],
+        incorrect: getRest(a, a.cow)
     }, {
         id: 'donky',
         name: "Donky",
-        pic: s + 'donky.jpg'
+        correct: [a.donky],
+        incorrect: getRest(a, a.donky)
     }, {
         id: 'lamb',
         name: "Lamb",
-        pic: s + 'lamb.jpg'
+        correct: [a.lamb],
+        incorrect: getRest(a, a.lamb)
     }, {
         id: 'lion',
         name: "Lion",
-        pic: s + 'lion.jpg'
+        correct: [a.lion],
+        incorrect: getRest(a, a.lion)
     }, {
         id: 'rat',
         name: "Rat",
-        pic: s + 'rat.jpg'
+        correct: [a.rat],
+        incorrect: getRest(a, a.rat)
+    }, {
+        id: 'rabbit',
+        name: "Rabbit",
+        correct: [a.rabbit],
+        incorrect: getRest(a, a.rabbit)
     }, {
         id: 'tiger',
         name: "Tiger",
-        pic: s + 'tiger.jpg'
+        correct: [a.tiger],
+        incorrect: getRest(a, a.tiger)
     }, {
         id: 'wolf',
         name: "Wolf",
-        pic: s + 'wolf.jpg'
+        correct: [a.wolf],
+        incorrect: getRest(a, a.wolf)
     }
 ] as BoardFaces

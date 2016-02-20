@@ -3,7 +3,8 @@
 export interface BoardFace {
     id: string,
     name: string,
-    pic: string
+    correct? : Array<string>,
+    incorrect? : Array<string>
 }
 
 export interface BoardFaces {
