@@ -4,13 +4,29 @@ import _ = require('underscore');
 import SelectionCss = require('./SelectionCss');
 import SelectionStore = require('../../stores/SelectionStore');
 import SwitcherView = require('./views/switcher/SwitcherView');
+import ExplenationView = require('./views/explenation/ExplenationView');
 const {div} = React.DOM;
 
 function getState() {
     return {
-        list: SelectionStore.getList()
+        // list: SelectionStore.getList()
     };
 }
+
+
+const getView = function(): any {
+    const rootState = SelectionStore.getRootState();
+    const ids = rootState.ids;
+    switch (rootState.id) {
+        case ids.settings:
+        case ids.lessons:
+        case ids.shopping:
+            return SwitcherView();
+        case ids.explenation:
+            return ExplenationView();
+    }
+}
+
 
 const state = getState();
 declare type State = typeof state;
@@ -20,15 +36,14 @@ class SelectionView extends React.Component<{}, State>{
 
     constructor() {
         super();
-        this.state = getState();
         this.onChange = this.onChange.bind(this);
     }
 
-    public componentDidMount() {
+    componentDidMount() {
         SelectionStore.addChangeListener(this.onChange);
     }
 
-    public componentWillUnmount() {
+    componentWillUnmount() {
         SelectionStore.removeChangeListener(this.onChange);
     }
 
@@ -36,22 +51,10 @@ class SelectionView extends React.Component<{}, State>{
         this.setState(getState());
     }
 
-    getList() {
-        return _.map(this.state.list, function(item: any, id: string) {
-            if (!item.hide) {
-                return SwitcherView(_.extend({
-                    key: id,
-                    id: id
-                }, item));
-            }
-            return null;
-        });
-    }
-
-    public render() {
+    render() {
         return div({
             style: SelectionCss.getPanel()
-        }, this.getList());
+        }, getView());
     }
 
 }

@@ -2,37 +2,62 @@ import React = require('react');
 import MenuCss = require('./MenuCss');
 import _ = require('underscore');
 import ButtonView = require('../../button/ButtonView')
+import AppDispatcher = require('../../../dispatcher/AppDispatcher');
+import Constants = require('../../../constants/Constants');
+import MenuActions = require('./MenuActions');
 const {div} = React.DOM;
 
-
-interface MenuStateFace {
-    menu: Array<{ id: string, name: string, icon?:string, onClick: Function }>
+interface Item {
+    id: string, name: string, icon?: string, onClick: Function
 }
 
-class MenuView extends React.Component<{}, MenuStateFace>{
 
-    constructor(data: MenuStateFace) {
+let prev = [{
+    id: 'prev',
+    icon: 'icon-left-open',
+    onClick: MenuActions.requestPrev
+}];
+
+let next = [{
+    id: 'next',
+    icon: 'icon-right-open',
+    onClick: MenuActions.requestNext
+}];
+
+function getState(data: any) {
+    const menu = data && data.menu ? data.menu : [];
+    return {
+        menu: [].concat(prev, menu, next) as Item[]
+    };
+}
+
+const state = getState(null);
+declare type State = typeof state;
+
+class View extends React.Component<State, State>{
+
+    constructor(data: State) {
         super();
-        this.state = data;
+        this.state = getState(data);
     }
 
-    public render() {
-        let buttons = [] as any;
-        _.each(this.state.menu, function(item): any {          
-            buttons.push(div({
+    render() {
+        let buttons = this.state.menu.map(function(item: Item) {
+            return div({
                 key: item.id,
                 style: MenuCss.getItem()
             }, ButtonView({
                 name: item.name,
-                icon : item.icon,
+                icon: item.icon,
                 isExpandWidth: true,
                 onClick: item.onClick
-            })));
-        }, this);
+            }));
+        });
+
         return div({
             style: MenuCss.getPanel()
         }, buttons);
     }
 };
 
-export =  React.createFactory(MenuView);
+export =  React.createFactory(View);

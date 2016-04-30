@@ -1,5 +1,4 @@
 import Home = require("./home/Home");
-var payment = require("./payment/payment");
 import Console = require("./utils/debugger/Console");
 
 var app = {
@@ -19,7 +18,6 @@ var app = {
      //   try {
             app.applyLoader();
             new Home(document.getElementById('app'));
-            payment();
 
      //   } catch (e) {
      //       console.error(e.stack);

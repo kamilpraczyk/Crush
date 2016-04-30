@@ -5,6 +5,8 @@ import BoardStore = require('../../stores/board/BoardStore');
 import DrawView = require('./draw/DrawView');
 import RadioView = require('./radio/RadioView');
 import QuatroView = require('./quatro/QuatroView');
+import PointsView = require('./points/PointsView');
+
 const {div} = React.DOM;
 
 
@@ -20,6 +22,7 @@ function getView() {
             return RadioView();
     }
 }
+
 
 class BoardView extends React.Component<{}, {}>{
 
@@ -43,7 +46,7 @@ class BoardView extends React.Component<{}, {}>{
     render() {
         return div({
             style: BoardCss.getPanel()
-        }, getView());
+        }, PointsView(), getView());
     }
 };
 

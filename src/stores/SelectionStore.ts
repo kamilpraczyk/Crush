@@ -5,18 +5,9 @@ import SettingsRootStore = require('./SettingsRootStore');
 
 import LessonStore = require('./lesson/LessonStore');
 import SettingStore = require('./setting/SettingStore');
-import {LessonMapFace} from './lesson/interface';
-import {SettingMapFace} from './setting/interface';
+import BoardStore = require('./board/BoardStore');
 
-const getList = function(): LessonMapFace | SettingMapFace {
-    const ids = SettingsRootStore.getIds();
-    switch (SettingsRootStore.getActiveRoot()) {
-        case ids.settings:
-            return SettingStore.getAll();
-        case ids.lessons:
-            return LessonStore.getAll();
-    }
-}
+
 
 class SelectionStore extends BaseStore {
 
@@ -24,9 +15,26 @@ class SelectionStore extends BaseStore {
         super()
     }
 
-    getList() {
-        return getList();
+    getRootState() {
+        return {
+            ids: SettingsRootStore.getIds(),
+            id: SettingsRootStore.getActiveRoot(),
+        }
     }
+    
+    getSettings() {
+        return SettingStore.getAll();
+    }
+    getBought() {
+        return LessonStore.getBought();
+    }
+    getToBought() {
+        return LessonStore.getToBought();
+    }
+    getExplenation() {
+        return BoardStore.getExplenation();
+    }
+
 
     dispatcherIndex = this.register((payload: { action: any }) => {
         var action = payload.action;
@@ -35,7 +43,7 @@ class SelectionStore extends BaseStore {
 
             case Constants.SWITCH_ACTION:
                 this.waitFor([SettingStore.dispatcherIndex, LessonStore.dispatcherIndex], () => {
-                   console.log('switch selection store');
+                    console.log('switch selection store');
                     this.emitChange();
                 });
 

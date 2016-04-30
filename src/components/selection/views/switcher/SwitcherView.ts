@@ -2,43 +2,66 @@
 import React = require('react');
 import _ = require('underscore');
 import SwitchCss = require('./SwitchCss');
-import SwitcherActions = require('./SwitcherActions');
+import AppDispatcher = require('../../../../dispatcher/AppDispatcher');
+import Constants = require('../../../../constants/Constants');
 import ButtonView = require('../../../button/ButtonView');
+import SelectionStore = require('../../../../stores/SelectionStore');
 const {div} = React.DOM;
 
-interface SwitcherViewPropsFace {
-    id: string,
-    name: string,
-    active: boolean
+
+function getState(): { list: [{ name: string, disable: boolean, active: boolean }] } {
+    const rootState = SelectionStore.getRootState();
+    const ids = rootState.ids;
+    let list = [] as any;
+    switch (rootState.id) {
+        case ids.settings:
+            list = SelectionStore.getSettings();
+            break;
+        case ids.lessons:
+            list = SelectionStore.getBought();
+            break;
+        case ids.shopping:
+            list = SelectionStore.getToBought();
+            break;
+    }
+    return {
+        list: list
+    }
 }
-interface SwitcherViewStateFace { }
 
-class SwitcherView extends React.Component<SwitcherViewPropsFace, SwitcherViewStateFace>{
+const state = getState();
+declare type State = typeof state;
 
-    constructor(props: SwitcherViewPropsFace) {
-        super(props);
-        this.handleClick = this.handleClick.bind(this);
+class View extends React.Component<{}, State>{
+
+    constructor() {
+        super();
     }
 
-    public handleClick() {
-        SwitcherActions.requestSwitchAction(this.props.id)
-    }
-
-    getButton() {
-        return ButtonView({
-            name: this.props.name,
-            onClick: this.handleClick,
-            isExpandWidth: true,
-            isActive: this.props.active
+    render() {
+        this.state = getState();
+        const buttons = _.map(this.state.list, (item: any, id: string) => {
+            if (!item.hide) {
+                return ButtonView({
+                    key: id,
+                    name: item.name,
+                    onClick: function() {
+                        AppDispatcher.handleViewAction({
+                            actionType: Constants.SWITCH_ACTION,
+                            id: id
+                        });
+                    },
+                    isExpandWidth: true,
+                    isActive: item.active
+                });
+            }
         });
-    }
 
-    public render() {
         return div({
             style: SwitchCss.getPanel()
-        }, this.getButton());
+        }, buttons);
     }
 
 };
 
-export =  React.createFactory(SwitcherView); 
+export =  React.createFactory(View); 

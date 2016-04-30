@@ -2,26 +2,21 @@ import css = require('../../utils/css/css');
 import utils = require('../../utils/utils');
 
 let styles = {
-    
-    panel :{
-        
-    },
-    
-    item : {
 
-    }
+    panel: {
+        height: '100%',
+        width: '100%',
+        overflowX: 'hidden',
+        overflowY: 'auto',
+    },
+
 }
 
 export = utils.union(css, {
-    
-    getPanel(){
+
+    getPanel() {
         return styles.panel;
     },
-    
-    getItem(){
-        return styles.item;
-    }
-
 
 
 });

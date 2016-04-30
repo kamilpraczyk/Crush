@@ -7,6 +7,7 @@ import BaseStore from '../../utils/store/BaseStore';
 import LessonStore = require('../lesson/LessonStore');
 import SettingStore = require('../setting/SettingStore');
 import storageHelper = require('./storageHelper');
+import pointsHelper = require('./pointsHelper');
 
 let list = LessonStore.getLessons();
 let _index = 0;
@@ -14,7 +15,6 @@ let _index = 0;
 let lastActiveLesson = null as string;
 
 function loadLesson() {
-
     if (list !== LessonStore.getLessons()) {
         list = LessonStore.getLessons();
         _index = 0
@@ -67,11 +67,27 @@ class BoardStore extends BaseStore {
         return storageHelper.getState(list[_index]);
     }
 
+    getPoints() {
+        return pointsHelper.getState(list[_index], list);
+    }
+
+    getExplenation() {
+        return {
+            isVisible: true,
+            title: LessonStore.getLessonName(),
+            explenation: list[_index].explenation
+        }
+    }
+
     dispatcherIndex = this.register((payload: { action: any }) => {
         var action = payload.action;
 
         switch (action.actionType) {
 
+
+            case Constants.READ:
+                utils.voice.read(action.read);
+                break;
             case Constants.CHOOSE_PICTURE:
             case Constants.CHOOSE_RADIO:
 
@@ -89,11 +105,13 @@ class BoardStore extends BaseStore {
 
             case Constants.BOARD_PREV:
                 onPrev();
+                utils.voice.stopReading();
                 this.emitChange();
                 break;
 
             case Constants.BOARD_NEXT:
                 onNext();
+                utils.voice.stopReading();
                 this.emitChange();
                 break;
 

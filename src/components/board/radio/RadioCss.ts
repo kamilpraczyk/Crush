@@ -3,6 +3,7 @@ import utils = require('../../../utils/utils');
 import _ = require('underscore');
 
 const backgroundColor = 'rgba(250,250,250,0.5)'
+import {ids} from '../../../lessons/helper/constants';
 
 let styles = {
 
@@ -92,8 +93,14 @@ export = utils.union(css, {
     getContentName() {
         return styles.nameContent;
     },
-    getName() {
-        return styles.name;
+    getName(id: string) {
+        let style = styles.name;
+        if (_.contains(id, ids.center)) {
+            style = css.get(style, {
+                textAlign: 'center'
+            })
+        }
+        return style;
     },
 
     getContentList() {
@@ -103,14 +110,14 @@ export = utils.union(css, {
     getList() {
         return styles.list;
     },
-    getItem(index: number, name: string, correctNames: Array<string>, choosenName: string) {
+    getItem(index: number, name: string, isCorrect: boolean, choosenName: string) {
         let style = css.get(styles.item, css.answer.normal);
         if (index % 2) {
             style = css.get(style, styles.itemEven);
         }
 
         if (choosenName === name) {
-            if (_.contains(correctNames, name)) {
+            if (isCorrect) {
                 style = css.get(style, css.answer.good);
             } else {
                 style = css.get(style, css.answer.bad);

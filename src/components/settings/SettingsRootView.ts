@@ -88,12 +88,10 @@ function getItem(item: any, id: string) {
 
 function getRootList(state: State) {
     let list = _.map(state.rootList, function(item: any, id: string) {
-        if (!item.disable) {
-            return div({
-                key: id,
-                style: SettingsRootCss.getRootItem(),
-            }, getItem(item, id));
-        }
+        return div({
+            key: id,
+            style: SettingsRootCss.getRootItem(),
+        }, getItem(item, id));
         return null;
     });
     return div({

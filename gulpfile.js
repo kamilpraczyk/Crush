@@ -78,12 +78,6 @@ gulp.task("package", function () {
         }
 
     }, function () {
-        cordova.plugins(
-            'add',
-            "cc.fovea.cordova.purchase",
-            {"options":{ variable:["BILLING_KEY=MIIBAQAB"]}}
-
-            );
             cordova.run({
                 "platforms": ["browser"]
            })

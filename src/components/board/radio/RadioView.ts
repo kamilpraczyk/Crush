@@ -2,7 +2,7 @@ import React = require('react');
 import RadioCss = require('./RadioCss');
 import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
-import MenuFactory = require('../menu/MenuFactory');
+import MenuView = require('../menu/MenuView');
 import BoardStore = require('../../../stores/board/BoardStore');
 import _ = require('underscore');
 const {div} = React.DOM;
@@ -18,30 +18,58 @@ function onAnswer(id: string) {
         actionType: Constants.CHOOSE_RADIO,
         id: id
     });
+    onRead(id);
+}
+
+function onRead(read: string) {
+    AppDispatcher.handleViewAction({
+        actionType: Constants.READ,
+        read: read
+    });
 }
 
 function getMenu() {
     return div({
         style: RadioCss.getMenu()
-    }, MenuFactory())
+    }, MenuView())
 }
 
-function getItems(state: State) {
-    return state.generatedList.map((name: string, index: number) => {
-        return div({
-            key: name,
-            style: RadioCss.getItem(index, name, state.lessonData.correct, state.selectedAnswer),
-            onClick: RadioCss.animate(onAnswer, name)
-        }, name)
-    });
+
+
+
+function getQueston(state: State) {
+    const name = div({
+        style: RadioCss.getContentName(),
+        onClick: RadioCss.animate(onRead, state.lessonData.info)
+    }, div({
+        style: RadioCss.getName(state.lessonData.id)
+    }, state.lessonData.info));
+
+    return name;
+}
+
+
+function getName(state: State) {
+    const name = div({
+        style: RadioCss.getContentName(),
+        onClick: RadioCss.animate(onRead, state.text)
+    }, div({
+        style: RadioCss.getName(state.lessonData.id)
+    }, state.text));
+
+    return name;
 }
 
 function getRadio(state: State) {
-    const name = div({
-        style: RadioCss.getContentName()
-    }, div({
-        style: RadioCss.getName()
-    }, state.text));
+    function getItems(state: State) {
+        return state.generatedList.map((name: string, index: number) => {
+            return div({
+                key: name + index,
+                style: RadioCss.getItem(index, name, state.isCorrect, state.selectedAnswer),
+                onClick: RadioCss.animate(onAnswer, name)
+            }, name)
+        });
+    }
 
     const list = div({
         style: RadioCss.getContentList()
@@ -53,7 +81,7 @@ function getRadio(state: State) {
         style: RadioCss.getRadio()
     }, div({
         style: RadioCss.getRadioPanel()
-    }, name, list));
+    }, getQueston(state), getName(state), list));
 }
 
 class RadioView extends React.Component<{}, State>{

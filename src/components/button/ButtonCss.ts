@@ -15,7 +15,7 @@ const styles = {
         cursor: 'pointer',
         fontFamily: 'Arial',
         fontSize: css.font.fontSize.XL,
-        height: '7vh',
+        height: '10vh',
         minHeight: 35,
         textDecoration: 'none',
         textShadow: '0px 1px 0px #2f6627',

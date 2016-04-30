@@ -1,10 +1,12 @@
 /// <reference path="../../typings/tsd.d.ts" />
 import _ = require("underscore");
+import voice = require("./voice");
 
 export = {
     union,
     union3,
-    first
+    first,
+    voice
 };
 
 function first(obj: any) {

@@ -2,7 +2,7 @@ import React = require('react');
 import DrawCss = require('./DrawCss');
 import Signature = require('../../signature/index');
 import BoardStore = require('../../../stores/board/BoardStore');
-import MenuFactory = require('../menu/MenuFactory');
+import MenuView = require('../menu/MenuView');
 const {div} = React.DOM;
 
 function getState() {
@@ -34,11 +34,13 @@ class DrawView extends React.Component<{}, State>{
     getMenu() {
         return div({
             style: DrawCss.getMenu(),
-        }, MenuFactory([{
-            id: 'clear',
-            name: 'clear',
-            onClick: this.clearSignature
-        }]))
+        }, MenuView({
+            menu: [{
+                id: 'clear',
+                name: 'clear',
+                onClick: this.clearSignature
+            }]
+        }))
     }
 
     getText() {

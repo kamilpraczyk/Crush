@@ -9,7 +9,9 @@ import BaseStore from '../utils/store/BaseStore';
 const _ids = {
     close: 'close',
     lessons: 'lessons',
-    settings: 'setting'
+    explenation: 'explenation',
+    settings: 'setting',
+    shopping: 'shopping'
 }
 
 let _isMinimalized = true;
@@ -23,15 +25,27 @@ let _rootList = {
         active: false,
         disable: false
     },
-    [_ids.lessons]: {
-        name: 'lessons',
-        icon: 'icon-graduation-cap',
-        active: true,
+    [_ids.explenation]: {
+        name: 'info',
+        icon: 'icon-info',
+        active: false,
         disable: false
     },
     [_ids.settings]: {
         name: 'settings',
         icon: 'icon-sliders',
+        active: false,
+        disable: false
+    },
+    [_ids.lessons]: {
+        name: 'lessons',
+        icon: 'icon-book',
+        active: true,
+        disable: false
+    },
+    [_ids.shopping]: {
+        name: 'shopping',
+        icon: 'icon-basket',
         active: false,
         disable: false
     }

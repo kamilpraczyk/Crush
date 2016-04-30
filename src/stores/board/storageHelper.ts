@@ -1,6 +1,7 @@
 /// <reference path="../../../typings/tsd.d.ts" />
-import {BoardFace, BoardFaces} from '../lesson/interface';
+import {BoardFace, BoardFaces} from '../../lessons/interface';
 import _ = require('underscore');
+import {space, empty}  from '../../lessons/helper/constants';
 
 let generatedList = [] as string[];
 let lastId = null as string;
@@ -25,16 +26,29 @@ function reset() {
 
 function setPressedAnswer(answer: string) {
     _selectedAnswer = answer;
+    
+    
+   // utils.voice.read('Hello');
 }
 
 
 function getState(board: BoardFace) {
     generate(board);
+
+    const isCorrect = _.contains(board.correct, _selectedAnswer);
+    let name = board.name;
+    //replace name with correct sentence
+    if (isCorrect) {
+        const replacement = _selectedAnswer === empty ? '' : _selectedAnswer;
+        name = name.replace(space, replacement);
+    }
+
     return {
         selectedAnswer: _selectedAnswer,
         generatedList: generatedList,
-        text: board.name,
-        lessonData: board
+        text: name,
+        lessonData: board,
+        isCorrect: isCorrect
     }
 }
 

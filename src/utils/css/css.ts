@@ -105,7 +105,7 @@ let style = {
 
     themes: {
         standard: {
-            backgroundImage: 'url("img/wood.jpg")',
+            backgroundImage: 'url("img/b2.jpg")',
         },
 
         draw: {

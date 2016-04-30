@@ -51,7 +51,6 @@ let styles = {
         backgroundSize: 'contain',
     },
 
-
     text: {
         textAlign: 'center',
         fontSize: css.font.fontSize.XL3
@@ -60,7 +59,7 @@ let styles = {
     menu: {
         display: 'table-row',
         width: '100%'
-    }
+    },
 
 }
 
@@ -118,6 +117,6 @@ export = utils.union(css, {
 
     getMenu() {
         return styles.menu;
-    },
+    }
 
 });

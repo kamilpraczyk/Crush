@@ -4,7 +4,7 @@ import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
 import BoardStore = require('../../../stores/board/BoardStore');
 import Signature = require('../../signature/index');
-import MenuFactory = require('../menu/MenuFactory');
+import MenuView = require('../menu/MenuView');
 import _ = require('underscore');
 const {div} = React.DOM;
 
@@ -17,7 +17,7 @@ declare type State = typeof state;
 function getMenu() {
     return div({
         style: QuatroCss.getMenu(),
-    }, MenuFactory())
+    }, MenuView())
 }
 
 function onClickPic(name: string) {

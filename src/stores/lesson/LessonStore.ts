@@ -1,41 +1,12 @@
-import {LessonMapFace, LessonFace} from '../lesson/interface';
+import {LessonMapFace, LessonFace} from '../../lessons/interface';
 import Constants = require('../../constants/Constants');
 import BaseStore from '../../utils/store/BaseStore';
 import utils = require('../../utils/utils');
+import _ = require('underscore');
+import {lessons, activeStartup} from '../../lessons/lessons';
 
-let _lessons: LessonMapFace = {
-
-    all: {
-        name: 'all',
-        amount: 5,
-        disable: false,
-        active: false,
-        hide: true,
-        lessons: []//???
-    },
-
-    animals: {
-        name: 'animals',
-        disable: false,
-        active: false,
-        lessons: require('../../lessons/animals')
-    },
-
-    lesson2: {
-        name: 'lesson 2',
-        disable: false,
-        active: false,
-        lessons: require('../../lessons/lesson2')
-    },
-    grammar: {
-        name: 'Grammar',
-        disable: false,
-        active: false,
-        lessons: require('../../lessons/grammar')
-    }
-};
-
-let _active = 'grammar';
+let _active = activeStartup;
+let _lessons = lessons;
 
 _lessons[_active].active = true;
 
@@ -47,17 +18,40 @@ function onSwitchAction(id: string) {
     }
 }
 
+function getBought(): LessonMapFace {
+    let result = {} as LessonMapFace;
+    _.mapObject(_lessons, (lesson: LessonFace, key: string) => {
+        if (lesson.bought === true)
+            result[key] = lesson;
+    });
+    return result;
+}
+
+function getToBought(): LessonMapFace {
+    let result = {} as LessonMapFace;
+    _.mapObject(_lessons, (lesson: LessonFace, key: string) => {
+        if (lesson.bought === false)
+            result[key] = lesson;
+    });
+    return result;
+}
+
 class LessonStore extends BaseStore {
     constructor() {
         super()
     }
 
-    getAll(): LessonMapFace {
-        return _lessons;
-    }
+    getToBought = getToBought;
+    getBought = getBought;
+
     getItem(id: string): LessonFace {
         return _lessons[id]
     }
+
+    getLessonName() {
+        return _lessons[_active].name;
+    }
+
     getActiveId() {
         return _active;
     }
@@ -70,7 +64,7 @@ class LessonStore extends BaseStore {
 
         switch (action.actionType) {
             case Constants.SWITCH_ACTION:
-             console.log('switch lesson store');
+                console.log('switch lesson store');
                 onSwitchAction(action.id)
                 break;
         }
