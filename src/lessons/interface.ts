@@ -1,7 +1,7 @@
 /// <reference path="../../typings/tsd.d.ts" />
 
 export interface Explenation {
-    html: any
+    exp: any
 }
 
 export interface BoardFace {
@@ -20,6 +20,7 @@ export interface BoardFaces {
 }
 
 export interface LessonFace {
+    settings: string,
     name: string,
     active: boolean,
     bought: boolean,

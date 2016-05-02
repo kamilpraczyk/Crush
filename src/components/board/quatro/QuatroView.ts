@@ -27,6 +27,13 @@ function onClickPic(name: string) {
     });
 }
 
+function onRead(read: string) {
+    AppDispatcher.handleViewAction({
+        actionType: Constants.READ,
+        read: read
+    });
+}
+
 function getContentLine(state: State, list: any[]) {
     let corrrectId = state.lessonData.correct;
     const elements = list.map((name: string) => {
@@ -52,7 +59,8 @@ function getQuatro(state: State) {
     const line1 = getContentLine(state, state.generatedList.slice(0, 2))
 
     const line2 = div({
-        style: QuatroCss.getLineText()
+        style: QuatroCss.getLineText(),
+        onClick: QuatroCss.animate(onRead, state.text)
     },
         div({
             style: QuatroCss.getText(),

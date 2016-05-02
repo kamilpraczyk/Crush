@@ -10,6 +10,7 @@ const styles = {
         paddingLeft: '5vw',
         paddingRight: '5vw',
         margin: 'auto',
+        pointer : 'normal'
     },
 
     title: {

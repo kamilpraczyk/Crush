@@ -18,7 +18,6 @@ const getView = function(): any {
     const rootState = SelectionStore.getRootState();
     const ids = rootState.ids;
     switch (rootState.id) {
-        case ids.settings:
         case ids.lessons:
         case ids.shopping:
             return SwitcherView();

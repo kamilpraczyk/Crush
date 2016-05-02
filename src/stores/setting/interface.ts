@@ -10,3 +10,10 @@ export interface SettingFace {
 export interface SettingMapFace {
     [id: string]: SettingFace;
 }
+
+
+export const ids = {
+    draw: 'draw',
+    qutro: 'qutro',
+    radio: 'radio'
+}

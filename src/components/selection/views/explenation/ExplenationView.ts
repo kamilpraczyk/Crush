@@ -2,6 +2,8 @@ import React = require('react');
 import ExplenationCss = require('./ExplenationCss');
 const {div, button} = React.DOM;
 import BoardStore = require('../../../../stores/board/BoardStore');
+import utils = require('../../../../utils/utils');
+
 
 function getState() {
     return BoardStore.getExplenation();
@@ -21,16 +23,18 @@ class View extends React.Component<{}, State>{
         if (this.state.isVisible && this.state.explenation) {
 
             const title = div({
-                style: ExplenationCss.getTitle()
+                style: ExplenationCss.getTitle(),
+                onClick: ExplenationCss.animate(utils.voice.read, this.state.title)
             }, this.state.title);
 
 
             const body = div({
-                style: ExplenationCss.getBody(),
-                dangerouslySetInnerHTML: {
-                    __html: this.state.explenation.html
+                style: ExplenationCss.getBody()
+            }, this.state.explenation.exp, div({
+                style: {
+                    padding: '10vh'
                 }
-            });
+            }));
 
             return div({
                 style: ExplenationCss.getPanel()

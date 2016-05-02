@@ -6,17 +6,16 @@ import AppDispatcher = require('../../../../dispatcher/AppDispatcher');
 import Constants = require('../../../../constants/Constants');
 import ButtonView = require('../../../button/ButtonView');
 import SelectionStore = require('../../../../stores/SelectionStore');
+import {ids} from '../../../../stores/setting/interface';
+import {LessonMapFace, LessonFace} from '../../../../lessons/interface';
 const {div} = React.DOM;
 
 
-function getState(): { list: [{ name: string, disable: boolean, active: boolean }] } {
+function getState() {
     const rootState = SelectionStore.getRootState();
     const ids = rootState.ids;
-    let list = [] as any;
+    let list = SelectionStore.getToBought();
     switch (rootState.id) {
-        case ids.settings:
-            list = SelectionStore.getSettings();
-            break;
         case ids.lessons:
             list = SelectionStore.getBought();
             break;
@@ -32,6 +31,19 @@ function getState(): { list: [{ name: string, disable: boolean, active: boolean 
 const state = getState();
 declare type State = typeof state;
 
+const getIcon = function (id: string) {
+    switch (id) {
+        case ids.draw:
+            return 'moon-quill';
+        case ids.qutro:
+            return 'moon-images';
+        case ids.radio:
+            return 'moon-signup';
+      //read 'moon-newspaper'
+    }
+    return null;
+}
+
 class View extends React.Component<{}, State>{
 
     constructor() {
@@ -40,21 +52,20 @@ class View extends React.Component<{}, State>{
 
     render() {
         this.state = getState();
-        const buttons = _.map(this.state.list, (item: any, id: string) => {
-            if (!item.hide) {
-                return ButtonView({
-                    key: id,
-                    name: item.name,
-                    onClick: function() {
-                        AppDispatcher.handleViewAction({
-                            actionType: Constants.SWITCH_ACTION,
-                            id: id
-                        });
-                    },
-                    isExpandWidth: true,
-                    isActive: item.active
-                });
-            }
+        const buttons = _.map(this.state.list, (item: LessonFace, id: string) => {
+            return ButtonView({
+                key: id,
+                leftIcon: getIcon(item.settings),
+                name: item.name,
+                onClick: function () {
+                    AppDispatcher.handleViewAction({
+                        actionType: Constants.SWITCH_ACTION,
+                        id: id
+                    });
+                },
+                isExpandWidth: true,
+                isActive: item.active
+            });
         });
 
         return div({

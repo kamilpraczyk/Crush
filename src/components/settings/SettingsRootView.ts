@@ -92,7 +92,6 @@ function getRootList(state: State) {
             key: id,
             style: SettingsRootCss.getRootItem(),
         }, getItem(item, id));
-        return null;
     });
     return div({
         style: SettingsRootCss.getRootList(),

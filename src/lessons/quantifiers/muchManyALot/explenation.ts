@@ -1,39 +1,51 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 
-const html = "\
-\ <br>\
-\ <br>\
-\ a lot of of people = many people  <br>\
-\ a lot of traffic = much traffic   <br>\
-\ <br>\
-\ Much - is use for singular nouns <br/>\
-\ much milk                         <br>\
-\ much water                        <br>\
-\ much noise                        <br>\
-\ much money                        <br>\
-\ <br>\
-\ Many - is use for plural nouns   <br>\
-\ many problems                     <br>\
-\ many friends                      <br>\
-\ many people                       <br>\
-\ many women                        <br>\
-\ <br>\
-\ A lot of - is use for singular and plural nouns   <br>\
-\ a lot of time                     <br>\
-\ a lot of times                    <br>\
-\ a lot of coffee                   <br>\
-\ a lot of coffees                  <br>\
-\ <br>\
-\ <b>much</b> cannot replace <b>many</b>, but both of them can be replaced by <b>a lot of</b> <br>\
-\ much = a lot of = many            <br>\
-\ <br>\
-\ <br>\
-\ <br>\
-\ <br>\
-\ <br>\
-"
+import {tList} from '../../helper/renderer';
+let exp: any[] = [];
+
+exp.push(tList({
+    t: '<u>Much</u> - is use for singular nouns',
+    list: [
+        { l: 'much milk' },
+        { l: 'much water' },
+        { l: 'much noise' },
+        { l: 'much money' }
+    ]
+}));
+
+exp.push(tList({
+    t: '<u>Many</u> - is use for plural nouns',
+    list: [
+        { l: 'many problems' },
+        { l: 'many friends' },
+        { l: 'many people' },
+        { l: 'many women' }
+    ]
+}));
+
+exp.push(tList({
+    t: '<u>A lot of</u> - is use for singular and plural nouns',
+    list: [
+        { l: 'a lot of time' },
+        { l: 'a lot of times' },
+        { l: 'a lot of coffee' },
+        { l: 'a lot of coffees' }
+    ]
+}));
+
+exp.push(tList({
+    t: '<u>Much</u> cannot replace <u>many</u>, but both of them can be replaced by <u>a lot of</u>',
+    list: [
+        { eq: ['a lot of people', 'many people'] },
+        { eq: ['a lot of women', 'many women'] },
+        { eq: ['a lot of traffic', 'much traffic'] },
+        { eq: ['a lot of time', 'much time'] },
+        { eq: ['a lot of milk', 'much milk'] },
+    ]
+}));
+
+
 
 export = {
-    html: html
+    exp: exp
 };
-  

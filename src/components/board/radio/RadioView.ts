@@ -18,7 +18,6 @@ function onAnswer(id: string) {
         actionType: Constants.CHOOSE_RADIO,
         id: id
     });
-    onRead(id);
 }
 
 function onRead(read: string) {
@@ -50,14 +49,12 @@ function getQueston(state: State) {
 
 
 function getName(state: State) {
-    const name = div({
+   return div({
         style: RadioCss.getContentName(),
         onClick: RadioCss.animate(onRead, state.text)
     }, div({
         style: RadioCss.getName(state.lessonData.id)
     }, state.text));
-
-    return name;
 }
 
 function getRadio(state: State) {

@@ -4,8 +4,9 @@ const {div, button} = React.DOM;
 
 interface Props {
     name: string,
-    key? :string,
+    key?: string,
     icon?: string,
+    leftIcon?: string,
     onClick: Function,
     isExpand?: boolean,
     isActive?: boolean,
@@ -50,21 +51,35 @@ class ButtonView extends React.Component<Props, ButtonViewStateFace>{
         let icon = null as any;
         if (this.props.icon) {
             icon = div({
-                className: this.props.icon
-            })
+                className: this.props.icon,
+                style: ButtonCss.getIcon()
+            });
+        }
+        let leftIcon = null as any;
+        if (this.props.leftIcon) {
+            icon = div({
+                className: this.props.leftIcon,
+                style: ButtonCss.getLeftIcon()
+            });
         }
 
+
+        const name = div({
+            style: ButtonCss.getName()
+        }, this.props.name);
+
         return button({
-            key : this.props.key,
+            key: this.props.key,
             style: ButtonCss.getButton({
                 pressed: this.state.pressed,
                 isExpand: this.props.isExpand,
                 isExpandWidth: this.props.isExpandWidth,
-                isActive: this.props.isActive
+                isActive: this.props.isActive,
+                isFlex: !!this.props.leftIcon
             }),
             onClick: this.clickHandler
-        }, icon ? icon : this.props.name);
+        }, leftIcon, icon, name);
     }
 };
 
-export =  React.createFactory(ButtonView);
+export = React.createFactory(ButtonView);

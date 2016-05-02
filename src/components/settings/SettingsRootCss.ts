@@ -23,7 +23,7 @@ let styles = {
         width: '100%',
         height: '100%',
         color: css.font.color.default,
-        background: 'rgba(255,255,255,0.8)',
+        background: 'rgba(255,255,255,0.9)',
     },
 
     panelContent: {

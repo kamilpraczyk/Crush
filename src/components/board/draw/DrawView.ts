@@ -3,6 +3,8 @@ import DrawCss = require('./DrawCss');
 import Signature = require('../../signature/index');
 import BoardStore = require('../../../stores/board/BoardStore');
 import MenuView = require('../menu/MenuView');
+import AppDispatcher = require('../../../dispatcher/AppDispatcher');
+import Constants = require('../../../constants/Constants');
 const {div} = React.DOM;
 
 function getState() {
@@ -10,6 +12,14 @@ function getState() {
 }
 const state = getState();
 declare type State = typeof state;
+
+function onRead(read: string) {
+    AppDispatcher.handleViewAction({
+        actionType: Constants.READ,
+        read: read
+    });
+}
+
 
 class DrawView extends React.Component<{}, State>{
 
@@ -45,7 +55,8 @@ class DrawView extends React.Component<{}, State>{
 
     getText() {
         return div({
-            style: DrawCss.getText()
+            style: DrawCss.getText(),
+            onClick: DrawCss.animate(onRead, this.state.lessonData.name)
         }, this.state.lessonData.name)
     }
 

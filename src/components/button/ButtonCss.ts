@@ -15,7 +15,6 @@ const styles = {
         cursor: 'pointer',
         fontFamily: 'Arial',
         fontSize: css.font.fontSize.XL,
-        height: '10vh',
         minHeight: 35,
         textDecoration: 'none',
         textShadow: '0px 1px 0px #2f6627',
@@ -42,12 +41,33 @@ const styles = {
         backgroundColor: css.button.background.active,
         color: css.button.color.active,
         border: css.button.border.active
+    },
+
+    name: {
+        display: 'inline-block',
+        paddingRight: 3,
+        paddingTop: '1vh',
+        paddingBottom: '1vh'
+    },
+
+    icon: {
+        display: 'inline-block',
+        paddingLeft: '1vw',
+        paddingRight: '1vw'
+    },
+    leftIcon: {
+        color: '#777',
+        float: 'left',
+        paddingLeft: '1vw',
+        paddingRight: '1vw',
+        paddingTop: '1vh'
     }
+
 }
 
 export = utils.union(css, {
 
-    getButton(options: { pressed: boolean, isExpand: boolean, isExpandWidth: boolean, isActive: boolean }) {
+    getButton(options: { pressed: boolean, isExpand: boolean, isExpandWidth: boolean, isActive: boolean, isFlex: boolean }) {
         let style = styles.button;
         if (options.isExpandWidth)
             style = css.get(style, styles.isExpandWidth);
@@ -59,7 +79,22 @@ export = utils.union(css, {
 
         if (options.pressed)
             style = css.get(style, styles.pressed);
+        if (options.isFlex) {
+            style = css.get(style, { display: 'inline-flex', textAlign: 'left' });
+        }
         return style;
+    },
+
+    getName() {
+        return styles.name;
+    },
+
+    getIcon() {
+        return styles.icon;
+    },
+
+    getLeftIcon() {
+        return styles.leftIcon;
     },
 
 

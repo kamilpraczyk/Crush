@@ -21,25 +21,19 @@ let _activeRoot = _ids.lessons;
 let _rootList = {
 
     [_ids.close]: {
-        icon: 'icon-cancel',
+        icon: 'moon-redo2',
         active: false,
         disable: false
     },
     [_ids.explenation]: {
-        name: 'info',
-        icon: 'icon-info',
-        active: false,
-        disable: false
-    },
-    [_ids.settings]: {
-        name: 'settings',
-        icon: 'icon-sliders',
+        name: 'lesson ',
+        icon: 'moon-file',
         active: false,
         disable: false
     },
     [_ids.lessons]: {
         name: 'lessons',
-        icon: 'icon-book',
+        icon: 'icon-folder',
         active: true,
         disable: false
     },

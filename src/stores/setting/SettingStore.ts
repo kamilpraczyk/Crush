@@ -1,14 +1,8 @@
 /// <reference path="../../../typings/tsd.d.ts" />
-import {SettingMapFace, SettingFace} from './interface';
+import {SettingMapFace, SettingFace, ids} from './interface';
 import Constants = require('../../constants/Constants');
 import BaseStore from '../../utils/store/BaseStore';
 import utils = require('../../utils/utils');
-
-let ids = {
-    draw: 'draw',
-    qutro: 'qutro',
-    radio: 'radio'
-}
 
 let _setting: SettingMapFace = {
     [ids.draw]: {
@@ -44,6 +38,7 @@ class SettingStore extends BaseStore {
     constructor() {
         super()
     }
+
     getAll() {
         return _setting;
     }
@@ -57,12 +52,13 @@ class SettingStore extends BaseStore {
         return ids;
     }
 
-    dispatcherIndex = this.register(function(payload: { action: any }) {
+    switchTo = onSwitchAction;
+
+    dispatcherIndex = this.register(function (payload: { action: any }) {
         var action = payload.action;
 
         switch (action.actionType) {
-            case Constants.SWITCH_ACTION:           
-             console.log('switch setting store');
+            case Constants.SWITCH_ACTION:
                 onSwitchAction(action.id);
                 break;
         }

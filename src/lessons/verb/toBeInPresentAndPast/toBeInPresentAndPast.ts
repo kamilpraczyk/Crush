@@ -60,9 +60,9 @@ export =[
         explenation: explenation
     }, {
         id: id([ids.center]),
-        name: "I am an enginer.",
-        correct: ["I was an enginer."],
-        incorrect: ["I shall be an enginer.", "I would be an enginer."],
+        name: "I am an engineer.",
+        correct: ["I was an engineer."],
+        incorrect: ["I shall be an engineer.", "I would be an engineer."],
         info: toPast,
         explenation: explenation
     }, {

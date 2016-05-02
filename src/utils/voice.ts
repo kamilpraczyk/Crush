@@ -3,8 +3,11 @@ import _ = require("underscore");
 import {space}  from '../lessons/helper/constants';
 
 const read = function (value: string) {
+  console.log('read', value);
   value = value.replace(space, '');
   value = value.replace('_', '');
+
+
 
   var utterance = new (<any>window).SpeechSynthesisUtterance(value);
   var voices = (<any>window).speechSynthesis.getVoices();
@@ -15,7 +18,7 @@ const read = function (value: string) {
 }
 
 
- const stopReading = function () {
+const stopReading = function () {
   (<any>window).speechSynthesis.cancel();
 }
 

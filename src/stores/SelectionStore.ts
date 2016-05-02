@@ -21,10 +21,7 @@ class SelectionStore extends BaseStore {
             id: SettingsRootStore.getActiveRoot(),
         }
     }
-    
-    getSettings() {
-        return SettingStore.getAll();
-    }
+
     getBought() {
         return LessonStore.getBought();
     }
