@@ -18,7 +18,7 @@ let styles = {
 
     text: {
         position: 'absolute',
-        top: 10,
+        bottom: 60,
         left: 0,
         width: '100%',
         textAlign: 'center',

@@ -6,37 +6,37 @@ let exp: any[] = [];
 exp.push(tList({
     t: "We use pronouns to refer to possession and 'belonging'.",
     list: [
-        { to: ["This is <u>my</u> pen.", "This pen is <u>mine</u>."] },
-        { to: ["This is <u>your</u> pen.", "This pen is <u>yours</u>."] },
-        { to: ["This is <u>his</u> pen.", "This pen is <u>his</u>."] },
-        { to: ["This is <u>her</u> pen.", "This pen is <u>hers</u>."] },
-        { to: ["This is <u>our</u> pen.", "This pen is <u>ours</u>."] },
-        { to: ["This is <u>their</u> pen.", "This pen is <u>theirs</u>."] }
+        { to: ["This is <p>my</p> pen.", "This pen is <p>mine</p>."] },
+        { to: ["This is <p>your</p> pen.", "This pen is <p>yours</p>."] },
+        { to: ["This is <p>his</p> pen.", "This pen is <p>his</p>."] },
+        { to: ["This is <p>her</p> pen.", "This pen is <p>hers</p>."] },
+        { to: ["This is <p>our</p> pen.", "This pen is <p>ours</p>."] },
+        { to: ["This is <p>their</p> pen.", "This pen is <p>theirs</p>."] }
     ]
 }));
 
 exp.push(tList({
     t: "Possessive pronouns are used in English to avoid repeating information that is already clear.",
     list: [
-        { to: ["This is <u>my</u> pen.", "This pen is <u>mine</u>."] },
-        { to: ["<u>My</u> bag is old.", "<u>Hers</u> is new."] },
-        { to: ["Is this <u>your</u> bag?", "No, it's <u>hers</u>."] },
-        { to: ["<u>His</u> name is Bob", "<u>Hers</u> is Joanna."] },
-        { to: ["<u>My</u> name is Sue", "<u>His</u> is Bob."] },
-        { to: ["<u>Our</u> dog is friendly", "<u>Theirs</u> is agressive."] }
+        { to: ["This is <p>my</p> pen.", "This pen is <p>mine</p>."] },
+        { to: ["<p>My</p> bag is old.", "<p>Hers</p> is new."] },
+        { to: ["Is this <p>your</p> bag?", "No, it's <p>hers</p>."] },
+        { to: ["<p>His</p> name is Bob", "<p>Hers</p> is Joanna."] },
+        { to: ["<p>My</p> name is Sue", "<p>His</p> is Bob."] },
+        { to: ["<p>Our</p> dog is friendly", "<p>Theirs</p> is agressive."] }
     ]
 }));
 
 exp.push(tList({
     t: "We use possessive pronouns in place of a noun:",
     list: [
-        { l: "I know this drink is <u>yours</u> but I need to drink something." },
-        { l: "I know this drink is <u>your drink</u> but I need to drink something." },
-        { i: "<u>Yours</u> is a possessive pronoun that replaces <u>your drink</u>." },
+        { l: "I know this drink is <p>yours</p> but I need to drink something." },
+        { l: "I know this drink is <p>your drink</p> but I need to drink something." },
+        { i: "<p>Yours</p> is a possessive pronoun that replaces <p>your drink</p>." },
         { s: ' ' },
-        { l: "Her car is faster than <u>mine</u>." },
-        { l: "Her car is faster than <u>my car</u>." },
-        { i: "<u>Mine</u> is a possessive pronoun that replaces <u>my car</u>." },
+        { l: "Her car is faster than <p>mine</p>." },
+        { l: "Her car is faster than <p>my car</p>." },
+        { i: "<p>Mine</p> is a possessive pronoun that replaces <p>my car</p>." },
         { s: ' ' },
     ]
 }));

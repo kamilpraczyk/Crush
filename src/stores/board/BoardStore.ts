@@ -70,6 +70,10 @@ class BoardStore extends BaseStore {
     getPoints() {
         return pointsHelper.getState(list[_index], list);
     }
+    
+    getPurchaseInfoState(){
+        return {}
+    }
 
     getExplenation() {
         return {

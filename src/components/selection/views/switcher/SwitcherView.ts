@@ -5,6 +5,7 @@ import SwitchCss = require('./SwitchCss');
 import AppDispatcher = require('../../../../dispatcher/AppDispatcher');
 import Constants = require('../../../../constants/Constants');
 import ButtonView = require('../../../button/ButtonView');
+import PurchaseInfoView = require('../purchaseInfo/PurchaseInfoView');
 import SelectionStore = require('../../../../stores/SelectionStore');
 import {ids} from '../../../../stores/setting/interface';
 import {LessonMapFace, LessonFace} from '../../../../lessons/interface';
@@ -24,7 +25,8 @@ function getState() {
             break;
     }
     return {
-        list: list
+        list: list,
+        info: PurchaseInfoView()
     }
 }
 
@@ -39,7 +41,7 @@ const getIcon = function (id: string) {
             return 'moon-images';
         case ids.radio:
             return 'moon-signup';
-      //read 'moon-newspaper'
+        //read 'moon-newspaper'
     }
     return null;
 }
@@ -70,7 +72,7 @@ class View extends React.Component<{}, State>{
 
         return div({
             style: SwitchCss.getPanel()
-        }, buttons);
+        }, this.state.info, buttons);
     }
 
 };

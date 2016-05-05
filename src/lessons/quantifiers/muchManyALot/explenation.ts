@@ -4,7 +4,7 @@ import {tList} from '../../helper/renderer';
 let exp: any[] = [];
 
 exp.push(tList({
-    t: '<u>Much</u> - is use for singular nouns',
+    t: '<p>Much</p> - is use for singular nouns',
     list: [
         { l: 'much milk' },
         { l: 'much water' },
@@ -14,7 +14,7 @@ exp.push(tList({
 }));
 
 exp.push(tList({
-    t: '<u>Many</u> - is use for plural nouns',
+    t: '<p>Many</p> - is use for plural nouns',
     list: [
         { l: 'many problems' },
         { l: 'many friends' },
@@ -24,7 +24,7 @@ exp.push(tList({
 }));
 
 exp.push(tList({
-    t: '<u>A lot of</u> - is use for singular and plural nouns',
+    t: '<p>A lot of</p> - is use for singular and plural nouns',
     list: [
         { l: 'a lot of time' },
         { l: 'a lot of times' },
@@ -34,7 +34,7 @@ exp.push(tList({
 }));
 
 exp.push(tList({
-    t: '<u>Much</u> cannot replace <u>many</u>, but both of them can be replaced by <u>a lot of</u>',
+    t: '<p>Much</p> cannot replace <p>many</p>, but both of them can be replaced by <p>a lot of</p>',
     list: [
         { eq: ['a lot of people', 'many people'] },
         { eq: ['a lot of women', 'many women'] },

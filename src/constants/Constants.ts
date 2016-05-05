@@ -7,5 +7,6 @@ export =  {
     CHOOSE_RADIO: 'CHOOSE_RADIO',
     BOARD_NEXT: 'BOARD_NEXT',
     BOARD_PREV: 'BOARD_PREV',
-    READ: 'READ'
+    READ: 'READ',
+    SUBSCRIBE: 'SUBSCRIBE',
 }

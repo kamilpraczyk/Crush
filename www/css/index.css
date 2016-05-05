@@ -101,6 +101,9 @@ body {
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
     font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+	display: fixed; /*prevent scroll bouncing on safari*/
+	width: 100%;
+	height: 100%;
 }
 
 /* Portrait layout (default) */
@@ -125,6 +128,13 @@ body {
         margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
                                       /* offset horizontal: half of image width and text area width */
     }
+}
+
+p{
+	text-decoration: none;
+    display: inline;
+	vertical-align: baseline;
+	color: #518696
 }
 
 h1 {

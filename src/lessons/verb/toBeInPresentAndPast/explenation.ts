@@ -6,43 +6,43 @@ let exp: any[] = [];
 exp.push(tList({
     t: 'Present',
     list: [
-        { l: 'I <u>am</u>' },
-        { l: 'you <u>are</u>' },
-        { l: 'he, she, it <u>is</u>' },
-        { l: 'we <u>are</u>' },
-        { l: 'you <u>are</u>' },
-        { l: 'they <u>are</u>' }
+        { l: 'I <p>am</p>' },
+        { l: 'you <p>are</p>' },
+        { l: 'he, she, it <p>is</p>' },
+        { l: 'we <p>are</p>' },
+        { l: 'you <p>are</p>' },
+        { l: 'they <p>are</p>' }
     ]
 }));
 
 exp.push(tList({
     t: 'Past',
     list: [
-        { l: 'I <u>was</u>' },
-        { l: 'you <u>were</u>' },
-        { l: 'he, she, it <u>was</u>' },
-        { l: 'we <u>were</u>' },
-        { l: 'you <u>were</u>' },
-        { l: 'they <u>were</u>' }
+        { l: 'I <p>was</p>' },
+        { l: 'you <p>were</p>' },
+        { l: 'he, she, it <p>was</p>' },
+        { l: 'we <p>were</p>' },
+        { l: 'you <p>were</p>' },
+        { l: 'they <p>were</p>' }
     ]
 }));
 
 exp.push(tList({
     t: 'Negation',
     list: [
-        { l: 'I am <u>not</u>' },
-        { l: 'I was <u>not</u>' },
-        { l: 'he, she, it was <u>not</u>' },
-        { l: 'we are <u>not</u>' },
-        { l: 'they were <u>not</u>' }
+        { l: 'I am <p>not</p>' },
+        { l: 'I was <p>not</p>' },
+        { l: 'he, she, it was <p>not</p>' },
+        { l: 'we are <p>not</p>' },
+        { l: 'they were <p>not</p>' }
     ]
 }));
 
 exp.push(tList({
     t: 'Questions',
     list: [
-        { l: 'They <u>are</u> tired.' },
-        { l: '<u>Are</u> they tired?' },
+        { l: 'They <p>are</p> tired.' },
+        { l: '<p>Are</p> they tired?' },
     ]
 }));
 

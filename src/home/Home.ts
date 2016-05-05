@@ -1,8 +1,8 @@
-
 import React = require('react');
 import ReactDOM = require('react-dom');
 import components = require('../components/components');
 import Layout = require('./layout/Layout')
+import HomeStore = require('../stores/home/HomeStore');
 
 
 class Home {
@@ -22,15 +22,28 @@ class Home {
             onComponentDidMount: this.onComponentDidMount
         });
         ReactDOM.render(this.layout, this.el);
+
+
+        this.onChange = this.onChange.bind(this);
+        HomeStore.addChangeListener(this.onChange);
+    }
+
+    onChange() {
+        console.log('change!!');
+        const state = HomeStore.getStateHome();
+        if (state.isGreetings) {
+            this.showGreetings();
+        } else {
+            this.showSettings();
+            this.showBoard();
+        }
     }
 
     onComponentDidMount(regions: any) {
         this.boardRegion = regions.boardRegion;
         this.settingsRegion = regions.settingsRegion;
         this.greetingsRegion = regions.greetingsRegion;
-        // this.showGreetings();
-        this.showSettings();
-        this.showBoard();
+        this.onChange();
     }
 
     showGreetings() {

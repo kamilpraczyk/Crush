@@ -28,9 +28,9 @@ exp.push(tList({
     t: "We use a reflexive pronoun",
     i: "as a direct object when the object is the same as the subject of the verb",
     list: [
-        { l: "<u>I</u> am teaching <u>myself</u> to play the guitar." },
+        { l: "<p>I</p> am teaching <p>myself</p> to play the guitar." },
         { s: " " },
-        { l: "<u>You</u> should enjoy <u>yourself</u> more!" },
+        { l: "<p>You</p> should enjoy <p>yourself</p> more!" },
     ]
 }));
 

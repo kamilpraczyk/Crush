@@ -4,7 +4,7 @@ import {tList} from '../helper/renderer';
 let exp: any[] = [];
 
 exp.push(tList({
-    t: 'To make a plural we add <u>-s</u>, <u>-es</u>, <u>-ies</u>',
+    t: 'To make a plural we add <p>-s</p>, <p>-es</p>, <p>-ies</p>',
     list: [
         { to: ['film', 'films'] },
         { to: ['book', 'books'] },
@@ -20,7 +20,7 @@ exp.push(tList({
 
 
 exp.push(tList({
-    t: 'Words without <u>-(ie)s</u>',
+    t: 'Words without <p>-(ie)s</p>',
     list: [
         { to: ['a man', 'men'] },
         { to: ['a woman', 'women'] },

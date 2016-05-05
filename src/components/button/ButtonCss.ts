@@ -45,9 +45,9 @@ const styles = {
 
     name: {
         display: 'inline-block',
-        paddingRight: 3,
         paddingTop: '1vh',
-        paddingBottom: '1vh'
+        paddingBottom: '1vh',
+        paddingRight: '1vw',
     },
 
     icon: {
@@ -61,6 +61,9 @@ const styles = {
         paddingLeft: '1vw',
         paddingRight: '1vw',
         paddingTop: '1vh'
+    },
+    leftIconActive: {
+        color: '#fff',
     }
 
 }
@@ -93,8 +96,12 @@ export = utils.union(css, {
         return styles.icon;
     },
 
-    getLeftIcon() {
-        return styles.leftIcon;
+    getLeftIcon(isActive: boolean) {
+        let style = styles.leftIcon;
+        if (isActive) {
+            style = css.get(style, styles.leftIconActive);
+        }
+        return style;
     },
 
 

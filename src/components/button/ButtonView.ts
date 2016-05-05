@@ -29,7 +29,6 @@ class ButtonView extends React.Component<Props, ButtonViewStateFace>{
         this.unpress = this.unpress.bind(this);
     }
 
-
     clickHandler(e: any) {
         e.preventDefault();
         this.setState({ pressed: true });
@@ -41,11 +40,9 @@ class ButtonView extends React.Component<Props, ButtonViewStateFace>{
         this.setState && this.setState({ pressed: false });
     }
 
-
     componentWillUnmount() {
         clearTimeout(this.time);
     }
-
 
     render() {
         let icon = null as any;
@@ -59,10 +56,9 @@ class ButtonView extends React.Component<Props, ButtonViewStateFace>{
         if (this.props.leftIcon) {
             icon = div({
                 className: this.props.leftIcon,
-                style: ButtonCss.getLeftIcon()
+                style: ButtonCss.getLeftIcon(this.props.isActive)
             });
         }
-
 
         const name = div({
             style: ButtonCss.getName()

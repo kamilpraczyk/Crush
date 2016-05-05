@@ -3,7 +3,7 @@ import {tList} from '../../helper/renderer';
 let exp: any[] = [];
 
 exp.push(tList({
-    t: 'Two forms: <u>have</u> and <u>has</u>',
+    t: 'Two forms: <p>have</p> and <p>has</p>',
     list: [
         { l: 'I have' },
         { l: 'you have' },
@@ -15,42 +15,42 @@ exp.push(tList({
 }));
 
 exp.push(tList({
-    t: '<u>Have</u> and <u>has</u> often come with <u>got</u>',
+    t: '<p>Have</p> and <p>has</p> often come with <p>got</p>',
     i: 'The meaning remains the same',
     list: [
-        { eq: ['I have', 'I have <u>got</u>'] },
-        { eq: ['he has', 'he has <u>got</u>'] },
+        { eq: ['I have', 'I have <p>got</p>'] },
+        { eq: ['he has', 'he has <p>got</p>'] },
     ]
 }));
 
 exp.push(tList({
-    t: '<u>Have</u> often come with <u>some, any, no</u> and <u>one</u>',
+    t: '<p>Have</p> often come with <p>some, any, no</p> and <p>one</p>',
     list: [
-        { l: 'Have you got <u>any</u> money?' },
-        { l: 'Yes, I have (got) <u>some</u>.' },
-        { l: 'No, I have not got <u>any</u>.' },
+        { l: 'Have you got <p>any</p> money?' },
+        { l: 'Yes, I have (got) <p>some</p>.' },
+        { l: 'No, I have not got <p>any</p>.' },
         { s: ' ' },
-        { l: 'Have you got <u>any</u> books?' },
-        { l: 'Yes, I have (got) <u>some</u>.' },
-        { l: 'No, I have not got <u>any</u>.' },
+        { l: 'Have you got <p>any</p> books?' },
+        { l: 'Yes, I have (got) <p>some</p>.' },
+        { l: 'No, I have not got <p>any</p>.' },
         { s: ' ' },
-        { l: 'Have you got <u>a</u> car?' },
-        { l: 'Yes, I have (got) <u>one</u>.' },
-        { l: 'No, I have not got <u>one</u>.' }
+        { l: 'Have you got <p>a</p> car?' },
+        { l: 'Yes, I have (got) <p>one</p>.' },
+        { l: 'No, I have not got <p>one</p>.' }
     ]
 }));
 
 exp.push(tList({
-    t: 'Negation of Noun Phrases with <u>not</u>',
+    t: 'Negation of Noun Phrases with <p>not</p>',
     list: [
-        { l: 'I have <u>not</u> got any money.' }
+        { l: 'I have <p>not</p> got any money.' }
     ]
 }));
 
 exp.push(tList({
     t: 'Negation of Verb Phrases with <b>no</b>',
     list: [
-        { l: 'I have <u>no</u> money.' }
+        { l: 'I have <p>no</p> money.' }
     ]
 }));
 

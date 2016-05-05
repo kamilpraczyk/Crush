@@ -21,7 +21,7 @@ interface TList {
 }
 
 const cleanText = function (l: string) {
-    return l.replace('<u>', '').replace('</u>', '').replace('</b>', '').replace('<b>', '');
+    return l.replace('<p>', '').replace('</p>', '').replace('</b>', '').replace('<b>', '');
 }
 
 export const tList = (o: TList) => {
