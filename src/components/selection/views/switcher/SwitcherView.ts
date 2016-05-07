@@ -65,6 +65,7 @@ class View extends React.Component<{}, State>{
                         id: id
                     });
                 },
+                isQuickClick: true,
                 isExpandWidth: true,
                 isActive: item.active
             });

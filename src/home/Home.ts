@@ -29,14 +29,9 @@ class Home {
     }
 
     onChange() {
-        console.log('change!!');
-        const state = HomeStore.getStateHome();
-        if (state.isGreetings) {
-            this.showGreetings();
-        } else {
-            this.showSettings();
-            this.showBoard();
-        }
+        this.showGreetings();
+        this.showSettings();
+        this.showBoard();
     }
 
     onComponentDidMount(regions: any) {
@@ -47,22 +42,15 @@ class Home {
     }
 
     showGreetings() {
-        ReactDOM.render(components.GreetingsView({
-            name: '',
-            onClick: this.showSettings
-        }), this.greetingsRegion);
+        ReactDOM.render(components.GreetingsView(), this.greetingsRegion);
     }
 
     showSettings() {
-        ReactDOM.unmountComponentAtNode(this.greetingsRegion);
-        ReactDOM.render(components.SettingsRootView({
-            rootList: []
-        }), this.settingsRegion);
+        ReactDOM.render(components.SettingsRootView({}), this.settingsRegion);
     }
 
     showBoard() {
-        ReactDOM.render(components.BoardView({
-        }), this.boardRegion);
+        ReactDOM.render(components.BoardView({}), this.boardRegion);
     }
 
 

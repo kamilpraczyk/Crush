@@ -8,6 +8,7 @@ interface Props {
     icon?: string,
     leftIcon?: string,
     onClick: Function,
+    isQuickClick?: boolean,
     isExpand?: boolean,
     isActive?: boolean,
     isExpandWidth?: boolean
@@ -32,11 +33,12 @@ class ButtonView extends React.Component<Props, ButtonViewStateFace>{
     clickHandler(e: any) {
         e.preventDefault();
         this.setState({ pressed: true });
-        this.props.onClick(this.props);
-        this.time = setTimeout(this.unpress, 300);
+        this.props.isQuickClick && this.props.onClick(this.props);
+        this.time = setTimeout(this.unpress, 250);
     }
 
     unpress() {
+        !this.props.isQuickClick && this.props.onClick(this.props);
         this.setState && this.setState({ pressed: false });
     }
 

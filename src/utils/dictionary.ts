@@ -33,6 +33,7 @@ const data = {
     GREET_HELLO: (object: { name: string }) => {
         return replace('GREET_HELLO', object);
     },
+    GREET_TITLE : wrap('GREET_TITLE'),
     GREET_START: wrap('GREET_START'),
     OK: wrap('OK'),
 };

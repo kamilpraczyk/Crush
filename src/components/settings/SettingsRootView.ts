@@ -72,22 +72,22 @@ function getPanelSelection() {
 
 
 function getItem(item: any, id: string) {
-          
-    //buttonPerfect
+
     return div({
         style: SettingsRootCss.getItem(),
     }, ButtonView({
         name: item.name,
         icon: item.icon,
         onClick: _.partial(_onRootClick, id),
+        isQuickClick: id === 'close' ? false : true,
         isExpandWidth: true,
         isExpand: true,
-        isActive: item.active
+        isActive: item.active,
     }));
 }
 
 function getRootList(state: State) {
-    let list = _.map(state.rootList, function(item: any, id: string) {
+    let list = _.map(state.rootList, function (item: any, id: string) {
         return div({
             key: id,
             style: SettingsRootCss.getRootItem(),
@@ -127,7 +127,7 @@ class SettingRootView extends React.Component<{}, State> {
     }
 }
 
-export =  React.createFactory(SettingRootView); 
+export =  React.createFactory(SettingRootView);
 
 
 

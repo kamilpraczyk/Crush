@@ -1,5 +1,6 @@
 /// <reference path="../../typings/tsd.d.ts" />
 export =  {
+    GREETINGS_SHOW_LESSONS: 'GREETINGS_SHOW_LESSONS',
     ROOT_ITEM_CLICK: 'ROOT_ITEM_CLICK',
     SWITCH_ACTION: 'SWITCH_ACTION',
     MAXIMALIZE_SETTINGS: 'MAXIMALIZE_SETTINGS',

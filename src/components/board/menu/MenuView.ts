@@ -42,7 +42,7 @@ class View extends React.Component<State, State>{
     }
 
     render() {
-        let buttons = this.state.menu.map(function(item: Item) {
+        let buttons = this.state.menu.map(function (item: Item) {
             return div({
                 key: item.id,
                 style: MenuCss.getItem()
@@ -50,7 +50,8 @@ class View extends React.Component<State, State>{
                 name: item.name,
                 icon: item.icon,
                 isExpandWidth: true,
-                onClick: item.onClick
+                onClick: item.onClick,
+                isQuickClick: true
             }));
         });
 

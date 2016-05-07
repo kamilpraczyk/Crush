@@ -8,8 +8,9 @@ import SettingStore = require('../setting/SettingStore');
 
 
 let state = {
-    //  isPrime : false, // did user bought subsc
-    isGreetings: false
+    isPrime: false,
+    isGreetings: true,
+    userName : ''
 };
 
 class Store extends BaseStore {
@@ -31,6 +32,11 @@ class Store extends BaseStore {
 
             case Constants.SUBSCRIBE:
                 state.isGreetings = true;
+                this.emitChange();
+                break;
+
+            case Constants.GREETINGS_SHOW_LESSONS:
+                state.isGreetings = false;
                 this.emitChange();
                 break;
         }

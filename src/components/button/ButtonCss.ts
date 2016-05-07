@@ -48,6 +48,7 @@ const styles = {
         paddingTop: '1vh',
         paddingBottom: '1vh',
         paddingRight: '1vw',
+        paddingLeft: '1vw',
     },
 
     icon: {

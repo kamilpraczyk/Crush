@@ -4,44 +4,56 @@ import dictionary = require('../../utils/dictionary');
 import React = require('react');
 import GreetingsCss = require('./GreetingsCss');
 import ButtonView = require('../../components/button/ButtonView');
+import AppDispatcher = require('../../dispatcher/AppDispatcher');
+import Constants = require('../../constants/Constants');
+import HomeStore = require('../../stores/home/HomeStore');
 const {div} = React.DOM;
 
-interface GreetingsViewPropsFace {
-    name: string,
-    onClick: Function
+function getState() {
+    return HomeStore.getStateHome();
 }
-interface GreetingsViewStateFace { }
+const state = getState();
+declare type State = typeof state;
 
-class GreetingsView extends React.Component<GreetingsViewPropsFace, GreetingsViewStateFace>{
 
+function getTitle() {
+    return div({
+        style: GreetingsCss.getText()
+    }, dictionary.GREET_TITLE());
+}
 
-    constructor(props: GreetingsViewPropsFace) {
-        super(props)
-    }
-
-    getText() {
-        return div({
-            style: GreetingsCss.getText()
-        }, dictionary.GREET_HELLO({ name: this.props.name }));
-    }
-    getButton() {
-        return ButtonView({
-            name: dictionary.GREET_START(),
-            onClick: this.props.onClick
-        });
-    }
-
-    getContainer() {
-        return div({
-            style: GreetingsCss.getContainer()
-        }, this.getText(), this.getButton());
-    }
-
-    public render() {
-        return div({
-            style: GreetingsCss.getPanel()
-        }, this.getContainer());
-    }
+function getText(name: string) {
+    return div({
+        style: GreetingsCss.getText()
+    }, dictionary.GREET_HELLO({ name: name }));
 };
 
-export = React.createFactory(GreetingsView); 
+function getButton() {
+    return ButtonView({
+        name: dictionary.GREET_START(),
+        onClick: function () {
+            AppDispatcher.handleViewAction({
+                actionType: Constants.GREETINGS_SHOW_LESSONS,
+            });
+        }
+    });
+};
+
+function getContainer(state: State) {
+    return div({
+        style: GreetingsCss.getContainer()
+    }, getTitle(), getText(state.userName), getButton());
+};
+
+function render() {
+    const state = getState();
+    if (state.isGreetings) {
+        return div({
+            style: GreetingsCss.getPanel()
+        }, getContainer(state));
+    }
+    return div({});
+}
+
+
+export = render; 
