@@ -9,7 +9,7 @@ import SettingStore = require('../setting/SettingStore');
 
 let state = {
     isPrime: false,
-    isGreetings: true,
+    isGreetings: false,
     userName : ''
 };
 

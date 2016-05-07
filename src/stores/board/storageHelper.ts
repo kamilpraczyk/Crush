@@ -1,7 +1,7 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 import {BoardFace, BoardFaces} from '../../lessons/interface';
 import _ = require('underscore');
-import {space, empty}  from '../../lessons/helper/constants';
+import {space, empty, multi}  from '../../lessons/helper/constants';
 import utils = require('../../utils/utils');
 
 let generatedList = [] as string[];
@@ -27,22 +27,43 @@ function reset() {
     _selectedAnswer = null;
 }
 
+function getCorrectSentence() {
+    let name = _board.name;
+    let read = '';
+    if (_selectedAnswer.indexOf('.png') !== -1 || _selectedAnswer.indexOf('.jpg') !== -1) {
+        /*answer is a path to a picture*/
+        read = name;
+    } else if (_selectedAnswer.indexOf(multi) !== -1) {
+        /*answer is a multi answer, separated by 'space'*/
+        const split = _selectedAnswer.split(multi);
+        read = name;
+        split.map((item) => {
+            read = read.replace(space, item.replace(multi, '').trim());
+        });
+    } else if (name.indexOf(space) !== -1) {
+        /*name contains partly answer, in place of 'space'*/
+        const replacement = _selectedAnswer === empty ? ' ' : ' ' + _selectedAnswer + ' ';
+        read = name.replace(space, replacement);
+    } else if (_selectedAnswer !== empty) {
+        /* selected answer is correct*/
+        read = _selectedAnswer;
+    } else if (_selectedAnswer !== empty) {
+        /*answer is an empty answer - origin sentence correct*/
+        read = name;
+    }
+
+    read = read.replace('  ', ' ').replace(' .', '.').replace(' ,', ',');
+    return read;
+}
+
+function isCorrect() {
+    return _.contains(_board.correct, _selectedAnswer);
+}
+
 function setPressedAnswer(answer: string) {
-    _selectedAnswer = answer
-    const isCorrect = _.contains(_board.correct, _selectedAnswer);
-    if (isCorrect) {
-        let name = _board.name;
-        let read = '';
-        if (_selectedAnswer.indexOf('.png') !== -1 || _selectedAnswer.indexOf('.jpg') !== -1) { //if is a picture
-            read = name;
-        } else if (name.indexOf(space) !== -1) { //if contains partly answer
-            const replacement = _selectedAnswer === empty ? ' ' : ' ' + _selectedAnswer + ' ';
-            read = name.replace(space, replacement);
-        } else if (_selectedAnswer !== empty) { // if is not an empty answer
-            read = _selectedAnswer;
-        } else if (_selectedAnswer !== empty) {// is empty answer
-            read = name;
-        }
+    _selectedAnswer = answer;
+    if (isCorrect()) {
+        const read = getCorrectSentence();
         utils.voice.read(read);
     }
 }
@@ -51,12 +72,10 @@ function setPressedAnswer(answer: string) {
 function getState(board: BoardFace) {
     generate(board);
 
-    const isCorrect = _.contains(board.correct, _selectedAnswer);
     let name = board.name;
     //replace name with correct sentence
-    if (isCorrect) {
-        const replacement = _selectedAnswer === empty ? ' ' : ' ' + _selectedAnswer + ' ';
-        name = name.replace(space, replacement).replace('  ', ' ').replace(' .', '.').replace(' ,', ',');
+    if (isCorrect()) {
+        name = getCorrectSentence();
     }
     console.log('name', name)
 
@@ -65,7 +84,7 @@ function getState(board: BoardFace) {
         generatedList: generatedList,
         text: name,
         lessonData: board,
-        isCorrect: isCorrect
+        isCorrect: isCorrect()
     }
 }
 

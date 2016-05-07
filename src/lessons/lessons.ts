@@ -3,7 +3,7 @@ import {LessonMapFace, LessonFace} from './interface';
 import {ids} from '../stores/setting/interface';
 import _ = require('underscore');
 
-export const activeStartup = 'irregularVerbs';
+export const activeStartup = 'eitherNeither';
 
 
 export const lessons: LessonMapFace = {
@@ -13,9 +13,14 @@ export const lessons: LessonMapFace = {
         name: 'Animals', bought: true, active: false,
         lessons: require('./animals/animals')
     },
+    eitherNeither :{
+        settings: ids.radio,
+        name: 'Either and Neither', bought: true, active: false,
+        lessons: require('./words/eitherNeither/eitherNeither')
+    },   
     irregularVerbs: {
         settings: ids.draw,
-        name: 'Irregular Verbs', bought: true, active: false,
+        name: 'Irregular Verbs', bought: true, active: false, //TODO guess with is first
         lessons: require('./irregular/verbs/irregularVerbs')
     },
     singularAndPlural: {

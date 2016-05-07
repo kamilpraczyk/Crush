@@ -8,12 +8,14 @@ let styles = {
         top: 0,
         right: 0,
         border: '1px solid black',
-        width: css.status.width,
-        height: css.status.height,
+        //width: css.status.width,
+        //height: css.status.height,
         maxHeight: css.status.maxHeight,
         maxWidth: css.status.maxWidth,
         cursor: css.cursor.pointer,
-        borderRadius: css.borderRadius
+        borderRadius: css.borderRadius,
+        width : 100,
+        height: 100
     },
 
     panel: {

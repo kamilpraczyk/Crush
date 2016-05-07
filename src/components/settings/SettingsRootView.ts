@@ -99,6 +99,7 @@ function getRootList(state: State) {
 }
 
 
+
 class SettingRootView extends React.Component<{}, State> {
 
     constructor() {

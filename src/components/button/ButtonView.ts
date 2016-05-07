@@ -34,13 +34,14 @@ class ButtonView extends React.Component<Props, ButtonViewStateFace>{
         e.preventDefault();
         this.setState({ pressed: true });
         this.props.isQuickClick && this.props.onClick(this.props);
-        this.time = setTimeout(this.unpress, 250);
+        this.time = setTimeout(this.unpress, 250, this);
     }
 
     unpress() {
-        !this.props.isQuickClick && this.props.onClick(this.props);
         this.setState && this.setState({ pressed: false });
+        !this.props.isQuickClick && this.props.onClick(this.props);
     }
+ 
 
     componentWillUnmount() {
         clearTimeout(this.time);
