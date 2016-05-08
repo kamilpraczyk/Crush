@@ -4,7 +4,6 @@ import BaseStore from '../utils/store/BaseStore';
 import SettingsRootStore = require('./SettingsRootStore');
 
 import LessonStore = require('./lesson/LessonStore');
-import SettingStore = require('./setting/SettingStore');
 import BoardStore = require('./board/BoardStore');
 
 
@@ -39,7 +38,7 @@ class SelectionStore extends BaseStore {
         switch (action.actionType) {
 
             case Constants.SWITCH_ACTION:
-                this.waitFor([SettingStore.dispatcherIndex, LessonStore.dispatcherIndex], () => {
+                this.waitFor([LessonStore.dispatcherIndex], () => {
                     console.log('switch selection store');
                     this.emitChange();
                 });

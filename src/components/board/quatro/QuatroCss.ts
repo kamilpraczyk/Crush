@@ -32,7 +32,7 @@ let styles = {
         display: 'table-row',
         textAlign: 'center',
         height: 0,
-        backgroundColor: 'rgba(255, 255, 255, 0.60)'
+        backgroundColor:css.background.text.backgroundColor
     },
 
 

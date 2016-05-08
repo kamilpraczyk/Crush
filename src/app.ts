@@ -1,11 +1,9 @@
 import Home = require("./home/Home");
-import Console = require("./utils/debugger/Console");
 
 var app = {
 
     initialize: function () {
         this.bindEvents();
-        // Console.start();
     },
 
     bindEvents: function () {

@@ -42,6 +42,9 @@ const styles = {
         color: css.button.color.active,
         border: css.button.border.active
     },
+    isResponsibleHeight: {
+        minHeight: '10vh'
+    },
 
     name: {
         display: 'inline-block',
@@ -71,7 +74,7 @@ const styles = {
 
 export = utils.union(css, {
 
-    getButton(options: { pressed: boolean, isExpand: boolean, isExpandWidth: boolean, isActive: boolean, isFlex: boolean }) {
+    getButton(options: { pressed: boolean, isExpand: boolean, isExpandWidth: boolean, isActive: boolean, isFlex: boolean, isResponsibleHeight: boolean }) {
         let style = styles.button;
         if (options.isExpandWidth)
             style = css.get(style, styles.isExpandWidth);
@@ -85,6 +88,9 @@ export = utils.union(css, {
             style = css.get(style, styles.pressed);
         if (options.isFlex) {
             style = css.get(style, { display: 'inline-flex', textAlign: 'left' });
+        }
+        if (options.isResponsibleHeight) {
+            style = css.get(style, styles.isResponsibleHeight);
         }
         return style;
     },

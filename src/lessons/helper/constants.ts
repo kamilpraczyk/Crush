@@ -6,14 +6,17 @@ export const space = '___';
 export const multi = '−';
 export const empty = '_';
 
-export const ids = {
-    fourPictures: 'f',
-    radio: 'r',
-    draw: 'd',
-
-
+export const idsCss = {
     center: 'c',
 }
+
+export const viewIds = {
+    fourPictures: 'f',
+    oneTwoThree: 'o',
+    radio: 'r',
+    draw: 'd',
+}
+
 export function id(a: string[] = [], b: string[] = [], c: string[] = []) {
     return _.uniqueId('_' + a.join('_') + b.join('_') + c.join('_'));
 }

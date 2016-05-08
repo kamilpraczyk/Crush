@@ -1,19 +1,23 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 import {BoardFace, BoardFaces} from '../../lessons/interface';
 import _ = require('underscore');
-import {space, empty, multi}  from '../../lessons/helper/constants';
+import {space, empty, multi, viewIds}  from '../../lessons/helper/constants';
 import utils = require('../../utils/utils');
 
-let generatedList = [] as string[];
-let lastId = null as string;
-let _selectedAnswer = null as string;
+let generatedList: string[] = [];
+let lastId: string = null;
+let _selectedAnswer: string = null;
+let _selectedAnswerQueue: any[] = [];
 let _board: BoardFace = null;
+let wasLastCorrect: boolean = null;
 
 
 function generate(board: BoardFace) {
     let id = board.id;
     if (lastId !== id) {
         _selectedAnswer = null;
+        _selectedAnswerQueue = [];
+        wasLastCorrect = false;
         const incorrent = _.sample(board.incorrect, 3) as string[];
         _board = board;
         generatedList = [].concat(board.correct).concat(incorrent) as string[];
@@ -25,14 +29,23 @@ function generate(board: BoardFace) {
 
 function reset() {
     _selectedAnswer = null;
+    wasLastCorrect = false;
+    _selectedAnswerQueue = [];
 }
 
 function getCorrectSentence() {
     let name = _board.name;
     let read = '';
-    if (_selectedAnswer.indexOf('.png') !== -1 || _selectedAnswer.indexOf('.jpg') !== -1) {
-        /*answer is a path to a picture*/
+    if (_board.id.indexOf(viewIds.oneTwoThree) !== -1) {
+        /* answer is a queue answer*/
         read = name;
+        console.log('name', name);
+        _selectedAnswerQueue.map((item) => {
+            read = read.replace(space, item);
+        });
+    } else if (_board.id.indexOf(viewIds.fourPictures) !== -1) {
+        /*answer is a path to a picture*/
+        return name;
     } else if (_selectedAnswer.indexOf(multi) !== -1) {
         /*answer is a multi answer, separated by 'space'*/
         const split = _selectedAnswer.split(multi);
@@ -52,19 +65,46 @@ function getCorrectSentence() {
         read = name;
     }
 
-    read = read.replace('  ', ' ').replace(' .', '.').replace(' ,', ',');
+    read = read.replace('  ', ' ').replace(' .', '.').replace(' ,', ',');//do not replace '-'
     return read;
 }
 
 function isCorrect() {
+
+    if (_board.id.indexOf(viewIds.oneTwoThree) !== -1) {
+        const length = _selectedAnswerQueue.length;
+        return _.last(_selectedAnswerQueue) === _board.correct[length - 1];
+    }
     return _.contains(_board.correct, _selectedAnswer);
+}
+
+function isCorrectForUser() {
+    if (_board.id.indexOf(viewIds.oneTwoThree) !== -1) {
+
+    }
+    return isCorrect();
 }
 
 function setPressedAnswer(answer: string) {
     _selectedAnswer = answer;
+    wasLastCorrect = false;
     if (isCorrect()) {
         const read = getCorrectSentence();
         utils.voice.read(read);
+        wasLastCorrect = true;
+    }
+}
+
+function setPressedAnswerOnQueue(answer: string) {
+    _selectedAnswer = answer;
+    const length = _selectedAnswerQueue.length;
+
+    wasLastCorrect = false;
+    if (_board.correct[length] === answer) {
+        console.log('correct', length, answer);
+        _selectedAnswerQueue.push(answer);
+        wasLastCorrect = true;
+        utils.voice.read(answer);
     }
 }
 
@@ -77,19 +117,21 @@ function getState(board: BoardFace) {
     if (isCorrect()) {
         name = getCorrectSentence();
     }
-    console.log('name', name)
+    console.log('name', name);
+    console.log('generatedList', generatedList);
 
     return {
         selectedAnswer: _selectedAnswer,
         generatedList: generatedList,
         text: name,
         lessonData: board,
-        isCorrect: isCorrect()
+        isCorrect: wasLastCorrect
     }
 }
 
 export = {
     reset,
     setPressedAnswer,
+    setPressedAnswerOnQueue,
     getState
 }

@@ -4,8 +4,6 @@ import utils = require('../../utils/utils');
 import _ = require('underscore');
 import BaseStore from '../../utils/store/BaseStore';
 import LessonStore = require('../lesson/LessonStore');
-import SettingStore = require('../setting/SettingStore');
-
 
 let state = {
     isPrime: false,

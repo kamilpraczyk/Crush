@@ -20,7 +20,7 @@ export interface BoardFaces {
 }
 
 export interface LessonFace {
-    settings: string,
+    icon: string,
     name: string,
     active: boolean,
     bought: boolean,

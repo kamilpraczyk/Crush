@@ -5,9 +5,10 @@ import _ = require('underscore');
 import BaseStore from '../../utils/store/BaseStore';
 
 import LessonStore = require('../lesson/LessonStore');
-import SettingStore = require('../setting/SettingStore');
 import storageHelper = require('./storageHelper');
 import pointsHelper = require('./pointsHelper');
+
+import {viewIds} from '../../lessons/helper/constants';
 
 let list = LessonStore.getLessons();
 let _index = 0;
@@ -45,15 +46,24 @@ class BoardStore extends BaseStore {
         super()
     }
 
-    getSettingsIds() {
-        return SettingStore.getIds();
-    }
-
-    getActiveSettingId() {
-        return SettingStore.getActiveId();
+    getSettingId() {
+        const idString = list[_index].id;
+        let findId: string = null;
+        _.mapObject(viewIds, (id: any) => {
+            if (idString.indexOf(id) !== -1)
+                findId = id;
+        });
+        if (!findId) {
+            console.error('Lesson have no Id: ' + idString)
+        }
+        return findId;
     }
 
     getQuatroState() {
+        return storageHelper.getState(list[_index]);
+    }
+
+    getOneTwoThreeState() {
         return storageHelper.getState(list[_index]);
     }
 
@@ -70,8 +80,8 @@ class BoardStore extends BaseStore {
     getPoints() {
         return pointsHelper.getState(list[_index], list);
     }
-    
-    getPurchaseInfoState(){
+
+    getPurchaseInfoState() {
         return {}
     }
 
@@ -98,9 +108,13 @@ class BoardStore extends BaseStore {
                 storageHelper.setPressedAnswer(action.id);
                 this.emitChange()
                 break;
+            case Constants.CHOOSE_ONE_TWO_THREE:
+                storageHelper.setPressedAnswerOnQueue(action.id);
+                this.emitChange()
+                break;
 
             case Constants.SWITCH_ACTION:
-                this.waitFor([LessonStore.dispatcherIndex, SettingStore.dispatcherIndex], () => {
+                this.waitFor([LessonStore.dispatcherIndex], () => {
                     console.log('switch board store!!!');
                     loadLesson()
                     this.emitChange()

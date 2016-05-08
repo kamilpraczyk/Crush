@@ -3,7 +3,6 @@ import QuatroCss = require('./QuatroCss');
 import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
 import BoardStore = require('../../../stores/board/BoardStore');
-import Signature = require('../../signature/index');
 import MenuView = require('../menu/MenuView');
 import _ = require('underscore');
 const {div} = React.DOM;
@@ -18,13 +17,6 @@ function getMenu() {
     return div({
         style: QuatroCss.getMenu(),
     }, MenuView())
-}
-
-function onClickPic(name: string) {
-    AppDispatcher.handleViewAction({
-        actionType: Constants.CHOOSE_PICTURE,
-        id: name
-    });
 }
 
 function onRead(read: string) {
@@ -46,7 +38,12 @@ function getContentLine(state: State, list: any[]) {
         return div({
             key: name,
             style: QuatroCss.getItem(state.selectedAnswer, name, state.lessonData.correct, pic),
-            onClick: QuatroCss.animate(onClickPic, name)
+            onClick: QuatroCss.animate(function () {
+                AppDispatcher.handleViewAction({
+                    actionType: Constants.CHOOSE_PICTURE,
+                    id: name
+                });
+            })
         }, pic ? null : name)
     })
 

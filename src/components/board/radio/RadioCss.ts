@@ -2,8 +2,7 @@ import css = require('../../../utils/css/css');
 import utils = require('../../../utils/utils');
 import _ = require('underscore');
 
-const backgroundColor = 'rgba(250,250,250,0.5)'
-import {ids} from '../../../lessons/helper/constants';
+import {idsCss} from '../../../lessons/helper/constants';
 
 let styles = {
 
@@ -35,7 +34,7 @@ let styles = {
         padding: '1vh',
         paddingLeft: '10vw',
         paddingRight: '10vw',
-        backgroundColor: backgroundColor
+        backgroundColor: css.background.text.backgroundColor
     },
 
     listContent: {
@@ -58,7 +57,7 @@ let styles = {
         marginRight: '10vw',
         paddingLeft: '2vw',
         paddingRight: '2vw',
-        backgroundColor: backgroundColor
+        backgroundColor: css.background.text.backgroundColor
     },
     itemEven: {
         marginRight: 0,
@@ -95,7 +94,7 @@ export = utils.union(css, {
     },
     getName(id: string) {
         let style = styles.name;
-        if (_.contains(id, ids.center)) {
+        if (_.contains(id, idsCss.center)) {
             style = css.get(style, {
                 textAlign: 'center'
             })

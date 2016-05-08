@@ -25,7 +25,6 @@ function getPanel(state: State) {
 
 
 function gauge() {
-    console.log('gauge');
     const google: any = window['google'];
 
 
@@ -72,7 +71,7 @@ class View extends React.Component<{}, State>{
     }
 
     componentDidUpdate() {
-        gauge();
+        //gauge();//TODO gauge?
     }
 
     render() {

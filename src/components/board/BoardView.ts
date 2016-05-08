@@ -5,22 +5,27 @@ import BoardStore = require('../../stores/board/BoardStore');
 import DrawView = require('./draw/DrawView');
 import RadioView = require('./radio/RadioView');
 import QuatroView = require('./quatro/QuatroView');
+import OneTwoThreeView = require('./oneTwoThree/OneTwoThreeView');
 import PointsView = require('./points/PointsView');
+
+import {viewIds} from '../../lessons/helper/constants';
 
 const {div} = React.DOM;
 
 
 function getView() {
-    let ids = BoardStore.getSettingsIds()
 
-    switch (BoardStore.getActiveSettingId()) {
-        case ids.draw:
-            return DrawView()
-        case ids.qutro:
+    switch (BoardStore.getSettingId()) {
+        case viewIds.draw:
+            return DrawView();
+        case viewIds.fourPictures:
             return QuatroView();
-        case ids.radio:
+        case viewIds.radio:
             return RadioView();
+        case viewIds.oneTwoThree:
+            return OneTwoThreeView();
     }
+    console.error('GetView not recognized by id:' + BoardStore.getSettingId());
 }
 
 

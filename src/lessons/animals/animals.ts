@@ -1,7 +1,7 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../interface';
 import _ = require('underscore');
-import {space, ids, id, getRest} from '../helper/constants';
+import {space, viewIds, idsCss, id, getRest} from '../helper/constants';
 const s = 'img/animals/';
 
 const a = {
@@ -17,7 +17,7 @@ const a = {
     wolf: s + 'wolf.png',
 }
 
-const  common = [ids.fourPictures, ids.center];
+const common = [viewIds.fourPictures, idsCss.center];
 
 export =[
     {

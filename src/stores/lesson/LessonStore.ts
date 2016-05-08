@@ -4,7 +4,6 @@ import BaseStore from '../../utils/store/BaseStore';
 import utils = require('../../utils/utils');
 import _ = require('underscore');
 import {lessons, activeStartup} from '../../lessons/lessons';
-import SettingStore = require('../setting/SettingStore');
 
 let _active = activeStartup;
 let _lessons = lessons;
@@ -16,8 +15,6 @@ function onSwitchAction(id: string) {
         _lessons[_active].active = false;
         _active = id;
         _lessons[_active].active = true;
-        
-        _lessons[_active].settings
     }
 }
 
@@ -68,8 +65,7 @@ class LessonStore extends BaseStore {
         switch (action.actionType) {
             case Constants.SWITCH_ACTION:
                 console.log('switch lesson store');
-                onSwitchAction(action.id)
-                SettingStore.switchTo(_lessons[_active].settings);
+                onSwitchAction(action.id);
                 break;
         }
         return true;

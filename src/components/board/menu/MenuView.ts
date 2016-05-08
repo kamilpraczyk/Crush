@@ -50,6 +50,7 @@ class View extends React.Component<State, State>{
                 name: item.name,
                 icon: item.icon,
                 isExpandWidth: true,
+                isResponsibleHeight : true,
                 onClick: item.onClick,
                 isQuickClick: true
             }));

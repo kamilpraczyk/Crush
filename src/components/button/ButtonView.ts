@@ -11,7 +11,8 @@ interface Props {
     isQuickClick?: boolean,
     isExpand?: boolean,
     isActive?: boolean,
-    isExpandWidth?: boolean
+    isExpandWidth?: boolean,
+    isResponsibleHeight? :boolean
 }
 
 interface ButtonViewStateFace {
@@ -74,7 +75,8 @@ class ButtonView extends React.Component<Props, ButtonViewStateFace>{
                 isExpand: this.props.isExpand,
                 isExpandWidth: this.props.isExpandWidth,
                 isActive: this.props.isActive,
-                isFlex: !!this.props.leftIcon
+                isFlex: !!this.props.leftIcon,
+                isResponsibleHeight : this.props.isResponsibleHeight
             }),
             onClick: this.clickHandler
         }, leftIcon, icon, name);

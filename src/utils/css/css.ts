@@ -18,9 +18,9 @@ let style = {
     },
 
 
-    animate: function(callback: Function, object?: any) {
+    animate: function (callback: Function, object?: any) {
         if (callback) {
-            return function(e: any) {
+            return function (e: any) {
                 var call = object ? _.partial(callback, object, _.extend({}, e) as any) : callback;
                 call();
             };
@@ -99,6 +99,12 @@ let style = {
             border: borderWidth + borderWidthUnit + ' solid #FF5656',
             cursor: 'pointer',
             borderRadius: borderRadius
+        }
+    },
+
+    background: {
+        text: {
+            backgroundColor: 'rgba(255, 255, 255, 0.60)'
         }
     },
 

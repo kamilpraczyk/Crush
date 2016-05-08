@@ -7,9 +7,9 @@ import Constants = require('../../../../constants/Constants');
 import ButtonView = require('../../../button/ButtonView');
 import PurchaseInfoView = require('../purchaseInfo/PurchaseInfoView');
 import SelectionStore = require('../../../../stores/SelectionStore');
-import {ids} from '../../../../stores/setting/interface';
 import {LessonMapFace, LessonFace} from '../../../../lessons/interface';
 const {div} = React.DOM;
+
 
 
 function getState() {
@@ -33,19 +33,6 @@ function getState() {
 const state = getState();
 declare type State = typeof state;
 
-const getIcon = function (id: string) {
-    switch (id) {
-        case ids.draw:
-            return 'moon-quill';
-        case ids.qutro:
-            return 'moon-images';
-        case ids.radio:
-            return 'moon-signup';
-        //read 'moon-newspaper'
-    }
-    return null;
-}
-
 class View extends React.Component<{}, State>{
 
     constructor() {
@@ -57,7 +44,7 @@ class View extends React.Component<{}, State>{
         const buttons = _.map(this.state.list, (item: LessonFace, id: string) => {
             return ButtonView({
                 key: id,
-                leftIcon: getIcon(item.settings),
+                leftIcon:item.icon,
                 name: item.name,
                 onClick: function () {
                     AppDispatcher.handleViewAction({
