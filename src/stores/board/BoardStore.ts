@@ -18,7 +18,8 @@ let lastActiveLesson = null as string;
 function loadLesson() {
     if (list !== LessonStore.getLessons()) {
         list = LessonStore.getLessons();
-        _index = 0
+        _index = 0;
+        pointsHelper.reset();
     }
 }
 
@@ -68,9 +69,7 @@ class BoardStore extends BaseStore {
     }
 
     getDrawState() {
-        return {
-            lessonData: list[_index]
-        }
+        return storageHelper.getState(list[_index]);
     }
 
     getRadioStage() {

@@ -3,15 +3,10 @@ import RadioCss = require('./RadioCss');
 import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
 import MenuView = require('../menu/MenuView');
-import BoardStore = require('../../../stores/board/BoardStore');
+import {BoardResult} from '../../../lessons/interface';
 import _ = require('underscore');
 const {div} = React.DOM;
 
-function getState() {
-    return BoardStore.getRadioStage();
-}
-const state = getState();
-declare type State = typeof state;
 
 function onAnswer(id: string) {
     AppDispatcher.handleViewAction({
@@ -27,38 +22,37 @@ function onRead(read: string) {
     });
 }
 
-function getMenu() {
+function getFooter() {
     return div({
-        style: RadioCss.getMenu()
-    }, MenuView())
+        style: RadioCss.getFooter()
+    }, MenuView());
+}
+
+function getHeader(state: BoardResult) {
+    let instructions: any = null;
+
+    if (state.lessonData.info) {
+        instructions = div({
+            onClick: RadioCss.animate(onRead, state.lessonData.info),
+            style: RadioCss.getInstructions()
+        }, state.lessonData.info);
+    }
+
+    return div({
+        style: RadioCss.getHeader()
+    },
+        instructions,
+        div({
+            onClick: RadioCss.animate(onRead, state.text),
+            style: RadioCss.getText()
+        }, state.text)
+    );
 }
 
 
+function getBody(state: BoardResult) {
 
-
-function getQueston(state: State) {
-    const name = div({
-        style: RadioCss.getContentName(),
-        onClick: RadioCss.animate(onRead, state.lessonData.info)
-    }, div({
-        style: RadioCss.getName(state.lessonData.id)
-    }, state.lessonData.info));
-
-    return name;
-}
-
-
-function getName(state: State) {
-   return div({
-        style: RadioCss.getContentName(),
-        onClick: RadioCss.animate(onRead, state.text)
-    }, div({
-        style: RadioCss.getName(state.lessonData.id)
-    }, state.text));
-}
-
-function getRadio(state: State) {
-    function getItems(state: State) {
+    function getItems(state: BoardResult) {
         return state.generatedList.map((name: string, index: number) => {
             return div({
                 key: name + index,
@@ -69,35 +63,22 @@ function getRadio(state: State) {
     }
 
     const list = div({
-        style: RadioCss.getContentList()
-    }, div({
         style: RadioCss.getList()
-    }, getItems(state)))
+    }, getItems(state));
 
     return div({
-        style: RadioCss.getRadio()
+        style: RadioCss.getBody()
     }, div({
-        style: RadioCss.getRadioPanel()
-    }, getQueston(state), getName(state), list));
-}
-
-class RadioView extends React.Component<{}, State>{
-
-    constructor() {
-        super();
-        this.state = getState();
-    }
-
-    componentWillReceiveProps() {
-        this.setState(getState());
-    }
-
-    render() {
-        return div({
-            key: 'radioView',
-            style: RadioCss.getPanel()
-        }, getRadio(this.state), getMenu());
-    }
+        style: RadioCss.getBodyContent()
+    }, list));
 };
 
-export = React.createFactory(RadioView);
+
+function render(state: BoardResult) {
+    return div({
+        key: 'radioView',
+        style: RadioCss.getPanel()
+    }, getHeader(state), getBody(state), getFooter());
+};
+
+export = render;

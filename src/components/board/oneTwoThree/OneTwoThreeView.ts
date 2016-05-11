@@ -2,20 +2,15 @@ import React = require('react');
 import OneTwoThreeCss = require('./OneTwoThreeCss');
 import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
-import BoardStore = require('../../../stores/board/BoardStore');
+import {BoardResult} from '../../../lessons/interface';
 import MenuView = require('../menu/MenuView');
 import _ = require('underscore');
 const {div} = React.DOM;
 
-function getState() {
-    return BoardStore.getOneTwoThreeState()
-}
-const state = getState();
-declare type State = typeof state;
 
-function getMenu() {
+function getFooter() {
     return div({
-        style: OneTwoThreeCss.getMenu(),
+        style: OneTwoThreeCss.getFooter(),
     }, MenuView())
 }
 
@@ -27,7 +22,16 @@ function onRead(read: string) {
     });
 }
 
-function getContentLine(state: State, name: string) {
+function getHeader(state: BoardResult) {
+    return div({
+        style: OneTwoThreeCss.getHeader(),
+    }, div({
+        style: OneTwoThreeCss.getText(),
+        onClick: OneTwoThreeCss.animate(onRead, state.text)
+    }, state.text));
+}
+
+function getContentLine(state: BoardResult, name: string) {
     let corrrectId = state.lessonData.correct;
 
 
@@ -47,44 +51,28 @@ function getContentLine(state: State, name: string) {
     }, nameEl);
 }
 
-function getLines(state: State) {
+function getBodyContent(state: BoardResult) {
 
-    const text = div({
-        style: OneTwoThreeCss.getLine(),
-        onClick: OneTwoThreeCss.animate(onRead, state.text)
-    }, div({
-        style: OneTwoThreeCss.getText()
-    }, state.text));
     const line1 = getContentLine(state, state.generatedList[0]);
     const line2 = getContentLine(state, state.generatedList[1]);
     const line3 = getContentLine(state, state.generatedList[2]);
 
     return div({
-        style: OneTwoThreeCss.getLines()
-    }, text, line1, line2, line3)
+        style: OneTwoThreeCss.getBodyContent()
+    }, line1, line2, line3)
 }
 
-class OneTwoThreeView extends React.Component<{}, State>{
+function getBody(state: BoardResult) {
+    return div({
+        style: OneTwoThreeCss.getBody()
+    }, getBodyContent(state));
+}
 
-    constructor() {
-        super();
-        this.state = getState();
-    }
-
-    componentWillReceiveProps() {
-        this.state = getState();
-    }
-
-    render() {
-        let center = div({
-            style: OneTwoThreeCss.getCenter()
-        }, getLines(this.state));
-
-        return div({
-            key: 'oneTwoThreeView',
-            style: OneTwoThreeCss.getPanel()
-        }, center, getMenu());
-    }
+function render(state: BoardResult) {
+    return div({
+        key: 'oneTwoThreeView',
+        style: OneTwoThreeCss.getPanel()
+    }, getHeader(state), getBody(state), getFooter());
 };
 
-export =  React.createFactory(OneTwoThreeView);
+export =  render;

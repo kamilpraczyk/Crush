@@ -32,3 +32,11 @@ export interface LessonMapFace {
 }
 
 
+export interface BoardResult {
+    selectedAnswer: string,
+    generatedList: string[],
+    text: string,
+    lessonData: BoardFace,
+    isCorrect: boolean
+}
+

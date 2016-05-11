@@ -49,7 +49,9 @@ let style = {
             default: 'black',
             select: 'blue',
             hint: 'gray',
-            disable: 'lightgray'
+            disable: 'lightgray',
+            success : 'green',
+            fail : 'red'
         }
     },
 
@@ -57,13 +59,6 @@ let style = {
     borderWidth: borderWidth,
     borderWidthUnit: borderWidthUnit,
 
-    /* dimensions of top bar*/
-    status: {
-        width: '20vmin',
-        height: '20vmin',
-        maxHeight: 90,
-        maxWidth: 90,
-    },
 
     button: {
         background: {
@@ -90,13 +85,13 @@ let style = {
             borderRadius: borderRadius
         },
         good: {
-            border: borderWidth + borderWidthUnit + ' solid #67FF67',
+            border: borderWidth + borderWidthUnit + ' solid #00FF00',
             cursor: 'pointer',
             borderRadius: borderRadius
 
         },
         bad: {
-            border: borderWidth + borderWidthUnit + ' solid #FF5656',
+            border: borderWidth + borderWidthUnit + ' solid #FF0000',
             cursor: 'pointer',
             borderRadius: borderRadius
         }
@@ -114,9 +109,6 @@ let style = {
             backgroundImage: 'url("img/b2.jpg")',
         },
 
-        draw: {
-            canvasBackgroundColor: 'transparent'
-        },
         quatro: {
 
         }

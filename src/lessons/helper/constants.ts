@@ -6,7 +6,7 @@ export const space = '___';
 export const multi = '−';
 export const empty = '_';
 
-export const idsCss = {
+export const idsCss = { //TODO remove
     center: 'c',
 }
 

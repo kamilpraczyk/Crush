@@ -6,28 +6,54 @@ let styles = {
     panel: {
         width: '100%',
         height: '100%',
-        display: 'table',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'stretch',
+        alignContent: 'stretch',
     },
 
-    signature: {
-        display: 'table-row',
-        width: '100%',
-        height: '100%',
-        background: css.themes.draw.canvasBackgroundColor
+    header: {
+        display: 'flex',
+        margin: '2vh',
+        marginBottom: 0,
+        justifyContent: 'center',
+        flexDirection: 'column',
+        alignItems: 'center'
+    },
+
+    body: {
+        display: 'flex',
+        flex: 1,
+        margin: '2vh',
+        alignItems: 'stretch',
+        flexDirection: 'column'
+    },
+
+    bodyContent: {
+        display: 'flex',
+        flex: 1,
+        cursor: css.cursor.pointer,
+        borderRadius: css.borderRadius,
+        fontSize: css.font.fontSize.XL,
+        backgroundColor: css.background.text.backgroundColor,
+        alignItems: 'stretch',
+        flexDirection: 'column'
     },
 
     text: {
-        position: 'absolute',
-        bottom: 60,
-        left: 0,
-        width: '100%',
-        textAlign: 'center',
-        fontSize: css.font.fontSize.XL
+        display: 'flex',
+        paddingLeft: '2vw',
+        paddingRight: '2vw',
+        paddingTop: '1vh',
+        paddingBottom: '1vh',
+        cursor: css.cursor.pointer,
+        borderRadius: css.borderRadius,
+        fontSize: css.font.fontSize.XL,
+        backgroundColor: css.background.text.backgroundColor,
     },
 
-    menu: {
-        display: 'table-row',
-        width: '100%'
+    footer: {
+        display: 'flex'
     }
 
 }
@@ -38,16 +64,24 @@ export = utils.union(css, {
         return styles.panel;
     },
 
-    getSignature() {
-        return styles.signature;
+    getHeader() {
+        return styles.header;
+    },
+
+    getBody() {
+        return styles.body;
+    },
+
+    getBodyContent() {
+        return styles.bodyContent;
     },
 
     getText() {
         return styles.text;
     },
 
-    getMenu() {
-        return styles.menu;
+    getFooter() {
+        return styles.footer;
     },
 
 });

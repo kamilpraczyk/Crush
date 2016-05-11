@@ -12,7 +12,7 @@ const styles = {
     },
 
     title: {
-        paddingTop: '1hv',
+        paddingTop: '1vh',
         fontSize: css.font.fontSize.XL,
         textAlign: 'center'
     },

@@ -5,53 +5,74 @@ import _ = require('underscore');
 let styles = {
 
     panel: {
-        display: 'table',
         width: '100%',
         height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'stretch',
+        alignContent: 'stretch',
     },
 
-    center: {
-        width: '100%',
-        height: '100%',
-        display: 'table-row'
+    header: {
+        display: 'flex',
+        margin: '2vh',
+        marginBottom: 0,
+        justifyContent: 'center',
+        flexDirection: 'column',
+        alignItems: 'center'
     },
 
-    lines: {
-        width: '100%',
-        height: '100%',
-        display: 'table',
-        borderSpacing: 0
+    body: {
+        display: 'flex',
+        flex: 1,
+        margin: '2vh',
+        alignItems: 'stretch',
+        flexDirection: 'column'
+    },
+
+    bodyContent: {
+        display: 'flex',
+        flex: 1,
+        alignItems: 'center',
+        flexDirection: 'column'
     },
 
     line: {
-        display: 'table-row',
-        textAlign: 'center',
+        display: 'flex',
+        flex: 1,
+        alignItems: 'stretch',
+        flexDirection: 'column',
+        justifyContent: 'center'
     },
 
+
     text: {
-        marginTop: '10vh',
-        textAlign: 'center',
+        paddingLeft: '2vw',
+        paddingRight: '2vw',
+        paddingTop: '1vh',
+        paddingBottom: '1vh',
+        cursor: css.cursor.pointer,
+        borderRadius: css.borderRadius,
+        fontSize: css.font.fontSize.XL,
         backgroundColor: css.background.text.backgroundColor,
     },
 
 
     item: {
-        display: 'inline-block',
+        display: 'inline-flex',
+        justifyContent: 'center',
         verdicalAlign: 'middle',
         boxSizing: 'border-box',
-        textAlign: 'center',
         paddingLeft: '5vw',
         paddingRight: '5vw',
         paddingTop: '5vh',
         paddingBottom: '5vh',
-        backgroundColor: css.background.text.backgroundColor,
-        minWidth: '80%'
+        backgroundColor: css.background.text.backgroundColor
     },
 
 
-    menu: {
-        display: 'table-row',
-        width: '100%'
+    footer: {
+        display: 'flex'
     },
 
 }
@@ -62,12 +83,16 @@ export = utils.union(css, {
         return styles.panel;
     },
 
-    getCenter() {
-        return styles.center;
+    getHeader() {
+        return styles.header;
     },
 
-    getLines() {
-        return styles.lines;
+    getBody() {
+        return styles.body;
+    },
+
+    getBodyContent() {
+        return styles.bodyContent;
     },
 
     getLine() {
@@ -91,8 +116,8 @@ export = utils.union(css, {
     },
 
 
-    getMenu() {
-        return styles.menu;
+    getFooter() {
+        return styles.footer;
     }
 
 });

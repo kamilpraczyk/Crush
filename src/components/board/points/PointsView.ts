@@ -1,6 +1,8 @@
 import React = require('react');
 import PointsCss = require('./PointsCss');
 import _ = require('underscore');
+import AppDispatcher = require('../../../dispatcher/AppDispatcher');
+import Constants = require('../../../constants/Constants');
 import BoardStore = require('../../../stores/board/BoardStore');
 const {div} = React.DOM;
 
@@ -17,10 +19,31 @@ function getPanel(state: State) {
         style: PointsCss.getPoints()
     }, state.points.display);
 
+    let success: any = null;
+    if (state.points.isCurrentSuccess) {
+        success = div({
+            style: PointsCss.getStatusSuccess(),
+            className: PointsCss.getClassNameIconSuccess()
+        });
+    }
+
+    let fail: any = null;
+    if (state.points.isCurrentFail) {
+        fail = div({
+            style: PointsCss.getStatusFail(),
+            className: PointsCss.getClassNameIconFail()
+        });
+    }
+
     return div({
         style: PointsCss.getPanel(),
-        id: 'chart_div'
-    }, points);
+        id: 'chart_div',
+        onClick: PointsCss.animate(function () {
+    AppDispatcher.handleViewAction({
+        actionType: Constants.MAXIMALIZE_SETTINGS
+    });
+        })
+    }, points, success, fail);
 }
 
 
@@ -53,7 +76,7 @@ function gauge() {
         chart.draw(data, options);
 
     }
-  //  drawChart();
+    //  drawChart();
 }
 
 

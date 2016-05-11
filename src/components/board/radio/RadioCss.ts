@@ -2,52 +2,70 @@ import css = require('../../../utils/css/css');
 import utils = require('../../../utils/utils');
 import _ = require('underscore');
 
-import {idsCss} from '../../../lessons/helper/constants';
-
-let styles = {
+const styles = {
 
     panel: {
         width: '100%',
-        height: 'calc(100% - ' + css.status.height + ')',
-        marginTop: css.status.height,
-        display: 'table',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'stretch',
+        alignContent: 'stretch',
         fontSize: css.font.fontSize.XL
     },
 
-    radio: {
-        display: 'table-row',
-        width: '100%',
-        height: '100%'
+    header: {
+        display: 'flex',
+        margin: '2vh',
+        marginTop: '10vh',
+        marginBottom: 0,
+        justifyContent: 'center',
+        flexDirection: 'column',
+        alignItems: 'center'
     },
 
-    radioPanel: {
-        width: '100%',
-        height: '100%'
+    body: {
+        display: 'flex',
+        flex: 1,
+        margin: '2vh',
+        alignItems: 'stretch',
+        flexDirection: 'column'
     },
 
-    nameContent: {
-
+    bodyContent: {
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column'
     },
 
-    name: {
+    instructions: {
         textAlign: 'left',
-        padding: '1vh',
-        paddingLeft: '10vw',
-        paddingRight: '10vw',
-        backgroundColor: css.background.text.backgroundColor
+        paddingLeft: '2vw',
+        paddingRight: '2vw',
+        paddingTop: '1vh',
+        paddingBottom: '1vh',
+        cursor: css.cursor.pointer,
+        borderRadius: css.borderRadius
     },
 
-    listContent: {
-        height: '100%',
-        overflowY: 'auto',
-        overflowX: 'hidden'
+    text: {
+        textAlign: 'left',
+        paddingLeft: '2vw',
+        paddingRight: '2vw',
+        paddingTop: '1vh',
+        paddingBottom: '1vh',
+        cursor: css.cursor.pointer,
+        borderRadius: css.borderRadius,
+        backgroundColor: css.background.text.backgroundColor
     },
 
     list: {
         paddingTop: '2vh',
         margin: 'auto',
-        textAlign: 'center',
-        display: 'table',
+        display: 'flex',
+        flex: 1,
+        flexDirection: 'column'
+
     },
     item: {
         margin: 'auto',
@@ -64,9 +82,8 @@ let styles = {
         marginLeft: '10vw',
     },
 
-    menu: {
-        display: 'table-row',
-        width: '100%'
+    footer: {
+        display: 'flex',
     }
 
 }
@@ -77,34 +94,31 @@ export = utils.union(css, {
         return styles.panel;
     },
 
-    getRadio() {
-        return styles.radio;
+    getHeader() {
+        return styles.header;
     },
 
-    getRadioPanel() {
-        return styles.radioPanel;
+    getBody() {
+        return styles.body;
     },
 
-    getMenu() {
-        return styles.menu;
+    getBodyContent() {
+        return styles.bodyContent;
     },
 
-    getContentName() {
-        return styles.nameContent;
-    },
-    getName(id: string) {
-        let style = styles.name;
-        if (_.contains(id, idsCss.center)) {
-            style = css.get(style, {
-                textAlign: 'center'
-            })
-        }
-        return style;
+    getFooter() {
+        return styles.footer;
     },
 
-    getContentList() {
-        return styles.listContent;
+
+    getText() {
+        return styles.text;
     },
+
+    getInstructions() {
+        return styles.instructions;
+    },
+
 
     getList() {
         return styles.list;

@@ -5,60 +5,72 @@ import _ = require('underscore');
 let styles = {
 
     panel: {
-        display: 'table',
         width: '100%',
         height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'stretch',
+        alignContent: 'stretch',
     },
 
-    center: {
-        width: '100%',
-        height: '100%',
-        display: 'table-row'
+    body: {
+        display: 'flex',
+        flex: 1,
+
+        flexDirection: 'column',
+        alignItems: 'stretch',
+        alignContent: 'stretch',
     },
 
-    quatro: {
-        width: '100%',
-        height: '100%',
-        display: 'table',
-        borderSpacing: 0
-    },
 
     line: {
-        display: 'table-row',
-        textAlign: 'center',
+        display: 'flex',
+        flex: 1
     },
 
+
     lineText: {
-        display: 'table-row',
-        textAlign: 'center',
-        height: 0,
-        backgroundColor:css.background.text.backgroundColor
+        display: 'flex',
+        justifyContent: 'center',
+    },
+
+    itemWraper: {
+        padding: '2vh',
+        display: 'flex',
+        flexGrow: 1,
     },
 
 
     item: {
-        display: 'inline-block',
+        display: 'flex',
+        flexGrow: 1,
+        justifyContent: 'center',
         verdicalAlign: 'middle',
         boxSizing: 'border-box',
         textAlign: 'center',
-        width: 'calc(50% - ' + css.borderWidth * 2 + css.borderWidthUnit + ')',
-        height: '100%',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         WebkitBackgroundSize: 'contain',
         MozBackgroundSize: 'contain',
         OBackgroundSize: 'contain',
         backgroundSize: 'contain',
+        backgroundColor: css.background.text.backgroundColor
     },
 
     text: {
         textAlign: 'center',
-        fontSize: css.font.fontSize.XL3
+        cursor: css.cursor.pointer,
+        paddingLeft: '2vw',
+        paddingRight: '2vw',
+        paddingTop: '1vh',
+        paddingBottom: '1vh',
+        fontSize: css.font.fontSize.XL3,
+        backgroundColor: css.background.text.backgroundColor,
+        borderRadius: css.borderRadius
     },
 
-    menu: {
-        display: 'table-row',
-        width: '100%'
+    footer: {
+        display: 'flex',
     },
 
 }
@@ -78,12 +90,8 @@ export = utils.union(css, {
         return styles.panel;
     },
 
-    getCenter() {
-        return styles.center;
-    },
-
-    getQuatro() {
-        return styles.quatro;
+    getBody() {
+        return styles.body;
     },
 
     getLine() {
@@ -96,6 +104,10 @@ export = utils.union(css, {
 
     getText() {
         return css.get(styles.text);
+    },
+
+    getItemWraper() {
+        return styles.itemWraper
     },
 
     getItem(selectedAnswer: string, currentAnswer: string, correctAnswers: string[], url?: string) {
@@ -115,8 +127,7 @@ export = utils.union(css, {
     },
 
 
-    getMenu() {
-        return styles.menu;
+    getFooter() {
+        return styles.footer;
     }
-
 });

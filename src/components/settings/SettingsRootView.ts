@@ -22,21 +22,6 @@ const state = getState();
 declare type State = typeof state;
 
 
-
-function _onMinimalizeClick() {
-    AppDispatcher.handleViewAction({
-        actionType: Constants.MAXIMALIZE_SETTINGS
-    });
-}
-
-function getMinimalized() {
-    return div({
-        style: SettingsRootCss.getPanelMinimalized(),
-        onClick: _onMinimalizeClick
-    });
-}
-
-
 function getMaximalized(state: State) {
     let panelContent = div({
         style: SettingsRootCss.getPanelContent()
@@ -46,14 +31,6 @@ function getMaximalized(state: State) {
         style: SettingsRootCss.getPanel()
     }, panelContent);
 }
-
-function _onRootClick(id: string) {
-    AppDispatcher.handleViewAction({
-        actionType: Constants.ROOT_ITEM_CLICK,
-        id: id
-    });
-}
-
 
 function getPanelRoot(state: State) {
     return div({
@@ -78,7 +55,12 @@ function getItem(item: any, id: string) {
     }, ButtonView({
         name: item.name,
         icon: item.icon,
-        onClick: _.partial(_onRootClick, id),
+        onClick: function () {
+            AppDispatcher.handleViewAction({
+                actionType: Constants.ROOT_ITEM_CLICK,
+                id: id
+            });
+        },
         isQuickClick: id === 'close' ? false : true,
         isExpandWidth: true,
         isExpand: true,
@@ -122,7 +104,7 @@ class SettingRootView extends React.Component<{}, State> {
 
     render() {
         if (this.state.isMinimalized) {
-            return getMinimalized();
+            return div({});
         }
         return getMaximalized(this.state);
     }

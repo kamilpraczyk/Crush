@@ -46,7 +46,7 @@ class SignaturePad extends React.Component<SignaturePadPropsFace, SignaturePadSt
         this.velocityFilterWeight = this.props.velocityFilterWeight || 0.7;
         this.minWidth = this.props.minWidth || 0.5;
         this.maxWidth = this.props.maxWidth || 2.5;
-        this.dotSize = this.props.dotSize || function() {
+        this.dotSize = this.props.dotSize || function () {
             return (this.minWidth + this.maxWidth) / 2;
         };
         this.penColor = this.props.penColor || "black";
@@ -99,7 +99,7 @@ class SignaturePad extends React.Component<SignaturePadPropsFace, SignaturePadSt
 
         this._reset();
         image.src = dataUrl;
-        image.onload = function() {
+        image.onload = function () {
             self._ctx.drawImage(image, 0, 0, width, height);
         };
         this._isEmpty = false;
@@ -357,24 +357,10 @@ class SignaturePad extends React.Component<SignaturePadPropsFace, SignaturePadSt
         return React.DOM.canvas({
             ref: 'cv',
             style: {
-                width: '100%',
-                height: '100%'
+                display: 'flex',
+                flexGrow: 1
             }
         })
-   
-        /*
-      <div id="signature-pad" className="m-signature-pad">
-        <div className="m-signature-pad--body">
-          <canvas ref="cv"></canvas>
-        </div>
-        { this.props.clearButton &&
-          <div className="m-signature-pad--footer">
-            <button className="btn btn-default button clear" onClick={this.clear.bind(this)}>Clear</button>
-          </div>
-        }
-      </div>
-      */
-
     }
 
 }

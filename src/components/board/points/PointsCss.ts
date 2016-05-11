@@ -6,17 +6,41 @@ let styles = {
     panel: {
         position: 'absolute',
         top: 0,
-        left: 0,
-        width: '100%',
-        height: '20px'
+        right: 0,
+        display: 'flex',
+        flexFlow: 'column wrap',
+        border: '1px solid black',
+        borderRadius: css.borderRadius,
+        backgroundColor: css.background.text.backgroundColor,
+        minWidth: '10vmin',
+        minHeight: '10vmin',
+
+        cursor: css.cursor.pointer
     },
 
     point: {
-        display: 'table',
-        textAlign: 'center',
-        height: '100%',
-        width: '100%',
-    }
+        display: 'flex',
+        paddingLeft: '1vw',
+        paddingRight: '1vw',
+        justifyContent: 'center',
+        paddingTop: '1vh',
+    },
+
+    status: {
+        display: 'flex',
+        paddingLeft: '1vw',
+        paddingRight: '1vw',
+        paddingBottom: '1vh',
+        justifyContent: 'center',
+    },
+
+    success: {
+        color: css.font.color.success
+    },
+
+    fail: {
+        color: css.font.color.fail
+    },
 }
 
 export = utils.union(css, {
@@ -27,5 +51,22 @@ export = utils.union(css, {
 
     getPoints() {
         return styles.point;
-    }
+    },
+
+    getStatusSuccess() {
+        return css.get(styles.status, styles.success);
+    },
+
+    getStatusFail() {
+        return css.get(styles.status, styles.fail);
+    },
+
+    getClassNameIconSuccess() {
+        return 'moon-thumbs-up';
+    },
+    getClassNameIconFail() {
+        return 'moon-thumbs-up2';
+    },
+
+
 });

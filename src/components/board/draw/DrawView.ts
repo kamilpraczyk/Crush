@@ -1,17 +1,12 @@
 import React = require('react');
 import DrawCss = require('./DrawCss');
 import Signature = require('../../signature/index');
-import BoardStore = require('../../../stores/board/BoardStore');
 import MenuView = require('../menu/MenuView');
 import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
+import {BoardResult} from '../../../lessons/interface';
 const {div} = React.DOM;
 
-function getState() {
-    return BoardStore.getDrawState();
-}
-const state = getState();
-declare type State = typeof state;
 
 function onRead(read: string) {
     AppDispatcher.handleViewAction({
@@ -20,64 +15,60 @@ function onRead(read: string) {
     });
 }
 
-
-class DrawView extends React.Component<{}, State>{
-
-    signatureClear = null as Function;
-
-    constructor() {
-        super();
-        this.state = getState();
-        this.onGetInterfaceClear = this.onGetInterfaceClear.bind(this);
-        this.clearSignature = this.clearSignature.bind(this);
-    }
-
-    componentWillReceiveProps() {
-        this.setState(getState());
-        this.clearSignature();
-    }
-
-    clearSignature() {
-        this.signatureClear && this.signatureClear();
-    }
-
-    getMenu() {
-        return div({
-            style: DrawCss.getMenu(),
-        }, MenuView({
-            menu: [{
-                id: 'clear',
-                name: 'clear',
-                onClick: this.clearSignature
-            }]
-        }))
-    }
-
-    getText() {
-        return div({
+function getHeader(name: string) {
+    return div({
+        style: DrawCss.getHeader()
+    },
+        div({
             style: DrawCss.getText(),
-            onClick: DrawCss.animate(onRead, this.state.lessonData.name)
-        }, this.state.lessonData.name)
-    }
+            onClick: DrawCss.animate(onRead, name)
+        }, name)
+    );
+}
 
-    onGetInterfaceClear(onClear: Function) {
-        this.signatureClear = onClear;
-    }
 
-    getSignature() {
-        return div({
-            style: DrawCss.getSignature(),
-        }, Signature({
-            onGetInterface: this.onGetInterfaceClear
-        }));
-    }
+function getFooter(onClick: Function) {
+    return div({
+        style: DrawCss.getFooter(),
+    }, MenuView({
+        menu: [{
+            id: 'clear',
+            name: 'clear',
+            onClick: onClick
+        }]
+    }))
+}
+let signatureClear: Function = null;
+function onGetInterfaceClear(onClear: Function) {
+    signatureClear = onClear;
+}
 
-    render() {
-        return div({
-            key: 'drawView',
-            style: DrawCss.getPanel()
-        }, this.getSignature(), this.getText(), this.getMenu());
-    }
-};
+function getBody() {
 
-export =  React.createFactory(DrawView);
+    return div({
+        style: DrawCss.getBody()
+    },
+        div({
+            style: DrawCss.getBodyContent()
+        },
+            Signature({
+                onGetInterface: onGetInterfaceClear
+            })
+        )
+    );
+}
+
+function clearSignature() {
+    signatureClear && signatureClear();
+}
+
+
+function render(state: BoardResult) {
+    return div({
+        key: 'drawView',
+        style: DrawCss.getPanel()
+    }, getHeader(state.lessonData.name), getBody(), getFooter(clearSignature));
+}
+
+
+export =  render

@@ -2,20 +2,15 @@ import React = require('react');
 import QuatroCss = require('./QuatroCss');
 import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
-import BoardStore = require('../../../stores/board/BoardStore');
 import MenuView = require('../menu/MenuView');
 import _ = require('underscore');
+import {BoardResult} from '../../../lessons/interface';
 const {div} = React.DOM;
 
-function getState() {
-    return BoardStore.getQuatroState()
-}
-const state = getState();
-declare type State = typeof state;
 
-function getMenu() {
+function getFooter() {
     return div({
-        style: QuatroCss.getMenu(),
+        style: QuatroCss.getFooter(),
     }, MenuView())
 }
 
@@ -26,72 +21,52 @@ function onRead(read: string) {
     });
 }
 
-function getContentLine(state: State, list: any[]) {
-    let corrrectId = state.lessonData.correct;
+function getContentLine(state: BoardResult, list: any[]) {
     const elements = list.map((name: string) => {
-        const isPicture = _.contains(name, '.png') || _.contains(name, '/');
-        let pic = null as string;
-        if (isPicture) {
-            pic = name;
-        }
-
         return div({
             key: name,
-            style: QuatroCss.getItem(state.selectedAnswer, name, state.lessonData.correct, pic),
-            onClick: QuatroCss.animate(function () {
-                AppDispatcher.handleViewAction({
-                    actionType: Constants.CHOOSE_PICTURE,
-                    id: name
-                });
-            })
-        }, pic ? null : name)
-    })
+            style: QuatroCss.getItemWraper()
+        },
+            div({
+                style: QuatroCss.getItem(state.selectedAnswer, name, state.lessonData.correct, name),
+                onClick: QuatroCss.animate(function () {
+                    AppDispatcher.handleViewAction({
+                        actionType: Constants.CHOOSE_PICTURE,
+                        id: name
+                    });
+                })
+            }));
+    });
 
     return div({
         style: QuatroCss.getLine()
     }, elements);
 }
 
-function getQuatro(state: State) {
+function getBody(state: BoardResult) {
     const line1 = getContentLine(state, state.generatedList.slice(0, 2))
 
     const line2 = div({
-        style: QuatroCss.getLineText(),
-        onClick: QuatroCss.animate(onRead, state.text)
+        style: QuatroCss.getLineText()
     },
         div({
             style: QuatroCss.getText(),
+            onClick: QuatroCss.animate(onRead, state.text)
         }, state.text)
     );
     const line3 = getContentLine(state, state.generatedList.slice(2, 4))
 
 
     return div({
-        style: QuatroCss.getQuatro()
+        style: QuatroCss.getBody()
     }, line1, line2, line3)
-}
-
-class QuatroView extends React.Component<{}, State>{
-
-    constructor() {
-        super();
-        this.state = getState();
-    }
-
-    componentWillReceiveProps() {
-        this.state = getState();
-    }
-
-    render() {
-        let center = div({
-            style: QuatroCss.getCenter()
-        }, getQuatro(this.state));
-
-        return div({
-            key: 'quatroView',
-            style: QuatroCss.getPanel()
-        }, center, getMenu());
-    }
 };
 
-export =  React.createFactory(QuatroView);
+function render(state: BoardResult) {
+    return div({
+        key: 'quatroView',
+        style: QuatroCss.getPanel()
+    }, getBody(state), getFooter());
+};
+
+export =  render
