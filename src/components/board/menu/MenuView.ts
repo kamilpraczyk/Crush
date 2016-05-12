@@ -4,7 +4,6 @@ import _ = require('underscore');
 import ButtonView = require('../../button/ButtonView')
 import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
-import MenuActions = require('./MenuActions');
 const {div} = React.DOM;
 
 interface Item {
@@ -12,54 +11,48 @@ interface Item {
 }
 
 
-let prev = [{
+const prev = [{
     id: 'prev',
     icon: 'icon-left-open',
-    onClick: MenuActions.requestPrev
+    onClick: function () {
+        AppDispatcher.handleViewAction({
+            actionType: Constants.BOARD_PREV
+        })
+    }
 }];
 
-let next = [{
+const next = [{
     id: 'next',
     icon: 'icon-right-open',
-    onClick: MenuActions.requestNext
+    onClick: function () {
+        AppDispatcher.handleViewAction({
+            actionType: Constants.BOARD_NEXT
+        })
+    }
 }];
 
-function getState(data: any) {
-    const menu = data && data.menu ? data.menu : [];
-    return {
-        menu: [].concat(prev, menu, next) as Item[]
-    };
-}
 
-const state = getState(null);
-declare type State = typeof state;
+function render(items?: Item[]) {
+    items = items || [];
+    items = [].concat(prev, items, next);
 
-class View extends React.Component<State, State>{
-
-    constructor(data: State) {
-        super();
-        this.state = getState(data);
-    }
-
-    render() {
-        let buttons = this.state.menu.map(function (item: Item) {
-            return div({
-                key: item.id,
-                style: MenuCss.getItem()
-            }, ButtonView({
-                name: item.name,
-                icon: item.icon,
-                isExpandWidth: true,
-                isResponsibleHeight : true,
-                onClick: item.onClick,
-                isQuickClick: true
-            }));
-        });
-
+    const buttons = items.map(function (item: Item) {
         return div({
-            style: MenuCss.getPanel()
-        }, buttons);
-    }
+            key: item.id,
+            style: MenuCss.getItem()
+        }, ButtonView({
+            name: item.name,
+            icon: item.icon,
+            isExpandWidth: true,
+            isResponsibleHeight: true,
+            onClick: item.onClick,
+            isQuickClick: true
+        }));
+    });
+
+    return div({
+        style: MenuCss.getPanel()
+    }, buttons);
 };
 
-export =  React.createFactory(View);
+export =  render;

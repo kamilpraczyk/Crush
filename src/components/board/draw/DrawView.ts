@@ -30,13 +30,13 @@ function getHeader(name: string) {
 function getFooter(onClick: Function) {
     return div({
         style: DrawCss.getFooter()
-    }, MenuView({
-        menu: [{
+    }, MenuView(
+        [{
             id: 'clear',
             name: 'clear',
             onClick: onClick
         }]
-    }))
+    ))
 }
 let signatureClear: Function = null;
 function onGetInterfaceClear(onClear: Function) {

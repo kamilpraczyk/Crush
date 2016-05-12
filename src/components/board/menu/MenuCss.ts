@@ -1,7 +1,7 @@
 import css = require('../../../utils/css/css');
 import utils = require('../../../utils/utils');
 
-let styles = {
+const styles = {
 
     panel: {
         display: 'table',
