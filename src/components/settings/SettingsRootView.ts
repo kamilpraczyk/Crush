@@ -22,26 +22,20 @@ const state = getState();
 declare type State = typeof state;
 
 
-function getMaximalized(state: State) {
-    let panelContent = div({
-        style: SettingsRootCss.getPanelContent()
-    }, getPanelSelection(), getPanelRoot(state));
-
+function getPanel(state: State) {
     return div({
         style: SettingsRootCss.getPanel()
-    }, panelContent);
+    }, getPanelSelection(), getPanelRoot(state));
 }
 
 function getPanelRoot(state: State) {
     return div({
-        key: 'panelRoot',
         style: SettingsRootCss.getPanelRoot()
     }, getRootList(state));
 }
 
 function getPanelSelection() {
     return div({
-        key: 'panelSelection',
         style: SettingsRootCss.getPanelSelection()
     }, SelectionView());
 }
@@ -49,10 +43,7 @@ function getPanelSelection() {
 
 
 function getItem(item: any, id: string) {
-
-    return div({
-        style: SettingsRootCss.getItem(),
-    }, ButtonView({
+    return ButtonView({
         name: item.name,
         icon: item.icon,
         onClick: function () {
@@ -65,19 +56,16 @@ function getItem(item: any, id: string) {
         isExpandWidth: true,
         isExpand: true,
         isActive: item.active,
-    }));
+    });
 }
 
 function getRootList(state: State) {
-    let list = _.map(state.rootList, function (item: any, id: string) {
+    return _.map(state.rootList, function (item: any, id: string) {
         return div({
             key: id,
             style: SettingsRootCss.getRootItem(),
         }, getItem(item, id));
     });
-    return div({
-        style: SettingsRootCss.getRootList(),
-    }, list);
 }
 
 
@@ -106,7 +94,7 @@ class SettingRootView extends React.Component<{}, State> {
         if (this.state.isMinimalized) {
             return div({});
         }
-        return getMaximalized(this.state);
+        return getPanel(this.state);
     }
 }
 

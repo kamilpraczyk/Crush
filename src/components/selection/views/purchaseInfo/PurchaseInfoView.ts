@@ -44,7 +44,7 @@ class View extends React.Component<{}, State>{
             style: PurchaseInfoCss.getBody()
         }, div({
             style: {
-                padding: '10vh'
+               
             }
         }, 'Click to ', subscribe));
 

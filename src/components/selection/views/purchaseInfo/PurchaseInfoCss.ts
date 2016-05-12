@@ -4,11 +4,11 @@ import utils = require('../../../../utils/utils');
 const styles = {
 
     panel: {
-        maxWidth: '100%',
+        display: 'flex',
+        flexGrow: 1,
         paddingLeft: '5vw',
         paddingRight: '5vw',
-        margin: 'auto',
-        pointer : 'normal'
+        pointer: 'normal'
     },
 
     title: {

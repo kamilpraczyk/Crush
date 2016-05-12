@@ -32,7 +32,10 @@ class View extends React.Component<{}, State>{
                 style: ExplenationCss.getBody()
             }, this.state.explenation.exp, div({
                 style: {
-                    padding: '10vh'
+                    paddingTop: '5vh',
+                    paddingLeft: '5vw',
+                    paddingRight: '5vw',
+                    paddingBottom: '10vh'
                 }
             }));
 

@@ -29,9 +29,13 @@ const styles = {
         border: css.button.border.focus
     },
     isExpand: {
-        width: '100%',
-        height: '100%',
-        padding: 0
+        display: 'flex',
+        flexGrow: 1,
+        padding: 0,
+        margin: 0,
+        flexDirection: 'column',
+        alignItems: 'stretch',
+        alignContent: 'stretch',
     },
     isExpandWidth: {
         width: '100%',
@@ -52,12 +56,16 @@ const styles = {
         paddingBottom: '1vh',
         paddingRight: '1vw',
         paddingLeft: '1vw',
+        margin: 'auto',
+        marginTop: 0
     },
 
     icon: {
         display: 'inline-block',
         paddingLeft: '1vw',
-        paddingRight: '1vw'
+        paddingRight: '1vw',
+        margin: 'auto',
+        marginBottom: 0
     },
     leftIcon: {
         color: '#777',
