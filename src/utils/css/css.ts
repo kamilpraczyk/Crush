@@ -5,6 +5,20 @@ const constPoint = 'vmin'
 const borderRadius = 10;
 const borderWidth = 1;
 const borderWidthUnit = 'vh';
+const cursorPointer = 'pointer';
+const cursorDefault = 'default';
+
+
+const XS = constFont - 0.8 + constPoint;
+const S = constFont - 0.7 + constPoint;
+const M = constFont - 0.5 + constPoint;
+const L = constFont - 0.3 + constPoint;
+const XL = constFont + constPoint;
+const XL2 = constFont + 0.2 + constPoint;
+const XL3 = constFont + 0.5 + constPoint;
+const XL4 = constFont + 2.0 + constPoint;
+
+const backgroundColourText = 'rgba(255, 255, 255, 0.60)';
 let style = {
 
     get: function <T1, T2, T3, T4, T5>(a: T1, b?: T2, c?: T3, d?: T4, e?: T5): T1 & T2 & T3 & T4 & T5 {
@@ -29,20 +43,20 @@ let style = {
     },
 
     cursor: {
-        normal: 'default',
-        pointer: 'pointer'
+        normal: cursorDefault,
+        pointer: cursorPointer
     },
 
     font: {
         fontSize: {
-            XS: constFont - 0.8 + constPoint,
-            S: constFont - 0.7 + constPoint,
-            M: constFont - 0.5 + constPoint,
-            L: constFont - 0.3 + constPoint,
-            XL: constFont + constPoint,
-            XL2: constFont + 0.2 + constPoint,
-            XL3: constFont + 0.5 + constPoint,
-            XL4: constFont + 2.0 + constPoint
+            XS: XS,
+            S: S,
+            M: M,
+            L: L,
+            XL: XL,
+            XL2: XL2,
+            XL3: XL3,
+            XL4: XL4
         },
         color: {
             light: 'white',
@@ -50,8 +64,8 @@ let style = {
             select: 'blue',
             hint: 'gray',
             disable: 'lightgray',
-            success : 'green',
-            fail : 'red'
+            success: 'green',
+            fail: 'red'
         }
     },
 
@@ -99,7 +113,7 @@ let style = {
 
     background: {
         text: {
-            backgroundColor: 'rgba(255, 255, 255, 0.60)'
+            backgroundColor: backgroundColourText
         }
     },
 
@@ -112,7 +126,88 @@ let style = {
         quatro: {
 
         }
+    },
+
+    layout: {
+        getPanel: () => {
+            return {
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'stretch',
+                alignContent: 'stretch',
+                fontSize: XL,
+            }
+        },
+
+        getHeader: () => {
+            return {
+                display: 'flex',
+                margin: '2vh',
+                marginBottom: 0,
+                justifyContent: 'center',
+                flexDirection: 'column',
+                alignItems: 'center' //by default in center
+            }
+        },
+
+        getBody: () => {
+            return {
+                display: 'flex',
+                flex: 1,
+                margin: '2vh',
+                flexDirection: 'column',
+                alignItems: 'stretch',
+            }
+        },
+
+        getBodyContent: () => {
+            return {
+                display: 'flex',
+                flex: 1,
+                flexDirection: 'column',
+                alignItems: 'stretch',// by default stretch
+            }
+        },
+
+        getText: () => {
+            return {
+                display: 'flex',
+                paddingLeft: '2vw',
+                paddingRight: '2vw',
+                paddingTop: '1vh',
+                paddingBottom: '1vh',
+                cursor: cursorPointer,
+                borderRadius: borderRadius,
+                fontSize: XL,
+                backgroundColor: backgroundColourText,
+            }
+        },
+
+        getInstructions: () => {
+            return {
+                display: 'flex',
+                paddingLeft: '2vw',
+                paddingRight: '2vw',
+                paddingTop: '1vh',
+                paddingBottom: '1vh',
+                cursor: cursorPointer,
+                borderRadius: borderRadius,
+                fontSize: XL,
+            }
+        },
+
+
+        getFooter: () => {
+            return {
+                display: 'flex'
+            }
+        }
+
     }
+
+
 
 }
 

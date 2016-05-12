@@ -10,7 +10,7 @@ const {div} = React.DOM;
 
 function getFooter() {
     return div({
-        style: QuatroCss.getFooter(),
+        style: QuatroCss.getFooter()
     }, MenuView())
 }
 
@@ -59,7 +59,10 @@ function getBody(state: BoardResult) {
 
     return div({
         style: QuatroCss.getBody()
-    }, line1, line2, line3)
+    },
+        div({
+            style: QuatroCss.getBodyContent()
+        }, line1, line2, line3));
 };
 
 function render(state: BoardResult) {

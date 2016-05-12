@@ -1,8 +1,8 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, multi, viewIds, idsCss, id } from '../../helper/constants';
+import {space, multi, viewIds, id } from '../../helper/constants';
 import explenation = require('./explenation');
-const common = [viewIds.radio, idsCss.center];
+const common = [viewIds.radio];
 
 export =[
     {

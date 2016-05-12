@@ -29,7 +29,7 @@ function getHeader(name: string) {
 
 function getFooter(onClick: Function) {
     return div({
-        style: DrawCss.getFooter(),
+        style: DrawCss.getFooter()
     }, MenuView({
         menu: [{
             id: 'clear',

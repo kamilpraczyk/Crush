@@ -358,7 +358,8 @@ class SignaturePad extends React.Component<SignaturePadPropsFace, SignaturePadSt
             ref: 'cv',
             style: {
                 display: 'flex',
-                flexGrow: 1
+                flexGrow: 1,
+                cursor: 'pointer'
             }
         })
     }

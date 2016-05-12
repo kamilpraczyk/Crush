@@ -4,30 +4,11 @@ import _ = require('underscore');
 
 let styles = {
 
-    panel: {
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'stretch',
-        alignContent: 'stretch',
-    },
-
-    body: {
-        display: 'flex',
-        flex: 1,
-
-        flexDirection: 'column',
-        alignItems: 'stretch',
-        alignContent: 'stretch',
-    },
-
 
     line: {
         display: 'flex',
         flex: 1
     },
-
 
     lineText: {
         display: 'flex',
@@ -57,42 +38,17 @@ let styles = {
         backgroundColor: css.background.text.backgroundColor
     },
 
-    text: {
-        textAlign: 'center',
-        cursor: css.cursor.pointer,
-        paddingLeft: '2vw',
-        paddingRight: '2vw',
-        paddingTop: '1vh',
-        paddingBottom: '1vh',
-        fontSize: css.font.fontSize.XL3,
-        backgroundColor: css.background.text.backgroundColor,
-        borderRadius: css.borderRadius
-    },
-
-    footer: {
-        display: 'flex',
-    },
-
-}
-
-function addUrl(style: any, url: string): any {
-    if (url) {
-        return css.get(style, {
-            backgroundImage: 'url(' + url + ')'
-        });
-    }
-    return style;
 }
 
 export = utils.union(css, {
 
-    getPanel() {
-        return styles.panel;
-    },
+    getPanel: css.layout.getPanel,
+    getBody: css.layout.getBody,
+    getFooter: css.layout.getFooter,
+    getText: css.layout.getText,
 
-    getBody() {
-        return styles.body;
-    },
+    getBodyContent: css.layout.getBodyContent,
+
 
     getLine() {
         return css.get(styles.line);
@@ -102,15 +58,12 @@ export = utils.union(css, {
         return styles.lineText;
     },
 
-    getText() {
-        return css.get(styles.text);
-    },
 
     getItemWraper() {
         return styles.itemWraper
     },
 
-    getItem(selectedAnswer: string, currentAnswer: string, correctAnswers: string[], url?: string) {
+    getItem(selectedAnswer: string, currentAnswer: string, correctAnswers: string[], url: string) {
         let style = css.get(styles.item, css.answer.normal);
 
         if (selectedAnswer === currentAnswer) {
@@ -121,13 +74,11 @@ export = utils.union(css, {
             }
         }
         if (url) {
-            style = addUrl(style, url);
+            style = css.get(style, {
+                backgroundImage: 'url(' + url + ')'
+            });
         }
         return style;
     },
 
-
-    getFooter() {
-        return styles.footer;
-    }
 });

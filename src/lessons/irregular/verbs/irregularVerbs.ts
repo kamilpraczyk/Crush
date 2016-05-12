@@ -1,9 +1,9 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, idsCss, id } from '../../helper/constants';
+import {space, viewIds, id } from '../../helper/constants';
 import explenation = require('./explenation');
 
-const common = [viewIds.draw, idsCss.center];
+const common = [viewIds.draw];
 export =[
     {
         id: id(common),

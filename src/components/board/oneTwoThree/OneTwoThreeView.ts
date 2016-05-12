@@ -10,7 +10,7 @@ const {div} = React.DOM;
 
 function getFooter() {
     return div({
-        style: OneTwoThreeCss.getFooter(),
+        style: OneTwoThreeCss.getFooter()
     }, MenuView())
 }
 

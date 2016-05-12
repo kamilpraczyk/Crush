@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, idsCss, id } from '../../helper/constants';
+import {space, viewIds, id } from '../../helper/constants';
 import explenation = require('./explenation');
 
 const toPlural = 'Change to Plural';
@@ -8,7 +8,7 @@ const toSingular = 'Change to Singular';
 const toPast = 'Change to Past Tense';
 const toPresent = 'Change to Present Tense';
 
-const common = [viewIds.radio, idsCss.center];
+const common = [viewIds.radio];
 
 export =[
     {

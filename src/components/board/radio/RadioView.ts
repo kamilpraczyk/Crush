@@ -24,7 +24,7 @@ function onRead(read: string) {
 
 function getFooter() {
     return div({
-        style: RadioCss.getFooter()
+        style: RadioCss.layout.getFooter()
     }, MenuView());
 }
 
@@ -56,7 +56,7 @@ function getBody(state: BoardResult) {
         return state.generatedList.map((name: string, index: number) => {
             return div({
                 key: name + index,
-                style: RadioCss.getItem(index, name, state.isCorrect, state.selectedAnswer),
+                style: RadioCss.getItem(name, state.isCorrect, state.selectedAnswer),
                 onClick: RadioCss.animate(onAnswer, name)
             }, name)
         });
@@ -77,7 +77,7 @@ function getBody(state: BoardResult) {
 function render(state: BoardResult) {
     return div({
         key: 'radioView',
-        style: RadioCss.getPanel()
+        style: RadioCss.layout.getPanel()
     }, getHeader(state), getBody(state), getFooter());
 };
 

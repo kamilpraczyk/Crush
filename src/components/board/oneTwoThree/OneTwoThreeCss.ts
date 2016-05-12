@@ -4,38 +4,12 @@ import _ = require('underscore');
 
 let styles = {
 
-    panel: {
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'stretch',
-        alignContent: 'stretch',
-    },
 
-    header: {
-        display: 'flex',
-        margin: '2vh',
-        marginBottom: 0,
-        justifyContent: 'center',
-        flexDirection: 'column',
-        alignItems: 'center'
-    },
-
-    body: {
-        display: 'flex',
-        flex: 1,
-        margin: '2vh',
-        alignItems: 'stretch',
-        flexDirection: 'column'
-    },
 
     bodyContent: {
-        display: 'flex',
-        flex: 1,
         alignItems: 'center',
-        flexDirection: 'column'
     },
+
 
     line: {
         display: 'flex',
@@ -43,18 +17,6 @@ let styles = {
         alignItems: 'stretch',
         flexDirection: 'column',
         justifyContent: 'center'
-    },
-
-
-    text: {
-        paddingLeft: '2vw',
-        paddingRight: '2vw',
-        paddingTop: '1vh',
-        paddingBottom: '1vh',
-        cursor: css.cursor.pointer,
-        borderRadius: css.borderRadius,
-        fontSize: css.font.fontSize.XL,
-        backgroundColor: css.background.text.backgroundColor,
     },
 
 
@@ -71,36 +33,26 @@ let styles = {
     },
 
 
-    footer: {
-        display: 'flex'
-    },
-
 }
 
 export = utils.union(css, {
 
-    getPanel() {
-        return styles.panel;
-    },
+    getPanel: css.layout.getPanel,
+    getHeader: css.layout.getHeader,
+    getBody: css.layout.getBody,
+    getFooter: css.layout.getFooter,
+    getText: css.layout.getText,
 
-    getHeader() {
-        return styles.header;
-    },
-
-    getBody() {
-        return styles.body;
-    },
 
     getBodyContent() {
-        return styles.bodyContent;
+        return css.get(css.layout.getBodyContent(), styles.bodyContent);
     },
+
 
     getLine() {
         return css.get(styles.line);
     },
-    getText() {
-        return css.get(styles.text);
-    },
+
 
     getItem(selectedAnswer: string, currentAnswer: string, isCorrect: boolean) {
         let style = css.get(styles.item, css.answer.normal);
@@ -115,9 +67,5 @@ export = utils.union(css, {
         return style;
     },
 
-
-    getFooter() {
-        return styles.footer;
-    }
 
 });
