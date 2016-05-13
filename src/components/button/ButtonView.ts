@@ -12,7 +12,8 @@ interface Props {
     isExpand?: boolean,
     isActive?: boolean,
     isExpandWidth?: boolean,
-    isResponsibleHeight? :boolean
+    isResponsibleHeight?: boolean,
+    isResponsibleCenter?: boolean
 }
 
 interface ButtonViewStateFace {
@@ -42,7 +43,7 @@ class ButtonView extends React.Component<Props, ButtonViewStateFace>{
         this.setState && this.setState({ pressed: false });
         !this.props.isQuickClick && this.props.onClick(this.props);
     }
- 
+
 
     componentWillUnmount() {
         clearTimeout(this.time);
@@ -53,7 +54,9 @@ class ButtonView extends React.Component<Props, ButtonViewStateFace>{
         if (this.props.icon) {
             icon = div({
                 className: this.props.icon,
-                style: ButtonCss.getIcon()
+                style: ButtonCss.getIcon({
+                    isResponsibleCenter: this.props.isResponsibleCenter
+                })
             });
         }
         let leftIcon = null as any;
@@ -64,9 +67,14 @@ class ButtonView extends React.Component<Props, ButtonViewStateFace>{
             });
         }
 
-        const name = div({
-            style: ButtonCss.getName()
-        }, this.props.name);
+        let name: any = null;
+        if (this.props.name) {
+            name = div({
+                style: ButtonCss.getName({
+                    isResponsibleCenter: this.props.isResponsibleCenter
+                })
+            }, this.props.name);
+        }
 
         return button({
             key: this.props.key,
@@ -75,8 +83,7 @@ class ButtonView extends React.Component<Props, ButtonViewStateFace>{
                 isExpand: this.props.isExpand,
                 isExpandWidth: this.props.isExpandWidth,
                 isActive: this.props.isActive,
-                isFlex: !!this.props.leftIcon,
-                isResponsibleHeight : this.props.isResponsibleHeight
+                isResponsibleHeight: this.props.isResponsibleHeight
             }),
             onClick: this.clickHandler
         }, leftIcon, icon, name);

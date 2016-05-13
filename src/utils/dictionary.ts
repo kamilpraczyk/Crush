@@ -6,9 +6,9 @@ import polish = require('./languages/polish');
 let dictionary = english;
 //dictionary = polish;
 
-const wrap = function(id: string) {
+const wrap = function (id: string) {
     if (dictionary[id]) {
-        return function() {
+        return function () {
             return dictionary[id];
         }
     } else {
@@ -16,7 +16,7 @@ const wrap = function(id: string) {
     }
 }
 
-const replace = function(id: string, options: any) {
+const replace = function (id: string, options: any) {
     let text = dictionary[id]
     _.map(options, (object: any, id: string) => {
         let key = '{' + id + '}';
@@ -33,9 +33,11 @@ const data = {
     GREET_HELLO: (object: { name: string }) => {
         return replace('GREET_HELLO', object);
     },
-    GREET_TITLE : wrap('GREET_TITLE'),
+    GREET_TITLE: wrap('GREET_TITLE'),
     GREET_START: wrap('GREET_START'),
     OK: wrap('OK'),
+    SUBSCRIBE_TEXT: wrap('SUBSCRIBE_TEXT'),
+    SUBSCRIBE_BUTTON: wrap('SUBSCRIBE_BUTTON'),
 };
 export = data;
 

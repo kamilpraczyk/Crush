@@ -45,6 +45,7 @@ function render(items?: Item[]) {
             icon: item.icon,
             isExpandWidth: true,
             isResponsibleHeight: true,
+            isResponsibleCenter: true,
             onClick: item.onClick,
             isQuickClick: true
         }));

@@ -4,15 +4,18 @@ import utils = require('../../../utils/utils');
 const styles = {
 
     panel: {
-        display: 'table',
+        display: 'flex',
         width: '100%',
         height: '100%',
+        flexDirection: 'row',
+        alignItems: 'stretch',
+        alignContent: 'stretch',
     },
 
     item: {
-        display: 'table-cell',
-        textAlign: 'center',
-        height: '100%',
+        display: 'flex',
+        flexGrow: 1,
+        alignItems: 'center',
     }
 
 }

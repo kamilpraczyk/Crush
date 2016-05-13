@@ -60,19 +60,8 @@ class BoardStore extends BaseStore {
         return findId;
     }
 
-    getQuatroState() {
-        return storageHelper.getState(list[_index]);
-    }
 
-    getOneTwoThreeState() {
-        return storageHelper.getState(list[_index]);
-    }
-
-    getDrawState() {
-        return storageHelper.getState(list[_index]);
-    }
-
-    getRadioStage() {
+    getBoardState() {
         return storageHelper.getState(list[_index]);
     }
 
@@ -81,7 +70,9 @@ class BoardStore extends BaseStore {
     }
 
     getPurchaseInfoState() {
-        return {}
+        return {
+            someState: '' //TODO
+        }
     }
 
     getExplenation() {

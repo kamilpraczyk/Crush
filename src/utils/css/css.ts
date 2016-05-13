@@ -156,7 +156,10 @@ let style = {
             return {
                 display: 'flex',
                 flex: 1,
-                margin: '2vh',
+                paddingBottom: '2vw',
+                paddingTop: '2vw',
+                paddingLeft: '2vw',
+                paddingRight: '2vw',
                 flexDirection: 'column',
                 alignItems: 'stretch',
             }

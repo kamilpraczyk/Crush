@@ -4,6 +4,7 @@ import utils = require('../../utils/utils');
 const styles = {
 
     button: {
+        display: 'flex',
         backgroundColor: css.button.background.normal,
         color: css.button.color.normal,
         border: css.button.border.normal,
@@ -11,7 +12,6 @@ const styles = {
         MozBorderRadius: 28,
         WebkitBorderRadius: 28,
         borderRadius: 28,
-        display: 'inline-block',
         cursor: 'pointer',
         fontFamily: 'Arial',
         fontSize: css.font.fontSize.XL,
@@ -19,6 +19,11 @@ const styles = {
         textDecoration: 'none',
         textShadow: '0px 1px 0px #2f6627',
         margin: 0,
+        padding: 0,
+        paddingTop: '1vh',
+        paddingBottom: '1vh',
+        flexDirection: 'row',
+        alignItems: 'stretch',
     },
 
     pressed: {
@@ -31,14 +36,15 @@ const styles = {
     isExpand: {
         display: 'flex',
         flexGrow: 1,
-        padding: 0,
-        margin: 0,
         flexDirection: 'column',
-        alignItems: 'stretch',
-        alignContent: 'stretch',
+        alignItems: 'center',
+        alignContent: 'center',
+        justifyContent: 'center',
+        textAlign: 'left'
     },
     isExpandWidth: {
         width: '100%',
+        flexGrow: 1
     },
 
     isActive: {
@@ -49,30 +55,31 @@ const styles = {
     isResponsibleHeight: {
         minHeight: '10vh'
     },
+    isResponsibleCenter: {
+        justifyContent: 'center',
+        display: 'flex',
+        flexGrow: 1
+    },
 
     name: {
-        display: 'inline-block',
-        paddingTop: '1vh',
-        paddingBottom: '1vh',
+        display: 'inline-flex',
         paddingRight: '1vw',
         paddingLeft: '1vw',
-        margin: 'auto',
-        marginTop: 0
+        textAlign: 'left'
     },
 
     icon: {
-        display: 'inline-block',
+        display: 'inline-flex',
         paddingLeft: '1vw',
         paddingRight: '1vw',
-        margin: 'auto',
-        marginBottom: 0
+        alignSelf: 'center'
     },
     leftIcon: {
+        display: 'inline-flex',
+        alignSelf: 'center',
         color: '#777',
-        float: 'left',
         paddingLeft: '1vw',
         paddingRight: '1vw',
-        paddingTop: '1vh'
     },
     leftIconActive: {
         color: '#fff',
@@ -82,33 +89,40 @@ const styles = {
 
 export = utils.union(css, {
 
-    getButton(options: { pressed: boolean, isExpand: boolean, isExpandWidth: boolean, isActive: boolean, isFlex: boolean, isResponsibleHeight: boolean }) {
+    getButton(options: { pressed: boolean, isExpand: boolean, isExpandWidth: boolean, isActive: boolean, isResponsibleHeight: boolean }) {
         let style = styles.button;
         if (options.isExpandWidth)
             style = css.get(style, styles.isExpandWidth);
+
         if (options.isExpand)
             style = css.get(style, styles.isExpand);
+
         if (options.isActive)
             style = css.get(style, styles.isActive);
 
-
         if (options.pressed)
             style = css.get(style, styles.pressed);
-        if (options.isFlex) {
-            style = css.get(style, { display: 'inline-flex', textAlign: 'left' });
-        }
+
         if (options.isResponsibleHeight) {
             style = css.get(style, styles.isResponsibleHeight);
         }
         return style;
     },
 
-    getName() {
-        return styles.name;
+    getName(options: { isResponsibleCenter: boolean }) {
+        let style = styles.name;
+        if (options.isResponsibleCenter) {
+            style = css.get(style, styles.isResponsibleCenter);
+        }
+        return style;
     },
 
-    getIcon() {
-        return styles.icon;
+    getIcon(options: { isResponsibleCenter: boolean }) {
+        let style = styles.icon;
+        if (options.isResponsibleCenter) {
+            style = css.get(style, styles.isResponsibleCenter);
+        }
+        return style;
     },
 
     getLeftIcon(isActive: boolean) {

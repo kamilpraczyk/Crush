@@ -6,15 +6,17 @@ import _ = require('underscore');
 import SettingsRootCss = require('./SettingsRootCss');
 import AppDispatcher = require('../../dispatcher/AppDispatcher');
 import Constants = require('../../constants/Constants');
-import SettingRootStore = require('../../stores/SettingsRootStore');
-import SelectionView = require('../selection/SelectionView')
+import SettingsRootStore = require('../../stores/SettingsRootStore');
+import SwitcherView = require('./views/switcher/SwitcherView');
+import ExplenationView = require('./views/explenation/ExplenationView');
+
 import {RootFace, RootFaces } from '../../stores/SettingsRootInterfaces';
 const {div} = React.DOM;
 
 function getState() {
     return {
-        rootList: SettingRootStore.getRootList(),
-        isMinimalized: SettingRootStore.isMinimalized()
+        rootList: SettingsRootStore.getRootList(),
+        isMinimalized: SettingsRootStore.isMinimalized()
     };
 }
 
@@ -35,9 +37,24 @@ function getPanelRoot(state: State) {
 }
 
 function getPanelSelection() {
+
+    let view: any = null;
+    const ids = SettingsRootStore.getIds();
+
+    switch (SettingsRootStore.getActiveRoot()) {
+        case ids.lessons:
+        case ids.shopping:
+            view = SwitcherView();
+            break;
+        case ids.explenation:
+            view = ExplenationView();
+    }
+
     return div({
         style: SettingsRootCss.getPanelSelection()
-    }, SelectionView());
+    }, view);
+
+
 }
 
 
@@ -79,11 +96,11 @@ class SettingRootView extends React.Component<{}, State> {
     }
 
     componentDidMount() {
-        SettingRootStore.addChangeListener(this.onChange);
+        SettingsRootStore.addChangeListener(this.onChange);
     }
 
     componentWillUnmount() {
-        SettingRootStore.removeChangeListener(this.onChange);
+        SettingsRootStore.removeChangeListener(this.onChange);
     }
 
     onChange() {

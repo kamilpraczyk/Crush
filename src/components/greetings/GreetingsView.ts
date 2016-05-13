@@ -31,6 +31,7 @@ function getText(name: string) {
 function getButton() {
     return ButtonView({
         name: dictionary.GREET_START(),
+        isResponsibleHeight : true,
         onClick: function () {
             AppDispatcher.handleViewAction({
                 actionType: Constants.GREETINGS_SHOW_LESSONS,

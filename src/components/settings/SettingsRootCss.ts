@@ -26,11 +26,14 @@ let styles = {
         flex: 7,
         flexDirection: 'column',
         alignItems: 'stretch',
+        overflowX: 'hidden',
+        overflowY: 'auto',
+        paddingBottom: '10vh'
     },
 
     panelRoot: {
         display: 'flex',
-        marginBottom : '3px',
+        marginBottom: '3px',
         flex: 1,
         flexDirection: 'column',
         alignItems: 'stretch',

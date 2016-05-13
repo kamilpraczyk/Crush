@@ -17,13 +17,13 @@ function getView() {
 
     switch (BoardStore.getSettingId()) {
         case viewIds.draw:
-            return DrawView(BoardStore.getDrawState());
+            return DrawView(BoardStore.getBoardState());
         case viewIds.fourPictures:
-            return QuatroView(BoardStore.getQuatroState());
+            return QuatroView(BoardStore.getBoardState());
         case viewIds.radio:
-            return RadioView(BoardStore.getRadioStage());
+            return RadioView(BoardStore.getBoardState());
         case viewIds.oneTwoThree:
-            return OneTwoThreeView(BoardStore.getOneTwoThreeState());
+            return OneTwoThreeView(BoardStore.getBoardState());
     }
     console.error('GetView not recognized by id:' + BoardStore.getSettingId());
 }
