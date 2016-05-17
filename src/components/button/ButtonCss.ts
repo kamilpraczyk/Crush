@@ -65,7 +65,8 @@ const styles = {
         display: 'inline-flex',
         paddingRight: '1vw',
         paddingLeft: '1vw',
-        textAlign: 'left'
+        textAlign: 'left',
+        alignSelf: 'center',
     },
 
     icon: {

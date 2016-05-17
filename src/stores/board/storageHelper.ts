@@ -37,17 +37,24 @@ function reset() {
 function getCorrectSentence() {
     let name = _board.name;
     let read = '';
-    if (_board.id.indexOf(viewIds.draw) !== -1) {
+    if (isDraw()) {
         read = name;
-    } else if (_board.id.indexOf(viewIds.oneTwoThree) !== -1) {
-        read = name;
-        _selectedAnswerQueue.map((item) => {
-            read = read.replace(space, item);
-        });
-    } else if (_board.id.indexOf(viewIds.fourPictures) !== -1) {
+
+    } else if (isOneTwoThree()) {
+        //put placeholder if no answer jet 
+        if (!_selectedAnswerQueue.length) {
+            read = _board.placeholder;  //e.g Simple Present Tense
+        } else {
+            read = _selectedAnswerQueue.join(name);
+            if (isCompletedAndCorrect()) { //finish sentence with dot
+                read = read + '.'
+            }
+        }
+
+    } else if (isFourPictures()) {
         /*answer is a path to a picture*/
         return name;
-    } else if (_board.id.indexOf(viewIds.radio) !== -1) {
+    } else if (isRadio()) {
 
         if (_selectedAnswer.indexOf(multi) !== -1) {
             /*answer is a multi answer, separated by 'space'*/
@@ -62,7 +69,7 @@ function getCorrectSentence() {
             read = name.replace(space, replacement);
         } else if (_selectedAnswer !== empty) {
             /* selected answer is correct*/
-            read = _selectedAnswer;        //TODO we shold not change main text but read good answer only
+            read = _selectedAnswer;   
         } else if (_selectedAnswer !== empty) {
             /*answer is an empty answer - origin sentence correct*/
             read = name;
@@ -73,59 +80,70 @@ function getCorrectSentence() {
 }
 
 function isCorrect() {
-
-    if (_board.id.indexOf(viewIds.oneTwoThree) !== -1) {
+    if (isOneTwoThree()) {
         const length = _selectedAnswerQueue.length;
         return _.last(_selectedAnswerQueue) === _board.correct[length - 1];
     }
     return _.contains(_board.correct, _selectedAnswer);
 }
 
-function isCorrectForUser() {
-    if (_board.id.indexOf(viewIds.oneTwoThree) !== -1) {
-
-    }
-    return isCorrect();
+function isCompletedAndCorrect() {
+    return _board.correct.length === _selectedAnswerQueue.length && _.difference(_board.correct, _selectedAnswerQueue).length === 0;
 }
+
+function isOneTwoThree() {
+    return _board.id.indexOf(viewIds.oneTwoThree) !== -1;
+}
+function isRadio() {
+    return _board.id.indexOf(viewIds.radio) !== -1;
+}
+function isDraw() {
+    return _board.id.indexOf(viewIds.draw) !== -1;
+}
+function isFourPictures() {
+    return _board.id.indexOf(viewIds.fourPictures) !== -1;
+}
+
+
 
 function setPressedAnswer(answer: string) {
+
     _selectedAnswer = answer;
     wasLastCorrect = false;
 
-    if (isCorrect()) {
-        const read = getCorrectSentence();
-        utils.voice.read(read);
-        wasLastCorrect = true;
-        pointsHelper.setCompletedStatus(_board, true);
-    } else {
-        pointsHelper.setCompletedStatus(_board, false);
-    }
+    if (isOneTwoThree()) {
 
-}
+        const length = _selectedAnswerQueue.length;
 
-function setPressedAnswerOnQueue(answer: string) {
-    _selectedAnswer = answer;
-    const length = _selectedAnswerQueue.length;
-
-    wasLastCorrect = false;
-    if (_board.correct[length] === answer) {
-        _selectedAnswerQueue.push(answer);
-        wasLastCorrect = true;
-        utils.voice.read(answer);
-        //all answered and last one is correct?
-        if (_board.correct.length === _selectedAnswerQueue.length && _.difference(_board.correct, _selectedAnswerQueue).length === 0) {
-            pointsHelper.setCompletedStatus(_board, true);
+        if (_board.correct[length] === answer) {
+            _selectedAnswerQueue.push(answer);
+            wasLastCorrect = true;
+            utils.voice.read(answer);
+            //all answered and last one is correct?
+            if (isCompletedAndCorrect()) {
+                pointsHelper.setCompletedStatus(_board, true);
+            }
+            return;
+        } else {
+            pointsHelper.setCompletedStatus(_board, false);
         }
+
     } else {
-        pointsHelper.setCompletedStatus(_board, false);
+
+        if (isCorrect()) {
+            const read = getCorrectSentence();
+            utils.voice.read(read);
+            wasLastCorrect = true;
+            pointsHelper.setCompletedStatus(_board, true);
+        } else {
+            pointsHelper.setCompletedStatus(_board, false);
+        }
+
     }
 
-    if (pointsHelper.isCompletedStatus(_board)) {
-        _selectedAnswer = null;
-        wasLastCorrect = false;
-        utils.voice.read(answer);
-    }
+
 }
+
 
 
 function getState(board: BoardFace) {
@@ -150,6 +168,5 @@ function getState(board: BoardFace) {
 export = {
     reset,
     setPressedAnswer,
-    setPressedAnswerOnQueue,
     getState
 }

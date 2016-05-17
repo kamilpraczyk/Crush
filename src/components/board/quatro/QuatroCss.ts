@@ -7,7 +7,7 @@ let styles = {
 
     line: {
         display: 'flex',
-        flex: 1
+        flexGrow: 1
     },
 
     lineText: {

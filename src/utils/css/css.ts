@@ -9,6 +9,7 @@ const cursorPointer = 'pointer';
 const cursorDefault = 'default';
 
 
+
 const XS = constFont - 0.8 + constPoint;
 const S = constFont - 0.7 + constPoint;
 const M = constFont - 0.5 + constPoint;
@@ -17,6 +18,7 @@ const XL = constFont + constPoint;
 const XL2 = constFont + 0.2 + constPoint;
 const XL3 = constFont + 0.5 + constPoint;
 const XL4 = constFont + 2.0 + constPoint;
+
 
 const backgroundColourText = 'rgba(255, 255, 255, 0.60)';
 let style = {
@@ -155,7 +157,7 @@ let style = {
         getBody: () => {
             return {
                 display: 'flex',
-                flex: 1,
+                flexGrow: 1,
                 paddingBottom: '2vw',
                 paddingTop: '2vw',
                 paddingLeft: '2vw',
@@ -168,7 +170,7 @@ let style = {
         getBodyContent: () => {
             return {
                 display: 'flex',
-                flex: 1,
+                flexGrow: 1,
                 flexDirection: 'column',
                 alignItems: 'stretch',// by default stretch
             }

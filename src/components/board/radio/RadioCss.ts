@@ -17,7 +17,7 @@ const styles = {
         paddingTop: '2vh',
         margin: 'auto',
         display: 'flex',
-        flex: 1,
+        flexGrow: 1,
         flexDirection: 'column'
 
     },

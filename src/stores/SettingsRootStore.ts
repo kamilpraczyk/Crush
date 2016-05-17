@@ -4,7 +4,8 @@ import utils = require('../utils/utils');
 import _ = require('underscore');
 import {RootFace, RootFaces } from './SettingsRootInterfaces';
 import BaseStore from '../utils/store/BaseStore';
-
+import LessonStore = require('./lesson/LessonStore');
+import BoardStore = require('./board/BoardStore');
 
 const _ids = {
     close: 'close',
@@ -89,6 +90,12 @@ class SettingRootStore extends BaseStore {
         let action = payload.action;
 
         switch (action.actionType) {
+            case Constants.SWITCH_ACTION:
+                this.waitFor([LessonStore.dispatcherIndex, BoardStore.dispatcherIndex], () => {
+                    console.log('switch root');
+                    this.emitChange();
+                });
+                break;
             case Constants.ROOT_ITEM_CLICK:
                 onClickRootItem(action.id)
                 this.emitChange();

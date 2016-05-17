@@ -1,25 +1,18 @@
-import css = require('../../utils/css/css');
-import utils = require('../../utils/utils');
+import css = require('../../../utils/css/css');
+import utils = require('../../../utils/utils');
 
 let styles = {
+
     panel: {
         position: 'absolute',
         top: 0,
         left: 0,
         width: '100%',
         height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'stretch',
-        alignContent: 'stretch',
-        background: 'red',
         fontSize: css.font.fontSize.XL,
-    },
-
-    container: {
+        background: 'red',
         display: 'flex',
         flexGrow: 1,
-        margin: '2vmax',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
@@ -32,6 +25,7 @@ let styles = {
     },
 }
 
+
 export = utils.union(css, {
     getPanel() {
         return styles.panel;
@@ -41,7 +35,5 @@ export = utils.union(css, {
         return styles.text;
     },
 
-    getContainer() {
-        return styles.container;
-    },
+
 });

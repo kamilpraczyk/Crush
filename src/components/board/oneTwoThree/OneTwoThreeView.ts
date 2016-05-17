@@ -32,11 +32,11 @@ function getHeader(state: BoardResult) {
 }
 
 function getContentLine(state: BoardResult, name: string) {
-    let corrrectId = state.lessonData.correct;
 
-
-    const nameEl = div({
-        key: name,
+    return div({
+        key: _.uniqueId('_'),
+        style: OneTwoThreeCss.getLine()
+    }, div({
         style: OneTwoThreeCss.getItem(state.selectedAnswer, name, state.isCorrect),
         onClick: OneTwoThreeCss.animate(function () {
             AppDispatcher.handleViewAction({
@@ -44,22 +44,19 @@ function getContentLine(state: BoardResult, name: string) {
                 id: name
             });
         })
-    }, name);
-
-    return div({
-        style: OneTwoThreeCss.getLine()
-    }, nameEl);
+    }, name));
 }
 
 function getBodyContent(state: BoardResult) {
 
-    const line1 = getContentLine(state, state.generatedList[0]);
-    const line2 = getContentLine(state, state.generatedList[1]);
-    const line3 = getContentLine(state, state.generatedList[2]);
+    const lines: any = [];
+    _.each(state.generatedList, (o: string) => {
+        lines.push(getContentLine(state, o));
+    });
 
     return div({
         style: OneTwoThreeCss.getBodyContent()
-    }, line1, line2, line3)
+    }, lines)
 }
 
 function getBody(state: BoardResult) {

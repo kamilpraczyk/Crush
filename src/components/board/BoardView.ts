@@ -7,6 +7,7 @@ import RadioView = require('./radio/RadioView');
 import QuatroView = require('./quatro/QuatroView');
 import OneTwoThreeView = require('./oneTwoThree/OneTwoThreeView');
 import PointsView = require('./points/PointsView');
+import GratulationView = require('./gratulation/GratulationView')
 
 import {viewIds} from '../../lessons/helper/constants';
 
@@ -51,7 +52,7 @@ class BoardView extends React.Component<{}, {}>{
     render() {
         return div({
             style: BoardCss.getPanel()
-        }, PointsView(), getView());
+        }, GratulationView(), PointsView(), getView());
     }
 };
 

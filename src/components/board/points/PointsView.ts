@@ -6,14 +6,9 @@ import Constants = require('../../../constants/Constants');
 import BoardStore = require('../../../stores/board/BoardStore');
 const {div} = React.DOM;
 
-function getState() {
-    return BoardStore.getPoints();
-}
 
-const state = getState();
-declare type State = typeof state;
-
-function getPanel(state: State) {
+function render() {
+    const state = BoardStore.getPoints();
 
     const points = div({
         style: PointsCss.getPoints()
@@ -43,10 +38,6 @@ function getPanel(state: State) {
             });
         })
     }, points, success, fail);
-}
-
-function render() {
-    return getPanel(getState());
 }
 
 export = render;

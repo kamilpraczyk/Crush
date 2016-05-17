@@ -6,12 +6,18 @@ export const space = '___';
 export const multi = '−';
 export const empty = '_';
 
-
 export const viewIds = {
     fourPictures: 'f',
     oneTwoThree: 'o',
     radio: 'r',
     draw: 'd',
+}
+
+export const icons = {
+    draw: 'moon-quill',
+    fourPictures: 'moon-images',
+    radio: 'moon-insert-template',
+    oneTwoThree: 'moon-bubble'
 }
 
 export function id(a: string[] = [], b: string[] = [], c: string[] = []) {
@@ -23,5 +29,6 @@ export function getRest(group: any, exclude: any): string[] {
     return _.chain(group).values().without(exclude).value();
 }
 
+//TODO button skip > until finish of lesson 
 
 

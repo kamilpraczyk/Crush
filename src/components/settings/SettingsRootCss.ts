@@ -1,5 +1,7 @@
+/// <reference path="../../../typings/tsd.d.ts" />
 import css = require('../../utils/css/css');
 import utils = require('../../utils/utils');
+import React = require('react');
 
 let styles = {
 
@@ -23,7 +25,7 @@ let styles = {
 
     panelSelection: {
         display: 'flex',
-        flex: 7,
+        flexGrow: 7,
         flexDirection: 'column',
         alignItems: 'stretch',
         overflowX: 'hidden',
@@ -34,7 +36,7 @@ let styles = {
     panelRoot: {
         display: 'flex',
         marginBottom: '3px',
-        flex: 1,
+        flexGrow: 1,
         flexDirection: 'column',
         alignItems: 'stretch',
         alignContent: 'stretch',
@@ -43,7 +45,7 @@ let styles = {
 
     rootItem: {
         display: 'flex',
-        flex: 1,
+        flexGrow: 1,
         flexDirection: 'column',
         alignItems: 'stretch',
         alignContent: 'stretch',

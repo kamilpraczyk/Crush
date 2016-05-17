@@ -88,7 +88,6 @@ class BoardStore extends BaseStore {
 
         switch (action.actionType) {
 
-
             case Constants.READ:
                 utils.voice.read(action.read);
                 break;
@@ -99,15 +98,15 @@ class BoardStore extends BaseStore {
                 this.emitChange()
                 break;
             case Constants.CHOOSE_ONE_TWO_THREE:
-                storageHelper.setPressedAnswerOnQueue(action.id);
+                storageHelper.setPressedAnswer(action.id);
                 this.emitChange()
                 break;
 
             case Constants.SWITCH_ACTION:
                 this.waitFor([LessonStore.dispatcherIndex], () => {
                     console.log('switch board store!!!');
-                    loadLesson()
-                    this.emitChange()
+                    loadLesson();
+                    this.emitChange();
                 });
                 break;
 
@@ -122,6 +121,12 @@ class BoardStore extends BaseStore {
                 utils.voice.stopReading();
                 this.emitChange();
                 break;
+
+            case Constants.GREETINGS_CONTINUE:
+                pointsHelper.reset()
+                this.emitChange();
+                break;
+                
 
         }
         return true;

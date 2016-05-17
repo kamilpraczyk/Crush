@@ -13,7 +13,7 @@ let styles = {
 
     line: {
         display: 'flex',
-        flex: 1,
+        flexGrow: 1,
         alignItems: 'stretch',
         flexDirection: 'column',
         justifyContent: 'center'
@@ -27,8 +27,8 @@ let styles = {
         boxSizing: 'border-box',
         paddingLeft: '5vw',
         paddingRight: '5vw',
-        paddingTop: '5vh',
-        paddingBottom: '5vh',
+        paddingTop: '2vh',
+        paddingBottom: '2vh',
         backgroundColor: css.background.text.backgroundColor
     },
 

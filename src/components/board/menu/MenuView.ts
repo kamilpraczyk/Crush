@@ -4,6 +4,7 @@ import _ = require('underscore');
 import ButtonView = require('../../button/ButtonView')
 import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
+import ProgressView = require('./progress/ProgressView');
 const {div} = React.DOM;
 
 interface Item {
@@ -39,7 +40,7 @@ function render(items?: Item[]) {
     const buttons = items.map(function (item: Item) {
         return div({
             key: item.id,
-            style: MenuCss.getItem()
+            style: MenuCss.getMenuItem()
         }, ButtonView({
             name: item.name,
             icon: item.icon,
@@ -53,7 +54,14 @@ function render(items?: Item[]) {
 
     return div({
         style: MenuCss.getPanel()
-    }, buttons);
+    },
+        div({
+            style: MenuCss.getMenu()
+        }, buttons),
+        div({
+            style: MenuCss.getProgress()
+        }, ProgressView())
+    );
 };
 
 export =  render;
