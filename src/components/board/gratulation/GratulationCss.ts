@@ -10,7 +10,7 @@ let styles = {
         width: '100%',
         height: '100%',
         fontSize: css.font.fontSize.XL,
-        background: 'red',
+        background: 'rgba(200,200,200,0.5)',
         display: 'flex',
         flexGrow: 1,
         flexDirection: 'column',

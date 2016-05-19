@@ -1,13 +1,15 @@
 /// <reference path="../../typings/tsd.d.ts" />
 import _ = require("underscore");
 import voice = require("./voice");
+import keys = require("./keys/keys");
 
 export = {
     union,
     union3,
     first,
     voice,
-    round10
+    round10,
+    keys
 };
 
 function decimalAdjust(type: string, value: any, exp: any) {

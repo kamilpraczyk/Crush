@@ -3,6 +3,7 @@ import {BoardFaces} from '../../interface';
 import {space, viewIds, id, icons } from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [viewIds.radio];
+import _ = require("underscore");
 const title = 'Location';
 const icon = icons.radio;
 
@@ -37,7 +38,7 @@ const lessons = [
     },
     {
         id: id(common), title: title,
-        name: "The ship sank 100 miles " + space + " the shore.",
+        name: "The ship sank " + _.sample([2, 200, 165, 202, 3, 18, 22, 55, 700]) + " miles " + space + " the shore.",
         correct: ["off"],
         incorrect: ["below", "away", "outdoors", "local", "western", "northern", "worldwide"],
         explenation: explenation

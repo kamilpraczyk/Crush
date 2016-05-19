@@ -30,5 +30,9 @@ export function getRest(group: any, exclude: any): string[] {
 }
 
 //TODO button skip > until finish of lesson 
+//TODO ESC - will toogle menu,
+// TODO - left right will navigate lessons
+//TODO - buttons in radio  
+// lessons 4 pictures with time clock
 
 

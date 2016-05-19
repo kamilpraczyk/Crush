@@ -20,10 +20,11 @@ let styles = {
 
     point: {
         display: 'flex',
+        justifyContent: 'center',
         paddingLeft: '1vw',
         paddingRight: '1vw',
-        justifyContent: 'center',
         paddingTop: '1vh',
+        paddingBottom: '1vh',
     },
 
     status: {

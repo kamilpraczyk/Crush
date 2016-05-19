@@ -3,6 +3,7 @@ import ReactDOM = require('react-dom');
 import components = require('../components/components');
 import Layout = require('./layout/Layout')
 import HomeStore = require('../stores/home/HomeStore');
+import utils = require('../utils/utils')
 
 
 class Home {
@@ -18,6 +19,7 @@ class Home {
         this.showSettings = this.showSettings.bind(this);
         this.showBoard = this.showBoard.bind(this);
 
+        utils.keys();
         this.layout = Layout({
             onComponentDidMount: this.onComponentDidMount
         });

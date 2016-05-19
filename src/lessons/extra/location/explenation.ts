@@ -97,7 +97,7 @@ exp.push(tList({
         { l: "This building is <p>perpendicular</p> to the ground." },
         { i: "It just means at right angles (90°) to." },
         { s: " " },
-        { l: "she wore her beret <p>at an angle</p>." },
+        { l: "She wore her beret <p>at an angle</p>." },
         { i: "In a direction different from parallel, vertical, or horizontal." }
     ]
 }));

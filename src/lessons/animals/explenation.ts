@@ -4,7 +4,7 @@ import {tList} from '../helper/renderer';
 let exp: any[] = [];
 
 exp.push(tList({
-    t: "Animals",
+    t: "",
     list: [
         { l: "Camel" },
         { l: "Cat" },

@@ -20,7 +20,8 @@
 		overflow: hidden
 	}
 	:focus {
-		outline: 0
+		outline: 0;
+		box-shadow: inset 0px 0px 2px 2px orange !important;
 	}
 	html {
 		height: 100%

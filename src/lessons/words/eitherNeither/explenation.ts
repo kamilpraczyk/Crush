@@ -71,13 +71,12 @@ exp.push(tList({
     list: [
         { l: "I don't speak German." },
         { l: "<p>Neither</p> do I." },
-        { l: "(informal): Me <p>neither</p>." },
+        { l: "Me <p>neither</p>." },
         { s: " " },
         { l: "He isn't ready to go." },
         { l: "<p>Neither</p> are we." },
     ]
 }));
-
 
 exp.push(tList({
     t: "Remember",
@@ -85,9 +84,9 @@ exp.push(tList({
         { eq: ["either", "(means) one"] },
         { eq: ["neither", "(means) none"] },
         { eq: ["not either ", "neither"] },
-        { l: "<p>or</p> goes with <p>either</p>" },
-        { l: "<p>nor</p> goes with <p>neither</p>" },
-        // { s: " " },
+        { s: " " },
+        { eq: ["<p>or</p>", "goes with", "<p>either</p>"] },
+        { eq: ["<p>nor</p>", "goes with", "<p>neither</p>"] }
     ]
 }));
 

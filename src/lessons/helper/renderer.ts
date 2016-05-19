@@ -3,7 +3,7 @@ import _ = require('underscore');
 import React = require('react');
 import utils = require('../../utils/utils');
 import css = require('../../utils/css/css');
-const {div} = React.DOM;
+const {div, button} = React.DOM;
 import rendererCss = require('./rendererCss');
 
 interface List {
@@ -25,17 +25,20 @@ const cleanText = function (l: string) {
 }
 
 export const tList = (o: TList) => {
-    const aTitle = div({
-        style: rendererCss.title(),
-        dangerouslySetInnerHTML: {
-            __html: o.t
-        },
-        onClick: css.animate(utils.voice.read, cleanText(o.t))
-    });
+    let aTitle: any = null;
+    if (o.t) {
+        aTitle = button({
+            style: rendererCss.title(),
+            dangerouslySetInnerHTML: {
+                __html: o.t
+            },
+            onClick: css.animate(utils.voice.read, cleanText(o.t))
+        });
+    }
 
     let aInfo: any = null;
     if (o.i) {
-        aInfo = div({
+        aInfo = button({
             style: rendererCss.info(),
             dangerouslySetInnerHTML: {
                 __html: o.i
@@ -45,15 +48,16 @@ export const tList = (o: TList) => {
     }
     const aList = o.list.map((item) => {
         if (item.l) {
-            return div({
+            return button({
                 key: _.uniqueId('_'),
+                style: rendererCss.item(),
                 dangerouslySetInnerHTML: {
                     __html: item.l
                 },
                 onClick: css.animate(utils.voice.read, cleanText(item.l))
             });
         } else if (item.i) {
-            return div({
+            return button({
                 key: _.uniqueId('_'),
                 style: rendererCss.itemInfo(),
                 dangerouslySetInnerHTML: {
@@ -65,7 +69,7 @@ export const tList = (o: TList) => {
             const to = item.eq || item.to;
 
             const getTo = function (eq: string) {
-                return div({
+                return button({
                     key: _.uniqueId('_'),
                     style: rendererCss.itemTo(),
                     dangerouslySetInnerHTML: {
@@ -75,16 +79,21 @@ export const tList = (o: TList) => {
                 });
             }
 
-            const getSeparator = function (key: string) {
+            const getSeparator = function () {
                 const sep = item.eq ? '=' : item.to ? ' ' : '-'
                 return div({
-                    key: '_sep' + key,
                     style: rendererCss.itemSep()
                 }, sep);
             }
+            /*NODE: if array contain 3 items the middle one is a separator */
+            const v1 = getTo(to[0]);
+            const v2 = to.length >= 3 ? getTo(to[1]) : getSeparator();
+            const v3 = to.length >= 3 ? getTo(to[2]) : getTo(to[1]);
+
             return div({
+                style: rendererCss.wrapperItemTo(),
                 key: _.uniqueId('_'),
-            }, getTo(to[0]), getSeparator(to[0]), getTo(to[1]))
+            }, v1, v2, v3);
 
         } else if (item.s) {
             return div({
