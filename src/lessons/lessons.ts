@@ -2,7 +2,7 @@
 import {LessonMapFace, LessonFace} from './interface';
 import _ = require('underscore');
 
-export const activeStartup = 'presentTenseOneToThree';
+export const activeStartup = 'clock';
 
 
 const icon_draw = 'moon-quill';
@@ -19,12 +19,18 @@ export const lessons: LessonMapFace = {
         name: require('./animals/animals').title,
         lessons: require('./animals/animals').lessons
     },
-    presentTenseOneToThree: {
+    clock: {
+        bought: true, active: false,
+        icon: require('./extra/clock/clock').icon,
+        name: require('./extra/clock/clock').title,
+        lessons: require('./extra/clock/clock').lessons
+    },
+   /* presentTenseOneToThree: {
         bought: true, active: false,
         icon: require('./tense/presentTense/presentTenseOneToThree').icon,
         name: require('./tense/presentTense/presentTenseOneToThree').title,
         lessons: require('./tense/presentTense/presentTenseOneToThree').lessons
-    },
+    },*/
     location: {
         bought: true, active: false,
         icon: require('./extra/location/location').icon,

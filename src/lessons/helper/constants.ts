@@ -13,6 +13,11 @@ export const viewIds = {
     draw: 'd',
 }
 
+export const displayIds = {
+    digitalTime : 'e',
+    clockTime : 'c'
+}
+
 export const icons = {
     draw: 'moon-quill',
     fourPictures: 'moon-images',
@@ -29,10 +34,13 @@ export function getRest(group: any, exclude: any): string[] {
     return _.chain(group).values().without(exclude).value();
 }
 
-//TODO button skip > until finish of lesson 
+
 //TODO ESC - will toogle menu,
-// TODO - left right will navigate lessons
-//TODO - buttons in radio  
+// TODO - left-right will navigate lessons
+//TODO - buttons in radio
+//TODO - draw -IE11 - fix layout 
+//TODO - IE11 settings menu fix layout
+//TODO - IE11 grammar fix layout
 // lessons 4 pictures with time clock
 
 

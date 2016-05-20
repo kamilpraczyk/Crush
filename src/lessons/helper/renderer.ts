@@ -12,6 +12,7 @@ interface List {
     s?: string //separator line
     eq?: string[] //array of html separated by '='
     to?: string[] //array of html separated by '-'
+    mute_to?: string[]
 }
 
 interface TList {
@@ -27,60 +28,65 @@ const cleanText = function (l: string) {
 export const tList = (o: TList) => {
     let aTitle: any = null;
     if (o.t) {
+        const onClick = css.animate(utils.voice.read, cleanText(o.t));
         aTitle = button({
-            style: rendererCss.title(),
+            style: rendererCss.title(!!onClick),
             dangerouslySetInnerHTML: {
                 __html: o.t
             },
-            onClick: css.animate(utils.voice.read, cleanText(o.t))
+            onClick: onClick
         });
     }
 
     let aInfo: any = null;
     if (o.i) {
+        const onClick = css.animate(utils.voice.read, cleanText(o.i));
         aInfo = button({
-            style: rendererCss.info(),
+            style: rendererCss.info(!!onClick),
             dangerouslySetInnerHTML: {
                 __html: o.i
             },
-            onClick: css.animate(utils.voice.read, cleanText(o.i))
+            onClick: onClick
         });
     }
     const aList = o.list.map((item) => {
         if (item.l) {
+            const onClick = css.animate(utils.voice.read, cleanText(item.l));
             return button({
                 key: _.uniqueId('_'),
-                style: rendererCss.item(),
+                style: rendererCss.item(!!onClick),
                 dangerouslySetInnerHTML: {
                     __html: item.l
                 },
-                onClick: css.animate(utils.voice.read, cleanText(item.l))
+                onClick: onClick
             });
         } else if (item.i) {
+            const onClick = css.animate(utils.voice.read, cleanText(item.i));
             return button({
                 key: _.uniqueId('_'),
-                style: rendererCss.itemInfo(),
+                style: rendererCss.itemInfo(!!onClick),
                 dangerouslySetInnerHTML: {
                     __html: item.i
                 },
-                onClick: css.animate(utils.voice.read, cleanText(item.i))
+                onClick: onClick
             })
-        } else if (item.eq || item.to) {
-            const to = item.eq || item.to;
+        } else if (item.eq || item.to || item.mute_to) {
+            const to = item.eq || item.to || item.mute_to;
 
             const getTo = function (eq: string) {
+                const onClick = !!item.mute_to ? null : css.animate(utils.voice.read, cleanText(eq));
                 return button({
                     key: _.uniqueId('_'),
-                    style: rendererCss.itemTo(),
+                    style: rendererCss.itemTo(!!onClick),
                     dangerouslySetInnerHTML: {
                         __html: eq
                     },
-                    onClick: css.animate(utils.voice.read, cleanText(eq))
+                    onClick: onClick
                 });
             }
 
             const getSeparator = function () {
-                const sep = item.eq ? '=' : item.to ? ' ' : '-'
+                const sep = item.eq ? '=' : item.to || item.mute_to ? ' ' : '-'
                 return div({
                     style: rendererCss.itemSep()
                 }, sep);

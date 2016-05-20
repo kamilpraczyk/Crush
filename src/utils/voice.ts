@@ -4,22 +4,22 @@ import {space}  from '../lessons/helper/constants';
 
 const read = function (value: string) {
   console.log('read', value);
-  value = value.replace(space, '');
-  value = value.replace('_', '');
+  if ((<any>window).SpeechSynthesisUtterance && (<any>window).speechSynthesis) {
+    value = value.replace(space, '');
+    value = value.replace('_', '');
 
+    var utterance = new (<any>window).SpeechSynthesisUtterance(value);
+    var voices = (<any>window).speechSynthesis.getVoices();
 
-
-  var utterance = new (<any>window).SpeechSynthesisUtterance(value);
-  var voices = (<any>window).speechSynthesis.getVoices();
-
-  utterance.voice = voices.filter(function (voice: any) { return voice.name == 'Alex'; })[0];
-
-  (<any>window).speechSynthesis.speak(utterance);
+    //Google UK English Male
+    utterance.voice = voices.filter(function (voice: any) { return voice.name == "Google UK English Female"; })[0];
+    (<any>window).speechSynthesis.speak(utterance);
+  }
 }
 
 
 const stopReading = function () {
-  (<any>window).speechSynthesis.cancel();
+  (<any>window).speechSynthesis && (<any>window).speechSynthesis.cancel();
 }
 
 export = {

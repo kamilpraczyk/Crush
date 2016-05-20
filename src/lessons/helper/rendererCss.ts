@@ -63,6 +63,9 @@ const style = {
         paddingRight: '1vh',
         backgroundColor: 'transparent'
     },
+    noClick: {
+        opacity: '0.4'
+    },
     itemSep: {
         display: 'flex',
         flexBasis: 0,
@@ -78,12 +81,12 @@ const style = {
 
 
 export = {
-    title: () => { return style.title },
-    info: () => { return style.info },
-    item: () => { return style.item },
-    itemInfo: () => { return style.itemInfo },
+    title: (isClick: boolean) => { return css.get(style.title, isClick ? {} : style.noClick) },
+    info: (isClick: boolean) => { return css.get(style.info, isClick ? {} : style.noClick) },
+    item: (isClick: boolean) => { return css.get(style.item, isClick ? {} : style.noClick) },
+    itemInfo: (isClick: boolean) => { return css.get(style.itemInfo, isClick ? {} : style.noClick) },
     wrapperItemTo: () => { return style.wrapperItemTo },
-    itemTo: () => { return style.itemTo },
+    itemTo: (isClick: boolean) => { return css.get(style.itemTo, isClick ? {} : style.noClick) },
     itemSep: () => { return style.itemSep },
     itemLineSep: () => { return style.itemLineSep },
 }

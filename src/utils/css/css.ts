@@ -7,7 +7,8 @@ const borderWidth = 1;
 const borderWidthUnit = 'vh';
 const cursorPointer = 'pointer';
 const cursorDefault = 'default';
-
+const fontFamilyTime = 'Orbitron Medium';
+import {displayIds} from '../../lessons/helper/constants';
 
 
 const XS = constFont - 0.8 + constPoint;
@@ -20,18 +21,20 @@ const XL3 = constFont + 0.5 + constPoint;
 const XL4 = constFont + 2.0 + constPoint;
 
 
+const get = function <T1, T2, T3, T4, T5>(a: T1, b?: T2, c?: T3, d?: T4, e?: T5): T1 & T2 & T3 & T4 & T5 {
+    var res = {} as T1 & T2 & T3 & T4 & T5;
+    for (var i = 0; i < arguments.length; i++) {
+        if (arguments[i]) {
+            _.extend(res, arguments[i]);
+        }
+    }
+    return res;
+}
+
 const backgroundColourText = 'rgba(255, 255, 255, 0.60)';
 let style = {
 
-    get: function <T1, T2, T3, T4, T5>(a: T1, b?: T2, c?: T3, d?: T4, e?: T5): T1 & T2 & T3 & T4 & T5 {
-        var res = {} as T1 & T2 & T3 & T4 & T5;
-        for (var i = 0; i < arguments.length; i++) {
-            if (arguments[i]) {
-                _.extend(res, arguments[i]);
-            }
-        }
-        return res;
-    },
+    get: get,
 
 
     animate: function (callback: Function, object?: any) {
@@ -190,8 +193,8 @@ let style = {
             }
         },
 
-        getInstructions: () => {
-            return {
+        getInstructions: (id?: string) => {
+            let style = {
                 display: 'flex',
                 paddingLeft: '2vw',
                 paddingRight: '2vw',
@@ -201,6 +204,14 @@ let style = {
                 borderRadius: borderRadius,
                 fontSize: XL,
             }
+            if (id && id.indexOf(displayIds.digitalTime) !== -1) {
+                let digitalTime = {
+                    fontSize: XL3,
+                    fontFamily: fontFamilyTime
+                }
+                style = get(style, digitalTime);
+            }
+            return style;
         },
 
 

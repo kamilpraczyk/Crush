@@ -81,6 +81,17 @@
 
 }
 
+
+
+
+@font-face {
+font-family:"Orbitron Medium";
+src:url("orbitron-medium.eot?") format("eot"),url("orbitron/orbitron-medium.woff") format("woff"),url("orbitron/orbitron-medium.ttf") format("truetype"),url("orbitron/orbitron-medium.svg#Orbitron-Medium") format("svg");
+font-weight:normal;
+font-style:normal;
+}
+
+
 * {
 	-webkit-user-select: none;
 	-webkit-tap-highlight-color: rgba(0,0,0,0)!important; /* make transparent link selection, adjust last value opacity 0 to 1.0 */

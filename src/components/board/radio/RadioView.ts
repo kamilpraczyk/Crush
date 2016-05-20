@@ -3,7 +3,9 @@ import RadioCss = require('./RadioCss');
 import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
 import MenuView = require('../menu/MenuView');
+import TimeView = require('../time/TimeView');
 import {BoardResult} from '../../../lessons/interface';
+import {displayIds} from '../../../lessons/helper/constants';
 import _ = require('underscore');
 const {div} = React.DOM;
 
@@ -31,15 +33,25 @@ function getFooter() {
 function getHeader(state: BoardResult) {
     let instructions: any = null;
 
-    if (state.lessonData.info) {
+    if (state.lessonData.id.indexOf(displayIds.clockTime) !== -1) {
+        const time = state.lessonData.info.split(':');
         instructions = div({
             onClick: RadioCss.animate(onRead, state.lessonData.info),
-            style: RadioCss.getInstructions()
+            style: RadioCss.getInstructions(state.lessonData.id)
+        }, TimeView({
+            hour: parseInt(time[0]),
+            minute: parseInt(time[1])
+        }));
+    } else if (state.lessonData.info) {
+        instructions = div({
+            onClick: RadioCss.animate(onRead, state.lessonData.info),
+            style: RadioCss.getInstructions(state.lessonData.id)
         }, state.lessonData.info);
     }
 
+
     return div({
-        style: RadioCss.getHeader()
+        style: RadioCss.getHeader(state.lessonData.id)
     },
         instructions,
         div({

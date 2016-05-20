@@ -1,11 +1,15 @@
 import css = require('../../../utils/css/css');
 import utils = require('../../../utils/utils');
+import {displayIds} from '../../../lessons/helper/constants';
 import _ = require('underscore');
 
 const styles = {
 
     header: {
         marginTop: '10vh'
+    },
+    headerShrink: {
+        marginTop: '2vh'
     },
 
     bodyContent: {
@@ -32,8 +36,12 @@ const styles = {
 export = utils.union(css, {
 
     getPanel: css.layout.getPanel,
-    getHeader() {
-        return css.get(css.layout.getHeader(), styles.header);
+    getHeader(id: string) {
+        let style = css.get(css.layout.getHeader(), styles.header);
+        if (id.indexOf(displayIds.clockTime) !== -1) {
+            style = css.get(style, styles.headerShrink);
+        }
+        return style;
     },
     getBody: css.layout.getBody,
     getFooter: css.layout.getFooter,
@@ -51,7 +59,7 @@ export = utils.union(css, {
     },
     getItem(name: string, isCorrect: boolean, choosenName: string) {
         let style = css.get(css.layout.getText(), styles.item, css.answer.normal);
-  
+
         if (choosenName === name) {
             if (isCorrect) {
                 style = css.get(style, css.answer.good);
