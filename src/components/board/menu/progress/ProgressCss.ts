@@ -1,3 +1,4 @@
+/// <reference path="../../../../../typings/tsd.d.ts" />
 import css = require('../../../../utils/css/css');
 import utils = require('../../../../utils/utils');
 

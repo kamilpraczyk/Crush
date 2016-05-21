@@ -8,7 +8,7 @@ const borderWidthUnit = 'vh';
 const cursorPointer = 'pointer';
 const cursorDefault = 'default';
 const fontFamilyTime = 'Orbitron Medium';
-import {displayIds} from '../../lessons/helper/constants';
+import {isId} from '../../lessons/helper/constants';
 
 
 const XS = constFont - 0.8 + constPoint;
@@ -122,14 +122,16 @@ let style = {
         }
     },
 
+    fontFamily: {
+        time: {
+            fontFamily: fontFamilyTime
+        }
+    },
+
 
     themes: {
         standard: {
             backgroundImage: 'url("img/b2.jpg")',
-        },
-
-        quatro: {
-
         }
     },
 
@@ -179,8 +181,8 @@ let style = {
             }
         },
 
-        getText: () => {
-            return {
+        getText: (id?: string) => {
+            let style = {
                 display: 'flex',
                 paddingLeft: '2vw',
                 paddingRight: '2vw',
@@ -191,6 +193,11 @@ let style = {
                 fontSize: XL,
                 backgroundColor: backgroundColourText,
             }
+
+            if (id && isId.isDigitalTime(id)) {
+                style = get(style, { fontFamily: fontFamilyTime });
+            }
+            return style;
         },
 
         getInstructions: (id?: string) => {
@@ -202,12 +209,15 @@ let style = {
                 paddingBottom: '1vh',
                 cursor: cursorPointer,
                 borderRadius: borderRadius,
+                marginBottom: '1vh',
                 fontSize: XL,
             }
-            if (id && id.indexOf(displayIds.digitalTime) !== -1) {
+            if (id && isId.isDigitalTime(id)) {
                 let digitalTime = {
                     fontSize: XL3,
-                    fontFamily: fontFamilyTime
+                    fontFamily: fontFamilyTime,
+                    background: 'black',
+                    color: 'white'
                 }
                 style = get(style, digitalTime);
             }

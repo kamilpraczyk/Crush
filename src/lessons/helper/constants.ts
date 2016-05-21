@@ -8,22 +8,49 @@ export const empty = '_';
 
 export const viewIds = {
     fourPictures: 'f',
+    fourWords: 'w',
     oneTwoThree: 'o',
     radio: 'r',
     draw: 'd',
 }
 
 export const displayIds = {
-    digitalTime : 'e',
-    clockTime : 'c'
+    digitalTime: 'e',
+    analogTime: 'c'
 }
 
 export const icons = {
     draw: 'moon-quill',
     fourPictures: 'moon-images',
+    fourWords : 'moon-table',
     radio: 'moon-insert-template',
     oneTwoThree: 'moon-bubble'
 }
+export const isId = {
+    isOneTwoThree: function (id: string) {
+        return id.indexOf(viewIds.oneTwoThree) !== -1;
+    },
+    isRadio: function (id: string) {
+        return id.indexOf(viewIds.radio) !== -1;
+    },
+    isDraw: function (id: string) {
+        return id.indexOf(viewIds.draw) !== -1;
+    },
+    isFourPictures: function (id: string) {
+        return id.indexOf(viewIds.fourPictures) !== -1;
+    },
+    isFourWords: function (id: string) {
+        return id.indexOf(viewIds.fourWords) !== -1;
+    },
+    isDigitalTime: function (id: string) {
+        return id.indexOf(displayIds.digitalTime) !== -1;
+    },
+    isAnalogTime: function (id: string) {
+        return id.indexOf(displayIds.analogTime) !== -1;
+    },
+
+}
+
 
 export function id(a: string[] = [], b: string[] = [], c: string[] = []) {
     return _.uniqueId('_' + a.join('_') + b.join('_') + c.join('_'));

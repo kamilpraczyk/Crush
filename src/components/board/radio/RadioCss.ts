@@ -1,6 +1,6 @@
 import css = require('../../../utils/css/css');
 import utils = require('../../../utils/utils');
-import {displayIds} from '../../../lessons/helper/constants';
+import {isId} from '../../../lessons/helper/constants';
 import _ = require('underscore');
 
 const styles = {
@@ -9,7 +9,7 @@ const styles = {
         marginTop: '10vh'
     },
     headerShrink: {
-        marginTop: '2vh'
+        marginTop: '1vh'
     },
 
     bodyContent: {
@@ -38,7 +38,7 @@ export = utils.union(css, {
     getPanel: css.layout.getPanel,
     getHeader(id: string) {
         let style = css.get(css.layout.getHeader(), styles.header);
-        if (id.indexOf(displayIds.clockTime) !== -1) {
+        if (isId.isAnalogTime(id)) {
             style = css.get(style, styles.headerShrink);
         }
         return style;

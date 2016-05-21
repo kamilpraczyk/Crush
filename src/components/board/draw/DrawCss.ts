@@ -8,6 +8,8 @@ let styles = {
         borderRadius: css.borderRadius,
         fontSize: css.font.fontSize.XL,
         backgroundColor: css.background.text.backgroundColor,
+        alignItems: 'cneter',
+        overflow: 'hidden'
     },
 
     text: {
@@ -35,7 +37,12 @@ export = utils.union(css, {
         return css.get(css.layout.getBodyContent(), styles.bodyContent);
     },
 
-    getText: css.layout.getText
+    getText: css.layout.getText,
+
+
+    getSupportClassName(): string {
+        return 'moon-support';
+    }
 
 
 });

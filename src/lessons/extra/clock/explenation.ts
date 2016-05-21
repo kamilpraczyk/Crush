@@ -93,8 +93,8 @@ exp.push(tList({
     ]
 }));
 
-export = {
-    exp: exp
+export {
+exp
 };
 
 

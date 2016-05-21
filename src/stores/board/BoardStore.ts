@@ -104,7 +104,6 @@ class BoardStore extends BaseStore {
 
             case Constants.SWITCH_ACTION:
                 this.waitFor([LessonStore.dispatcherIndex], () => {
-                    console.log('switch board store!!!');
                     loadLesson();
                     this.emitChange();
                 });

@@ -1,7 +1,7 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 import {BoardFace, BoardFaces, BoardResult} from '../../lessons/interface';
 import _ = require('underscore');
-import {space, empty, multi, viewIds}  from '../../lessons/helper/constants';
+import {space, empty, multi, viewIds, isId}  from '../../lessons/helper/constants';
 import utils = require('../../utils/utils');
 import pointsHelper = require('./pointsHelper');
 
@@ -37,10 +37,10 @@ function reset() {
 function getCorrectSentence() {
     let name = _board.name;
     let read = '';
-    if (isDraw()) {
+    if (isId.isDraw(_board.id)) {
         read = name;
 
-    } else if (isOneTwoThree()) {
+    } else if (isId.isOneTwoThree(_board.id)) {
         //put placeholder if no answer jet 
         if (!_selectedAnswerQueue.length) {
             read = _board.placeholder;  //e.g Simple Present Tense
@@ -51,10 +51,10 @@ function getCorrectSentence() {
             }
         }
 
-    } else if (isFourPictures()) {
-        /*answer is a path to a picture*/
+    } else if (isId.isFourPictures(_board.id) || isId.isFourWords(_board.id)) {
+        /*answer is a path to a picture or word*/
         return name;
-    } else if (isRadio()) {
+    } else if (isId.isRadio(_board.id)) {
 
         if (_selectedAnswer.indexOf(multi) !== -1) {
             /*answer is a multi answer, separated by 'space'*/
@@ -69,7 +69,7 @@ function getCorrectSentence() {
             read = name.replace(space, replacement);
         } else if (_selectedAnswer !== empty) {
             /* selected answer is correct*/
-            read = _selectedAnswer;   
+            read = _selectedAnswer;
         } else if (_selectedAnswer !== empty) {
             /*answer is an empty answer - origin sentence correct*/
             read = name;
@@ -80,7 +80,7 @@ function getCorrectSentence() {
 }
 
 function isCorrect() {
-    if (isOneTwoThree()) {
+    if (isId.isOneTwoThree(_board.id)) {
         const length = _selectedAnswerQueue.length;
         return _.last(_selectedAnswerQueue) === _board.correct[length - 1];
     }
@@ -91,18 +91,7 @@ function isCompletedAndCorrect() {
     return _board.correct.length === _selectedAnswerQueue.length && _.difference(_board.correct, _selectedAnswerQueue).length === 0;
 }
 
-function isOneTwoThree() {
-    return _board.id.indexOf(viewIds.oneTwoThree) !== -1;
-}
-function isRadio() {
-    return _board.id.indexOf(viewIds.radio) !== -1;
-}
-function isDraw() {
-    return _board.id.indexOf(viewIds.draw) !== -1;
-}
-function isFourPictures() {
-    return _board.id.indexOf(viewIds.fourPictures) !== -1;
-}
+
 
 
 
@@ -111,7 +100,7 @@ function setPressedAnswer(answer: string) {
     _selectedAnswer = answer;
     wasLastCorrect = false;
 
-    if (isOneTwoThree()) {
+    if (isId.isOneTwoThree(_board.id)) {
 
         const length = _selectedAnswerQueue.length;
 

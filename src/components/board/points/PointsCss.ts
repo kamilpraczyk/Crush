@@ -62,11 +62,18 @@ export = utils.union(css, {
         return css.get(styles.status, styles.fail);
     },
 
+    getStatusUnknown() {
+        return css.get(styles.status);
+    },
+
     getClassNameIconSuccess() {
         return 'moon-thumbs-up';
     },
     getClassNameIconFail() {
         return 'moon-thumbs-up2';
+    },
+    getClassNameIconUnknown() {
+        return 'moon-question';
     },
 
 

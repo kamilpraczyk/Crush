@@ -14,12 +14,13 @@ import {viewIds} from '../../lessons/helper/constants';
 const {div} = React.DOM;
 
 
-function getView() {
+function getView(): any {
 
     switch (BoardStore.getSettingId()) {
         case viewIds.draw:
             return DrawView(BoardStore.getBoardState());
         case viewIds.fourPictures:
+        case viewIds.fourWords:
             return QuatroView(BoardStore.getBoardState());
         case viewIds.radio:
             return RadioView(BoardStore.getBoardState());

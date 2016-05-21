@@ -2,11 +2,12 @@
 import {LessonMapFace, LessonFace} from './interface';
 import _ = require('underscore');
 
-export const activeStartup = 'clock';
+export const activeStartup = 'clockFourWords';
 
 
 const icon_draw = 'moon-quill';
 const icon_fourPictures = 'moon-images';
+const icon_fourWords = 'moon-images';
 const icon_radio = 'moon-insert-template';
 const icon_oneTwoThree = 'moon-bubble';
 
@@ -19,18 +20,30 @@ export const lessons: LessonMapFace = {
         name: require('./animals/animals').title,
         lessons: require('./animals/animals').lessons
     },
+    clockFourWords: {
+        bought: true, active: false,
+        icon: require('./extra/clock/clockFourWords').icon,
+        name: require('./extra/clock/clockFourWords').title,
+        lessons: require('./extra/clock/clockFourWords').lessons
+    },
+    clockDraw: {
+        bought: true, active: false,
+        icon: require('./extra/clock/clockDraw').icon,
+        name: require('./extra/clock/clockDraw').title,
+        lessons: require('./extra/clock/clockDraw').lessons
+    },
     clock: {
         bought: true, active: false,
         icon: require('./extra/clock/clock').icon,
         name: require('./extra/clock/clock').title,
         lessons: require('./extra/clock/clock').lessons
     },
-   /* presentTenseOneToThree: {
-        bought: true, active: false,
-        icon: require('./tense/presentTense/presentTenseOneToThree').icon,
-        name: require('./tense/presentTense/presentTenseOneToThree').title,
-        lessons: require('./tense/presentTense/presentTenseOneToThree').lessons
-    },*/
+    /* presentTenseOneToThree: {
+         bought: true, active: false,
+         icon: require('./tense/presentTense/presentTenseOneToThree').icon,
+         name: require('./tense/presentTense/presentTenseOneToThree').title,
+         lessons: require('./tense/presentTense/presentTenseOneToThree').lessons
+     },*/
     location: {
         bought: true, active: false,
         icon: require('./extra/location/location').icon,

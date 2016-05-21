@@ -5,6 +5,7 @@ import Constants = require('../../../constants/Constants');
 import MenuView = require('../menu/MenuView');
 import _ = require('underscore');
 import {BoardResult} from '../../../lessons/interface';
+import {isId}  from '../../../lessons/helper/constants';
 const {div} = React.DOM;
 
 
@@ -23,19 +24,25 @@ function onRead(read: string) {
 
 function getContentLine(state: BoardResult, list: any[]) {
     const elements = list.map((name: string) => {
+        let word: string = null;
+
+        if (isId.isFourWords(state.lessonData.id)) {
+            word = name;
+        }
+
         return div({
             key: name,
             style: QuatroCss.getItemWraper()
         },
             div({
-                style: QuatroCss.getItem(state.selectedAnswer, name, state.lessonData.correct, name),
+                style: QuatroCss.getItem(state.lessonData.id, state.selectedAnswer, name, state.lessonData.correct, word ? null : name),
                 onClick: QuatroCss.animate(function () {
                     AppDispatcher.handleViewAction({
                         actionType: Constants.CHOOSE_PICTURE,
                         id: name
                     });
                 })
-            }));
+            }, word));
     });
 
     return div({

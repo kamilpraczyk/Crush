@@ -1,6 +1,7 @@
 import css = require('../../../utils/css/css');
 import utils = require('../../../utils/utils');
 import _ = require('underscore');
+import {isId}  from '../../../lessons/helper/constants';
 
 let styles = {
 
@@ -16,7 +17,10 @@ let styles = {
     },
 
     itemWraper: {
-        padding: '2vh',
+        paddingTop: '2vh',
+        paddingBottom: '2vh',
+        paddingLeft: '2vw',
+        paddingRight: '2vw',
         display: 'flex',
         flexGrow: 1,
     },
@@ -26,7 +30,8 @@ let styles = {
         display: 'flex',
         flexGrow: 1,
         justifyContent: 'center',
-        verdicalAlign: 'middle',
+        verticalAlign: 'middle',
+        alignItems: 'center',
         boxSizing: 'border-box',
         textAlign: 'center',
         backgroundRepeat: 'no-repeat',
@@ -63,7 +68,7 @@ export = utils.union(css, {
         return styles.itemWraper
     },
 
-    getItem(selectedAnswer: string, currentAnswer: string, correctAnswers: string[], url: string) {
+    getItem(id: string, selectedAnswer: string, currentAnswer: string, correctAnswers: string[], url?: string) {
         let style = css.get(styles.item, css.answer.normal);
 
         if (selectedAnswer === currentAnswer) {
@@ -77,6 +82,10 @@ export = utils.union(css, {
             style = css.get(style, {
                 backgroundImage: 'url(' + url + ')'
             });
+        }
+        console.log('id', id);
+        if (isId.isDigitalTime(id)) {
+            style = css.get(style, css.fontFamily.time);
         }
         return style;
     },

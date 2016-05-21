@@ -5,7 +5,7 @@ import Constants = require('../../../constants/Constants');
 import MenuView = require('../menu/MenuView');
 import TimeView = require('../time/TimeView');
 import {BoardResult} from '../../../lessons/interface';
-import {displayIds} from '../../../lessons/helper/constants';
+import {isId} from '../../../lessons/helper/constants';
 import _ = require('underscore');
 const {div} = React.DOM;
 
@@ -33,7 +33,7 @@ function getFooter() {
 function getHeader(state: BoardResult) {
     let instructions: any = null;
 
-    if (state.lessonData.id.indexOf(displayIds.clockTime) !== -1) {
+    if (isId.isAnalogTime(state.lessonData.id)) {
         const time = state.lessonData.info.split(':');
         instructions = div({
             onClick: RadioCss.animate(onRead, state.lessonData.info),

@@ -5,6 +5,7 @@ import Bezier from "./bezier";
 import Point = require("./point");
 
 interface SignaturePadPropsFace {
+    id: string,
     velocityFilterWeight?: number,
     minWidth?: number,
     maxWidth?: number,
@@ -37,12 +38,13 @@ class SignaturePad extends React.Component<SignaturePadPropsFace, SignaturePadSt
     private _lastVelocity: any;
     private _lastWidth: any;
     private _mouseButtonDown: any;
+    private id: string;
 
 
 
     constructor(props: SignaturePadPropsFace) {
         super(props);
-
+        this.id = props.id;
         this.velocityFilterWeight = this.props.velocityFilterWeight || 0.7;
         this.minWidth = this.props.minWidth || 0.5;
         this.maxWidth = this.props.maxWidth || 2.5;
@@ -56,7 +58,7 @@ class SignaturePad extends React.Component<SignaturePadPropsFace, SignaturePadSt
         this.clear = this.clear.bind(this);
     }
 
-    public componentDidMount() {
+    componentDidMount() {
         this._canvas = ReactDOM.findDOMNode(this.refs["cv"]),
             this._ctx = this._canvas.getContext("2d");
         this.clear();
@@ -70,6 +72,14 @@ class SignaturePad extends React.Component<SignaturePadPropsFace, SignaturePadSt
 
     componentWillUnmount() {
         this.off();
+    }
+
+
+    componentWillReceiveProps(props: SignaturePadPropsFace) {
+        if (props.id !== this.id) {
+            this.id = props.id
+            this.clear();
+        }
     }
 
     clear(e?: any) {
@@ -364,6 +374,19 @@ class SignaturePad extends React.Component<SignaturePadPropsFace, SignaturePadSt
         })
     }
 
+}
+
+function getSize() {
+    const w = window;
+    const d = document;
+    const e = d.documentElement;
+    const g = d.getElementsByTagName('body')[0];
+    let x = w.innerWidth || e.clientWidth || g.clientWidth;
+    let y = w.innerHeight || e.clientHeight || g.clientHeight;
+    return {
+        x: x,
+        y: y - 100
+    }
 }
 
 export = React.createFactory(SignaturePad);

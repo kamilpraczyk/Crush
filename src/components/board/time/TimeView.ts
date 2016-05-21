@@ -93,7 +93,7 @@ function getSize() {
     y = (y / 3);
     let size = Math.min(x, y);
     size = Math.max(x, 100); //not smaller than 100px;
-    size = Math.min(x, 200); //bigger than 200px
+    size = Math.min(x, 150); //bigger than 150px
     return utils.round10(size, 1);
 }
 

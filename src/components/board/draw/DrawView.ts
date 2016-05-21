@@ -15,14 +15,34 @@ function onRead(read: string) {
     });
 }
 
-function getHeader(name: string) {
+
+
+function getHeader(props: BoardResult, state: State, setState: Function) {
+
+    function getAnswerOrSupport() {
+        if (props.lessonData.correct && props.lessonData.correct.length) {
+            return div({
+                className: state.showAnswer ? null : DrawCss.getSupportClassName(),
+                style: DrawCss.getText(state.showAnswer ? props.lessonData.id : null),
+                //NOTE: no reading
+                onClick: DrawCss.animate(function () {
+                    setState({
+                        showAnswer: !state.showAnswer
+                    });
+                })
+            }, state.showAnswer ? props.lessonData.correct.join(" ") : null);
+        }
+        return null;
+    };
+
     return div({
         style: DrawCss.getHeader()
     },
         div({
             style: DrawCss.getText(),
-            onClick: DrawCss.animate(onRead, name)
-        }, name)
+            onClick: DrawCss.animate(onRead, props.lessonData.name)
+        }, props.lessonData.name),
+        getAnswerOrSupport()
     );
 }
 
@@ -43,7 +63,7 @@ function onGetInterfaceClear(onClear: Function) {
     signatureClear = onClear;
 }
 
-function getBody() {
+function getBody(props: BoardResult) {
 
     return div({
         style: DrawCss.getBody()
@@ -52,6 +72,7 @@ function getBody() {
             style: DrawCss.getBodyContent()
         },
             Signature({
+                id: props.lessonData.id,
                 onGetInterface: onGetInterfaceClear
             })
         )
@@ -63,12 +84,37 @@ function clearSignature() {
 }
 
 
-function render(state: BoardResult) {
+function render(props: BoardResult, state: State, setState: Function) {
     return div({
         key: 'drawView',
         style: DrawCss.getPanel()
-    }, getHeader(state.lessonData.name), getBody(), getFooter(clearSignature));
+    }, getHeader(props, state, setState), getBody(props), getFooter(clearSignature));
 }
 
 
-export =  render
+interface State {
+    showAnswer: boolean
+}
+
+class DrawView extends React.Component<BoardResult, State>{
+
+    constructor(props: BoardResult) {
+        super(props);
+        this.state = {
+            showAnswer: false
+        }
+    }
+
+    componentWillReceiveProps() {
+        this.setState({
+            showAnswer: false
+        });
+    }
+
+
+    render() {
+        return render(this.props, this.state, this.setState.bind(this))
+    }
+};
+
+export = React.createFactory(DrawView);

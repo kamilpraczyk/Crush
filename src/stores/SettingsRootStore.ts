@@ -92,7 +92,6 @@ class SettingRootStore extends BaseStore {
         switch (action.actionType) {
             case Constants.SWITCH_ACTION:
                 this.waitFor([LessonStore.dispatcherIndex, BoardStore.dispatcherIndex], () => {
-                    console.log('switch root');
                     this.emitChange();
                 });
                 break;

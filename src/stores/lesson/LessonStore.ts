@@ -64,7 +64,6 @@ class LessonStore extends BaseStore {
 
         switch (action.actionType) {
             case Constants.SWITCH_ACTION:
-                console.log('switch lesson store');
                 onSwitchAction(action.id);
                 break;
         }

@@ -14,21 +14,36 @@ function render() {
         style: PointsCss.getPoints()
     }, state.points.display);
 
-    let success: any = null;
-    if (state.points.isCurrentSuccess) {
-        success = div({
-            style: PointsCss.getStatusSuccess(),
-            className: PointsCss.getClassNameIconSuccess()
-        });
+
+    function getFail() {
+        if (state.points.isCurrentFail) {
+            return div({
+                style: PointsCss.getStatusFail(),
+                className: PointsCss.getClassNameIconFail()
+            });
+        }
+        return null;
     }
 
-    let fail: any = null;
-    if (state.points.isCurrentFail) {
-        fail = div({
-            style: PointsCss.getStatusFail(),
-            className: PointsCss.getClassNameIconFail()
-        });
+    function getSuccess() {
+        if (state.points.isCurrentSuccess) {
+            return div({
+                style: PointsCss.getStatusSuccess(),
+                className: PointsCss.getClassNameIconSuccess()
+            });
+        }
+        return null;
     }
+    function getUnknown() {
+        if (!state.points.isCurrentSuccess && !state.points.isCurrentFail) {
+            return div({
+                style: PointsCss.getStatusUnknown(),
+                className: PointsCss.getClassNameIconUnknown()
+            });
+        }
+        return null;
+    }
+
 
     return div({
         style: PointsCss.getPanel(),
@@ -37,7 +52,7 @@ function render() {
                 actionType: Constants.MAXIMALIZE_SETTINGS
             });
         })
-    }, points, success, fail);
+    }, points, getSuccess(), getFail(), getUnknown());
 }
 
 export = render;
