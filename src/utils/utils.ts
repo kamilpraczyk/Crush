@@ -9,7 +9,12 @@ export = {
     first,
     voice,
     round10,
-    keys
+    keys,
+    replaceAll
+};
+
+function replaceAll(str: string, search: string, replacement: string) {
+    return str.replace(new RegExp(search, 'g'), replacement);
 };
 
 function decimalAdjust(type: string, value: any, exp: any) {

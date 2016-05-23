@@ -46,6 +46,9 @@ function generate(board: BoardFace, boards: BoardFaces) {
     points.score = _.compact(_.values(points.mapStatus)).length;
     points.scorePercent = utils.round10(points.score * (100 / points.lessonsLength), -1);
     points.display = points.currentLesson + '/' + points.lessonsLength;
+
+    //todo remove 
+    //points.isFinished = points.isLastPage;
 }
 
 function setCompletedStatus(board: BoardFace, isSuccess: boolean) {
@@ -70,8 +73,22 @@ function getState(board: BoardFace, boards: BoardFaces) {
     };
 }
 
-export = {
-    reset,
-    getState,
-    setCompletedStatus,
+function getRandomNotCompletedId(board: BoardFace, boards: BoardFaces) {
+    /*Get random id of next lesson and skip current lesson */
+    let values = _.chain(boards).pluck('id').compact().difference(_.keys(points.mapStatus)).value();
+    if (values.length > 1) {
+        values = _.without(values, board.id);
+    }
+    values = _.sample(values, 1);
+    if (values.length) {
+        return _.first(values);
+    }
+    return null;
+}
+
+export {
+reset,
+getState,
+setCompletedStatus,
+getRandomNotCompletedId
 }

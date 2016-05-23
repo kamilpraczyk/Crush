@@ -44,6 +44,8 @@ const data = {
         return replace('GRATULATIONS_TEXT', o);
     },
     GRATULATIONS_BUTTON: wrap('GRATULATIONS_BUTTON'),
+    DID_I_HELP_YOU_OUT: wrap('DID_I_HELP_YOU_OUT'),
+    BUY_ME_A_BEER: wrap('BUY_ME_A_BEER'),
 };
 export = data;
 

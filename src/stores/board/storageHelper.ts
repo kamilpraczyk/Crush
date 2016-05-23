@@ -47,7 +47,7 @@ function getCorrectSentence() {
         } else {
             read = _selectedAnswerQueue.join(name);
             if (isCompletedAndCorrect()) { //finish sentence with dot
-                read = read + '.'
+                read = read + _board.postfix
             }
         }
 

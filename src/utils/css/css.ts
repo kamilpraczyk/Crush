@@ -91,9 +91,11 @@ let style = {
             focus: 'white'
         },
         border: {
-            normal: '1px solid gray',
-            active: '1px solid gray',
-            focus: '1px solid gray'
+            normal: '5px solid gray',
+            active: '5px solid gray',
+            focus: '5px solid gray',
+            success: '5px solid #00FF00',
+            fail: '5px solid  #FF0000',
         }
     },
 
@@ -104,7 +106,7 @@ let style = {
             borderRadius: borderRadius
         },
         good: {
-            border: borderWidth + borderWidthUnit + ' solid #00FF00',
+            border: borderWidth + borderWidthUnit + ' solid ',
             cursor: 'pointer',
             borderRadius: borderRadius
 
@@ -131,7 +133,8 @@ let style = {
 
     themes: {
         standard: {
-            backgroundImage: 'url("img/b2.jpg")',
+            backgroundImageLesson: 'url("img/b2.png")',
+            backgroundImageBeer: 'url("img/beer.png")',
         }
     },
 

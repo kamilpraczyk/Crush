@@ -20,10 +20,14 @@ const styles = {
         textShadow: '0px 1px 0px #2f6627',
         margin: 0,
         padding: 0,
-        paddingTop: '1vh',
-        paddingBottom: '1vh',
         flexDirection: 'row',
         alignItems: 'stretch',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        WebkitBackgroundSize: 'contain',
+        MozBackgroundSize: 'contain',
+        OBackgroundSize: 'contain',
+        backgroundSize: 'contain',
     },
 
     pressed: {
@@ -61,26 +65,40 @@ const styles = {
         flexGrow: 1
     },
 
+    isSuccess: {
+        border: css.button.border.success
+    },
+    isFail: {
+        border: css.button.border.fail
+    },
+
+
     name: {
+        paddingTop: '2vh',
+        paddingBottom: '2vh',
+        paddingLeft: '2vw',
+        paddingRight: '2vw',
         display: 'inline-flex',
-        paddingRight: '1vw',
-        paddingLeft: '1vw',
         textAlign: 'left',
         alignSelf: 'center',
     },
 
     icon: {
+        paddingTop: '2vh',
+        paddingBottom: '2vh',
+        paddingLeft: '2vw',
+        paddingRight: '2vw',
         display: 'inline-flex',
-        paddingLeft: '1vw',
-        paddingRight: '1vw',
         alignSelf: 'center'
     },
     leftIcon: {
+        paddingTop: '2vh',
+        paddingBottom: '2vh',
+        paddingLeft: '2vw',
+        paddingRight: '2vw',
         display: 'inline-flex',
         alignSelf: 'center',
         color: '#777',
-        paddingLeft: '1vw',
-        paddingRight: '1vw',
     },
     leftIconActive: {
         color: '#fff',
@@ -88,9 +106,21 @@ const styles = {
 
 }
 
+interface ButtonProps {
+    pressed: boolean,
+    isExpand: boolean,
+    isExpandWidth: boolean,
+    isActive: boolean,
+    isResponsibleHeight: boolean,
+    isSuccess: boolean,
+    isFail: boolean,
+    backUrl: string,
+    isTime: boolean
+}
+
 export = utils.union(css, {
 
-    getButton(options: { pressed: boolean, isExpand: boolean, isExpandWidth: boolean, isActive: boolean, isResponsibleHeight: boolean }) {
+    getButton(options: ButtonProps) {
         let style = styles.button;
         if (options.isExpandWidth)
             style = css.get(style, styles.isExpandWidth);
@@ -104,9 +134,29 @@ export = utils.union(css, {
         if (options.pressed)
             style = css.get(style, styles.pressed);
 
-        if (options.isResponsibleHeight) {
+        if (options.isResponsibleHeight)
             style = css.get(style, styles.isResponsibleHeight);
+
+        if (options.isSuccess)
+            style = css.get(style, styles.isSuccess);
+
+        if (options.isFail)
+            style = css.get(style, styles.isFail);
+
+        if (options.isTime)
+            style = css.get(style, css.fontFamily.time);
+
+        if (options.backUrl) {
+            style = css.get(style, {
+                backgroundImage: 'url(' + options.backUrl + ')',
+                backgroundColor: css.background.text.backgroundColor
+            });
         }
+
+
+
+
+
         return style;
     },
 

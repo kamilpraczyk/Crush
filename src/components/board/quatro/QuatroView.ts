@@ -3,6 +3,7 @@ import QuatroCss = require('./QuatroCss');
 import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
 import MenuView = require('../menu/MenuView');
+import ButtonView = require('../../button/ButtonView');
 import _ = require('underscore');
 import {BoardResult} from '../../../lessons/interface';
 import {isId}  from '../../../lessons/helper/constants';
@@ -30,19 +31,34 @@ function getContentLine(state: BoardResult, list: any[]) {
             word = name;
         }
 
+        let isFail = false;
+        let isSuccess = false;
+        if (state.selectedAnswer === name) {
+            if (_.contains(state.lessonData.correct, state.selectedAnswer)) {
+                isSuccess = true;
+            } else {
+                isFail = true;
+            }
+        }
+
         return div({
             key: name,
             style: QuatroCss.getItemWraper()
         },
-            div({
-                style: QuatroCss.getItem(state.lessonData.id, state.selectedAnswer, name, state.lessonData.correct, word ? null : name),
-                onClick: QuatroCss.animate(function () {
+            ButtonView({
+                name: word,
+                isExpand: true,
+                isFail: isFail,
+                isSuccess: isSuccess,
+                backUrl: word ? null : name,
+                isTime: isId.isDigitalTime(state.lessonData.id),
+                onClick: function () {
                     AppDispatcher.handleViewAction({
                         actionType: Constants.CHOOSE_PICTURE,
                         id: name
                     });
-                })
-            }, word));
+                }
+            }));
     });
 
     return div({
@@ -56,10 +72,12 @@ function getBody(state: BoardResult) {
     const line2 = div({
         style: QuatroCss.getLineText()
     },
-        div({
-            style: QuatroCss.getText(),
-            onClick: QuatroCss.animate(onRead, state.text)
-        }, state.text)
+        ButtonView({
+            name: state.text,
+            onClick: function () {
+                onRead(state.text)
+            }
+        })
     );
     const line3 = getContentLine(state, state.generatedList.slice(2, 4))
 

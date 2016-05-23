@@ -6,23 +6,25 @@ import explenation = require('./explenation');
 const separator = " ";
 const postfix = ".";
 const common = [viewIds.oneTwoThree];
-const placeholder = "Simple Present Tense";
-const title = "Simple Present Tense";
+const placeholder = "Present Perfect Continuous Tense";
+const title = "Present Perfect Continuous Tense";
 const icon = icons.oneTwoThree;
 const lessons = [
     {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["I", "have", "a big", "house"],
+        correct: ["They", "have", "been", "playing cricket", "since 5pm"],
         explenation: explenation,
         placeholder: placeholder
-    }, {
+    },
+    {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["Peter", "gives me", "a call", "every", "morning"],
+        correct: ["", ""],
         explenation: explenation,
         placeholder: placeholder
-    }] as BoardFaces
+    }
+] as BoardFaces
 
 export {
 title,

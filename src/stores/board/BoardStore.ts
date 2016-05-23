@@ -32,6 +32,18 @@ function onNext() {
     storageHelper.reset();
 }
 
+function onNextRandom() {
+    const id = pointsHelper.getRandomNotCompletedId(list[_index], list);
+    if (id) {
+        const item = _.findWhere(list, { id: id });
+        const index = _.indexOf(list, item);
+        if (_.isNumber(index)) {
+            _index = index;
+            storageHelper.reset();
+        }
+    }
+}
+
 function onPrev() {
     if (_index === 0) {
         _index = list.length - 1;
@@ -121,11 +133,18 @@ class BoardStore extends BaseStore {
                 this.emitChange();
                 break;
 
+            case Constants.BOARD_NEXT_RANDOM:
+                onNextRandom();
+                utils.voice.stopReading();
+                this.emitChange();
+                break;
+
+
             case Constants.GREETINGS_CONTINUE:
                 pointsHelper.reset()
                 this.emitChange();
                 break;
-                
+
 
         }
         return true;

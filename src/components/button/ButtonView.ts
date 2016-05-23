@@ -13,18 +13,23 @@ interface Props {
     isActive?: boolean,
     isExpandWidth?: boolean,
     isResponsibleHeight?: boolean,
-    isResponsibleCenter?: boolean
+    isResponsibleCenter?: boolean,
+    isSuccess?: boolean,
+    isFail?: boolean,
+    isTime?: boolean,
+    backUrl?: string
 }
 
-interface ButtonViewStateFace {
+
+interface State {
     pressed: boolean
 }
 
-class ButtonView extends React.Component<Props, ButtonViewStateFace>{
+class ButtonView extends React.Component<Props, State>{
     private time = null as any;
 
     constructor(props: Props) {
-        super(props)
+        super(props);
         this.state = {
             pressed: false
         }
@@ -43,7 +48,6 @@ class ButtonView extends React.Component<Props, ButtonViewStateFace>{
         this.setState && this.setState({ pressed: false });
         !this.props.isQuickClick && this.props.onClick(this.props);
     }
-
 
     componentWillUnmount() {
         clearTimeout(this.time);
@@ -83,7 +87,11 @@ class ButtonView extends React.Component<Props, ButtonViewStateFace>{
                 isExpand: this.props.isExpand,
                 isExpandWidth: this.props.isExpandWidth,
                 isActive: this.props.isActive,
-                isResponsibleHeight: this.props.isResponsibleHeight
+                isResponsibleHeight: this.props.isResponsibleHeight,
+                isSuccess: this.props.isSuccess,
+                isFail: this.props.isFail,
+                backUrl: this.props.backUrl,
+                isTime: this.props.isTime
             }),
             onClick: this.clickHandler
         }, leftIcon, icon, name);

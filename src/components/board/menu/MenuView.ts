@@ -1,7 +1,7 @@
 import React = require('react');
 import MenuCss = require('./MenuCss');
 import _ = require('underscore');
-import ButtonView = require('../../button/ButtonView')
+import ButtonView = require('../../button/ButtonView');
 import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
 import ProgressView = require('./progress/ProgressView');
@@ -33,9 +33,19 @@ const next = [{
 }];
 
 
+const nextRandom = [{
+    id: 'nextrandom',
+    icon: 'moon-shuffle',
+    onClick: function () {
+        AppDispatcher.handleViewAction({
+            actionType: Constants.BOARD_NEXT_RANDOM
+        })
+    }
+}];
+
 function render(items?: Item[]) {
     items = items || [];
-    items = [].concat(prev, items, next);
+    items = [].concat(prev, items, next, nextRandom);
 
     const buttons = items.map(function (item: Item) {
         return div({

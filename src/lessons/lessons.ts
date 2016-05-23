@@ -38,12 +38,30 @@ export const lessons: LessonMapFace = {
         name: require('./extra/clock/clock').title,
         lessons: require('./extra/clock/clock').lessons
     },
-    /* presentTenseOneToThree: {
-         bought: true, active: false,
-         icon: require('./tense/presentTense/presentTenseOneToThree').icon,
-         name: require('./tense/presentTense/presentTenseOneToThree').title,
-         lessons: require('./tense/presentTense/presentTenseOneToThree').lessons
-     },*/
+    presentTenseOneToThree: { //  Present Tense
+        bought: true, active: false,
+        icon: require('./tense/presentTense/presentTenseOneToThree').icon,
+        name: require('./tense/presentTense/presentTenseOneToThree').title,
+        lessons: require('./tense/presentTense/presentTenseOneToThree').lessons
+    },
+    presentContinuousTenseOneToThree: {
+        bought: true, active: false,
+        icon: require('./tense/presentContinuousTense/presentContinuousTenseOneToThree').icon,
+        name: require('./tense/presentContinuousTense/presentContinuousTenseOneToThree').title,
+        lessons: require('./tense/presentContinuousTense/presentContinuousTenseOneToThree').lessons
+    },
+    presentPerfectTenseOneToThree: {
+        bought: true, active: false,
+        icon: require('./tense/presentPerfectTense/presentPerfectTenseOneToThree').icon,
+        name: require('./tense/presentPerfectTense/presentPerfectTenseOneToThree').title,
+        lessons: require('./tense/presentPerfectTense/presentPerfectTenseOneToThree').lessons
+    },
+    presentPerfectContinuousTenseOneToThree: {
+        bought: true, active: false,
+        icon: require('./tense/presentPerfectContinuousTense/presentPerfectContinuousTenseOneToThree').icon,
+        name: require('./tense/presentPerfectContinuousTense/presentPerfectContinuousTenseOneToThree').title,
+        lessons: require('./tense/presentPerfectContinuousTense/presentPerfectContinuousTenseOneToThree').lessons
+    },                    // end Present Tense 
     location: {
         bought: true, active: false,
         icon: require('./extra/location/location').icon,

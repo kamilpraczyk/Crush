@@ -22,7 +22,10 @@ interface TList {
 }
 
 const cleanText = function (l: string) {
-    return l.replace('<p>', '').replace('</p>', '').replace('</b>', '').replace('<b>', '');
+    l = utils.replaceAll(l, '<p>', '');
+    l = utils.replaceAll(l, '</p>', '');
+    l = utils.replaceAll(l, '</b>', '');
+    return utils.replaceAll(l, '<b>', '');
 }
 
 export const tList = (o: TList) => {

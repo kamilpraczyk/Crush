@@ -5,7 +5,7 @@ let styles = {
 
     panel: {
         position: 'absolute',
-        backgroundImage: css.themes.standard.backgroundImage,
+        backgroundImage: css.themes.standard.backgroundImageLesson,
         width: '100%',
         height: '100%',
         overflow: 'hidden',

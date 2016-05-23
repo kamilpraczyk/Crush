@@ -12,7 +12,7 @@ const read = function (value: string) {
     var voices = (<any>window).speechSynthesis.getVoices();
 
     //Google UK English Male
-    utterance.voice = voices.filter(function (voice: any) { return voice.name == "Google UK English Female"; })[0];
+    utterance.voice = voices.filter(function (voice: any) { return voice.name == "Google UK English Male"; })[0];
     (<any>window).speechSynthesis.speak(utterance);
   }
 }

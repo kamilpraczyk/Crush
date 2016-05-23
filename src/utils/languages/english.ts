@@ -13,6 +13,9 @@ const dictonary = {
     GRATULATIONS_TEXT: 'Your score is: {score}%',
     GRATULATIONS_BUTTON: 'Continue',
 
+    DID_I_HELP_YOU_OUT: 'Did I help you out?',
+    BUY_ME_A_BEER: 'Buy me a beer'
+
 }
 
 export = dictonary;
