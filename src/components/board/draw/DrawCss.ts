@@ -3,27 +3,13 @@ import utils = require('../../../utils/utils');
 
 let styles = {
 
-
     bodyContent: {
         borderRadius: css.borderRadius,
         fontSize: css.font.fontSize.XL,
         backgroundColor: css.background.text.backgroundColor,
         alignItems: 'cneter',
         overflow: 'hidden'
-    },
-
-    text: {
-        display: 'flex',
-        paddingLeft: '2vw',
-        paddingRight: '2vw',
-        paddingTop: '1vh',
-        paddingBottom: '1vh',
-        cursor: css.cursor.pointer,
-        borderRadius: css.borderRadius,
-        fontSize: css.font.fontSize.XL,
-        backgroundColor: css.background.text.backgroundColor,
-    },
-
+    }
 }
 
 export = utils.union(css, {
@@ -37,10 +23,7 @@ export = utils.union(css, {
         return css.get(css.layout.getBodyContent(), styles.bodyContent);
     },
 
-    getText: css.layout.getText,
-
-
-    getSupportClassName(): string {
+    getSupportIcon(): string {
         return 'moon-support';
     }
 

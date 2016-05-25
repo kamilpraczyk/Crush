@@ -3,19 +3,13 @@ import RadioCss = require('./RadioCss');
 import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
 import MenuView = require('../menu/MenuView');
+import ButtonView = require('../../button/ButtonView');
 import TimeView = require('../time/TimeView');
 import {BoardResult} from '../../../lessons/interface';
 import {isId} from '../../../lessons/helper/constants';
 import _ = require('underscore');
 const {div} = React.DOM;
 
-
-function onAnswer(id: string) {
-    AppDispatcher.handleViewAction({
-        actionType: Constants.CHOOSE_RADIO,
-        id: id
-    });
-}
 
 function onRead(read: string) {
     AppDispatcher.handleViewAction({
@@ -47,6 +41,15 @@ function getHeader(state: BoardResult) {
             onClick: RadioCss.animate(onRead, state.lessonData.info),
             style: RadioCss.getInstructions(state.lessonData.id)
         }, state.lessonData.info);
+
+
+        instructions = ButtonView({
+            name: state.lessonData.info,
+            isTime: isId.isDigitalTime(state.lessonData.id),
+            onClick: function () {
+                onRead(state.lessonData.info);
+            }
+        })
     }
 
 
@@ -54,10 +57,12 @@ function getHeader(state: BoardResult) {
         style: RadioCss.getHeader(state.lessonData.id)
     },
         instructions,
-        div({
-            onClick: RadioCss.animate(onRead, state.text),
-            style: RadioCss.getText()
-        }, state.text)
+        ButtonView({
+            name: state.text,
+            onClick: function () {
+                onRead(state.text);
+            }
+        })
     );
 }
 
@@ -66,11 +71,32 @@ function getBody(state: BoardResult) {
 
     function getItems(state: BoardResult) {
         return state.generatedList.map((name: string, index: number) => {
-            return div({
+
+            let isFail = false;
+            let isSuccess = false;
+            if (state.selectedAnswer === name) {
+                if (state.isCorrect) {
+                    isSuccess = true;
+                } else {
+                    isFail = true;
+                }
+            }
+
+            return ButtonView({
                 key: name + index,
-                style: RadioCss.getItem(name, state.isCorrect, state.selectedAnswer),
-                onClick: RadioCss.animate(onAnswer, name)
-            }, name)
+                name: name,
+                isExpand: true,
+                isFail: isFail,
+                isSuccess: isSuccess,
+                isExpandWidth: true,
+                //isTime: isId.isDigitalTime(state.lessonData.id),
+                onClick: function () {
+                    AppDispatcher.handleViewAction({
+                        actionType: Constants.CHOOSE_RADIO,
+                        id: name
+                    });
+                }
+            });
         });
     }
 

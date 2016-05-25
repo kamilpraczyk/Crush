@@ -99,25 +99,6 @@ let style = {
         }
     },
 
-    answer: {
-        normal: {
-            border: borderWidth + borderWidthUnit + ' solid transparent',
-            cursor: 'pointer',
-            borderRadius: borderRadius
-        },
-        good: {
-            border: borderWidth + borderWidthUnit + ' solid ',
-            cursor: 'pointer',
-            borderRadius: borderRadius
-
-        },
-        bad: {
-            border: borderWidth + borderWidthUnit + ' solid #FF0000',
-            cursor: 'pointer',
-            borderRadius: borderRadius
-        }
-    },
-
     background: {
         text: {
             backgroundColor: backgroundColourText
@@ -182,25 +163,6 @@ let style = {
                 flexDirection: 'column',
                 alignItems: 'stretch',// by default stretch
             }
-        },
-
-        getText: (id?: string) => {
-            let style = {
-                display: 'flex',
-                paddingLeft: '2vw',
-                paddingRight: '2vw',
-                paddingTop: '1vh',
-                paddingBottom: '1vh',
-                cursor: cursorPointer,
-                borderRadius: borderRadius,
-                fontSize: XL,
-                backgroundColor: backgroundColourText,
-            }
-
-            if (id && isId.isDigitalTime(id)) {
-                style = get(style, { fontFamily: fontFamilyTime });
-            }
-            return style;
         },
 
         getInstructions: (id?: string) => {

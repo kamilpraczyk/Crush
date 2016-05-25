@@ -4,6 +4,7 @@ import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
 import {BoardResult} from '../../../lessons/interface';
 import MenuView = require('../menu/MenuView');
+import ButtonView = require('../../button/ButtonView');
 import _ = require('underscore');
 const {div} = React.DOM;
 
@@ -15,36 +16,52 @@ function getFooter() {
 }
 
 
-function onRead(read: string) {
-    AppDispatcher.handleViewAction({
-        actionType: Constants.READ,
-        read: read
-    });
-}
-
 function getHeader(state: BoardResult) {
     return div({
         style: OneTwoThreeCss.getHeader(),
-    }, div({
-        style: OneTwoThreeCss.getText(),
-        onClick: OneTwoThreeCss.animate(onRead, state.text)
-    }, state.text));
+    },
+        ButtonView({
+            name: state.text,
+            onClick: function () {
+                AppDispatcher.handleViewAction({
+                    actionType: Constants.READ,
+                    read: state.text
+                });
+            }
+        })
+    );
 }
 
 function getContentLine(state: BoardResult, name: string) {
 
+    let isFail = false;
+    let isSuccess = false;
+    if (state.selectedAnswer === name) {
+        if (state.isCorrect) {
+            isSuccess = true;
+        } else {
+            isFail = true;
+        }
+    }
+
     return div({
         key: _.uniqueId('_'),
         style: OneTwoThreeCss.getLine()
-    }, div({
-        style: OneTwoThreeCss.getItem(state.selectedAnswer, name, state.isCorrect),
-        onClick: OneTwoThreeCss.animate(function () {
-            AppDispatcher.handleViewAction({
-                actionType: Constants.CHOOSE_ONE_TWO_THREE,
-                id: name
-            });
+    },
+        ButtonView({
+            name: name,
+            isExpand: true,
+            isFail: isFail,
+            isSuccess: isSuccess,
+            isExpandWidth: true,
+            onClick: function () {
+                AppDispatcher.handleViewAction({
+                    actionType: Constants.CHOOSE_ONE_TWO_THREE,
+                    id: name
+                });
+            }
         })
-    }, name));
+    );
 }
 
 function getBodyContent(state: BoardResult) {

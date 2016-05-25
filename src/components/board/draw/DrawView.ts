@@ -5,32 +5,25 @@ import MenuView = require('../menu/MenuView');
 import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
 import {BoardResult} from '../../../lessons/interface';
+import ButtonView = require('../../button/ButtonView');
+import {isId} from '../../../lessons/helper/constants';
 const {div} = React.DOM;
-
-
-function onRead(read: string) {
-    AppDispatcher.handleViewAction({
-        actionType: Constants.READ,
-        read: read
-    });
-}
-
 
 
 function getHeader(props: BoardResult, state: State, setState: Function) {
 
     function getAnswerOrSupport() {
         if (props.lessonData.correct && props.lessonData.correct.length) {
-            return div({
-                className: state.showAnswer ? null : DrawCss.getSupportClassName(),
-                style: DrawCss.getText(state.showAnswer ? props.lessonData.id : null),
-                //NOTE: no reading
-                onClick: DrawCss.animate(function () {
+            return ButtonView({
+                icon: state.showAnswer ? null : DrawCss.getSupportIcon(),
+                isTime: isId.isDigitalTime(props.lessonData.id),
+                name: state.showAnswer ? props.lessonData.correct.join(" ") : null,
+                onClick: function () {
                     setState({
                         showAnswer: !state.showAnswer
                     });
-                })
-            }, state.showAnswer ? props.lessonData.correct.join(" ") : null);
+                }
+            });
         }
         return null;
     };
@@ -38,10 +31,15 @@ function getHeader(props: BoardResult, state: State, setState: Function) {
     return div({
         style: DrawCss.getHeader()
     },
-        div({
-            style: DrawCss.getText(),
-            onClick: DrawCss.animate(onRead, props.lessonData.name)
-        }, props.lessonData.name),
+        ButtonView({
+            name: props.lessonData.name,
+            onClick: function () {
+                AppDispatcher.handleViewAction({
+                    actionType: Constants.READ,
+                    read: props.lessonData.name
+                });
+            }
+        }),
         getAnswerOrSupport()
     );
 }
@@ -58,6 +56,7 @@ function getFooter(onClick: Function) {
         }]
     ))
 }
+
 let signatureClear: Function = null;
 function onGetInterfaceClear(onClear: Function) {
     signatureClear = onClear;
@@ -110,7 +109,6 @@ class DrawView extends React.Component<BoardResult, State>{
             showAnswer: false
         });
     }
-
 
     render() {
         return render(this.props, this.state, this.setState.bind(this))
