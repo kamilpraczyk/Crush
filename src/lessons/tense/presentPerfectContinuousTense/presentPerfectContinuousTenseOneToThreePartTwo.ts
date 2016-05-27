@@ -6,138 +6,131 @@ import explenation = require('./explenation');
 const separator = " ";
 const postfix = ".";
 const common = [viewIds.oneTwoThree];
-const placeholder = "Present Continuous Tense";
-const title = "Present Continuous Tense";
+const placeholder = "Present Perfect Continuous Tense";
+const title = "Present Perfect Continuous Tense";
 const icon = icons.oneTwoThree;
 const lessons = [
     {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["She", "is", "writing", "a letter"],
+        correct: ["She", "has", "been watching", "too much television", "lately"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["You", "are", "studying", "English", "grammar"],
+        correct: ["Chris", "has", "been", "teaching at the university", "since July"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["You", "are", "not", "watching", "TV"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["You", "are", "watching", "TV"],
+        correct: ["They have", "been", "travelling", "since last", "October"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: "",
-        correct: ["Are", "you", "watching", "TV", "?"],
+        correct: ["Why has Jadie", "not", "been taking her medicine", "for the last", "three days?"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["I", "am", "sitting"],
+        correct: ["It", "has", "been", "raining"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["They", "are", "reading", "their", "books"],
+        correct: ["I have", "been", "reading", "that book", "you lent me"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["They", "are", "not", "watching", "television"],
+        correct: ["He", "has", "been", "writing emails", "for 2 hours"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: "",
-        correct: ["What", "are", "you", "doing", "?"],
+        correct: ["Oh, the kitchen is a mess.", "Who", "has", "been", "cooking?"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: postfix,
+        correct: ["The university", "has been sending students here", "for over twenty years", "to do work experience"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: postfix,
+        correct: ["I have got", "a stiff neck.", "I have been", "working too long", "on computer"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: postfix,
+        correct: ["He has", "been", "phoning me", "all week", "for an answer"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: postfix,
+        correct: ["We", "have", "been", "working hard", "on it for ages"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: postfix,
+        correct: ["He has", "been", "working here", "since", "2017"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: postfix,
+        correct: ["I have", "been", "looking at", "other options", "recently"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: "",
-        correct: ["Why", "aren't", "you", "doing", "your homework?"],
+        correct: ["You look tired.", "Have you", "been", "sleeping", "properly?"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["I am", "not", "reading", "any", "books right now"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["I am", "studying", "to become", "an engineer"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["I", "am", "meeting", "some friends", "after work"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["I am", "not", "going to", "the party", "tonight"],
+        correct: ["He", "has", "not", "	been", "working hard"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: "",
-        correct: ["Are", "you", "still", "watching", "TV?"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: "",
-        correct: ["Isn't", "she", "coming", "with us", "tonight?"],
+        correct: ["What", "has", "he", "been", "waiting for?"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["She", "is", "always", "coming to", "class late"],
+        correct: ["He has been", "reading", "in this school", "since 2010"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["She", "is", "constantly", "talking"],
+        correct: ["He has", "not been", "watering", "the plants", "for two hours"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["She's", "studying", "with her", "friend", "for a week"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["He's", "eating", "a lot", "these", "days"],
+        correct: ["I have", "not", "been studying", "since ", "3 O'clock"],
         explenation: explenation,
         placeholder: placeholder
     }
-
-
-
-
-    //You are using the Internet.
-
-
 ] as BoardFaces
 
 export {

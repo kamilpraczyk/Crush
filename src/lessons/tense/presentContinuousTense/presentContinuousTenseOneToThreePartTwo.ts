@@ -13,131 +13,124 @@ const lessons = [
     {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["She", "is", "writing", "a letter"],
+        correct: ["You", "are", "using", "the", "Internet"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["You", "are", "studying", "English", "grammar"],
+        correct: ["She's", "swimming", "every", "morning"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["You", "are", "not", "watching", "TV"],
+        correct: ["I'm", "getting", "better", "at playing", "the piano"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["You", "are", "watching", "TV"],
+        correct: ["You're", "smoking", "too", "much"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: "",
-        correct: ["Are", "you", "watching", "TV", "?"],
+        correct: ["You're", "always", "losing", "your", "keys!"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["I", "am", "sitting"],
+        correct: ["She's", "constantly", "missing", "the", "train"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["They", "are", "reading", "their", "books"],
+        correct: ["I'm", "meeting", "my", "father", "tomorrow"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["They", "are", "not", "watching", "television"],
+        correct: ["I'm", "leaving", "at", "five"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: postfix,
+        correct: ["The", "weather", "is", "improving"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: postfix,
+        correct: ["I'm", "visiting", "grandpa", "in the", "afternoon"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: "",
-        correct: ["What", "are", "you", "doing", "?"],
+        correct: ["You are", "always", "coming", "late", "for the meetings!"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: postfix,
+        correct: ["I'm", "taking", "a shower", "now"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: postfix,
+        correct: ["I'm riding a bike", "to get to work", "because", "my car is", "broken"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: postfix,
+        correct: ["They", "are", "not talking", "with each", "other"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: "",
-        correct: ["Why", "aren't", "you", "doing", "your homework?"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["I am", "not", "reading", "any", "books right now"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["I am", "studying", "to become", "an engineer"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["I", "am", "meeting", "some friends", "after work"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["I am", "not", "going to", "the party", "tonight"],
+        correct: ["My", "boss", "is", "constantly critising", " me!"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: "",
-        correct: ["Are", "you", "still", "watching", "TV?"],
+        correct: ["Is", "Mary", "having", "breakfast", "now?"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: "",
-        correct: ["Isn't", "she", "coming", "with us", "tonight?"],
+        correct: ["Are they", "having", "the party", "on Friday", "?"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["She", "is", "always", "coming to", "class late"],
+        correct: ["He", "is not", "going to", "school", "tomorrow"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: "",
+        correct: ["Are", "they", "waiting", "for", "John?"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["She", "is", "constantly", "talking"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["She's", "studying", "with her", "friend", "for a week"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["He's", "eating", "a lot", "these", "days"],
+        correct: ["Is", "he", "waiting", "TV", "?"],
         explenation: explenation,
         placeholder: placeholder
     }
-
-
-
-
-    //You are using the Internet.
-
-
 ] as BoardFaces
 
 export {

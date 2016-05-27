@@ -8,7 +8,7 @@ const styles = {
         backgroundColor: css.button.background.normal,
         color: css.button.color.normal,
         border: css.button.border.normal,
-       // textTransform: 'capitalize',
+        // textTransform: 'capitalize',
         MozBorderRadius: 28,
         WebkitBorderRadius: 28,
         borderRadius: 28,
@@ -28,6 +28,7 @@ const styles = {
         MozBackgroundSize: 'contain',
         OBackgroundSize: 'contain',
         backgroundSize: 'contain',
+        minWidth: '15vw'
     },
 
     pressed: {

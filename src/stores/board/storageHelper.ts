@@ -47,7 +47,7 @@ function getCorrectSentence() {
         } else {
             read = _selectedAnswerQueue.join(name);
             if (isCompletedAndCorrect()) { //finish sentence with dot
-                read = read + _board.postfix
+                read = read + _board.postfix //TODO if last is ?or! and postfix is dot then show error
             }
         }
 

@@ -50,6 +50,12 @@ export const lessons: LessonMapFace = {
         name: require('./tense/presentContinuousTense/presentContinuousTenseOneToThree').title,
         lessons: require('./tense/presentContinuousTense/presentContinuousTenseOneToThree').lessons
     },
+    presentContinuousTenseOneToThreePartTwo: {
+        bought: true, active: false,
+        icon: require('./tense/presentContinuousTense/presentContinuousTenseOneToThreePartTwo').icon,
+        name: require('./tense/presentContinuousTense/presentContinuousTenseOneToThreePartTwo').title,
+        lessons: require('./tense/presentContinuousTense/presentContinuousTenseOneToThreePartTwo').lessons
+    },
     presentPerfectTenseOneToThree: {
         bought: true, active: false,
         icon: require('./tense/presentPerfectTense/presentPerfectTenseOneToThree').icon,
@@ -61,7 +67,13 @@ export const lessons: LessonMapFace = {
         icon: require('./tense/presentPerfectContinuousTense/presentPerfectContinuousTenseOneToThree').icon,
         name: require('./tense/presentPerfectContinuousTense/presentPerfectContinuousTenseOneToThree').title,
         lessons: require('./tense/presentPerfectContinuousTense/presentPerfectContinuousTenseOneToThree').lessons
-    },                    // end Present Tense 
+    }, 
+    presentPerfectContinuousTenseOneToThreePartTwo: {
+        bought: true, active: false,
+        icon: require('./tense/presentPerfectContinuousTense/presentPerfectContinuousTenseOneToThreePartTwo').icon,
+        name: require('./tense/presentPerfectContinuousTense/presentPerfectContinuousTenseOneToThreePartTwo').title,
+        lessons: require('./tense/presentPerfectContinuousTense/presentPerfectContinuousTenseOneToThreePartTwo').lessons
+    }, // end Present Tense 
     location: {
         bought: true, active: false,
         icon: require('./extra/location/location').icon,

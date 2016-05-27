@@ -69,5 +69,11 @@ export function getRest(group: any, exclude: any): string[] {
 //TODO - IE11 settings menu fix layout
 //TODO - IE11 grammar fix layout
 // lessons 4 pictures with time clock
+//TODO onetwothree - first box with word set to lower case only if second letter is lowercase (respect like 'TV' but She-> show)
 
 
+// make lessons - tences vs each other
+//make lessons - sentence to =>question sentence
+
+
+//make tests check . ? ! (end of sentences and postfix if match)

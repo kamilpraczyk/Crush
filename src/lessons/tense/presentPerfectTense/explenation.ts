@@ -47,13 +47,6 @@ exp.push(tList({
 }));
 
 
-exp.push(tList({
-    t: "Structure.",
-    list: [
-        { l: "Auxiliary verb <p>has</p> or <p>have</p> is used in sentence." },
-        { l: "<p>3rd form of verb</p> or <p>past participle</p> is used as main verb in sentence." }
-    ]
-}));
 
 exp.push(tList({
     t: "Positive sentence.",
