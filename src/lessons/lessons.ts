@@ -44,6 +44,24 @@ export const lessons: LessonMapFace = {
         name: require('./tense/presentTense/presentTenseOneToThree').title,
         lessons: require('./tense/presentTense/presentTenseOneToThree').lessons
     },
+    presentTenseOneToThreePartTwo: {
+        bought: true, active: false,
+        icon: require('./tense/presentTense/presentTenseOneToThreePartTwo').icon,
+        name: require('./tense/presentTense/presentTenseOneToThreePartTwo').title,
+        lessons: require('./tense/presentTense/presentTenseOneToThreePartTwo').lessons
+    },
+    presentTenseRadio: {
+        bought: true, active: false,
+        icon: require('./tense/presentTense/presentTenseRadio').icon,
+        name: require('./tense/presentTense/presentTenseRadio').title,
+        lessons: require('./tense/presentTense/presentTenseRadio').lessons
+    },
+    presentTenseMatch: {
+        bought: true, active: false,
+        icon: require('./tense/presentTense/presentTenseMatch').icon,
+        name: require('./tense/presentTense/presentTenseMatch').title,
+        lessons: require('./tense/presentTense/presentTenseMatch').lessons
+    },
     presentContinuousTenseOneToThree: {
         bought: true, active: false,
         icon: require('./tense/presentContinuousTense/presentContinuousTenseOneToThree').icon,
@@ -56,24 +74,49 @@ export const lessons: LessonMapFace = {
         name: require('./tense/presentContinuousTense/presentContinuousTenseOneToThreePartTwo').title,
         lessons: require('./tense/presentContinuousTense/presentContinuousTenseOneToThreePartTwo').lessons
     },
+    presentContinuousTenseRadio: {
+        bought: true, active: false,
+        icon: require('./tense/presentContinuousTense/presentContinuousTenseRadio').icon,
+        name: require('./tense/presentContinuousTense/presentContinuousTenseRadio').title,
+        lessons: require('./tense/presentContinuousTense/presentContinuousTenseRadio').lessons
+    },
     presentPerfectTenseOneToThree: {
         bought: true, active: false,
         icon: require('./tense/presentPerfectTense/presentPerfectTenseOneToThree').icon,
         name: require('./tense/presentPerfectTense/presentPerfectTenseOneToThree').title,
         lessons: require('./tense/presentPerfectTense/presentPerfectTenseOneToThree').lessons
     },
+    presentPerfectTenseOneToThreePartTwo: {
+        bought: true, active: false,
+        icon: require('./tense/presentPerfectTense/presentPerfectTenseOneToThreePartTwo').icon,
+        name: require('./tense/presentPerfectTense/presentPerfectTenseOneToThreePartTwo').title,
+        lessons: require('./tense/presentPerfectTense/presentPerfectTenseOneToThreePartTwo').lessons
+    },
+    presentPerfectTenseRadio: {
+        bought: true, active: false,
+        icon: require('./tense/presentPerfectTense/presentPerfectTenseRadio').icon,
+        name: require('./tense/presentPerfectTense/presentPerfectTenseRadio').title,
+        lessons: require('./tense/presentPerfectTense/presentPerfectTenseRadio').lessons
+    },
     presentPerfectContinuousTenseOneToThree: {
         bought: true, active: false,
         icon: require('./tense/presentPerfectContinuousTense/presentPerfectContinuousTenseOneToThree').icon,
         name: require('./tense/presentPerfectContinuousTense/presentPerfectContinuousTenseOneToThree').title,
         lessons: require('./tense/presentPerfectContinuousTense/presentPerfectContinuousTenseOneToThree').lessons
-    }, 
+    },
     presentPerfectContinuousTenseOneToThreePartTwo: {
         bought: true, active: false,
         icon: require('./tense/presentPerfectContinuousTense/presentPerfectContinuousTenseOneToThreePartTwo').icon,
         name: require('./tense/presentPerfectContinuousTense/presentPerfectContinuousTenseOneToThreePartTwo').title,
         lessons: require('./tense/presentPerfectContinuousTense/presentPerfectContinuousTenseOneToThreePartTwo').lessons
-    }, // end Present Tense 
+    },
+    presentPerfectContinuousTenseRadio: {
+        bought: true, active: false,
+        icon: require('./tense/presentPerfectContinuousTense/presentPerfectContinuousTenseRadio').icon,
+        name: require('./tense/presentPerfectContinuousTense/presentPerfectContinuousTenseRadio').title,
+        lessons: require('./tense/presentPerfectContinuousTense/presentPerfectContinuousTenseRadio').lessons
+    },
+    // end Present Tense 
     location: {
         bought: true, active: false,
         icon: require('./extra/location/location').icon,

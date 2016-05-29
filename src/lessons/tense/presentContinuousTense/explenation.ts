@@ -96,7 +96,7 @@ exp.push(tList({
 }));
 
 exp.push(tList({
-    t: "Interrogative Sentences.",
+    t: "Interrogative sentence.",
     list: [
         { l: "<p>Am</p> I <p>eating</p> a meal?" },
         { l: "<p>Is</p> she <p>learning</p> a lesson?" }

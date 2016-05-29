@@ -12,125 +12,125 @@ const icon = icons.oneTwoThree;
 const lessons = [
     {
         id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["I", "have", "a big", "house"],
+        name: separator, postfix: "",
+        correct: ["Where", "does", "he", "work", "?"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["Peter", "gives me", "a call", "every", "morning"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["She", "enjoys", "playing", "the", "guitar"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["He", "tries", "very", "hard"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["The", "party", "starts", "at 8", "o'clock"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["She", "needs", "help", "right", "now"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["Twice", "a week,", "Tom", "cleans", "the car"],
+        correct: ["I", "do not", "go", "fishing", "at weekends"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: "",
-        correct: ["Do", "you", "have", "your passport", "with you?"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["She", "is", "not", "here", "now"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["Every", "twelve months", "the Earth", "circles", "the Sun"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["He", "works", "at", "McDonald's"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["The", "next train", "leaves", "this evening", "at 6pm"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["He", "gets up", "early", "in", "the morning"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["I", "do", "not", "write", "a letter"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["The", "Sun", "rises", "in", "the east"],
+        correct: ["Do", "I", "go", "fishing", "at weekends?"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: "",
-        correct: ["Does", "he", "get up", "early", "in the morning?"],
+        correct: ["Does", "he ever", "put milk", "in his tea", "?"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["I", "sing", "a song"],
-        explenation: explenation,
-        placeholder: placeholder
-    }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["They", "read", "lessons"],
+        correct: ["My", "father", "plays", "the", "violin"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: "",
-        correct: ["Does", "the Sun", "rise", "in", "the east?"],
+        correct: ["Do", "we go", "to", "the cinema", "on Fridays?"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["Mike", "reaches", "home", "in", "time"],
+        correct: ["A rabbit", "does", "not have", "two", "legs"],
         explenation: explenation,
         placeholder: placeholder
-    }
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: "",
+        correct: ["How", "many legs", "does", "a spider", "have?"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: postfix,
+        correct: ["The", "earth", "goes", "round", "the Sun"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: postfix,
+        correct: ["The Sun", "does", "not", "go round", "the Earth"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: "",
+        correct: ["Does", "the Moon", "go", "round", "the Earth?"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: postfix,
+        correct: ["The", "course", "does", "not start", "in June"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: postfix,
+        correct: ["The train", "leaves", "at half", "past", "six"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: postfix,
+        correct: ["I", "like", "chocolate"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: postfix,
+        correct: ["Water", "is", "liquid", "at room", "temperature"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: postfix,
+        correct: ["Jason takes", "the ball,", "then he", "throws", "and scores two points"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: "",
+        correct: ["What", "time", "does", "the train", "leave?"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: postfix,
+        correct: ["The train", "gets", "in", "at 4 o'clock"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: postfix,
+        correct: ["The oceans", "are", "deep", "and cold"],
+        explenation: explenation,
+        placeholder: placeholder
+    }, {
+        id: id(common), title: title,
+        name: separator, postfix: postfix,
+        correct: ["Antartica", "is", "covered", "with", "ice"],
+        explenation: explenation,
+        placeholder: placeholder
+    },
 
 ] as BoardFaces
 

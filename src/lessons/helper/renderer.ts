@@ -16,7 +16,7 @@ interface List {
 }
 
 interface TList {
-    t: string,
+    t?: string,
     i?: string,
     list: List[]
 }

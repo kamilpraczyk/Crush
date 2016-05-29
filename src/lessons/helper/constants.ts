@@ -22,7 +22,7 @@ export const displayIds = {
 export const icons = {
     draw: 'moon-quill',
     fourPictures: 'moon-images',
-    fourWords : 'moon-table',
+    fourWords: 'moon-table',
     radio: 'moon-insert-template',
     oneTwoThree: 'moon-bubble'
 }
@@ -63,6 +63,7 @@ export function getRest(group: any, exclude: any): string[] {
 
 
 //TODO ESC - will toogle menu,
+//TODO - make something with minimalized menu button - is on the way always
 // TODO - left-right will navigate lessons
 //TODO - buttons in radio
 //TODO - draw -IE11 - fix layout 
@@ -70,10 +71,31 @@ export function getRest(group: any, exclude: any): string[] {
 //TODO - IE11 grammar fix layout
 // lessons 4 pictures with time clock
 //TODO onetwothree - first box with word set to lower case only if second letter is lowercase (respect like 'TV' but She-> show)
-
+//TODO - milestone - make history about acheived lessons (encurage to carry on and finish couses - or pay for more)
 
 // make lessons - tences vs each other
 //make lessons - sentence to =>question sentence
 
 
 //make tests check . ? ! (end of sentences and postfix if match)
+// when multi are separated in radio 'xxx'-'xxx' make sure there is space between words if is not defined
+//check space + rest of sentence have space inside 'xx '+ space +' xxx' is correct
+
+/*
+ACTIVE / PASSIVE
+Once a week, Tom cleans the car. Active
+Once a week, the car is cleaned by Tom. Passive
+
+*/
+
+/*
+        VS
+Present simple:	I work
+Present continuous:	I am working
+Present perfect:	I have worked
+Present perfect continuous:	I have been working
+*/
+
+/* The present progressive tense
+//http://www.grammar-quizzes.com/presten1.html  
+ */
