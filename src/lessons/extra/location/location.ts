@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons } from '../../helper/constants';
+import {space, viewIds, id, icons, capital } from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [viewIds.radio];
 import _ = require("underscore");
@@ -10,7 +10,7 @@ const icon = icons.radio;
 const lessons = [
     {
         id: id(common), title: title,
-        name: "Barcelona is " + space + " of Spain.",
+        name: capital.places.Barcelona + " is " + space + " of " + capital.countries.Spain + ".",
         correct: ["in the east"],
         incorrect: ["the bottom", "across", "on top", "above"],
         explenation: explenation
@@ -80,7 +80,7 @@ const lessons = [
     },
     {
         id: id(common), title: title,
-        name: "The dog sat " + space + " Suzan.",
+        name: "The dog sat " + space + " " + capital.names.Suzan + ".",
         correct: ["beside"],
         incorrect: ["from", "off", "northern", "there"],
         explenation: explenation

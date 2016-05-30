@@ -58,7 +58,7 @@ gulp.task('compress', function () {
     return gulp.src(config.publicPath + '/*.js')
         .pipe(sourcemaps.init())
         .pipe(uglify())
-    //.pipe(sourcemaps.write('./'))
+        //.pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(config.publicPath));
 });
 
@@ -78,13 +78,13 @@ gulp.task("package", function () {
         }
 
     }, function () {
-            cordova.run({
-                "platforms": ["browser"]
-           })
+        cordova.run({
+            "platforms": ["browser"]
+        })
 
     });
-    
-    
+
+
     //   "options": ["BILLING_KEY='MIIB...AQAB'"]
     //       ]
     //    }
@@ -103,3 +103,25 @@ gulp.task("default", function (cb) {
 gulp.task("build", function (cb) {
     runSequence('clean', 'copy', 'compile-js', 'compress', 'toCordova', 'package', 'clean', 'watch', cb);
 });
+
+
+
+//Test
+var mocha = require('gulp-mocha');
+
+
+//optional - use a tsconfig file
+var tsProject = ts.createProject('./tsconfig.json');
+gulp.task('test', function () {
+    //find test code - note use of 'base'
+    return gulp.src('./test/**/*.ts', { base: '.', timeout: 19000 })
+        /*transpile*/
+        .pipe(ts(tsProject))
+        /*flush to disk*/
+        .pipe(gulp.dest('.'))
+        /*execute tests*/
+        .pipe(mocha({
+            reporter: 'progress'
+        }));
+});
+

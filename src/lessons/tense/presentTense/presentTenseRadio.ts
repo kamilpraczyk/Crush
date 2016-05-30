@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons, multi } from '../../helper/constants';
+import {space, viewIds, id, icons, multi, capital } from '../../helper/constants';
 import explenation = require('./explenation');
 
 const common = [viewIds.radio];
@@ -10,21 +10,21 @@ const icon = icons.radio;
 const lessons = [
     {
         id: id(common), title: title,
-        name: "You " + space + " English.",
+        name: "You " + space + " " + capital.nationalityAdj.English + ".",
         correct: ["speak"],
         incorrect: ["speaks", "speaking"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
-        name: "New York " + space + " a small city.",
+        name: capital.places.NewYork + " " + space + " a small city.",
         correct: ["is", "is not"],
         incorrect: ["are", "are not"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
-        name: "You " + space + " English.",
+        name: "You " + space + " " + capital.nationalityAdj.English + ".",
         correct: ["do not speak"],
         incorrect: ["do not speaking", "does not speak"],
         explenation: explenation,
@@ -45,7 +45,7 @@ const lessons = [
         placeholder: placeholder
     }, {
         id: id(common), title: title,
-        name: "The bus does " + space + " at 10 AM, it " + space + " at 10 PM.",
+        name: "The bus does " + space + " at 10 " + capital.clock.am+", it " + space + " at 10 " + capital.clock.pm,
         correct: ["not arrive " + multi + " arrives"],
         incorrect: ["not arrive " + multi + " arrive", "not arrives " + multi + " arrives", "not arrive " + multi + " does arrive"],
         explenation: explenation,
@@ -73,7 +73,7 @@ const lessons = [
         placeholder: placeholder
     }, {
         id: id(common), title: title,
-        name: "Barcelona " + space + " in the United Kingdom.",
+        name: capital.places.Barcelona + " " + space + " in the " + capital.countries.UnitedKingdom + ".",
         correct: ["is not"],
         incorrect: ["does not", "do not", "are not"],
         explenation: explenation,

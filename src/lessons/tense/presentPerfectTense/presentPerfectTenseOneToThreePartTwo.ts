@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons } from '../../helper/constants';
+import {space, viewIds, id, icons, capital } from '../../helper/constants';
 import explenation = require('./explenation');
 import _ = require("underscore");
 
@@ -26,7 +26,7 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["She", "has", "swum", "the English Channel", "every summer"],
+        correct: ["She", "has", "swum", "the " + capital.places.EnglishChannel, "every summer"],
         explenation: explenation,
         placeholder: placeholder
     }, {
@@ -38,7 +38,7 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["He", "has", "read", "'Game of Thrones'"],
+        correct: ["He", "has", "read", capital.books.GameOfThrones],
         explenation: explenation,
         placeholder: placeholder
     }, {
@@ -62,7 +62,7 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["I", "have", "lived", "in London", "since 19" + _.sample([83, 78, 91, 82, 79, 81, 80])],
+        correct: ["I", "have", "lived", "in " + capital.places.London, "since 19" + _.sample([83, 78, 91, 82, 79, 81, 80])],
         explenation: explenation,
         placeholder: placeholder
     }, {
@@ -92,7 +92,7 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["She", "has", "studied", "Japanese", "and English"],
+        correct: ["She", "has", "studied", capital.nationalityAdj.Japanese + " and " + capital.nationalityAdj.English],
         explenation: explenation,
         placeholder: placeholder
     }, {
@@ -122,7 +122,7 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: "",
-        correct: ["Have", "you", "seen", "'True Blood'", "?"],
+        correct: ["Have", "you", "seen", capital.books.TrueBlood, "?"],
         explenation: explenation,
         placeholder: placeholder
     }, {

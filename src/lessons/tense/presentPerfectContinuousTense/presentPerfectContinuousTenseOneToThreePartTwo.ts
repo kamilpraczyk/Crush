@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons } from '../../helper/constants';
+import {space, viewIds, id, icons, capital} from '../../helper/constants';
 import explenation = require('./explenation');
 
 const separator = " ";
@@ -19,19 +19,19 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["Chris", "has", "been", "teaching at the university", "since July"],
+        correct: [capital.names.Chris, "has", "been", "teaching at the university", "since " + capital.mounths.July],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["They have", "been", "travelling", "since last", "October"],
+        correct: ["They have", "been", "travelling", "since last", capital.mounths.October],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: "",
-        correct: ["Why has Jadie", "not", "been taking her medicine", "for the last", "three days?"],
+        correct: ["Why has " + capital.names.Jadie, "not", "been taking her medicine", "for the last", "three days?"],
         explenation: explenation,
         placeholder: placeholder
     }, {
@@ -127,7 +127,7 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["I have", "not", "been studying", "since ", "3 O'clock"],
+        correct: ["I have", "not", "been studying", "since ", "3 o'clock"],
         explenation: explenation,
         placeholder: placeholder
     }

@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons } from '../../helper/constants';
+import {space, viewIds, id, icons, capital } from '../../helper/constants';
 import explenation = require('./explenation');
 
 const separator = " ";
@@ -12,8 +12,8 @@ const icon = icons.oneTwoThree;
 const lessons = [
     {
         id: id(common), title: title,
-        name: separator, postfix: postfix,
-        correct: ["They", "have", "been", "playing cricket", "since 5pm"],
+        name: separator, postfix: "",
+        correct: ["They", "have", "been", "playing cricket", "since 5p.m."], 
         explenation: explenation,
         placeholder: placeholder
     }, {
@@ -31,18 +31,18 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["Tom", "has", "not ", "been practicing", "his English"],
+        correct: [capital.names.Tom, "has", "not ", "been practicing", "his " + capital.nationalityNoun.English],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["Lisa", "has", "been feeling", "a little", "depressed"],
+        correct: [capital.names.Lisa, "has", "been feeling", "a little", "depressed"],
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["The teacher", "has", "been", "teaching", "English"],
+        correct: ["The teacher", "has", "been", "teaching", capital.nationalityNoun.English],
         explenation: explenation,
         placeholder: placeholder
     }, {
@@ -66,13 +66,13 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["Recently, Mark", "has", "been", "doing", "the work"],
+        correct: ["Recently, " + capital.names.Mark, "has", "been", "doing", "the work"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["Recently, the work", "has", "been", "done", "by Mark"],
+        correct: ["Recently, the work", "has", "been", "done", "by " + capital.names.Mark],
         explenation: explenation,
         placeholder: placeholder
     }, {

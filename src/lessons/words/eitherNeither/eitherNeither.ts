@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, multi, viewIds, id, icons } from '../../helper/constants';
+import {space, multi, viewIds, id, icons, capital} from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [viewIds.radio];
 const title = 'Either and Neither';
@@ -15,13 +15,13 @@ const lessons = [
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + " Bob " + space + " Sara will help you with your work. They are both busy at the moment.",
+        name: space + " " + capital.names.Bob +" " + space + " " + capital.names.Sara + " will help you with your work. They are both busy at the moment.",
         correct: ["Neither " + multi + " nor"],
         incorrect: ["Either " + multi + " or"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: "I don't speak German. You don't " + space + ".",
+        name: "I don't speak " + capital.nationalityAdj.German + ". You don't " + space + ".",
         correct: ["either"],
         incorrect: ["neither"],
         explenation: explenation
@@ -39,13 +39,13 @@ const lessons = [
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: "Neither..." + space + "",
+        name: "Neither... " + space,
         correct: ["...nor"],
         incorrect: ["...or"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: "Either..." + space + "",
+        name: "Either... " + space,
         correct: ["...or"],
         incorrect: ["...nor"],
         explenation: explenation
@@ -69,7 +69,7 @@ const lessons = [
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: "I cannot understand English. " + space + ".",
+        name: "I cannot understand " + capital.nationalityAdj.English + ". " + space + ".",
         correct: ["I can't either"],
         incorrect: ["Neither I"],
         explenation: explenation

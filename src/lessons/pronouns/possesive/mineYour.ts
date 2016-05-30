@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons } from '../../helper/constants';
+import {space, viewIds, id, icons, capital } from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [viewIds.radio];
 const title = 'Possessive Pronouns: mine, yours, hers...';
@@ -39,13 +39,13 @@ const lessons = [
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: "This pen is not " + space + ", it's Rob's",
+        name: "This pen is not " + space + ", it's " + capital.names.Robs,
         correct: ["mine"],
         incorrect: ["my"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: "Kate's father is very rich. Some day all this will be " + space,
+        name: capital.names.Kates + " father is very rich. Some day all this will be " + space,
         correct: ["hers"],
         incorrect: ["her"],
         explenation: explenation
@@ -81,7 +81,7 @@ const lessons = [
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: "Mr Thomas is a friend of " + space + " .",
+        name: "Mr " + capital.names.Thomas + " is a friend of " + space + " .",
         correct: ["ours"],
         incorrect: ["our"],
         explenation: explenation

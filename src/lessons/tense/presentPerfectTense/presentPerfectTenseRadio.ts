@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons } from '../../helper/constants';
+import {space, viewIds, id, icons, capital } from '../../helper/constants';
 import explenation = require('./explenation');
 import _ = require("underscore");
 const common = [viewIds.radio];
@@ -10,7 +10,7 @@ const icon = icons.radio;
 const lessons = [
     {
         id: id(common), title: title,
-        name: "He has " + space + " a letter to María.",
+        name: "He has " + space + " a letter to " + capital.names.Maria + ".",
         correct: ["written"],
         incorrect: ["write"],
         explenation: explenation,
@@ -31,21 +31,21 @@ const lessons = [
         placeholder: placeholder
     }, {
         id: id(common), title: title,
-        name: "John and Maria " + space + " to Spain.",
+        name: capital.names.Jason + " and " + capital.names.Maria + " " + space + " to " + capital.countries.Spain + ".",
         correct: ["have traveled"],
         incorrect: ["had traveled", "traveled"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
-        name: "I " + space + " in Madrid for one week.",
+        name: "I " + space + " in " + capital.places.Madrid + " for one week.",
         correct: ["have been"],
         incorrect: ["been", "was"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
-        name: "Chris " + space + " my friend for " + _.sample[2, 4, 6, 8, 9, 12] + " years.",
+        name: capital.names.Chris + " " + space + " my friend for " + _.sample[2, 4, 6, 8, 9, 12] + " years.",
         correct: ["has been"],
         incorrect: ["had been", "was"],
         explenation: explenation,

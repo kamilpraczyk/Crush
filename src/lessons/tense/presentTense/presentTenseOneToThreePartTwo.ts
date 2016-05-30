@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons } from '../../helper/constants';
+import {space, viewIds, id, icons, capital } from '../../helper/constants';
 import explenation = require('./explenation');
 
 const separator = " ";
@@ -43,7 +43,7 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: "",
-        correct: ["Do", "we go", "to", "the cinema", "on Fridays?"],
+        correct: ["Do", "we go", "to", "the cinema", "on " + capital.daysPlural.Fridays + "?"],
         explenation: explenation,
         placeholder: placeholder
     }, {
@@ -61,25 +61,25 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["The", "earth", "goes", "round", "the Sun"],
+        correct: ["The", capital.places.Earth, "goes", "round", "the " + capital.places.Sun],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["The Sun", "does", "not", "go round", "the Earth"],
+        correct: ["The " + capital.places.Sun, "does", "not", "go round", "the " + capital.places.Earth],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: "",
-        correct: ["Does", "the Moon", "go", "round", "the Earth?"],
+        correct: ["Does", "the " + capital.places.Moon, "go", "round", "the " + capital.places.Earth + "?"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["The", "course", "does", "not start", "in June"],
+        correct: ["The", "course", "does", "not start", "in " + capital.mounths.June],
         explenation: explenation,
         placeholder: placeholder
     }, {
@@ -103,7 +103,7 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["Jason takes", "the ball,", "then he", "throws", "and scores two points"],
+        correct: [capital.names.Jason + " takes", "the ball,", "then he", "throws", "and scores two points"],
         explenation: explenation,
         placeholder: placeholder
     }, {
@@ -127,7 +127,7 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["Antartica", "is", "covered", "with", "ice"],
+        correct: [capital.places.Antartica, "is", "covered", "with", "ice"],
         explenation: explenation,
         placeholder: placeholder
     },

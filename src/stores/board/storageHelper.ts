@@ -46,8 +46,8 @@ function getCorrectSentence() {
             read = _board.placeholder;  //e.g Simple Present Tense
         } else {
             read = _selectedAnswerQueue.join(name);
-            if (isCompletedAndCorrect()) { //finish sentence with dot
-                read = read + _board.postfix //TODO if last is ?or! and postfix is dot then show error
+            if (isCompletedAndCorrect()) {
+                read = read + _board.postfix
             }
         }
 

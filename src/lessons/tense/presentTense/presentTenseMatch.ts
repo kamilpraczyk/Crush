@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons, multi } from '../../helper/constants';
+import {space, viewIds, id, icons, multi, capital } from '../../helper/constants';
 import explenation = require('./explenation');
 
 const common = [viewIds.radio];
@@ -12,7 +12,7 @@ const icon = icons.radio;
 const lessons = [
     {
         id: id(common), title: title,
-        name: "The earth " + space + " 360º every day. The moon " + space + " the earth.",
+        name: "The " + capital.places.Earth + " " + space + " 360º every day. The " + capital.places.Moon + " " + space + " the " + capital.places.Earth + ".",
         correct: ["turns " + multi + " orbits"],
         incorrect: ["orbits " + multi + " turns"],
         explenation: explenation,
@@ -26,7 +26,7 @@ const lessons = [
         placeholder: placeholder
     }, {
         id: id(common), title: title,
-        name: "Antartica " + space + " covered with ice. The South Pole " + space + " strong winds.",
+        name: capital.places.Antartica + " " + space + " covered with ice. The " + capital.places.SouthPole + " " + space + " strong winds.",
         correct: ["is " + multi + " has"],
         incorrect: ["has " + multi + " is"],
         explenation: explenation,
@@ -35,7 +35,7 @@ const lessons = [
         id: id(common), title: title,
         name: "Plants " + space + " in soil. Plants " + space + " us oxygen.",
         correct: ["grow " + multi + " give"],
-        incorrect: ["give " + multi + "grow "],
+        incorrect: ["give " + multi + " grow"],
         explenation: explenation,
         placeholder: placeholder
     }, {
@@ -49,12 +49,12 @@ const lessons = [
         id: id(common), title: title,
         name: "People " + space + " on earth's resources. People " + space + " for good health.",
         correct: ["depend " + multi + " exercise"],
-        incorrect: ["exercise " + multi + "depend "],
+        incorrect: ["exercise " + multi + " depend"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
-        name: " Time " + space + " quickly. Daylight Savings time " + space + " in spring.",
+        name: "Time " + space + " quickly. Daylight savings time " + space + " in spring.",
         correct: ["passes " + multi + " begins"],
         incorrect: ["begins " + multi + " passes"],
         explenation: explenation,
@@ -75,7 +75,7 @@ const lessons = [
         placeholder: placeholder
     }, {
         id: id(common), title: title,
-        name: "Water " + space + " at zero degrees.  Water " + space + " at 100 degrees.",
+        name: "Water " + space + " at zero degrees. Water " + space + " at 100 degrees.",
         correct: ["freezes " + multi + " boils"],
         incorrect: ["boils " + multi + " freezes"],
         explenation: explenation,

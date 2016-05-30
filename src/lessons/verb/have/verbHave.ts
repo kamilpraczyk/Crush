@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons } from '../../helper/constants';
+import {space, viewIds, id, icons, capital } from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [viewIds.radio];
 const title = "Verb: have, has";
@@ -27,7 +27,7 @@ const lessons = [
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: "Has Wilson got any money? No, " + space + ".",
+        name: "Has " + capital.names.Wilson + " got any money? No, " + space + ".",
         correct: ["he has not"],
         incorrect: ["he have", "he has"],
         explenation: explenation
@@ -63,13 +63,13 @@ const lessons = [
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: "Has Sally got any books? Yes, she has " + space + ".",
+        name: "Has " + capital.names.Sally + " got any books? Yes, she has " + space + ".",
         correct: ["some"],
         incorrect: ["one"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: "Has Peter got a credit card? Yes, he has " + space + ".",
+        name: "Has " + capital.names.Peter + " got a credit card? Yes, he has " + space + ".",
         correct: ["one"],
         incorrect: ["some"],
         explenation: explenation
@@ -81,13 +81,13 @@ const lessons = [
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: "Sam has " + space + " job.",
+        name: capital.names.Sam + " has " + space + " job.",
         correct: ["no"],
         incorrect: ["not"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: "Rob has " + space + " money this month.",
+        name: capital.names.Rob + " has " + space + " money this month.",
         correct: ["no"],
         incorrect: ["not"],
         explenation: explenation
@@ -111,7 +111,7 @@ const lessons = [
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: "Tom has " + space + " got a book",
+        name: capital.names.Tom + " has " + space + " got a book",
         correct: ["not"],
         incorrect: ["no"],
         explenation: explenation

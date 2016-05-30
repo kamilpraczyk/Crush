@@ -51,157 +51,157 @@ const lessons = [
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "cities",
+        name: space + " cities",
         correct: [empty],
         incorrect: ["a", "an"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "house",
+        name: space + " house",
         correct: ["a"],
         incorrect: [empty, "an"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "hospital",
+        name: space + " hospital",
         correct: ["a"],
         incorrect: [empty, "an"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "old book",
+        name: space + " old book",
         correct: ["an"],
         incorrect: [empty, "a"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "interesting city",
+        name: space + " interesting city",
         correct: ["an"],
         incorrect: [empty, "a"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "actor",
+        name: space + " actor",
         correct: ["an"],
         incorrect: [empty, "a"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "tiger",
+        name: space + " tiger",
         correct: ["a"],
         incorrect: [empty, "an"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "egg",
+        name: space + " egg",
         correct: ["an"],
         incorrect: [empty, "a"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "lemon",
+        name: space + " lemon",
         correct: ["a"],
         incorrect: [empty, "an"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "club",
+        name: space + " club",
         correct: ["a"],
         incorrect: [empty, "an"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "engineer",
+        name: space + " engineer",
         correct: ["an"],
         incorrect: [empty, "a"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "emails",
+        name: space + " emails",
         correct: [empty],
         incorrect: ["a", "an"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "lemons",
+        name: space + " lemons",
         correct: [empty],
         incorrect: ["a", "an"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "houses",
+        name: space + " houses",
         correct: [empty],
         incorrect: ["a", "an"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "flower",
+        name: space + " flower",
         correct: ["a"],
         incorrect: [empty, "an"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "cashpoints",
+        name: space + " cashpoints",
         correct: [empty],
         incorrect: ["a", "an"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "flowers",
+        name: space + " flowers",
         correct: [empty],
         incorrect: ["a", "an"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "airport",
+        name: space + " airport",
         correct: ["an"],
         incorrect: [empty, "a"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "station",
+        name: space + " station",
         correct: ["a"],
         incorrect: [empty, "an"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "president",
+        name: space + " president",
         correct: ["a"],
         incorrect: [empty, "an"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "prime minister",
+        name: space + " prime minister",
         correct: ["a"],
         incorrect: [empty, "an"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "friend",
+        name: space + " friend",
         correct: ["a"],
         incorrect: [empty, "an"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "friends",
+        name: space + " friends",
         correct: [empty],
         incorrect: ["a", "an"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "letter",
+        name: space + " letter",
         correct: ["a"],
         incorrect: [empty, "an"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "postcard",
+        name: space + " postcard",
         correct: ["a"],
         incorrect: [empty, "an"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: space + "coffees",
+        name: space + " coffees",
         correct: [empty],
         incorrect: ["a", "an"],
         explenation: explenation

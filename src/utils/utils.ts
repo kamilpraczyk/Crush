@@ -10,8 +10,37 @@ export = {
     voice,
     round10,
     keys,
-    replaceAll
+    replaceAll,
+    tryToSetLowercaseFirstLetter
 };
+
+function tryToSetLowercaseFirstLetter(s: string, sentenceWords: string[]) {
+    console.log('s', s);
+    /*set to lowercase first word of the sentence*/
+
+
+    const sentenceWord = _.first(sentenceWords);
+
+    const words = s.split(' ');
+    const word = _.first(words);
+
+    if (sentenceWord === word) {
+        switch (word) {
+            case "I":
+            case "I'm":
+            case "English":
+                //case 'Peter':
+                return s;
+        }
+
+        return lowercaseFirstLetter(s);
+    }
+    return s;
+}
+
+function lowercaseFirstLetter(s: string) {
+    return s.charAt(0).toLowerCase() + s.slice(1);
+}
 
 function replaceAll(str: string, search: string, replacement: string) {
     return str.replace(new RegExp(search, 'g'), replacement);

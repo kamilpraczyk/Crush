@@ -1,5 +1,6 @@
 import React = require('react');
 import OneTwoThreeCss = require('./OneTwoThreeCss');
+import utils = require('../../../utils/utils');
 import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
 import {BoardResult} from '../../../lessons/interface';
@@ -49,7 +50,7 @@ function getContentLine(state: BoardResult, name: string) {
         style: OneTwoThreeCss.getLine()
     },
         ButtonView({
-            name: name,
+            name: utils.tryToSetLowercaseFirstLetter(name, state.lessonData.correct),//Try to lowercase first word of sentence
             isExpand: true,
             isFail: isFail,
             isSuccess: isSuccess,

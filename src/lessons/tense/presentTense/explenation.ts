@@ -15,7 +15,7 @@ exp.push(tList({
     list: [
         { l: "He drinks coffee every morning." },
         { l: "I go to church regularly." },
-        { l: "My mother gets up at 6am everyday." },
+        { l: "My mother gets up at 6 a.m. everyday." },
         { l: "I smoke." },
         { l: "I work in London." },
         { l: "We catch the bus every morning." }
@@ -25,8 +25,8 @@ exp.push(tList({
 exp.push(tList({
     t: "For fixed arrangements or events.",
     list: [
-        { l: "The next bus arrives at 7.45am." },
-        { l: "The match starts at 9am." },
+        { l: "The next bus arrives at 7.45 a.m." },
+        { l: "The match starts at 9 a.m." },
         { l: "When does this shop reopen?" },
         { l: "Your exam starts at 08.00." },
     ]

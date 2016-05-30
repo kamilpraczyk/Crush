@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons } from '../../helper/constants';
+import {space, viewIds, id, icons, capital } from '../../helper/constants';
 import explenation = require('./explenation');
 
 const separator = " ";
@@ -19,25 +19,25 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["You", "are", "studying", "English", "grammar"],
+        correct: ["You", "are", "studying", capital.nationalityNoun.English, "grammar"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["You", "are", "not", "watching", "TV"],
+        correct: ["You", "are", "not", "watching", capital.things.TV],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["You", "are", "watching", "TV"],
+        correct: ["You", "are", "watching", capital.things.TV],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: "",
-        correct: ["Are", "you", "watching", "TV", "?"],
+        correct: ["Are", "you", "watching", capital.things.TV, "?"],
         explenation: explenation,
         placeholder: placeholder
     }, {
@@ -97,7 +97,7 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: "",
-        correct: ["Are", "you", "still", "watching", "TV?"],
+        correct: ["Are", "you", "still", "watching", capital.things.TV + "?"],
         explenation: explenation,
         placeholder: placeholder
     }, {
@@ -132,10 +132,6 @@ const lessons = [
         placeholder: placeholder
     }
 
-
-
-
-    //You are using the Internet.
 
 
 ] as BoardFaces

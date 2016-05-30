@@ -83,13 +83,13 @@ exp.push(tList({
     list: [
         { to: ["<p>Germany</p>", "<p>England</p>"] },
         { mute_to: ["0:00", "midnight"] },
-        { mute_to: ["0:01", "12:01 am"] },
-        { mute_to: ["8:00", "8:00 am"] },
+        { mute_to: ["0:01", "12:01 a.m."] },
+        { mute_to: ["8:00", "8:00 a.m."] },
         { mute_to: ["12:00", "noon"] },
-        { mute_to: ["12:01", "12:01 pm"] },
-        { mute_to: ["14:00", "2 pm"] },
-        { mute_to: ["18:00", "6 pm"] },
-        { mute_to: ["23:59", "11:59 pm"] }
+        { mute_to: ["12:01", "12:01 p.m."] },
+        { mute_to: ["14:00", "2 p.m."] },
+        { mute_to: ["18:00", "6 p.m."] },
+        { mute_to: ["23:59", "11:59 p.m."] }
     ]
 }));
 

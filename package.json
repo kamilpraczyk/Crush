@@ -21,8 +21,10 @@
         "gulp-sourcemaps": "1.6.0",
         "vinyl-buffer": "1.0.0",
         "cordova-android": "^3.5.1",
-        "run-sequence": "1.1.5"
-        
+        "run-sequence": "1.1.5",
+        "gulp-mocha": "2.2.0",
+        "sinon": "1.17.4",
+        "expect.js": "0.3.1"
     },
     "devDependencies": {
         "gulp": "latest",

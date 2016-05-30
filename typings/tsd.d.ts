@@ -2,7 +2,9 @@
 /// <reference path="node/node.d.ts" />
 /// <reference path="react/react.d.ts" />
 /// <reference path="react/react-dom.d.ts" />
-
+/// <reference path="mocha/mocha.d.ts" />
+/// <reference path="sinon/sinon.d.ts" />
+/// <reference path="expect/expect.js.d.ts" />
 
 interface UnderscoreStatic {
     bindt<T>(
@@ -13,10 +15,10 @@ interface UnderscoreStatic {
 
 
 interface Window {
-    speechSynthesis : any
+    speechSynthesis: any
 }
-interface SpeechSynthesisUtterance{
-    
+interface SpeechSynthesisUtterance {
+
 }
 
 

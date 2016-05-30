@@ -16,7 +16,7 @@ exp.push(tList({
     t: "For an action which began at some time in the past and is still continuing.",
     list: [
         { l: "They <p>have been building</p> this bridge for the last nine months." },
-        { l: "They <p>have been playing</p> tennis since 4 PM." },
+        { l: "They <p>have been playing</p> tennis since 4 p.m." },
         { l: "He <p>has been working</p> in this company for a long time." },
         { l: "I <p>have been writing</p> a book for the last one year." },
 

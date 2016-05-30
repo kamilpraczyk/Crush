@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons } from '../../helper/constants';
+import {space, viewIds, id, icons, capital } from '../../helper/constants';
 import explenation = require('./explenation');
 
 const separator = " ";
@@ -79,7 +79,7 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["Chris", "has", "not", "left", "for home"],
+        correct: [capital.names.Chris, "has", "not", "left", "for home"],
         explenation: explenation,
         placeholder: placeholder
     }, {
@@ -97,7 +97,7 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: "",
-        correct: ["Has", "Bob", "left", "for home", "?"],
+        correct: ["Has", capital.names.Bob, "left", "for home", "?"],
         explenation: explenation,
         placeholder: placeholder
     }, {

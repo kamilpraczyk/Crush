@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {empty, space, viewIds, id, icons, multi } from '../../helper/constants';
+import {empty, space, viewIds, id, icons, multi, capital } from '../../helper/constants';
 import explenation = require('./explenation');
 
 const common = [viewIds.radio];
@@ -24,14 +24,14 @@ const lessons = [
         placeholder: placeholder
     }, {
         id: id(common), title: title,
-        name: space + " you " + space + " anything on Saturday morning?",
+        name: space + " you " + space + " anything on " + capital.days.Saturday + " morning?",
         correct: ["Are " + multi + " doing"],
         incorrect: ["Do " + multi + " doing"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
-        name: "Where is Bob? - He is " + space + " soccer in the sports hall.",
+        name: "Where is " + capital.names.Bob + "? He is " + space + " soccer in the sports hall.",
         correct: ["playing"],
         incorrect: ["having"],
         explenation: explenation,
@@ -59,7 +59,7 @@ const lessons = [
         placeholder: placeholder
     }, {
         id: id(common), title: title,
-        name: "Why " + space + " always raining in England?",
+        name: "Why " + space + " always raining in " + capital.countries.England + "?",
         correct: ["is it"],
         incorrect: [empty, "is"],
         explenation: explenation,

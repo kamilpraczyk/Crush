@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons } from '../../helper/constants';
+import {space, viewIds, id, icons, capital } from '../../helper/constants';
 import explenation = require('./explenation');
 const separator = " ";
 const common = [viewIds.radio];
@@ -17,7 +17,7 @@ const lessons = [
         placeholder: placeholder
     }, {
         id: id(common), title: title,
-        name: "I've " + space + " Polish for 20 years and I still don't know very much.",
+        name: "I've " + space + " " + capital.nationalityAdj.Polish + " for 20 years and I still don't know very much.",
         correct: ["been learning"],
         incorrect: ["learning", "not been learning"],
         explenation: explenation,
@@ -59,7 +59,7 @@ const lessons = [
         placeholder: placeholder
     }, {
         id: id(common), title: title,
-        name: "How long have you " + space + " English?",
+        name: "How long have you " + space + " " + capital.nationalityNoun.English + "?",
         correct: ["been learning"],
         incorrect: ["learning", "learn", "learned"],
         explenation: explenation,
