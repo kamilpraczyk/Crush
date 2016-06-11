@@ -17,6 +17,7 @@ function getHeader(props: BoardResult, state: State, setState: Function) {
             return ButtonView({
                 icon: state.showAnswer ? null : DrawCss.getSupportIcon(),
                 isTime: isId.isDigitalTime(props.lessonData.id),
+                isResponsibleCenter: true,
                 name: state.showAnswer ? props.lessonData.correct.join(" ") : null,
                 onClick: function () {
                     setState({

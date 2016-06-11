@@ -74,6 +74,7 @@ function getBody(state: BoardResult) {
     },
         ButtonView({
             name: state.text,
+            isResponsibleCenter: true,
             onClick: function () {
                 onRead(state.text)
             }

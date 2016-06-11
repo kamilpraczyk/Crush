@@ -2,28 +2,19 @@ import css = require('../../../../utils/css/css');
 import utils = require('../../../../utils/utils');
 
 let styles = {
-    
-    panel :{
-        width : '100%',
-        height : '100%'
-        
+
+    panel: {
+        width: '100%',
+        height: '100%',
+        overflowX: 'hidden',
+        overflowY: 'auto',
+        paddingBottom: '10vh'
     },
-    
-    button : {
-      color : '#AAA'
-    }
 }
 
 export = utils.union(css, {
-    
-    getPanel(){
+
+    getPanel() {
         return styles.panel;
-    },
-    
-    getButton(){
-        return styles.button;
     }
-
-
-
 });

@@ -31,10 +31,32 @@ const get = function <T1, T2, T3, T4, T5>(a: T1, b?: T2, c?: T3, d?: T4, e?: T5)
     return res;
 }
 
+function getSize() {
+    const w = window;
+    const d = document;
+    const e = d.documentElement;
+    const g = d.getElementsByTagName('body')[0];
+    let x = w.innerWidth || e.clientWidth || g.clientWidth;
+    let y = w.innerHeight || e.clientHeight || g.clientHeight;
+    return {
+        x: x,
+        y: y
+    }
+}
+
+function isMobile() {
+    const size = getSize();
+    if (size.x < 450 || size.y < 450) {
+        return true;
+    }
+    return false;
+}
+
 const backgroundColourText = 'rgba(255, 255, 255, 0.60)';
 let style = {
 
     get: get,
+    isMobile: isMobile,
 
 
     animate: function (callback: Function, object?: any) {
@@ -198,8 +220,9 @@ let style = {
 
     }
 
-
-
 }
+
+
+
 
 export = style;

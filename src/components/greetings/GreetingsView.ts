@@ -34,6 +34,7 @@ function render() {
         return ButtonView({
             name: dictionary.GREET_START(),
             isResponsibleHeight: true,
+            isResponsibleCenter: true,
             onClick: function () {
                 AppDispatcher.handleViewAction({
                     actionType: Constants.GREETINGS_SHOW_LESSONS,

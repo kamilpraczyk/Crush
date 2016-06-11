@@ -2,6 +2,7 @@
 import _ = require("underscore");
 import voice = require("./voice");
 import keys = require("./keys/keys");
+import { capital } from '../lessons/helper/constants';
 
 export = {
     union,
@@ -16,7 +17,7 @@ export = {
 
 function tryToSetLowercaseFirstLetter(s: string, sentenceWords: string[]) {
     console.log('s', s);
-    /*set to lowercase first word of the sentence*/
+    /*set to lowercase first word of the sentence if is not defined in capitalized words TODO*/
 
 
     const sentenceWord = _.first(sentenceWords);
@@ -25,12 +26,17 @@ function tryToSetLowercaseFirstLetter(s: string, sentenceWords: string[]) {
     const word = _.first(words);
 
     if (sentenceWord === word) {
-        switch (word) {
-            case "I":
-            case "I'm":
-            case "English":
-                //case 'Peter':
-                return s;
+
+        let allow = true;
+        _.mapObject(capital, (category) => {
+            _.mapObject(category, (capitalWord) => {
+                if (capitalWord === word) {
+                    allow = false;
+                }
+            });
+        });
+        if (!allow) {
+            return s;
         }
 
         return lowercaseFirstLetter(s);

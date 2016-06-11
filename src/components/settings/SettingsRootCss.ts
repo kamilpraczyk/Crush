@@ -22,26 +22,28 @@ let styles = {
         fontSize: css.font.fontSize.XL,
     },
 
-
     panelSelection: {
         display: 'flex',
         flexGrow: 7,
         flexDirection: 'column',
-        alignItems: 'stretch',
-        overflowX: 'hidden',
-        overflowY: 'auto',
-        paddingBottom: '10vh'
+        alignItems: 'stretch'
     },
 
     panelRoot: {
         display: 'flex',
-        marginBottom: '3px',
+        marginBottom: '2px',
         flexGrow: 1,
         flexDirection: 'column',
         alignItems: 'stretch',
         alignContent: 'stretch',
     },
-
+    panelRootMinimalized: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        width: '100%',
+        flexDirection: 'row',
+    },
 
     rootItem: {
         display: 'flex',
@@ -64,8 +66,8 @@ export = utils.union(css, {
         return styles.panelSelection;
     },
 
-    getPanelRoot() {
-        return styles.panelRoot;
+    getPanelRoot(isMenuMinimalized: boolean) {
+        return css.get(styles.panelRoot, isMenuMinimalized ? styles.panelRootMinimalized : {});
     },
 
     getRootItem() {

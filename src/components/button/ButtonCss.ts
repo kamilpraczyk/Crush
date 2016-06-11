@@ -8,7 +8,6 @@ const styles = {
         backgroundColor: css.button.background.normal,
         color: css.button.color.normal,
         border: css.button.border.normal,
-        // textTransform: 'capitalize',
         MozBorderRadius: 28,
         WebkitBorderRadius: 28,
         borderRadius: 28,

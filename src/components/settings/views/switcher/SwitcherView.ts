@@ -1,5 +1,6 @@
 /// <reference path="../../../../../typings/tsd.d.ts" />
 import React = require('react');
+import ReactDOM = require('react-dom');
 import _ = require('underscore');
 import SwitchCss = require('./SwitchCss');
 import AppDispatcher = require('../../../../dispatcher/AppDispatcher');
@@ -35,6 +36,7 @@ function render() {
     const buttons = _.map(state.list, (item: LessonFace, id: string) => {
         return ButtonView({
             key: id,
+            ref: id,
             leftIcon: item.icon,
             name: item.name,
             onClick: function () {
@@ -50,9 +52,45 @@ function render() {
     });
 
     return div({
-        style: SwitchCss.getPanel()
+        style: SwitchCss.getPanel(),
+        ref: 'panelSwitcher',
     }, PurchaseInfoView(), buttons);
 }
 
 
-export = render; 
+
+
+function scrollTo(el: Element, toEl: Element) {
+    el.scrollTop = 0;
+    if (toEl) {
+        const d = toEl.getBoundingClientRect();
+        el.scrollTop = d.top
+    }
+}
+
+
+
+class View extends React.Component<{}, {}> {
+
+    constructor() {
+        super();
+    }
+    scroll() {
+        scrollTo(ReactDOM.findDOMNode(this.refs["panelSwitcher"]), ReactDOM.findDOMNode(this.refs[LessonStore.getActiveId()]));
+    }
+
+    componentDidMount() {
+        this.scroll();
+    }
+
+    componentDidUpdate() {
+        this.scroll();
+    }
+
+    render() {
+        return render();
+    }
+}
+
+export =  React.createFactory(View);
+

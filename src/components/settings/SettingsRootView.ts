@@ -1,6 +1,7 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 import React = require('react');
 import { Component, PropTypes } from 'react';
+import css = require('../../utils/css/css');
 import ButtonView = require('../../components/button/ButtonView');
 import _ = require('underscore');
 import SettingsRootCss = require('./SettingsRootCss');
@@ -16,7 +17,8 @@ const {div} = React.DOM;
 function getState() {
     return {
         rootList: SettingsRootStore.getRootList(),
-        isMinimalized: SettingsRootStore.isMinimalized()
+        isMinimalized: SettingsRootStore.isMinimalized(),
+        isMenuMinimalized: SettingsRootStore.isMenuMinimalized() && css.isMobile()
     };
 }
 
@@ -32,7 +34,7 @@ function getPanel(state: State) {
 
 function getPanelRoot(state: State) {
     return div({
-        style: SettingsRootCss.getPanelRoot()
+        style: SettingsRootCss.getPanelRoot(state.isMenuMinimalized)
     }, getRootList(state));
 }
 
@@ -59,9 +61,9 @@ function getPanelSelection() {
 
 
 
-function getItem(item: any, id: string) {
+function getItem(state: State, item: any, id: string) {
     return ButtonView({
-        name: item.name,
+        name: state.isMenuMinimalized ? '' : item.name,
         icon: item.icon,
         onClick: function () {
             AppDispatcher.handleViewAction({
@@ -71,8 +73,10 @@ function getItem(item: any, id: string) {
         },
         isQuickClick: id === 'close' ? false : true,
         isExpandWidth: true,
-        isExpand: true,
+        isExpand: state.isMenuMinimalized ? false : true,
         isActive: item.active,
+        isResponsibleHeight: state.isMenuMinimalized ? true : false,
+        isResponsibleCenter: state.isMenuMinimalized ? true : false
     });
 }
 
@@ -81,7 +85,7 @@ function getRootList(state: State) {
         return div({
             key: id,
             style: SettingsRootCss.getRootItem(),
-        }, getItem(item, id));
+        }, getItem(state, item, id));
     });
 }
 

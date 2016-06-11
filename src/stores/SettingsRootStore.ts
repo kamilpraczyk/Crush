@@ -16,7 +16,7 @@ const _ids = {
 }
 
 let _isMinimalized = true;
-
+let _isMenuMinimalized = false;
 let _activeRoot = _ids.lessons;
 
 let _rootList = {
@@ -85,6 +85,9 @@ class SettingRootStore extends BaseStore {
     isMinimalized() {
         return _isMinimalized;
     }
+    isMenuMinimalized() {
+        return _isMenuMinimalized;
+    }
 
     dispatcherIndex = this.register((payload: { action: any }) => {
         let action = payload.action;
@@ -103,6 +106,20 @@ class SettingRootStore extends BaseStore {
                 _isMinimalized = false;
                 this.emitChange();
                 break;
+            case Constants.EXPLENATION_SCROLL_MIDDLE:
+                _isMenuMinimalized = true;
+                this.emitChange();
+                break;
+            case Constants.EXPLENATION_SCROLL_TOP:
+                _isMenuMinimalized = false;
+                this.emitChange();
+                break;
+            case Constants.EXPLENATION_SCROLL_RESET:
+                _isMenuMinimalized = false;
+                this.emitChange();
+                break;
+
+
 
         }
         return true;

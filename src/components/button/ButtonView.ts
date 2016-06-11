@@ -5,6 +5,7 @@ const {div, button} = React.DOM;
 interface Props {
     name: string,
     key?: string,
+    ref? : string,
     icon?: string,
     leftIcon?: string,
     onClick: Function,
@@ -81,6 +82,7 @@ class ButtonView extends React.Component<Props, State>{
         }
 
         return button({
+            ref : this.props.ref,
             key: this.props.key,
             style: ButtonCss.getButton({
                 pressed: this.state.pressed,

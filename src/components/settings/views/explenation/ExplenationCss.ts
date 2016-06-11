@@ -5,6 +5,9 @@ const styles = {
 
     panel: {
         width: '100%',
+        overflowX: 'hidden',
+        overflowY: 'auto',
+        paddingBottom: '10vh'
     },
 
     title: {
