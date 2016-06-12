@@ -38,3 +38,4 @@ temp/
 platforms/
 plugins/
 hooks/
+server/node_modules/

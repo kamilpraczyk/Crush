@@ -105,12 +105,14 @@ let style = {
         background: {
             normal: 'black',
             active: 'orange',
-            focus: 'blue'
+            focus: 'blue',
+            disabled: 'black'
         },
         color: {
             normal: 'white',
             active: 'white',
-            focus: 'white'
+            focus: 'white',
+            disabled: 'gray'
         },
         border: {
             normal: '5px solid gray',
@@ -118,6 +120,7 @@ let style = {
             focus: '5px solid gray',
             success: '5px solid #00FF00',
             fail: '5px solid  #FF0000',
+            disabled: '5px solid gray'
         }
     },
 

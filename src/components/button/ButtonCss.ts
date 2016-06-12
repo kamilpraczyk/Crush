@@ -72,6 +72,13 @@ const styles = {
         border: css.button.border.fail
     },
 
+    disabled: {
+        backgroundColor: css.button.background.disabled,
+        color: css.button.color.disabled,
+        border: css.button.border.disabled,
+        cursor: css.cursor.normal
+    },
+
 
     name: {
         paddingTop: '2vh',
@@ -115,7 +122,8 @@ interface ButtonProps {
     isSuccess: boolean,
     isFail: boolean,
     backUrl: string,
-    isTime: boolean
+    isTime: boolean,
+    disabled: boolean
 }
 
 export = utils.union(css, {
@@ -152,6 +160,9 @@ export = utils.union(css, {
                 backgroundColor: css.background.text.backgroundColor
             });
         }
+
+        if (options.disabled)
+            style = css.get(style, styles.disabled);
 
 
 

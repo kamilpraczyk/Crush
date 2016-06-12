@@ -1,0 +1,19 @@
+//Create table
+CREATE TABLE Users (
+  user_id INT NOT NULL AUTO_INCREMENT,
+  email VARCHAR(80) NOT NULL,
+  name VARCHAR(50) NOT NULL,
+  password CHAR(41) NOT NULL,
+  registered CHAR(20) NOT NULL,
+  valid_to CHAR(20) NOT NULL,
+  PRIMARY KEY (user_id),
+  UNIQUE INDEX (email)
+);
+
+//Crate admin
+INSERT INTO Users (email, name, password, registered, valid_to)
+VALUES ('kamil.praczyk@gmail.com','Kamil','abcd!', '2016-06-12', '2016-06-30');
+
+
+//Select user
+SELECT email, name, password, valid_to FROM `Users` WHERE email='kamil.praczyk@gmail.com'

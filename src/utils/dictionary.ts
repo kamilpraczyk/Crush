@@ -30,9 +30,14 @@ const replace = function (id: string, options: any) {
 }
 
 const data = {
+    GREET_LOGIN: wrap('GREET_LOGIN'),
+    GREET_EMAIL: wrap('GREET_EMAIL'),
+    GREET_PASSWORD: wrap('GREET_PASSWORD'),
+    GREET_REGISTER: wrap('GREET_REGISTER'),
     GREET_HELLO: (o: { name: string }) => {
         return replace('GREET_HELLO', o);
     },
+    GREET_LOGIN_INVALID: wrap('GREET_LOGIN_INVALID'),
     GREET_TITLE: wrap('GREET_TITLE'),
     GREET_START: wrap('GREET_START'),
     OK: wrap('OK'),

@@ -5,7 +5,6 @@ import Layout = require('./layout/Layout')
 import HomeStore = require('../stores/home/HomeStore');
 import utils = require('../utils/utils')
 
-
 class Home {
 
     private layout: any;
@@ -18,16 +17,15 @@ class Home {
         this.showGreetings = this.showGreetings.bind(this);
         this.showSettings = this.showSettings.bind(this);
         this.showBoard = this.showBoard.bind(this);
+        this.onChange = this.onChange.bind(this);
+
+        HomeStore.addChangeListener(this.onChange);
 
         utils.keys();
         this.layout = Layout({
             onComponentDidMount: this.onComponentDidMount
         });
         ReactDOM.render(this.layout, this.el);
-
-
-        this.onChange = this.onChange.bind(this);
-        HomeStore.addChangeListener(this.onChange);
     }
 
     onChange() {

@@ -6,6 +6,7 @@ interface Props {
     name: string,
     key?: string,
     ref? : string,
+    disabled? : boolean,
     icon?: string,
     leftIcon?: string,
     onClick: Function,
@@ -84,7 +85,9 @@ class ButtonView extends React.Component<Props, State>{
         return button({
             ref : this.props.ref,
             key: this.props.key,
+            disabled: this.props.disabled,
             style: ButtonCss.getButton({
+                disabled : this.props.disabled,
                 pressed: this.state.pressed,
                 isExpand: this.props.isExpand,
                 isExpandWidth: this.props.isExpandWidth,

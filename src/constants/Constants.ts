@@ -1,5 +1,7 @@
 /// <reference path="../../typings/tsd.d.ts" />
 export =  {
+    LOGIN : 'LOGIN',
+    REGISTER : 'REGISTER',
     GREETINGS_SHOW_LESSONS: 'GREETINGS_SHOW_LESSONS',
     ROOT_ITEM_CLICK: 'ROOT_ITEM_CLICK',
     SWITCH_ACTION: 'SWITCH_ACTION',

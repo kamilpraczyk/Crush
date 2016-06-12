@@ -2,7 +2,12 @@
 const dictonary = {
     GREET_TITLE: 'Crush English',
     GREET_HELLO: 'Hello world {name}!',
-    GREET_START: 'Start',
+    GREET_START: 'Start Demo',
+    GREET_LOGIN: 'Login',
+    GREET_EMAIL: 'Email',
+    GREET_PASSWORD: 'Password',
+    GREET_LOGIN_INVALID: 'Incorrect login or password',
+    GREET_REGISTER: 'Register',
     OK: 'Ok',
     SUBSCRIBE_TEXT: 'Subscribe to get full access and unblock all lessons.',
     SUBSCRIBE_BUTTON: 'Subscribe',
