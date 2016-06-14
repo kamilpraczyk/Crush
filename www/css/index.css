@@ -92,6 +92,22 @@ font-style:normal;
 }
 
 
+@font-face {
+font-family:"ArchitectsDaughter";
+src:url("handwriting/ArchitectsDaughter.ttf") format("truetype");
+font-weight:normal;
+font-style:normal;
+}
+
+
+@font-face {
+font-family:"journal";
+src:url("handwriting/ArchitectsDaughter.ttf") format("truetype");
+font-weight:normal;
+font-style:normal;
+}
+
+
 * {
 	-webkit-user-select: none;
 	-webkit-tap-highlight-color: rgba(0,0,0,0)!important; /* make transparent link selection, adjust last value opacity 0 to 1.0 */

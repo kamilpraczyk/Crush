@@ -6,7 +6,6 @@ import SwitchCss = require('./SwitchCss');
 import AppDispatcher = require('../../../../dispatcher/AppDispatcher');
 import Constants = require('../../../../constants/Constants');
 import ButtonView = require('../../../button/ButtonView');
-import PurchaseInfoView = require('../purchaseInfo/PurchaseInfoView');
 import {LessonMapFace, LessonFace} from '../../../../lessons/interface';
 import SettingsRootStore = require('../../../../stores/SettingsRootStore');
 import LessonStore = require('../../../../stores/lesson/LessonStore');
@@ -14,20 +13,8 @@ const {div} = React.DOM;
 
 
 function getState() {
-
-    let list = LessonStore.getToBought();
-    const ids = SettingsRootStore.getIds();
-
-    switch (SettingsRootStore.getActiveRoot()) {
-        case ids.lessons:
-            list = LessonStore.getBought();
-            break;
-        case ids.shopping:
-            list = LessonStore.getToBought();
-            break;
-    }
     return {
-        list: list
+        list: LessonStore.getAllLessons()
     }
 }
 
@@ -54,7 +41,7 @@ function render() {
     return div({
         style: SwitchCss.getPanel(),
         ref: 'panelSwitcher',
-    }, PurchaseInfoView(), buttons);
+    }, buttons);
 }
 
 

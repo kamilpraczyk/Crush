@@ -1,12 +1,26 @@
    
 <?php header('Access-Control-Allow-Origin: *');
-$email=$_GET["l"];
-$pass=$_GET["p"];
+//TO see errors:
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
+
+$email = urldecode($_GET["l"]);
+$pass = urldecode($_GET["p"]);
 
 function error($txt){
     $error = array('error' => $txt);
     print json_encode($error);
     die();
+}
+
+function isValidDate($valid_to){ //"2013-03-15"
+    $validDate = new DateTime($valid_to);
+    $nowDate   = new DateTime();
+	if($validDate > $nowDate || date_format($nowDate,"Y-m-d") === $valid_to){
+        return TRUE;
+	}
+    return FALSE;
 }
 
 $servername = "localhost";
@@ -26,16 +40,21 @@ $selected = mysql_select_db("clingy_crush",$conn);
 $result = mysql_query("SELECT email, name, password, valid_to FROM Users WHERE email='".$email."';");
 
 $rows = array();
-$isValid = false;
+$isValid = FALSE;
+$user = null;
 
 while ($row = mysql_fetch_array($result)) {
     $rows[] = $row;
-    if($row{'email'} === $email && $row{'password'}=== $pass){//TODO valid to
-        $isValid = true;
+    if($row{'email'} === $email && $row{'password'} === $pass){
+        $user = $row;
+        if(isValidDate($row{'valid_to'})){
+            $isValid = TRUE;
+        }
     }
    //echo "login:".$row{'login'}." Name:".$row{'name'}."<br>";
 }
-$data = array('isPrime' => $isValid, 'user' => $rows[0]);
+
+$data = array('isPrime' => $isValid, 'user' => $user);
 print json_encode($data);
 
 //close the connection

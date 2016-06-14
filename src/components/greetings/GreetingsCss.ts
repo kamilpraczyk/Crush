@@ -27,7 +27,7 @@ let styles = {
 
     text: {
         color: css.font.color.light,
-        fontSize: css.font.fontSize.XL3,
+        fontSize: css.font.fontSize.XL2,
         paddingBottom: '2vh'
     },
 

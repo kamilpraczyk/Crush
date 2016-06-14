@@ -228,7 +228,8 @@ export const capital = {
 //TODO - IE11 grammar fix layout
 // lessons 4 pictures with time clock
 //TODO - milestone - make history about acheived lessons (encurage to carry on and finish couses - or pay for more)
-
+//
+//TODO  when finish - next to buy me a beer - button save score, and display last score
 // make lessons - tences vs each other
 //make lessons - sentence to =>question sentence
 

@@ -12,7 +12,6 @@ const styles = {
         WebkitBorderRadius: 28,
         borderRadius: 28,
         cursor: 'pointer',
-        fontFamily: 'Arial',
         fontSize: css.font.fontSize.XL,
         minHeight: 35,
         textDecoration: 'none',
@@ -83,8 +82,8 @@ const styles = {
     name: {
         paddingTop: '2vh',
         paddingBottom: '2vh',
-        paddingLeft: '2vw',
-        paddingRight: '2vw',
+        paddingLeft: '1vw',
+        paddingRight: '1vw',
         display: 'inline-flex',
         textAlign: 'left',
         alignSelf: 'center',
@@ -94,15 +93,16 @@ const styles = {
         paddingTop: '2vh',
         paddingBottom: '2vh',
         paddingLeft: '2vw',
-        paddingRight: '2vw',
+        paddingRight: '1vw',
         display: 'inline-flex',
         alignSelf: 'center'
     },
+
     leftIcon: {
         paddingTop: '2vh',
         paddingBottom: '2vh',
         paddingLeft: '2vw',
-        paddingRight: '2vw',
+        paddingRight: '1vw',
         display: 'inline-flex',
         alignSelf: 'center',
         color: '#777',

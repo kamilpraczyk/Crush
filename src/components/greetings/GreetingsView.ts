@@ -125,7 +125,7 @@ function render(state: State, setState: Function) {
             isResponsibleCenter: true,
             onClick: function () {
                 AppDispatcher.handleViewAction({
-                    actionType: Constants.REGISTER, //TODO
+                    actionType: Constants.REGISTER
                 });
             }
         });

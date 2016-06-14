@@ -8,6 +8,10 @@ const borderWidthUnit = 'vh';
 const cursorPointer = 'pointer';
 const cursorDefault = 'default';
 const fontFamilyTime = 'Orbitron Medium';
+const fontFamilyWriting = 'ArchitectsDaughter';
+const fontFamilyJournal = 'journal';
+
+
 import {isId} from '../../lessons/helper/constants';
 
 
@@ -18,7 +22,7 @@ const L = constFont - 0.3 + constPoint;
 const XL = constFont + constPoint;
 const XL2 = constFont + 0.2 + constPoint;
 const XL3 = constFont + 0.5 + constPoint;
-const XL4 = constFont + 2.0 + constPoint;
+const XL4 = constFont + 0.8 + constPoint;
 
 
 const get = function <T1, T2, T3, T4, T5>(a: T1, b?: T2, c?: T3, d?: T4, e?: T5): T1 & T2 & T3 & T4 & T5 {
@@ -59,9 +63,9 @@ let style = {
     isMobile: isMobile,
 
 
-    animate: function (callback: Function, object?: any) {
+    animate: function(callback: Function, object?: any) {
         if (callback) {
-            return function (e: any) {
+            return function(e: any) {
                 var call = object ? _.partial(callback, object, _.extend({}, e) as any) : callback;
                 call();
             };
@@ -92,7 +96,8 @@ let style = {
             hint: 'gray',
             disable: 'lightgray',
             success: 'green',
-            fail: 'red'
+            fail: 'red',
+            ink : '#2C5781'
         }
     },
 
@@ -133,6 +138,12 @@ let style = {
     fontFamily: {
         time: {
             fontFamily: fontFamilyTime
+        },
+        writing: {
+            fontFamily: fontFamilyWriting
+        },
+        journal: {
+            fontFamily: fontFamilyJournal
         }
     },
 
@@ -154,6 +165,7 @@ let style = {
                 alignItems: 'stretch',
                 alignContent: 'stretch',
                 fontSize: XL,
+                fontFamily: fontFamilyWriting
             }
         },
 

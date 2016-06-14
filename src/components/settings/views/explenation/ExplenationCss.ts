@@ -7,7 +7,9 @@ const styles = {
         width: '100%',
         overflowX: 'hidden',
         overflowY: 'auto',
-        paddingBottom: '10vh'
+        paddingBottom: '10vh',
+        fontFamily: css.fontFamily.journal.fontFamily,
+        color: css.font.color.ink
     },
 
     title: {
@@ -15,7 +17,7 @@ const styles = {
         padding: '2vh',
         paddingBottom: 0,
         textAlign: 'center',
-        fontSize: css.font.fontSize.XL2,
+        fontSize: css.font.fontSize.XL4,
     },
 
     body: {
@@ -24,12 +26,13 @@ const styles = {
         paddingLeft: '2vw',
         paddingRight: '2vw',
         margin: 'auto',
+        color: css.font.color.ink
     },
 
     bodyContent: {
         wordWrap: 'break-word',
         whiteSpace: 'pre-wrap',
-        fontSize: css.font.fontSize.XL,
+        fontSize: css.font.fontSize.XL3,
     }
 
 }

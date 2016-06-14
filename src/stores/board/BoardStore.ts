@@ -81,12 +81,6 @@ class BoardStore extends BaseStore {
         return pointsHelper.getState(list[_index], list);
     }
 
-    getPurchaseInfoState() {
-        return {
-            someState: '' //TODO
-        }
-    }
-
     getExplenation() {
         return {
             isVisible: true,

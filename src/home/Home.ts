@@ -11,6 +11,7 @@ class Home {
     private boardRegion: Element;
     private settingsRegion: Element;
     private greetingsRegion: Element;
+    private registeringRegion: Element;
 
     constructor(public el: HTMLElement) {
         this.onComponentDidMount = this.onComponentDidMount.bind(this);
@@ -30,6 +31,7 @@ class Home {
 
     onChange() {
         this.showGreetings();
+        this.showRegistering();
         this.showSettings();
         this.showBoard();
     }
@@ -38,11 +40,16 @@ class Home {
         this.boardRegion = regions.boardRegion;
         this.settingsRegion = regions.settingsRegion;
         this.greetingsRegion = regions.greetingsRegion;
+        this.registeringRegion = regions.registeringRegion;
         this.onChange();
     }
 
     showGreetings() {
         ReactDOM.render(components.GreetingsView(), this.greetingsRegion);
+    }
+
+    showRegistering() {
+        ReactDOM.render(components.RegisteringView(), this.registeringRegion);
     }
 
     showSettings() {

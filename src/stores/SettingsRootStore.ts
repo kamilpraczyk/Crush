@@ -12,7 +12,7 @@ const _ids = {
     lessons: 'lessons',
     explenation: 'explenation',
     settings: 'setting',
-    shopping: 'shopping'
+    user: 'user'
 }
 
 let _isMinimalized = true;
@@ -23,7 +23,7 @@ let _rootList = {
 
     [_ids.close]: {
         name: 'practise',
-        icon: 'moon-redo2',
+        icon: 'moon-accessibility',
         active: false,
         disable: false
     },
@@ -35,13 +35,13 @@ let _rootList = {
     },
     [_ids.lessons]: {
         name: 'lessons',
-        icon: 'icon-folder',
+        icon: 'moon-drawer3',
         active: true,
         disable: false
     },
-    [_ids.shopping]: {
-        name: 'shopping',
-        icon: 'icon-basket',
+    [_ids.user]: {
+        name: 'user',
+        icon: 'moon-user2',
         active: false,
         disable: false
     }

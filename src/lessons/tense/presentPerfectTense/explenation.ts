@@ -51,7 +51,7 @@ exp.push(tList({
 exp.push(tList({
     t: "Positive sentence.",
     list: [
-        { l: "I <p>have eaten</p> meal." },
+        { l: "I <p>have eaten</p> a meal." },
         { l: "She <p>has learnt</p> a lesson." }
     ]
 }));
@@ -59,7 +59,7 @@ exp.push(tList({
 exp.push(tList({
     t: "Negative sentence.",
     list: [
-        { l: "I <p>have not eaten</p> meal." },
+        { l: "I <p>have not eaten</p>a  meal." },
         { l: "She <p>has not learnt</p> a lesson." }
     ]
 }));
@@ -67,7 +67,7 @@ exp.push(tList({
 exp.push(tList({
     t: "Interrogative sentence.",
     list: [
-        { l: "<p>Have</p> I <p>eaten</p> meal?" },
+        { l: "<p>Have</p> I <p>eaten</p> a meal?" },
         { l: "<p>Has</p> she <p>learnt</p> a lesson?" }
     ]
 }));

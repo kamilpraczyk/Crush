@@ -24,6 +24,8 @@ const styles = {
         alignSelf: 'center',
         paddingTop: '1vh',
         paddingBottom: '1vh',
+        paddingLeft: '2vw',
+        paddingRight: '2vw',
         fontSize: css.font.fontSize.XL,
         wordWrap: 'break-word',
         whiteSpace: 'pre-wrap'

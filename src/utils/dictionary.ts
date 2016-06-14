@@ -43,6 +43,22 @@ const data = {
     OK: wrap('OK'),
     SUBSCRIBE_TEXT: wrap('SUBSCRIBE_TEXT'),
     SUBSCRIBE_BUTTON: wrap('SUBSCRIBE_BUTTON'),
+    LOGEDIN_AS: (o: { name: string }) => {
+        return replace('LOGEDIN_AS', o);
+    },
+    LOGIN_VALID: (o: { valid: number }) => {
+        if (o.valid === 0) {
+            return replace('LOGIN_EXPIRED', o);
+        } else if (o.valid === 1) {
+            return replace('LOGIN_VALID', o);
+        } else if (o.valid > 1) {
+            return replace('LOGIN_VALID_PLURAL', o);
+        }
+        return '';
+
+    },
+    LOG_OUT: wrap('LOG_OUT'),
+    EXPIRED_TEXT: wrap('EXPIRED_TEXT'),
 
     GRATULATIONS_TITLE: wrap('GRATULATIONS_TITLE'),
     GRATULATIONS_TEXT: (o: { score: number }) => {

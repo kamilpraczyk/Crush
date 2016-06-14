@@ -18,31 +18,14 @@ function onSwitchAction(id: string) {
     }
 }
 
-function getBought(): LessonMapFace {
-    let result = {} as LessonMapFace;
-    _.mapObject(_lessons, (lesson: LessonFace, key: string) => {
-        if (lesson.bought === true)
-            result[key] = lesson;
-    });
-    return result;
-}
-
-function getToBought(): LessonMapFace {
-    let result = {} as LessonMapFace;
-    _.mapObject(_lessons, (lesson: LessonFace, key: string) => {
-        if (lesson.bought === false)
-            result[key] = lesson;
-    });
-    return result;
-}
-
 class LessonStore extends BaseStore {
     constructor() {
         super()
     }
 
-    getToBought = getToBought;
-    getBought = getBought;
+    getAllLessons(){
+        return _lessons;
+    }
 
     getItem(id: string): LessonFace {
         return _lessons[id]

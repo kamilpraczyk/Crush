@@ -10,6 +10,7 @@ import Constants = require('../../constants/Constants');
 import SettingsRootStore = require('../../stores/SettingsRootStore');
 import SwitcherView = require('./views/switcher/SwitcherView');
 import ExplenationView = require('./views/explenation/ExplenationView');
+import UserView = require('./views/user/UserView');
 
 import {RootFace, RootFaces } from '../../stores/SettingsRootInterfaces';
 const {div} = React.DOM;
@@ -45,11 +46,14 @@ function getPanelSelection() {
 
     switch (SettingsRootStore.getActiveRoot()) {
         case ids.lessons:
-        case ids.shopping:
             view = SwitcherView();
             break;
         case ids.explenation:
             view = ExplenationView();
+            break;
+        case ids.user:
+            view = UserView();
+            break;
     }
 
     return div({

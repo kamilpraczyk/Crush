@@ -12,13 +12,21 @@ export = {
     round10,
     keys,
     replaceAll,
-    tryToSetLowercaseFirstLetter
+    tryToSetLowercaseFirstLetter,
+    howManyDaysLeft
 };
 
-function tryToSetLowercaseFirstLetter(s: string, sentenceWords: string[]) {
-    console.log('s', s);
-    /*set to lowercase first word of the sentence if is not defined in capitalized words TODO*/
+function howManyDaysLeft(date: string): number { //ISO 2016-12-30
+    if (date) {
+        var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+        var firstDate = new Date();
+        var secondDate = new Date(date);
+        return Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));
+    }
+    return 0;
+}
 
+function tryToSetLowercaseFirstLetter(s: string, sentenceWords: string[]) {
 
     const sentenceWord = _.first(sentenceWords);
 
@@ -27,15 +35,15 @@ function tryToSetLowercaseFirstLetter(s: string, sentenceWords: string[]) {
 
     if (sentenceWord === word) {
 
-        let allow = true;
+        let allowLowercase = true;
         _.mapObject(capital, (category) => {
             _.mapObject(category, (capitalWord) => {
                 if (capitalWord === word) {
-                    allow = false;
+                    allowLowercase = false;
                 }
             });
         });
-        if (!allow) {
+        if (!allowLowercase) {
             return s;
         }
 
