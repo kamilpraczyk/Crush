@@ -31,15 +31,41 @@ let styles = {
         paddingBottom: '2vh'
     },
 
-    login: {
+
+    line: {
         display: 'flex',
         maxWidth: '100%',
-        paddingTop: '2vh',
         flexFlow: 'row wrap',
-        paddingBottom: '1vh',
+        justifyContent: 'space-between'
     },
 
-  
+    label: {
+        color: css.font.color.light,
+        flexGrow: 1,
+        display: 'flex',
+        fontSize: '22px',
+        paddingTop: '1vh',
+        paddingRight: '1vw',
+        minWidth: '170px'
+    },
+
+    input: {
+        flexGrow: 1,
+        display: 'flex',
+        maxWidth: '100%',
+        fontSize: '22px',
+        border: '1px solid #e6e6e6',
+        borderRadius: '4px',
+        backgroundColor: '#3CBC8D',
+        color: css.font.color.light,
+        marginBottom: '1vh',
+        paddingLeft: '1vw',
+        paddingRight: '1vw',
+        paddingTop: '1vh',
+        paddingBottom: '1vh',
+    }
+
+
 }
 
 export = utils.union(css, {
@@ -53,5 +79,16 @@ export = utils.union(css, {
 
     getContainer() {
         return styles.container;
-    }, 
+    },
+
+
+    getLine() {
+        return styles.line;
+    },
+    getLabel() {
+        return styles.label;
+    },
+    getInput() {
+        return styles.input;
+    }
 });

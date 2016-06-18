@@ -9,7 +9,6 @@ import Constants = require('../../constants/Constants');
 import HomeStore = require('../../stores/home/HomeStore');
 const {div, input, label} = React.DOM;
 
-
 function render(state: State, setState: Function) {
 
     const props = HomeStore.getStateHome();
@@ -51,7 +50,6 @@ function render(state: State, setState: Function) {
             }
         });
     };
-
 
     function getLogin() {
 
@@ -129,7 +127,6 @@ function render(state: State, setState: Function) {
                 });
             }
         });
-
     }
 
     return div({
@@ -139,12 +136,10 @@ function render(state: State, setState: Function) {
     }, getTitle(), getTextHello(), getButton(), getLogin(), getRegister()));
 }
 
-
 interface State {
     email: string,
     password: string
 }
-
 
 class View extends React.Component<{}, State>{
 

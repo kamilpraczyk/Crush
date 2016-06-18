@@ -8,7 +8,7 @@ import catalog = require("../../catalog/catalog");
 
 let state = {
     isPrime: false,
-    isPrimeExpired: false,//TODO lowe to purchase more time
+    isPrimeExpired: false,//TODO love to purchase more time
     isGreetings: true,
     isRegistering: false,
     isInvalidLogin: false,
@@ -96,6 +96,12 @@ class Store extends BaseStore {
             case Constants.GREETINGS_SHOW_LESSONS:
                 state.isGreetings = false;
                 this.emitChange();
+                break;
+
+            case Constants.REGISTER_ON_SERVER:
+                //TODO 
+                console.log('REGISTER_ON_SERVER', action)
+                //this.emitChange();
                 break;
         }
         return true;

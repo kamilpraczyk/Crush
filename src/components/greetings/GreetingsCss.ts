@@ -53,13 +53,15 @@ let styles = {
         flexFlow: 'row wrap',
         justifyContent: 'space-between'
     },
+
     loginLabel: {
         color: css.font.color.light,
         flexGrow: 1,
         display: 'flex',
         fontSize: '22px',
         paddingTop: '1vh',
-        paddingRight: '1vw'
+        paddingRight: '1vw',
+        minWidth: '140px'
     },
 
     input: {
@@ -67,7 +69,7 @@ let styles = {
         display: 'flex',
         maxWidth: '100%',
         fontSize: '22px',
-        border: '1px solid #e6e6e6;',
+        border: '1px solid #e6e6e6',
         borderRadius: '4px',
         backgroundColor: '#3CBC8D',
         color: css.font.color.light,
@@ -83,11 +85,9 @@ export = utils.union(css, {
     getPanel() {
         return styles.panel;
     },
-
     getText() {
         return styles.text;
     },
-
     getContainer() {
         return styles.container;
     },
@@ -103,8 +103,6 @@ export = utils.union(css, {
     getLoginLabel() {
         return styles.loginLabel;
     },
-
-
     getInput() {
         return styles.input
     }
