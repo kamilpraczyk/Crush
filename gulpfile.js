@@ -118,7 +118,7 @@ gulp.task('test', function () {
         /*transpile*/
         .pipe(ts(tsProject))
         /*flush to disk*/
-        .pipe(gulp.dest('.'))
+        .pipe(gulp.dest('./test'))
         /*execute tests*/
         .pipe(mocha({
             reporter: 'progress'

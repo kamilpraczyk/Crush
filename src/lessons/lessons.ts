@@ -2,8 +2,7 @@
 import {LessonMapFace, LessonFace} from './interface';
 import _ = require('underscore');
 
-export const activeStartup = 'clockFourWords';
-import w = require('./extra/clock/clockFourWords');
+export const activeStartup = 'an_a_shortOne';
 
 const icon_draw = 'moon-quill';
 const icon_fourPictures = 'moon-images';
@@ -30,6 +29,10 @@ import presentPerfectContinuousTenseOneToThreePartTwo = require('./tense/present
 import presentPerfectContinuousTenseRadio = require('./tense/presentPerfectContinuousTense/presentPerfectContinuousTenseRadio');
 import location = require('./extra/location/location');
 import eitherNeither = require('./words/eitherNeither/eitherNeither');
+import an_a_shortOne = require('./words/an_a/an_a_shortOne');
+import an_a_shortTwo = require('./words/an_a/an_a_shortTwo');
+import an_a_shortThree = require('./words/an_a/an_a_shortThree');
+import an_a_shortFour = require('./words/an_a/an_a_shortFour');
 import irregularVerbs = require('./irregular/verbs/irregularVerbs');
 import irregularVerbsOneTwoThree = require('./irregular/verbs/irregularVerbsOneTwoThree');
 import singularAndPlural = require('./singularAndPlural/singularAndPlural');
@@ -40,6 +43,11 @@ import toBeInPresentAndPast = require('./verb/toBeInPresentAndPast/toBeInPresent
 import mineYour = require('./pronouns/possesive/mineYour');
 import myselfYourself = require('./pronouns/reflexive/myselfYourself');
 export const lessons: LessonMapFace = {
+
+    an_a_shortOne: { bought: true, active: false, icon: an_a_shortOne.icon, name: an_a_shortOne.title, lessons: an_a_shortOne.lessons },
+    an_a_shortTwo: { bought: true, active: false, icon: an_a_shortTwo.icon, name: an_a_shortTwo.title, lessons: an_a_shortTwo.lessons },
+    an_a_shortThree: { bought: true, active: false, icon: an_a_shortThree.icon, name: an_a_shortThree.title, lessons: an_a_shortThree.lessons },
+    an_a_shortFour: { bought: true, active: false, icon: an_a_shortFour.icon, name: an_a_shortFour.title, lessons: an_a_shortFour.lessons },
 
     animals: { bought: true, active: false, icon: animals.icon, name: animals.title, lessons: animals.lessons },
     clockFourWords: { bought: true, active: false, icon: clockFourWords.icon, name: clockFourWords.title, lessons: clockFourWords.lessons },

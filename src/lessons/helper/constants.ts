@@ -11,6 +11,7 @@ export const viewIds = {
     fourWords: 'w',
     oneTwoThree: 'o',
     radio: 'r',
+    inradio: 'i',
     draw: 'd',
 }
 
@@ -24,7 +25,8 @@ export const icons = {
     fourPictures: 'moon-images',
     fourWords: 'moon-table',
     radio: 'moon-insert-template',
-    oneTwoThree: 'moon-bubble'
+    oneTwoThree: 'moon-bubble',
+    inradio: 'moon-contrast'
 }
 export const isId = {
     isOneTwoThree: function (id: string) {
@@ -32,6 +34,9 @@ export const isId = {
     },
     isRadio: function (id: string) {
         return id.indexOf(viewIds.radio) !== -1;
+    },
+    isInradio: function (id: string) {
+        return id.indexOf(viewIds.inradio) !== -1;
     },
     isDraw: function (id: string) {
         return id.indexOf(viewIds.draw) !== -1;
@@ -47,7 +52,7 @@ export const isId = {
     },
     isAnalogTime: function (id: string) {
         return id.indexOf(displayIds.analogTime) !== -1;
-    },
+    }
 
 }
 
@@ -208,6 +213,13 @@ export const capital = {
         Chinese: 'Chinese'
     },
 
+    people: {
+        Catholic: 'Catholic',
+        Englishman: 'Englishman',
+        Peruvian: 'Peruvian',
+        Buddhist: 'Buddhist'
+    },
+
     things: {
         TV: 'TV',
         Internet: 'Internet',
@@ -216,6 +228,11 @@ export const capital = {
     clock: {
         pm: 'p.m.',
         am: 'a.m.'
+    },
+
+    abbreviations: {
+        UFO: 'UFO',
+        FBI: 'FBI'
     }
 
 };
@@ -232,7 +249,8 @@ export const capital = {
 //TODO  when finish - next to buy me a beer - button save score, and display last score
 // make lessons - tences vs each other
 //make lessons - sentence to =>question sentence
-
+//TODO test - corrected and incorrected have to be unique
+//TODO test - name not empty, correct and incorrect not empty
 
 
 

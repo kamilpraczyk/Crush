@@ -17,3 +17,6 @@ VALUES ('kamil.praczyk@gmail.com','Kamil','abcd!', '2016-06-12', '2016-06-30');
 
 //Select user
 SELECT email, name, password, valid_to FROM `Users` WHERE email='kamil.praczyk@gmail.com'
+
+//update valid_to
+UPDATE `Temp` SET `valid_to`='2016-06-28' WHERE email='kamil.praczyk@gmail.com';

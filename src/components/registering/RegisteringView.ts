@@ -14,7 +14,7 @@ import LoaderView = require('../loader/LoaderView');
 interface State {
     message?: string,
     processing?: boolean,
-    data?: {
+    user?: {
         name: string,
         email: string,
         password: string,
@@ -40,11 +40,11 @@ function getName(state: State, setState: (s: State) => void) {
     }, dictionary.REGISTERING_NAME()), input({
         type: 'text',
         style: RegisteringCss.getInput(),
-        value: state.data.name,
+        value: state.user.name,
         disabled: state.processing,
         onChange: function (e: any) {
-            state.data.name = e.target.value
-            setState({ data: state.data });
+            state.user.name = e.target.value
+            setState({ user: state.user });
         }
     }));
 }
@@ -57,11 +57,11 @@ function getEmail(state: State, setState: (s: State) => void) {
     }, dictionary.REGISTERING_EMAIL()), input({
         type: 'text',
         style: RegisteringCss.getInput(),
-        value: state.data.email,
+        value: state.user.email,
         disabled: state.processing,
         onChange: function (e: any) {
-            state.data.email = e.target.value;
-            setState({ data: state.data });
+            state.user.email = e.target.value;
+            setState({ user: state.user });
         }
     }));
 }
@@ -74,11 +74,11 @@ function getPassword(state: State, setState: (s: State) => void) {
     }, dictionary.REGISTERING_PASSWORD()), input({
         type: 'password',
         style: RegisteringCss.getInput(),
-        value: state.data.password,
+        value: state.user.password,
         disabled: state.processing,
         onChange: function (e: any) {
-            state.data.password = e.target.value;
-            setState({ data: state.data });
+            state.user.password = e.target.value;
+            setState({ user: state.user });
         }
     }));
 }
@@ -91,11 +91,11 @@ function getRetypePassword(state: State, setState: (s: State) => void) {
     }, dictionary.REGISTERING_RETYPE_PASSWORD()), input({
         type: 'password',
         style: RegisteringCss.getInput(),
-        value: state.data.retypePassword,
+        value: state.user.retypePassword,
         disabled: state.processing,
         onChange: function (e: any) {
-            state.data.retypePassword = e.target.value;
-            setState({ data: state.data });
+            state.user.retypePassword = e.target.value;
+            setState({ user: state.user });
         }
     }));
 }
@@ -106,14 +106,14 @@ function getButton(state: State, setState: (s: State) => void) {
         isResponsibleHeight: true,
         isResponsibleCenter: true,
         onClick: function () {
-            Matchers.validate(state.data).then((e) => {
+            Matchers.validate(state.user).then((e) => {
                 setState({
                     message: dictionary.REGISTERING_PROCESS(),
                     processing: true
                 });
                 AppDispatcher.handleViewAction({
                     actionType: Constants.REGISTER_ON_SERVER,
-                    state: state
+                    user: state.user
                 });
             }).catch((err: Error) => {
                 setState({
@@ -153,11 +153,11 @@ class View extends React.Component<{}, State>{
         this.state = {
             message: dictionary.REGISTERING_TITLE(),
             processing: false,
-            data: {
-                name: '',
-                email: '',
-                password: '',
-                retypePassword: ''
+            user: {
+                name: 'kamil',
+                email: 'kamil.praczyk@gmail.com',
+                password: 'kamil',
+                retypePassword: 'kamil'
             }
         };
     }

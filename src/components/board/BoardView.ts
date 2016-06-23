@@ -4,6 +4,7 @@ import BoardCss = require('./BoardCss');
 import BoardStore = require('../../stores/board/BoardStore');
 import DrawView = require('./draw/DrawView');
 import RadioView = require('./radio/RadioView');
+import InradioView = require('./inradio/InradioView');
 import QuatroView = require('./quatro/QuatroView');
 import OneTwoThreeView = require('./oneTwoThree/OneTwoThreeView');
 import PointsView = require('./points/PointsView');
@@ -24,6 +25,8 @@ function getView(): any {
             return QuatroView(BoardStore.getBoardState());
         case viewIds.radio:
             return RadioView(BoardStore.getBoardState());
+        case viewIds.inradio:
+            return InradioView(BoardStore.getBoardState());
         case viewIds.oneTwoThree:
             return OneTwoThreeView(BoardStore.getBoardState());
     }

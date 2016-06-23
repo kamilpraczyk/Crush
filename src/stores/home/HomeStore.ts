@@ -31,10 +31,10 @@ function resetState() {
     };
 }
 
-function logIn(login: string, password: string, callback: () => void) {
+function logIn(login: string, password: string) {
     resetState();
 
-    catalog.isPrime(login, password).then((data: { error?: string, isPrime?: boolean, user?: { email: string, name: string, valid_to: string } }) => {
+    return catalog.serverIsPrime(login, password).then((data: { error?: string, isPrime?: boolean, user?: { email: string, name: string, valid_to: string } }) => {
         data = data || {};
 
         state.isInvalidLogin = data.user ? false : true;
@@ -49,11 +49,21 @@ function logIn(login: string, password: string, callback: () => void) {
                 valid_to: data.user.valid_to
             };
         }
-
-        callback();
-    }).catch((err) => {
-        callback();
     });
+}
+
+function updateValidation(login: string, valid_to: string) {
+    return catalog.serverUpdateValidTo(login, valid_to).then((data: { error?: string, success?: boolean }) => {
+        data = data || {};
+        console.log('data ===', data)//TODO
+    })
+}
+
+function register(login: string, password: string, name: string) {
+    return catalog.serverRegister(login, password, name).then((data: { error?: string, success?: boolean }) => {
+        data = data || {};
+        console.log('data ===', data)//TODO
+    })
 }
 
 class Store extends BaseStore {
@@ -72,7 +82,9 @@ class Store extends BaseStore {
         switch (action.actionType) {
 
             case Constants.LOGIN:
-                logIn(action.login, action.password, this.emitChange.bind(this));
+                logIn(action.login, action.password)
+                    .catch((e: Error) => { console.error(e) })
+                    .finally(this.emitChange.bind(this));
                 break;
 
             case Constants.SUBSCRIBE:
@@ -99,10 +111,18 @@ class Store extends BaseStore {
                 break;
 
             case Constants.REGISTER_ON_SERVER:
-                //TODO 
-                console.log('REGISTER_ON_SERVER', action)
-                //this.emitChange();
+                register(action.user.email, action.user.password, action.user.name)
+                    .catch((e: Error) => { console.error(e) })
+                    .finally(this.emitChange.bind(this));
                 break;
+
+
+            /* case Constants.REGISTER_ON_SERVER: //TODO
+                 //TODO change to register on server not to update validation
+                 updateValidation(state.user.email || "kamil.praczyk@gmail.com", "2016-07-12")
+                     .catch((e: Error) => { console.error(e) })
+                     .finally(this.emitChange.bind(this));
+                 break;*/
         }
         return true;
     })

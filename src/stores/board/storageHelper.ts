@@ -54,6 +54,11 @@ function getCorrectSentence() {
     } else if (isId.isFourPictures(_board.id) || isId.isFourWords(_board.id)) {
         /*answer is a path to a picture or word*/
         return name;
+    } else if (isId.isInradio(_board.id)) {
+
+        const replacement = _selectedAnswer === empty ? ' ' : ' ' + _selectedAnswer + ' ';
+        read = name.replace(space, replacement);
+
     } else if (isId.isRadio(_board.id)) {
 
         if (_selectedAnswer.indexOf(multi) !== -1) {

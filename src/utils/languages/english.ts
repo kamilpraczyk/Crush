@@ -32,7 +32,7 @@ const dictonary = {
     REGISTERING_PASSWORD: 'Password',
     REGISTERING_RETYPE_PASSWORD: 'Retype Password',
     REGISTERING_EMAIL: 'Email',
-    REGISTERING_PROCESS: 'Registering...',
+    REGISTERING_PROCESS: 'Registering',
 
     REGISTERING_ERROR_NO_MATCH_PASSWORDS: 'Passwords did not match',
     REGISTERING_ERROR_NO_NAME: 'Please enter a name',
