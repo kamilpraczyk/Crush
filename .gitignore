@@ -38,7 +38,8 @@ temp/
 platforms/
 plugins/
 hooks/
-
+test/**/*.js
+src/**/*.js
 test/test/
 test/src/
 server/node_modules/
