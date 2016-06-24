@@ -5,7 +5,7 @@ let exp: any[] = [];
 
 
 exp.push(tList({
-    t: "",
+    t: "",//TODO
     list: [
         { l: "" }
     ]

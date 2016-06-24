@@ -54,7 +54,7 @@ const lessons = [
         id: id(common), title: title,
         name: "It's ten to ten.",
         correct: ["09:50"],
-        incorrect: ["10:50", "10:10", "10:50", "09:10", "09:05"],
+        incorrect: ["10:50", "10:10", "09:10", "09:05"],
         explenation: explenation
     }, {
         id: id(common), title: title,

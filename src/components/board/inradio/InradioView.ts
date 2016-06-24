@@ -134,7 +134,7 @@ function getBody(state: BoardResult) {
 
 function render(state: BoardResult) {
     return div({
-        key: 'radioView',
+        key: 'inradioView',
         style: InradioCss.layout.getPanel()
     }, getHeader(state), getBody(state), getFooter());
 };

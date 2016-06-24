@@ -17,7 +17,8 @@ export const viewIds = {
 
 export const displayIds = {
     digitalTime: 'e',
-    analogTime: 'c'
+    analogTime: 'c',
+    areRepeated:'a'
 }
 
 export const icons = {
@@ -250,7 +251,6 @@ export const capital = {
 // make lessons - tences vs each other
 //make lessons - sentence to =>question sentence
 //TODO test - corrected and incorrected have to be unique
-//TODO test - name not empty, correct and incorrect not empty
 
 
 

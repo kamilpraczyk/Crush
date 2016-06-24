@@ -1,10 +1,10 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons} from '../../helper/constants';
+import {space, viewIds, id, icons, displayIds} from '../../helper/constants';
 import explenation = require('./explenation');
 
 const separator = " - "
-const common = [viewIds.oneTwoThree];
+const common = [viewIds.oneTwoThree, displayIds.areRepeated];
 const placeholder = 'Infinitive - Past Simple - Past Participle';
 const title = 'Irregular Verbs';
 const postfix = "";
