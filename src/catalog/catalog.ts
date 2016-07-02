@@ -29,7 +29,6 @@ function serverRegister(login: string, password: string, name: string) {
     return HttpClientPOST(newurl, data);
 }
 
-//TODO no characters & ' "
 
 export {
 serverIsPrime,

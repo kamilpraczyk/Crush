@@ -7,9 +7,8 @@ const {div} = React.DOM;
 interface LayoutPropsFace {
     onComponentDidMount: Function
 }
-interface LayoutStateFace { }
 
-class Layout extends React.Component<LayoutPropsFace, LayoutStateFace>{
+class Layout extends React.Component<LayoutPropsFace, {}>{
 
     constructor(props: LayoutPropsFace) {
         super(props)
@@ -29,31 +28,19 @@ class Layout extends React.Component<LayoutPropsFace, LayoutStateFace>{
         });
     }
 
-    _getGreetingsRegionEl() {
-        return div({
-            ref: 'greetingsRegion',
-            key: 'greetingsRegion'
-        });
-    }
-
-    _getRegisteringRegionEl() {
-        return div({
-            ref: 'registeringRegion',
-            key: 'registeringsRegion'
-        });
-    }
 
     public componentDidMount() {
         this.props.onComponentDidMount({
             settingsRegion: ReactDOM.findDOMNode(this.refs["settingsRegion"]),
-            boardRegion: ReactDOM.findDOMNode(this.refs["boardRegion"]),
-            greetingsRegion: ReactDOM.findDOMNode(this.refs["greetingsRegion"]),
-            registeringRegion: ReactDOM.findDOMNode(this.refs["registeringRegion"])
+            boardRegion: ReactDOM.findDOMNode(this.refs["boardRegion"])
         });
     }
 
     public render() {
-        return div({}, this._getBoardRegionEl(), this._getSettingsRegionEl(), this._getGreetingsRegionEl(), this._getRegisteringRegionEl());
+        return div({},
+            this._getBoardRegionEl(),
+            this._getSettingsRegionEl()
+        );
     }
 };
 

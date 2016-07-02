@@ -1,13 +1,10 @@
-import css = require('../../utils/css/css');
-import utils = require('../../utils/utils');
+import css = require('../../../../utils/css/css');
+import utils = require('../../../../utils/utils');
+import React = require('react');
+const {div, label} = React.DOM;
 
 let styles = {
     panel: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'stretch',
@@ -28,10 +25,11 @@ let styles = {
     text: {
         color: css.font.color.light,
         fontSize: css.font.fontSize.XL2,
-        paddingBottom: '2vh'
+        paddingBottom: '2vh',
+        justifyContent: 'left',
     },
 
-    login: {
+    box: {
         display: 'flex',
         maxWidth: '100%',
         paddingTop: '2vh',
@@ -39,36 +37,38 @@ let styles = {
         paddingBottom: '1vh',
     },
 
-    loginPart: {
+    boxSplit: {
         display: 'flex',
         flexGrow: 1,
         maxWidth: '100%',
+        paddingLeft: '1vw',
+        paddingRight: '1vw',
         flexDirection: 'column',
         justifyContent: 'flex-end'
     },
 
-    loginLine: {
+    boxLine: {
         display: 'flex',
         maxWidth: '100%',
         flexFlow: 'row wrap',
         justifyContent: 'space-between'
     },
 
-    loginLabel: {
+    boxLabel: {
         color: css.font.color.light,
         flexGrow: 1,
+        alignItems: 'center',
         display: 'flex',
-        fontSize: '22px',
-        paddingTop: '1vh',
         paddingRight: '1vw',
-        minWidth: '140px'
+        minWidth: '170px',
+        maxWidth: '100%'
     },
 
-    input: {
+    boxInput: {
         flexGrow: 1,
         display: 'flex',
+        flexBasis: '50%',
         maxWidth: '100%',
-        fontSize: '22px',
         border: '1px solid #e6e6e6',
         borderRadius: '4px',
         backgroundColor: '#3CBC8D',
@@ -78,6 +78,7 @@ let styles = {
         paddingRight: '1vw',
         paddingTop: '1vh',
         paddingBottom: '1vh',
+        width: '100%'
     }
 }
 
@@ -91,19 +92,29 @@ export = utils.union(css, {
     getContainer() {
         return styles.container;
     },
-    getLogin() {
-        return styles.login;
+    getBox() {
+        return styles.box;
     },
-    getLoginPart() {
-        return styles.loginPart;
+    getBoxSplit() {
+        return styles.boxSplit;
     },
-    getLoginLine() {
-        return styles.loginLine;
+    getBoxLine() {
+        return styles.boxLine;
     },
-    getLoginLabel() {
-        return styles.loginLabel;
+    getBoxLabel() {
+        return styles.boxLabel;
     },
-    getInput() {
-        return styles.input
+    getBoxInput() {
+        return css.get(styles.boxInput);
+    },
+    makeBoxLine(text: string, inputEl: any) {
+        return div({
+            style: this.getBoxLine()
+        },
+            label({
+                style: this.getBoxLabel()
+            }, text),
+            inputEl
+        );
     }
 });

@@ -18,7 +18,7 @@ export const viewIds = {
 export const displayIds = {
     digitalTime: 'e',
     analogTime: 'c',
-    areRepeated:'a'
+    areRepeated: 'a'
 }
 
 export const icons = {
@@ -29,6 +29,13 @@ export const icons = {
     oneTwoThree: 'moon-bubble',
     inradio: 'moon-contrast'
 }
+
+export const defaultUser = {
+    name: 'kamil',
+    email: 'kamil.praczyk1@gmail.com',
+    password: 'kamil',//'abcd!'
+}
+
 export const isId = {
     isOneTwoThree: function (id: string) {
         return id.indexOf(viewIds.oneTwoThree) !== -1;

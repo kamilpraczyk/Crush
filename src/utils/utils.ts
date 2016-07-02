@@ -3,6 +3,7 @@ import _ = require("underscore");
 import voice = require("./voice");
 import keys = require("./keys/keys");
 import { capital } from '../lessons/helper/constants';
+import Promise = require("bluebird");
 
 export = {
     union,
@@ -15,8 +16,27 @@ export = {
     tryToSetLowercaseFirstLetter,
     howManyDaysLeft,
     checkEmail,
-    isValidISODate
+    isValidISODate,
+    removeInvalidChars,
+    getNextYearISOdate,
+    getNextMonthISOdate,
+    delay
 };
+
+function delay(time?: number) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            return resolve();
+        }, time || 1200);
+    });
+}
+
+
+function removeInvalidChars(s: string) {
+    if (s)
+        return s.replace(/[/|;"']/g, "");
+    return s;
+}
 
 function isValidISODate(date: string) {
     return /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/.test(date);
@@ -31,6 +51,25 @@ function howManyDaysLeft(date: string): number { //ISO 2016-12-30
     }
     return 0;
 }
+
+
+
+function getISOdate(date?: Date) {
+    date = date || new Date();
+    return date.toISOString().substring(0, 10);
+};
+
+function getNextYearISOdate() {
+    const oneYr = new Date();
+    oneYr.setFullYear(oneYr.getFullYear() + 1);
+    return getISOdate(oneYr);
+}
+function getNextMonthISOdate() {
+    const oneYr = new Date();
+    oneYr.setMonth(oneYr.getMonth() + 1);
+    return getISOdate(oneYr);
+}
+
 
 function tryToSetLowercaseFirstLetter(s: string, sentenceWords: string[]) {
 

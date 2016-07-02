@@ -28,8 +28,12 @@ function HttpClientGET(aUrl: string) {
         const anHttpRequest = getHttpRequest();
         anHttpRequest.onreadystatechange = () => {
             if (anHttpRequest.readyState === 4 && anHttpRequest.status === 200) {
-                const data = JSON.parse(anHttpRequest.responseText);
-                return resolve(data);
+                try {
+                    const data = JSON.parse(anHttpRequest.responseText);
+                    return resolve(data);
+                } catch (e) {
+                    return reject(e);
+                }
             }
         }
         try {

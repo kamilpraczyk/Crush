@@ -1,7 +1,7 @@
 
-/// <reference path="../../../typings/tsd.d.ts" />
-import dictionary = require('../../utils/dictionary');
-import utils = require('../../utils/utils');
+/// <reference path="../../../../../../typings/tsd.d.ts" />
+import dictionary = require('../../../../../utils/dictionary');
+import utils = require('../../../../../utils/utils');
 import Promise = require("bluebird");
 
 interface Props {
@@ -15,49 +15,49 @@ interface Props {
 function isPasswordMatched(p: Props) {
     return new Promise<void>((resolve, reject) => {
         if (p.password === p.retypePassword) resolve(null);
-        reject(new Error(dictionary.REGISTERING_ERROR_NO_MATCH_PASSWORDS()));
+        reject(new Error(dictionary.ERROR_REGISTERING_NO_MATCH_PASSWORDS));
     });
 }
 
 function isNameEntered(p: Props) {
     return new Promise<void>((resolve, reject) => {
         if (p.name) resolve(null);
-        reject(new Error(dictionary.REGISTERING_ERROR_NO_NAME()));
+        reject(new Error(dictionary.ERROR_REGISTERING_NO_NAME));
     });
 }
 
 function isPasswordEntered(p: Props) {
     return new Promise<void>((resolve, reject) => {
         if (p.password) resolve(null);
-        reject(new Error(dictionary.REGISTERING_ERROR_NO_PASSWORD()));
+        reject(new Error(dictionary.ERROR_REGISTERING_NO_PASSWORD));
     });
 }
 
 function isRetypedPasswordEntered(p: Props) {
     return new Promise<void>((resolve, reject) => {
         if (p.retypePassword) resolve(null);
-        reject(new Error(dictionary.REGISTERING_ERROR_NO_RETYPED_PASSWORD()));
+        reject(new Error(dictionary.ERROR_REGISTERING_NO_RETYPED_PASSWORD));
     });
 }
 
 function isEmailEntered(p: Props) {
     return new Promise<void>((resolve, reject) => {
         if (p.email) resolve(null);
-        reject(new Error(dictionary.REGISTERING_ERROR_NO_EMAIL()));
+        reject(new Error(dictionary.ERROR_REGISTERING_NO_EMAIL));
     });
 }
 
 function isValidEmail(p: Props) {
     return new Promise<void>((resolve, reject) => {
         if (utils.checkEmail(p.email)) resolve(null);
-        reject(new Error(dictionary.REGISTERING_ERROR_INVALID_EMAIL()));
+        reject(new Error(dictionary.ERROR_REGISTERING_INVALID_EMAIL));
     });
 }
 
 function isValidPassword(p: Props) {
     return new Promise<void>((resolve, reject) => {
         if (p.password.length >= 5) resolve(null);
-        reject(new Error(dictionary.REGISTERING_ERROR_PASSWORD_TO_SHORT()));
+        reject(new Error(dictionary.ERROR_REGISTERING_PASSWORD_TO_SHORT));
     });
 }
 

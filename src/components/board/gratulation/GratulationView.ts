@@ -24,9 +24,9 @@ function getPayPal() {
             value: "HRQXPU6JQB8MS"
         }),
         input({
-            style : GratulationCss.getPayPal(),
+            style: GratulationCss.getPayPal(),
             type: 'submit',
-            value: dictionary.BUY_ME_A_BEER()
+            value: dictionary.BUY_ME_A_BEER
         }),
         img({
             alt: "",
@@ -47,18 +47,18 @@ function render() {
     function getTitle() {
         return div({
             style: GratulationCss.getText()
-        }, dictionary.GRATULATIONS_TITLE());
+        }, dictionary.GRATULATIONS_TITLE);
     };
 
     function getText() {
         return div({
             style: GratulationCss.getText()
-        }, dictionary.GRATULATIONS_TEXT({ score: state.points.scorePercent }));
+        }, dictionary.GRATULATIONS_TEXT + state.points.scorePercent + dictionary.PERCENT);
     };
 
     function getButtonContinue() {
         return ButtonView({
-            name: dictionary.GRATULATIONS_BUTTON(),
+            name: dictionary.GRATULATIONS_BUTTON,
             isResponsibleHeight: true,
             onClick: function () {
                 AppDispatcher.handleViewAction({
@@ -73,7 +73,7 @@ function render() {
         function getText() {
             return div({
                 style: GratulationCss.getText()
-            }, dictionary.DID_I_HELP_YOU_OUT());
+            }, dictionary.DID_I_HELP_YOU_OUT);
         }
 
         return div({
