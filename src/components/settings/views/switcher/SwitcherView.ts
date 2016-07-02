@@ -9,12 +9,14 @@ import ButtonView = require('../../../button/ButtonView');
 import {LessonMapFace, LessonFace} from '../../../../lessons/interface';
 import SettingsRootStore = require('../../../../stores/SettingsRootStore');
 import LessonStore = require('../../../../stores/lesson/LessonStore');
+import HomeStore = require('../../../../stores/home/HomeStore');
 const {div} = React.DOM;
 
 
 function getState() {
     return {
-        list: LessonStore.getAllLessons()
+        list: LessonStore.getAllLessons(),
+        user: HomeStore.getStateHome().user
     }
 }
 
@@ -26,6 +28,7 @@ function render() {
             ref: id,
             leftIcon: item.icon,
             name: item.name,
+            disabled: !(state.user.isPrime || item.free),
             onClick: function () {
                 AppDispatcher.handleViewAction({
                     actionType: Constants.SWITCH_ACTION,

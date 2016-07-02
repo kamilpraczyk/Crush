@@ -26,7 +26,7 @@ export interface LessonFace {
     icon: string,
     name: string,
     active: boolean,
-    bought: boolean,
+    free: boolean,
     lessons: BoardFaces
 }
 

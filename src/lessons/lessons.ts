@@ -1,14 +1,8 @@
 /// <reference path="../../typings/tsd.d.ts" />
-import {LessonMapFace, LessonFace} from './interface';
+import {LessonMapFace, LessonFace, BoardFaces} from './interface';
 import _ = require('underscore');
 
-export const activeStartup = 'an_a_shortOne';
-
-const icon_draw = 'moon-quill';
-const icon_fourPictures = 'moon-images';
-const icon_fourWords = 'moon-images';
-const icon_radio = 'moon-insert-template';
-const icon_oneTwoThree = 'moon-bubble';
+export const activeStartup = 'spellingVerbsIngOne';
 
 import animals = require('./animals/animals');
 import clockFourWords = require('./extra/clock/clockFourWords');
@@ -42,52 +36,73 @@ import verbHave = require('./verb/have/verbHave');
 import toBeInPresentAndPast = require('./verb/toBeInPresentAndPast/toBeInPresentAndPast');
 import mineYour = require('./pronouns/possesive/mineYour');
 import myselfYourself = require('./pronouns/reflexive/myselfYourself');
+import spellingVerbsIngOne = require('./words/ing/spellingVerbsIngOne');
+import spellingVerbsIngTwo = require('./words/ing/spellingVerbsIngTwo');
+import spellingVerbsIngThree = require('./words/ing/spellingVerbsIngThree');
+
+
+//TODO offer some for free and some when registered, and rest when subscribed
 export const lessons: LessonMapFace = {
 
-    an_a_shortOne: { bought: true, active: false, icon: an_a_shortOne.icon, name: an_a_shortOne.title, lessons: an_a_shortOne.lessons },
-    an_a_shortTwo: { bought: true, active: false, icon: an_a_shortTwo.icon, name: an_a_shortTwo.title, lessons: an_a_shortTwo.lessons },
-    an_a_shortThree: { bought: true, active: false, icon: an_a_shortThree.icon, name: an_a_shortThree.title, lessons: an_a_shortThree.lessons },
-    an_a_shortFour: { bought: true, active: false, icon: an_a_shortFour.icon, name: an_a_shortFour.title, lessons: an_a_shortFour.lessons },
+    spellingVerbsIngOne: w(true, spellingVerbsIngOne),
+    spellingVerbsIngTwo: w(true, spellingVerbsIngTwo),
+    spellingVerbsIngThree: w(true, spellingVerbsIngThree),
 
-    animals: { bought: true, active: false, icon: animals.icon, name: animals.title, lessons: animals.lessons },
-    clockFourWords: { bought: true, active: false, icon: clockFourWords.icon, name: clockFourWords.title, lessons: clockFourWords.lessons },
-    clockDraw: { bought: true, active: false, icon: clockDraw.icon, name: clockDraw.title, lessons: clockDraw.lessons },
-    clock: { bought: true, active: false, icon: clock.icon, name: clock.title, lessons: clock.lessons },
+    an_a_shortOne: w(true, an_a_shortOne),
+    an_a_shortTwo: w(true, an_a_shortTwo),
+    an_a_shortThree: w(true, an_a_shortThree),
+    an_a_shortFour: w(true, an_a_shortFour),
 
-    presentTenseOneToThree: { bought: true, active: false, icon: presentTenseOneToThree.icon, name: presentTenseOneToThree.title, lessons: presentTenseOneToThree.lessons },
-    presentTenseOneToThreePartTwo: { bought: true, active: false, icon: presentTenseOneToThreePartTwo.icon, name: presentTenseOneToThreePartTwo.title, lessons: presentTenseOneToThreePartTwo.lessons },
-    presentTenseRadio: { bought: true, active: false, icon: presentTenseRadio.icon, name: presentTenseRadio.title, lessons: presentTenseRadio.lessons },
-    presentTenseMatch: { bought: true, active: false, icon: presentTenseMatch.icon, name: presentTenseMatch.title, lessons: presentTenseMatch.lessons },
+    animals: w(true, animals),
+    clockFourWords: w(true, clockFourWords),
+    clockDraw: w(true, clockDraw),
+    clock: w(true, clock),
 
-    presentContinuousTenseOneToThree: { bought: true, active: false, icon: presentContinuousTenseOneToThree.icon, name: presentContinuousTenseOneToThree.title, lessons: presentContinuousTenseOneToThree.lessons },
-    presentContinuousTenseOneToThreePartTwo: { bought: true, active: false, icon: presentContinuousTenseOneToThreePartTwo.icon, name: presentContinuousTenseOneToThreePartTwo.title, lessons: presentContinuousTenseOneToThreePartTwo.lessons },
-    presentContinuousTenseRadio: { bought: true, active: false, icon: presentContinuousTenseRadio.icon, name: presentContinuousTenseRadio.title, lessons: presentContinuousTenseRadio.lessons },
+    presentTenseOneToThree: w(true, presentTenseOneToThree),
+    presentTenseOneToThreePartTwo: w(true, presentTenseOneToThreePartTwo),
+    presentTenseRadio: w(true, presentTenseRadio),
+    presentTenseMatch: w(true, presentTenseMatch),
 
-    presentPerfectTenseOneToThree: { bought: true, active: false, icon: presentPerfectTenseOneToThree.icon, name: presentPerfectTenseOneToThree.title, lessons: presentPerfectTenseOneToThree.lessons },
-    presentPerfectTenseOneToThreePartTwo: { bought: true, active: false, icon: presentPerfectTenseOneToThreePartTwo.icon, name: presentPerfectTenseOneToThreePartTwo.title, lessons: presentPerfectTenseOneToThreePartTwo.lessons },
-    presentPerfectTenseRadio: { bought: true, active: false, icon: presentPerfectTenseRadio.icon, name: presentPerfectTenseRadio.title, lessons: presentPerfectTenseRadio.lessons },
+    presentContinuousTenseOneToThree: w(true, presentContinuousTenseOneToThree),
+    presentContinuousTenseOneToThreePartTwo: w(true, presentContinuousTenseOneToThreePartTwo),
+    presentContinuousTenseRadio: w(true, presentContinuousTenseRadio),
 
-    presentPerfectContinuousTenseOneToThree: { bought: true, active: false, icon: presentPerfectContinuousTenseOneToThree.icon, name: presentPerfectContinuousTenseOneToThree.title, lessons: presentPerfectContinuousTenseOneToThree.lessons },
-    presentPerfectContinuousTenseOneToThreePartTwo: { bought: true, active: false, icon: presentPerfectContinuousTenseOneToThreePartTwo.icon, name: presentPerfectContinuousTenseOneToThreePartTwo.title, lessons: presentPerfectContinuousTenseOneToThreePartTwo.lessons },
-    presentPerfectContinuousTenseRadio: { bought: true, active: false, icon: presentPerfectContinuousTenseRadio.icon, name: presentPerfectContinuousTenseRadio.title, lessons: presentPerfectContinuousTenseRadio.lessons },
+    presentPerfectTenseOneToThree: w(true, presentPerfectTenseOneToThree),
+    presentPerfectTenseOneToThreePartTwo: w(true, presentPerfectTenseOneToThreePartTwo),
+    presentPerfectTenseRadio: w(true, presentPerfectTenseRadio),
 
-    location: { bought: true, active: false, icon: location.icon, name: location.title, lessons: location.lessons },
+    presentPerfectContinuousTenseOneToThree: w(true, presentPerfectContinuousTenseOneToThree),
+    presentPerfectContinuousTenseOneToThreePartTwo: w(true, presentPerfectContinuousTenseOneToThreePartTwo),
+    presentPerfectContinuousTenseRadio: w(true, presentPerfectContinuousTenseRadio),
 
-    eitherNeither: { bought: true, active: false, icon: eitherNeither.icon, name: eitherNeither.title, lessons: eitherNeither.lessons },
+    location: w(true, location),
 
-    irregularVerbs: { bought: true, active: false, icon: irregularVerbs.icon, name: irregularVerbs.title, lessons: irregularVerbs.lessons },
-    irregularVerbsOneTwoThree: { bought: true, active: false, icon: irregularVerbsOneTwoThree.icon, name: irregularVerbsOneTwoThree.title, lessons: irregularVerbsOneTwoThree.lessons },
+    eitherNeither: w(true, eitherNeither),
 
-    singularAndPlural: { bought: true, active: false, icon: singularAndPlural.icon, name: singularAndPlural.title, lessons: singularAndPlural.lessons },
+    irregularVerbs: w(true, irregularVerbs),
+    irregularVerbsOneTwoThree: w(true, irregularVerbsOneTwoThree),
 
-    fewLittle: { bought: false, active: false, icon: fewLittle.icon, name: fewLittle.title, lessons: fewLittle.lessons },
-    muchManyALot: { bought: false, active: false, icon: muchManyALot.icon, name: muchManyALot.title, lessons: muchManyALot.lessons },
+    singularAndPlural: w(true, singularAndPlural),
 
-    verbHave: { bought: false, active: false, icon: verbHave.icon, name: verbHave.title, lessons: verbHave.lessons },
-    toBeInPresentAndPast: { bought: false, active: false, icon: toBeInPresentAndPast.icon, name: toBeInPresentAndPast.title, lessons: toBeInPresentAndPast.lessons },
+    fewLittle: w(true, fewLittle),
+    muchManyALot: w(true, muchManyALot),
 
-    mineYour: { bought: false, active: false, icon: mineYour.icon, name: mineYour.title, lessons: mineYour.lessons },
-    myselfYourself: { bought: false, active: false, icon: myselfYourself.icon, name: myselfYourself.title, lessons: myselfYourself.lessons }
+    verbHave: w(true, verbHave),
+    toBeInPresentAndPast: w(true, toBeInPresentAndPast),
+
+    mineYour: w(true, mineYour),
+    myselfYourself: w(true, myselfYourself),
 
 };
+
+function w(free: boolean, data: { icon: string, title: string, lessons: BoardFaces }) {
+    const l: LessonFace = {
+        free: free,
+        active: false,
+        icon: data.icon,
+        name: data.title,
+        lessons: data.lessons
+    };
+    return l;
+}
 

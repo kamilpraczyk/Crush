@@ -10,8 +10,9 @@ const read = function (value: string) {
 
     var utterance = new (<any>window).SpeechSynthesisUtterance(value);
     var voices = (<any>window).speechSynthesis.getVoices();
-
+//TODO more options show to user
     //Google UK English Male
+    //https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance
     utterance.voice = voices.filter(function (voice: any) { return voice.name == "Google UK English Male"; })[0];
     (<any>window).speechSynthesis.speak(utterance);
   }
