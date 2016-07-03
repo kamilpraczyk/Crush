@@ -1,12 +1,14 @@
 import React = require('react');
 import ButtonCss = require('./ButtonCss');
+import LoaderView = require('../loader/LoaderView');
 const {div, button} = React.DOM;
+
 
 interface Props {
     name: string,
     key?: string,
-    ref? : string,
-    disabled? : boolean,
+    ref?: string,
+    disabled?: boolean,
     icon?: string,
     leftIcon?: string,
     onClick: Function,
@@ -19,6 +21,7 @@ interface Props {
     isSuccess?: boolean,
     isFail?: boolean,
     isTime?: boolean,
+    isLoader?: boolean,
     backUrl?: string
 }
 
@@ -82,12 +85,14 @@ class ButtonView extends React.Component<Props, State>{
             }, this.props.name);
         }
 
+        const loader = this.props.isLoader ? LoaderView() : null;
+
         return button({
-            ref : this.props.ref,
+            ref: this.props.ref,
             key: this.props.key,
             disabled: this.props.disabled,
             style: ButtonCss.getButton({
-                disabled : this.props.disabled,
+                disabled: this.props.disabled,
                 pressed: this.state.pressed,
                 isExpand: this.props.isExpand,
                 isExpandWidth: this.props.isExpandWidth,
@@ -96,10 +101,10 @@ class ButtonView extends React.Component<Props, State>{
                 isSuccess: this.props.isSuccess,
                 isFail: this.props.isFail,
                 backUrl: this.props.backUrl,
-                isTime: this.props.isTime
+                isTime: this.props.isTime,
             }),
             onClick: this.clickHandler
-        }, leftIcon, icon, name);
+        }, leftIcon, icon, name, loader);
     }
 };
 

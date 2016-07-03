@@ -15,6 +15,7 @@ const initialState = {
         success: false
     },
     register: {
+        show: false,
         error: null as string,
         process: false,
         success: false
@@ -118,16 +119,21 @@ class Store extends BaseStore {
                 emitChange();
 
                 utils.delay().then(() => {
-                    logIn(action.login, action.password)
-                        .finally(() => {
-                            state.login.process = false;
-                            emitChange();
-                        })
+                    return logIn(action.login, action.password)
+                }).finally(() => {
+                    state.login.process = false;
+                    emitChange();
                 });
                 break;
 
             case Constants.LOGOUT:
                 reset();
+                emitChange();
+                break;
+            case Constants.TOGGLE_REGISTER_VIEW:
+                const show = !state.register.show;
+                state.register = JSON.parse(JSON.stringify(initialState)).register;
+                state.register.show = show;
                 emitChange();
                 break;
 
@@ -137,24 +143,23 @@ class Store extends BaseStore {
                 emitChange();
 
                 utils.delay().then(() => {
-                    register(action.user.email, action.user.password, action.user.name)
-                        .finally(() => {
-                            state.register.process = false;
-                            emitChange();
-                        })
+                    return register(action.user.email, action.user.password, action.user.name)
+                }).finally(() => {
+                    state.register.process = false;
+                    emitChange();
                 });
                 break;
 
             case Constants.SUBSCRIPTION_ON_SERVER:
 
                 state.subscribe.process = true;
-                emitChange()
+                emitChange();
+                
                 utils.delay().then(() => {
-                    updateValidation(state.user.email, action.valid_to)
-                        .finally(() => {
-                            state.subscribe.process = false;
-                            emitChange()
-                        });
+                    return updateValidation(state.user.email, action.valid_to)
+                }).finally(() => {
+                    state.subscribe.process = false;
+                    emitChange();
                 });
                 break;
         }

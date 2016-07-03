@@ -5,16 +5,13 @@ let styles = {
 
     panel: {
         position: 'absolute',
-        backgroundImage: css.themes.standard.backgroundImageLesson,
+        //backgroundImage: css.themes.standard.backgroundImageLesson,
         width: '100%',
         height: '100%',
         overflow: 'hidden',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        WebkitBackgroundSize: 'cover',
-        MozBackgroundSize: 'cover',
-        OBackgroundSize: 'cover',
-        backgroundSize: 'cover',
+        backgroundColor: '#fff',
+        backgroundImage: 'linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px), linear-gradient(#eee .1em, transparent .1em)',
+        backgroundSize: '100% 1.2em'
     },
 
     text: {

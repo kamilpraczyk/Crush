@@ -19,7 +19,7 @@ const dictonary = {
     SUBMIT_BUTTON_LOGIN: 'Login',
     SUBMIT_BUTTON_REGISTERING: 'Register',
 
-    PLEASE_WAIT: 'Please wait',
+    PLEASE_WAIT: 'Please wait...',
 
     PERCENT: '%',
     NAME: 'Name',

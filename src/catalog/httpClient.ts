@@ -44,15 +44,19 @@ function HttpClientGET(aUrl: string) {
         }
     });
 }
-
+//TODO set timeout?
 function HttpClientPOST(aUrl: string, data: string) {
     return new Promise((resolve, reject) => {
 
         const anHttpRequest = getHttpRequest();
         anHttpRequest.onreadystatechange = () => {
             if (anHttpRequest.readyState === 4 && anHttpRequest.status === 200) {
-                const data = JSON.parse(anHttpRequest.responseText);
-                return resolve(data);
+                try {
+                    const data = JSON.parse(anHttpRequest.responseText);
+                    return resolve(data);
+                } catch (e) {
+                    return reject(e);
+                }
             }
         }
         try {

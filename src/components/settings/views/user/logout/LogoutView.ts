@@ -30,8 +30,8 @@ function getLogOut(props: Props) {
 }
 
 
-const props = HomeStore.getStateHome();
-declare type Props = typeof props;
+const p = HomeStore.getStateHome();
+declare type Props = typeof p;
 
 function render() {
 

@@ -8,7 +8,6 @@ import AppDispatcher = require('../../../../../dispatcher/AppDispatcher');
 import Constants = require('../../../../../constants/Constants');
 import HomeStore = require('../../../../../stores/home/HomeStore');
 import utils = require('../../../../../utils/utils');
-import LoaderView = require('../../../../loader/LoaderView');
 import {defaultUser} from '../../../../../lessons/helper/constants';
 const {div, input, label} = React.DOM;
 
@@ -63,6 +62,7 @@ function getButtonSubmit(props: Props, state: State, setState: SetState) {
         name: dictionary.SUBMIT_BUTTON_LOGIN,
         isResponsibleHeight: true,
         isResponsibleCenter: true,
+        isLoader: props.login.process,
         disabled: props.login.process || !state.email || !state.password ? true : false,
         onClick: () => {
             handleLogIn(state, setState);
@@ -72,22 +72,10 @@ function getButtonSubmit(props: Props, state: State, setState: SetState) {
 
 function render(props: Props, state: State, setState: SetState) {
 
-
-
     function getText() {
-        let loader: any = null;
-
-        let text = dictionary.HEADER_LOGIN;
-        if (props.login.error)
-            text = dictionary.ERROR_LOGIN_INVALID;
-        if (props.login.process) {
-            text = dictionary.PLEASE_WAIT;
-            loader = LoaderView();
-        }
-
         return div({
             style: CommonCss.getText()
-        }, text, loader);
+        }, state.message);
     };
 
     function getLogin() {
@@ -112,14 +100,15 @@ function render(props: Props, state: State, setState: SetState) {
 }
 
 interface State {
+    message?: string,
     email?: string,
     password?: string
 }
 
 
-const props = HomeStore.getStateHome();
+const p = HomeStore.getStateHome();
+declare type Props = typeof p;
 declare type SetState = (state: State) => void;
-declare type Props = typeof props;
 
 class View extends React.Component<{}, State>{
 
@@ -133,8 +122,16 @@ class View extends React.Component<{}, State>{
 
     render() {
         const props = HomeStore.getStateHome();
+
         if (props.login.success) {
             return null;
+        }
+
+        this.state.message = dictionary.HEADER_LOGIN;
+        if (props.login.error)
+            this.state.message = dictionary.ERROR_LOGIN_INVALID;
+        if (props.login.process) {
+            this.state.message = dictionary.PLEASE_WAIT;
         }
         return render(props, this.state, this.setState.bind(this));
     }

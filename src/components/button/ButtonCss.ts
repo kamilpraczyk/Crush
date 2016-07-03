@@ -107,7 +107,7 @@ const styles = {
         alignSelf: 'center',
         color: '#777',
     },
-    
+
     leftIconActive: {
         color: '#fff',
     }

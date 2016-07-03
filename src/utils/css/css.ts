@@ -150,7 +150,7 @@ let style = {
 
     themes: {
         standard: {
-            backgroundImageLesson: 'url("img/b2.png")',
+            backgroundImageLesson: 'url("img/10.jpg")',
             backgroundImageBeer: 'url("img/beer.png")',
         }
     },

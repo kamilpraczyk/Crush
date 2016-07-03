@@ -27,7 +27,7 @@ function delay(time?: number) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             return resolve();
-        }, time || 1200);
+        }, time || 1500);
     });
 }
 
