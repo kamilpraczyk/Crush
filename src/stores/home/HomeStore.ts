@@ -6,11 +6,12 @@ import BaseStore from '../../utils/store/BaseStore';
 import LessonStore = require('../lesson/LessonStore');
 import catalog = require("../../catalog/catalog");
 import dictionary = require('../../utils/dictionary');
+import {TimeOutError}  from '../../lessons/interface';
 
 const initialState = {
 
     login: {
-        error: false,
+        error: null as string,
         process: false,
         success: false
     },
@@ -47,7 +48,7 @@ function logIn(login: string, password: string) {
         data = data || {};
 
         state.login.success = data.user && data.user.name ? true : false;
-        state.login.error = !state.login.success;
+        state.login.error = state.login.success ? null : dictionary.ERROR_LOGIN_INVALID;
 
         if (data.user) {
             state.user = {
@@ -58,7 +59,7 @@ function logIn(login: string, password: string) {
             };
         }
     }).catch((e: Error) => {
-        state.login.error = true;
+        state.login.error = e instanceof TimeOutError ? dictionary.SERVER_ERROR_TIMEOUT : dictionary.ERROR_LOGIN_INVALID;
         console.error(e)
     });
 }
@@ -74,7 +75,7 @@ function updateValidation(login: string, valid_to: string) {
 
     }).catch((e: Error) => {
         console.error(e);
-        state.subscribe.error = dictionary.SERVER_ERROR_SUBSCRIBING_WENT_WRONG;
+        state.subscribe.error = e instanceof TimeOutError ? dictionary.SERVER_ERROR_TIMEOUT : dictionary.SERVER_ERROR_SUBSCRIBING_WENT_WRONG;
     });
 }
 
@@ -93,7 +94,7 @@ function register(login: string, password: string, name: string) {
         }
     }).catch((e: Error) => {
         console.error(e);
-        state.register.error = dictionary.SERVER_ERROR_NO_RESPOND;
+        state.register.error = e instanceof TimeOutError ? dictionary.SERVER_ERROR_TIMEOUT : dictionary.SERVER_ERROR_NO_RESPOND;
     });
 }
 
@@ -154,7 +155,7 @@ class Store extends BaseStore {
 
                 state.subscribe.process = true;
                 emitChange();
-                
+
                 utils.delay().then(() => {
                     return updateValidation(state.user.email, action.valid_to)
                 }).finally(() => {

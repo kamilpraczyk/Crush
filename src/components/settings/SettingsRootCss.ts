@@ -10,7 +10,7 @@ let styles = {
         position: 'absolute',
         top: 0,
         left: 0,
-        color: css.font.color.default,
+        color: css.font.color.dark,
         background: 'rgba(255,255,255,0.9)',
 
         width: '100%',

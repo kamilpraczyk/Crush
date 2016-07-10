@@ -5,7 +5,6 @@ import explenation = require('./explenation');
 const common = [viewIds.radio];
 import _ = require("underscore");
 const title = 'What time is it?';
-const icon = icons.radio;
 
 const lessons = [
     {
@@ -159,5 +158,4 @@ const lessons = [
 export {
 title,
 lessons,
-icon
 }

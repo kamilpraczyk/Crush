@@ -27,13 +27,15 @@ const dictonary = {
     PASSWORD: 'Password',
     EMAIL: 'Email',
 
-    HEADER_REGISTERING: 'Please Register',
+    HEADER_REGISTERING_OFF: 'or Register',
+    HEADER_REGISTERING_ON: 'Back',
     HEADER_LOGIN: 'Please Login',
     HEADER_SUBSCRIBING: 'Why not to invest in yourself? Subscribe to unblock all interactive lessons.',
     HEADER_SUBSCRIBING_VALID: 'Sbscription expire in:',
     DAYS: 'days.',
     DAY: 'day.',
 
+    SERVER_ERROR_TIMEOUT: 'Sorry, server not responding.',
     SERVER_ERROR_DUPLICATE_EMAIL: 'Sorry, this email already exist.',
     SERVER_ERROR_NO_RESPOND: 'Sorry, server is not responding.',
     SERVER_ERROR_INVALID_DATA: 'Sorry, invalid data.',
@@ -53,7 +55,7 @@ const dictonary = {
     ERROR_REGISTERING_PASSWORD_TO_SHORT: 'Password is to short.',
 
 
-    INFO_BROWSER: 'Please use Chrome or Opera browser for audio experience.'
+    INFO_BROWSER: 'Please use latest Chrome or Opera browser for an audio experience.'
 }
 
 export = dictonary;

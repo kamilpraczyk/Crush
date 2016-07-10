@@ -4,7 +4,6 @@ import {space, viewIds, id, icons } from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [viewIds.draw];
 const title = 'Irregular Verbs';
-const icon = icons.draw;
 
 const lessons = [
     {
@@ -271,5 +270,4 @@ const lessons = [
 export {
 title,
 lessons,
-icon
 }

@@ -4,7 +4,6 @@ import {space, viewIds, id, icons } from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [viewIds.radio];
 const title = 'Quantifiers: few, little';
-const icon = icons.radio;
 
 const lessons = [
     {
@@ -130,5 +129,4 @@ const lessons = [
 export {
 title,
 lessons,
-icon
 }

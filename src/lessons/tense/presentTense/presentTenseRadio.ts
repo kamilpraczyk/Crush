@@ -6,7 +6,6 @@ import explenation = require('./explenation');
 const common = [viewIds.radio];
 const placeholder = "Simple Present Tense";
 const title = "Simple Present Tense";
-const icon = icons.radio;
 const lessons = [
     {
         id: id(common), title: title,
@@ -85,7 +84,6 @@ const lessons = [
 export {
 title,
 lessons,
-icon
 }
 
 

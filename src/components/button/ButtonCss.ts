@@ -87,13 +87,14 @@ const styles = {
         display: 'inline-flex',
         textAlign: 'left',
         alignSelf: 'center',
+        flexGrow: 1
     },
 
     icon: {
         paddingTop: '2vh',
         paddingBottom: '2vh',
         paddingLeft: '2vw',
-        paddingRight: '1vw',
+        paddingRight: '2vw',
         display: 'inline-flex',
         alignSelf: 'center'
     },
@@ -105,11 +106,21 @@ const styles = {
         paddingRight: '1vw',
         display: 'inline-flex',
         alignSelf: 'center',
-        color: '#777',
+        color: css.font.color.disable,
     },
 
     leftIconActive: {
         color: '#fff',
+    },
+
+    numbers: {
+        fontSize: css.font.fontSize.micro,
+        alignSelf: 'center',
+        color: css.font.color.disable,
+        padding: 5
+    },
+    numbersActive: {
+        color: css.button.color.active
     }
 
 }
@@ -195,6 +206,10 @@ export = utils.union(css, {
         }
         return style;
     },
+
+    getNumbers(isActive: boolean) {
+        return css.get(styles.numbers, isActive ? styles.numbersActive : null);
+    }
 
 
 });

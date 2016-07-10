@@ -6,7 +6,6 @@ import explenation = require('./explenation');
 const common = [viewIds.radio];
 const placeholder = "Present Continuous Tense";
 const title = "Present Continuous Tense";
-const icon = icons.radio;
 const lessons = [
     {
         id: id(common), title: title,
@@ -84,7 +83,6 @@ const lessons = [
 export {
 title,
 lessons,
-icon
 }
 
 

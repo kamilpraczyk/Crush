@@ -8,7 +8,6 @@ const common = [viewIds.oneTwoThree, displayIds.areRepeated];
 const placeholder = 'Infinitive - Past Simple - Past Participle';
 const title = 'Irregular Verbs';
 const postfix = "";
-const icon = icons.oneTwoThree;
 
 
 const lessons = [
@@ -361,5 +360,4 @@ const lessons = [
 export {
 title,
 lessons,
-icon
 }

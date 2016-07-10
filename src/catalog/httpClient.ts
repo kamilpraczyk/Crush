@@ -1,6 +1,8 @@
 /// <reference path="../../typings/tsd.d.ts" />
 import Promise = require("bluebird");
+import {TimeOutError}  from '../lessons/interface';
 
+const timeMs = 20 * 1000;
 
 function addUrlGetParam(url: string, param: string, value: string) {
     var a = document.createElement('a'), regex = /(?:\?|&amp;|&)+([^=]+)(?:=([^&]*))*/gi;
@@ -26,8 +28,12 @@ function HttpClientGET(aUrl: string) {
     return new Promise((resolve, reject) => {
 
         const anHttpRequest = getHttpRequest();
+        const time = setTimeout(function () {
+            return reject(new TimeOutError());
+        }, timeMs);
         anHttpRequest.onreadystatechange = () => {
             if (anHttpRequest.readyState === 4 && anHttpRequest.status === 200) {
+                clearTimeout(time);
                 try {
                     const data = JSON.parse(anHttpRequest.responseText);
                     return resolve(data);
@@ -44,13 +50,17 @@ function HttpClientGET(aUrl: string) {
         }
     });
 }
-//TODO set timeout?
+
 function HttpClientPOST(aUrl: string, data: string) {
     return new Promise((resolve, reject) => {
 
         const anHttpRequest = getHttpRequest();
+        const time = setTimeout(function () {
+            return reject(new TimeOutError());
+        }, timeMs);
         anHttpRequest.onreadystatechange = () => {
             if (anHttpRequest.readyState === 4 && anHttpRequest.status === 200) {
+                clearTimeout(time);
                 try {
                     const data = JSON.parse(anHttpRequest.responseText);
                     return resolve(data);

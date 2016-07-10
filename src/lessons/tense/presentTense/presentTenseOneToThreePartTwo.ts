@@ -8,7 +8,6 @@ const postfix = ".";
 const common = [viewIds.oneTwoThree];
 const placeholder = "Simple Present Tense";
 const title = "Simple Present Tense";
-const icon = icons.oneTwoThree;
 const lessons = [
     {
         id: id(common), title: title,
@@ -137,7 +136,6 @@ const lessons = [
 export {
 title,
 lessons,
-icon
 }
 
 

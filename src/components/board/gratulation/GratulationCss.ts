@@ -20,7 +20,7 @@ let styles = {
     },
 
     text: {
-        color: css.font.color.light,
+        color: css.font.color.dark,
         fontSize: css.font.fontSize.XL2,
         paddingBottom: '2vh',
         textShadow: textShadow

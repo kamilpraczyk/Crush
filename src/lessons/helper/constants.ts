@@ -18,7 +18,8 @@ export const viewIds = {
 export const displayIds = {
     digitalTime: 'e',
     analogTime: 'c',
-    areRepeated: 'a'
+    areRepeated: 'a',
+    noSpace: 'n'
 }
 
 export const icons = {
@@ -60,6 +61,9 @@ export const isId = {
     },
     isAnalogTime: function (id: string) {
         return id.indexOf(displayIds.analogTime) !== -1;
+    },
+    isNoSpace: function (id: string) {
+        return id.indexOf(displayIds.noSpace) !== -1;
     }
 
 }
@@ -245,9 +249,8 @@ export const capital = {
 
 };
 
-//TODO ESC - will toogle menu,
+//TODO - answers have different buttons from info and main button -name.
 //TODO - make something with minimalized menu button - is on the way always
-//TODO - left-right will navigate lessons
 //TODO - IE11 draw fix layout 
 //TODO - IE11 settings menu fix layout
 //TODO - IE11 grammar fix layout
@@ -257,9 +260,6 @@ export const capital = {
 //TODO  when finish - next to buy me a beer - button save score, and display last score
 // make lessons - tences vs each other
 //make lessons - sentence to =>question sentence
-//TODO test - corrected and incorrected have to be unique
-
-
 
 /*
 ACTIVE / PASSIVE

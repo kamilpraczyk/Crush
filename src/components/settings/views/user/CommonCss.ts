@@ -9,7 +9,6 @@ let styles = {
         flexDirection: 'column',
         alignItems: 'stretch',
         alignContent: 'stretch',
-        background: 'red',
         fontSize: css.font.fontSize.XL,
     },
 
@@ -17,13 +16,14 @@ let styles = {
         display: 'flex',
         flexGrow: 1,
         margin: '2vmax',
+        marginBottom : '1vmax',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
     },
 
     text: {
-        color: css.font.color.light,
+        color: css.font.color.dark,
         fontSize: css.font.fontSize.XL2,
         paddingBottom: '2vh',
         justifyContent: 'left',
@@ -55,7 +55,7 @@ let styles = {
     },
 
     boxLabel: {
-        color: css.font.color.light,
+        color: css.font.color.dark,
         flexGrow: 1,
         alignItems: 'center',
         display: 'flex',
@@ -72,7 +72,7 @@ let styles = {
         border: '1px solid #e6e6e6',
         borderRadius: '4px',
         backgroundColor: '#3CBC8D',
-        color: css.font.color.light,
+        color: css.font.color.dark,
         marginBottom: '1vh',
         paddingLeft: '1vw',
         paddingRight: '1vw',

@@ -23,7 +23,6 @@ export interface BoardFaces {
 }
 
 export interface LessonFace {
-    icon: string,
     name: string,
     active: boolean,
     free: boolean,
@@ -43,3 +42,17 @@ export interface BoardResult {
     isCorrect: boolean
 }
 
+
+
+export class TimeOutError extends Error {
+
+    constructor(public message?: string) {
+        super(message);
+        this.name = 'TimeOutError';
+        this.message = message;
+        this.stack = (<any>new Error()).stack;
+    }
+    toString() {
+        return this.name + ': ' + this.message;
+    }
+}

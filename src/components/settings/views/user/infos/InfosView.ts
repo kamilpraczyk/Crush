@@ -16,14 +16,13 @@ function render() {
     const props = HomeStore.getStateHome();
 
 
-
     function getBox() {
 
         return div({
             style: CommonCss.getBox()
         },
             div({ style: CommonCss.getBoxSplit() },
-                div({ style: CommonCss.getText() }, dictionary.INFO_BROWSER)
+                !utils.isBrowserSupported() ? CommonCss.makeBoxLine(dictionary.INFO_BROWSER, null) : null
             )
         );
     }

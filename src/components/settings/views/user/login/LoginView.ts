@@ -123,13 +123,13 @@ class View extends React.Component<{}, State>{
     render() {
         const props = HomeStore.getStateHome();
 
-        if (props.login.success) {
+        if (props.login.success || props.register.show) {
             return null;
         }
 
         this.state.message = dictionary.HEADER_LOGIN;
         if (props.login.error)
-            this.state.message = dictionary.ERROR_LOGIN_INVALID;
+            this.state.message = props.login.error;
         if (props.login.process) {
             this.state.message = dictionary.PLEASE_WAIT;
         }

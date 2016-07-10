@@ -5,7 +5,6 @@ import explenation = require('./explenation');
 const common = [viewIds.fourWords, displayIds.digitalTime];
 import _ = require("underscore");
 const title = 'What time is it?';
-const icon = icons.fourWords;
 
 const lessons = [
     {
@@ -137,5 +136,4 @@ const lessons = [
 export {
 title,
 lessons,
-icon
 }

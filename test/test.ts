@@ -16,12 +16,16 @@ describe('Lessons -', () => {
                 if (board.name.length > space.length) { // skip simple space
 
                     if (board.name.indexOf(space) === 0) { //begining of sentence
-                        expect(board.name).to.contain(space + ' ');
+                        if (board.id.indexOf(displayIds.noSpace) === -1) {
+                            expect(board.name).to.contain(space + ' ');
+                        }
                         expect(board.name).to.not.contain(space + '  ');
                     }
 
                     if (board.name.indexOf(space, board.name.length - space.length) !== -1) { // ending of sentence
-                        expect(board.name).to.contain(' ' + space);
+                        if (board.id.indexOf(displayIds.noSpace) === -1) {
+                            expect(board.name).to.contain(' ' + space);
+                        }
                         expect(board.name).to.not.contain('  ' + space);
                     }
 
@@ -32,7 +36,9 @@ describe('Lessons -', () => {
                             const a = n[0];
                             const b = n[n.length - 1];
                             if (!(a === " " || a === "," || b === " " || b === "." || b === "?" || b === "!" || b === ",")) {
-                                throw Error('space surrounded: a or b not equal space:' + board.name + ' +' + n + '+');
+                                if (board.id.indexOf(displayIds.noSpace) === -1) {
+                                    throw Error('space surrounded: a or b not equal space:' + board.name + ' +' + n + '+');
+                                }
                             }
                         }
                     });
@@ -46,3 +52,5 @@ describe('Lessons -', () => {
     //is not capitall that should be capital
 
 });
+
+//TODO test check if is .?! or none? for each lessons batch title

@@ -14,7 +14,7 @@ const fontFamilyJournal = 'journal';
 
 import {isId} from '../../lessons/helper/constants';
 
-
+const micro = constFont - 2.0 + constPoint;
 const XS = constFont - 0.8 + constPoint;
 const S = constFont - 0.7 + constPoint;
 const M = constFont - 0.5 + constPoint;
@@ -63,9 +63,9 @@ let style = {
     isMobile: isMobile,
 
 
-    animate: function(callback: Function, object?: any) {
+    animate: function (callback: Function, object?: any) {
         if (callback) {
-            return function(e: any) {
+            return function (e: any) {
                 var call = object ? _.partial(callback, object, _.extend({}, e) as any) : callback;
                 call();
             };
@@ -80,6 +80,7 @@ let style = {
 
     font: {
         fontSize: {
+            micro: micro,
             XS: XS,
             S: S,
             M: M,
@@ -91,13 +92,13 @@ let style = {
         },
         color: {
             light: 'white',
-            default: 'black',
+            dark: 'black',
             select: 'blue',
-            hint: 'gray',
-            disable: 'lightgray',
+            hint: '#777',
+            disable: '#555',
             success: 'green',
             fail: 'red',
-            ink : '#2C5781'
+            ink: '#2C5781'
         }
     },
 

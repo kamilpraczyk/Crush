@@ -6,7 +6,6 @@ import explenation = require('./explenation');
 const common = [viewIds.radio];
 const placeholder = "Simple Present Tense";
 const title = "Simple Present Tense";
-const icon = icons.radio;
 
 //continue with next http://www.grammar-quizzes.com/prest-diagnostic.html
 const lessons = [
@@ -87,7 +86,6 @@ const lessons = [
 export {
 title,
 lessons,
-icon
 }
 
 

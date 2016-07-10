@@ -20,7 +20,8 @@ export = {
     removeInvalidChars,
     getNextYearISOdate,
     getNextMonthISOdate,
-    delay
+    isBrowserSupported,
+    delay //delay promise
 };
 
 function delay(time?: number) {
@@ -187,3 +188,82 @@ function union3<T, U, X>(first: T, second: U, third: X): T & U & X {
     }
     return result;
 }
+
+
+
+function _getBrowser() {
+    function get_browser_version() {
+        /*version will be cut to full number no float*/
+        var ua = navigator.userAgent, tem: any = null, M: any = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+        if (/trident/i.test(M[1])) {
+            tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
+            return { name: 'IE', version: (tem[1] || '') };
+        }
+        if (M[1] === 'Chrome') {
+            tem = ua.match(/\bOPR\/(\d+)/)
+            if (tem != null) { return { name: 'Opera', version: tem[1] }; }
+        }
+        M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
+        if ((tem = ua.match(/version\/(\d+)/i)) != null) { M.splice(1, 1, tem[1]); }
+        return {
+            name: M[0],
+            version: M[1]
+        };
+    }
+
+    var isOpera = !!(<any>window).opera || navigator.userAgent.indexOf(' OPR/') >= 0;  // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
+    var isFirefox = typeof (<any>window).InstallTrigger !== 'undefined';   // Firefox 1.0+
+    var isSafari = Object.prototype.toString.call((<any>window).HTMLElement).indexOf('Constructor') > 0;  // At least Safari 3+: "[object HTMLElementConstructor]"
+    // For the purposes of this code Electron is Chrome. See platform.js for more details. 
+    var isChrome = !!(<any>window).chrome && !isOpera || navigator.userAgent.indexOf('Electron') >= 0;              // Chrome 1+
+    var isIE = /*@cc_on!@*/false || !!(<any>document).documentMode;  // At least IE6 
+    var isEdge = !isIE && !!(<any>window).StyleMedia;  //  Edge 20+
+
+    var version = get_browser_version().version;
+
+    return {
+        isOpera,
+        isFirefox,
+        isSafari,
+        isChrome,
+        isIE,
+        isEdge,
+
+        version: parseInt(version, 10)
+    }
+}
+
+
+function isBrowserSupported(): boolean {
+    const b = _getBrowser();
+    /*var output = 'Detecting browsers:<hr>';
+    output += 'isFirefox: ' + b.isFirefox + '<br>';
+    output += 'isChrome: ' + b.isChrome + '<br>';
+    output += 'isSafari: ' + b.isSafari + '<br>';
+    output += 'isOpera: ' + b.isOpera + '<br>';
+    output += 'isIE: ' + b.isIE + '<br>';
+    output += 'isIE Edge: ' + b.isEdge + '<br>';
+    output += ' version : ' + b.version + '<br>';
+    document.body.innerHTML = output;*/
+    /*Support veriosns from Dec 2015 */
+    if ((b.isChrome && b.version >= 47) ||
+        (b.isFirefox && b.version >= 43) ||
+        //(b.isSafari && b.version >= 9) ||
+        // (b.isIE && b.version >= 11) ||
+        // (b.isEdge && b.version >= 25) ||
+        (b.isOpera && b.version >= 34)) {
+        return true;
+    }
+    return false;
+}
+
+function isIE() {
+    const b = _getBrowser();
+    if (b.isIE)
+        return true;
+    return false;
+}
+
+
+
+

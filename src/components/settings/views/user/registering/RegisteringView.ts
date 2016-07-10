@@ -148,7 +148,6 @@ class View extends React.Component<{}, State>{
     constructor() {
         super();
         this.state = {
-            message: dictionary.HEADER_REGISTERING,
             user: {
                 name: defaultUser.name,
                 email: defaultUser.email,
@@ -172,6 +171,7 @@ class View extends React.Component<{}, State>{
             this.state.user.retypePassword = null;
         }
 
+        this.state.message = dictionary.HEADER_REGISTERING_ON;
         if (props.register.process) {
             this.state.message = dictionary.PLEASE_WAIT;
         } else if (props.register.error) {
@@ -181,8 +181,9 @@ class View extends React.Component<{}, State>{
         }
 
         if (!props.register.show) {
-            this.state.message = dictionary.HEADER_REGISTERING;
+            this.state.message = dictionary.HEADER_REGISTERING_OFF
         }
+
         return render(props, this.state, this.setState.bind(this));
     }
 };

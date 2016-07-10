@@ -2,7 +2,7 @@
 import {LessonMapFace, LessonFace, BoardFaces} from './interface';
 import _ = require('underscore');
 
-export const activeStartup = 'spellingVerbsIngOne';
+export const activeStartup = 'prefixes_one';
 
 import animals = require('./animals/animals');
 import clockFourWords = require('./extra/clock/clockFourWords');
@@ -39,10 +39,14 @@ import myselfYourself = require('./pronouns/reflexive/myselfYourself');
 import spellingVerbsIngOne = require('./words/ing/spellingVerbsIngOne');
 import spellingVerbsIngTwo = require('./words/ing/spellingVerbsIngTwo');
 import spellingVerbsIngThree = require('./words/ing/spellingVerbsIngThree');
-
+import prefixes_one = require('./words/prefixes/prefixes_one');
+import prefixes_two = require('./words/prefixes/prefixes_two');
 
 //TODO offer some for free and some when registered, and rest when subscribed
 export const lessons: LessonMapFace = {
+
+    prefixes_one: w(true, prefixes_one),
+    prefixes_two: w(true, prefixes_two),
 
     spellingVerbsIngOne: w(true, spellingVerbsIngOne),
     spellingVerbsIngTwo: w(true, spellingVerbsIngTwo),
@@ -95,11 +99,10 @@ export const lessons: LessonMapFace = {
 
 };
 
-function w(free: boolean, data: { icon: string, title: string, lessons: BoardFaces }) {
+function w(free: boolean, data: { title: string, lessons: BoardFaces }) {
     const l: LessonFace = {
         free: free,
         active: false,
-        icon: data.icon,
         name: data.title,
         lessons: data.lessons
     };

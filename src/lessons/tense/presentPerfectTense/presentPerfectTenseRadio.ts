@@ -6,7 +6,6 @@ import _ = require("underscore");
 const common = [viewIds.radio];
 const placeholder = "Present Perfect Tense";
 const title = "Present Perfect Tense";
-const icon = icons.radio;
 const lessons = [
     {
         id: id(common), title: title,
@@ -84,7 +83,6 @@ const lessons = [
 export {
 title,
 lessons,
-icon
 }
 
 

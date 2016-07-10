@@ -4,7 +4,6 @@ import {space, viewIds, id, icons, capital } from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [viewIds.radio];
 const title = "Reflexive Pronouns: myself, yourself, herself...";
-const icon = icons.radio;
 
 const lessons = [
     {
@@ -80,5 +79,4 @@ const lessons = [
 export {
 title,
 lessons,
-icon
 }

@@ -20,7 +20,6 @@ const a = {
 }
 
 const title = 'Animals';
-const icon = icons.fourPictures;
 const common = [viewIds.fourPictures];
 
 const lessons = [
@@ -90,6 +89,5 @@ const lessons = [
 
 export {
 title,
-lessons,
-icon
+lessons
 }

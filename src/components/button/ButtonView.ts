@@ -1,6 +1,7 @@
 import React = require('react');
 import ButtonCss = require('./ButtonCss');
 import LoaderView = require('../loader/LoaderView');
+import _ = require('underscore');
 const {div, button} = React.DOM;
 
 
@@ -11,6 +12,7 @@ interface Props {
     disabled?: boolean,
     icon?: string,
     leftIcon?: string,
+    numbers?: number,
     onClick: Function,
     isQuickClick?: boolean,
     isExpand?: boolean,
@@ -86,6 +88,11 @@ class ButtonView extends React.Component<Props, State>{
         }
 
         const loader = this.props.isLoader ? LoaderView() : null;
+        let numbers: any = null;
+        if (_.isNumber(this.props.numbers)) {
+            numbers = div({ style: ButtonCss.getNumbers(this.props.isActive) }, this.props.numbers);
+        }
+
 
         return button({
             ref: this.props.ref,
@@ -104,7 +111,7 @@ class ButtonView extends React.Component<Props, State>{
                 isTime: this.props.isTime,
             }),
             onClick: this.clickHandler
-        }, leftIcon, icon, name, loader);
+        }, leftIcon, icon, name, numbers, loader);
     }
 };
 

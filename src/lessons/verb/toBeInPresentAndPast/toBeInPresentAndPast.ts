@@ -3,13 +3,12 @@ import {BoardFaces} from '../../interface';
 import {space, viewIds, id, icons } from '../../helper/constants';
 import explenation = require('./explenation');
 
-const toPlural = 'Change to Plural';
-const toSingular = 'Change to Singular';
-const toPast = 'Change to Past Tense';
-const toPresent = 'Change to Present Tense';
+const toPlural = 'Change to plural.';
+const toSingular = 'Change to singular.';
+const toPast = 'Change to Past Tense.';
+const toPresent = 'Change to Present Tense.';
 const common = [viewIds.radio];
 const title = 'Verb: "to be" in present and past';
-const icon = icons.radio;
 
 const lessons = [
     {
@@ -89,5 +88,4 @@ const lessons = [
 export {
 title,
 lessons,
-icon
 }

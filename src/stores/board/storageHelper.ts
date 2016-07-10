@@ -37,6 +37,11 @@ function reset() {
 function getCorrectSentence() {
     let name = _board.name;
     let read = '';
+    function getAnswer() {
+        const spaces = isId.isNoSpace(_board.id) ? '' : ' ';
+        return _selectedAnswer === empty ? ' ' : spaces + _selectedAnswer + spaces;
+    }
+
     if (isId.isDraw(_board.id)) {
         read = name;
 
@@ -56,8 +61,7 @@ function getCorrectSentence() {
         return name;
     } else if (isId.isInradio(_board.id)) {
 
-        const replacement = _selectedAnswer === empty ? ' ' : ' ' + _selectedAnswer + ' ';
-        read = name.replace(space, replacement);
+        read = name.replace(space, getAnswer());
 
     } else if (isId.isRadio(_board.id)) {
 
@@ -70,8 +74,7 @@ function getCorrectSentence() {
             });
         } else if (name.indexOf(space) !== -1) {
             /*name contains partly answer, in place of 'space'*/
-            const replacement = _selectedAnswer === empty ? ' ' : ' ' + _selectedAnswer + ' ';
-            read = name.replace(space, replacement);
+            read = name.replace(space, getAnswer());
         } else if (_selectedAnswer !== empty) {
             /* selected answer is correct*/
             read = _selectedAnswer;
@@ -95,9 +98,6 @@ function isCorrect() {
 function isCompletedAndCorrect() {
     return _board.correct.length === _selectedAnswerQueue.length && _.difference(_board.correct, _selectedAnswerQueue).length === 0;
 }
-
-
-
 
 
 function setPressedAnswer(answer: string) {
