@@ -21,7 +21,7 @@
 	}
 	:focus {
 		outline: 0;
-		box-shadow: inset 0px 0px 2px 2px orange !important;
+		box-shadow: inset 0px 0px 2px 2px gray !important;
 	}
 	html {
 		height: 100%
@@ -190,7 +190,7 @@ h1 {
 }
 
 .event.received {
-    background-color:#1BA261;
+    background-color:#00999D;
     display:none;
 }
 

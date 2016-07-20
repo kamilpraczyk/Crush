@@ -23,8 +23,15 @@ function getLogOut(props: Props) {
     });
 
     return div({ style: CommonCss.getBox() },
+
         div({ style: CommonCss.getBoxSplit() },
-            CommonCss.makeBoxLine(dictionary.LOGEDIN_AS + ' ' + props.user.name, buttonLogOut)
+            CommonCss.makeBoxLine(dictionary.LOGEDIN_AS + ' ' + props.user.name, null),
+            props.user.last_login ? CommonCss.makeBoxLine(dictionary.LAST_LOGIN + ' ' + props.user.last_login, null) : null,
+            !props.user.active && props.user.email ? CommonCss.makeBoxLine(dictionary.PLEASE_CONFIRM_EMAIL, null) : null
+        ),
+
+        div({ style: CommonCss.getBoxSplit() },
+            CommonCss.makeBoxLine(null, buttonLogOut)
         )
     );
 }

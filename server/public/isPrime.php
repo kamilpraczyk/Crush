@@ -34,7 +34,7 @@ $conn = mysqli_connect($servername, $username, $password, $db);
 
 
 //execute the SQL query and return records
-$sql="SELECT email, name, password, valid_to FROM Users WHERE email='".$email."'";
+$sql="SELECT email, name, password, valid_to, active, last_login FROM Users WHERE email='".$email."'";
 $result=mysqli_query($conn,$sql);
 
 $isValid = FALSE;

@@ -9,7 +9,8 @@ const styles = {
         overflowY: 'auto',
         paddingBottom: '10vh',
         fontFamily: css.fontFamily.journal.fontFamily,
-        color: css.font.color.ink
+        color: css.font.color.ink,
+        background: css.themes.standard.backgroundImageRead
     },
 
     title: {

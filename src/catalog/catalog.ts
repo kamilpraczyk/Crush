@@ -13,9 +13,24 @@ function serverIsPrime(login: string, password: string) {
     return HttpClientGET(newurl);
 }
 
+function sendEmailVerification(login: string,passwordMD5: string, password: string, name: string) {
+    let newurl = getUrl(source.emailVerification);
+    newurl = addUrlGetParam(newurl, "l", login);
+    newurl = addUrlGetParam(newurl, "p", password);
+    newurl = addUrlGetParam(newurl, "n", name);
+
+    let u = getUrl(source.emailClickConfirm);
+    u = addUrlGetParam(u, "l", login);
+    u = addUrlGetParam(u, "p", passwordMD5);
+
+    newurl = addUrlGetParam(newurl, "u", u);
+
+    return HttpClientGET(newurl);
+}
+
 function serverUpdateValidTo(login: string, valid_to: string) {
     if (!utils.isValidISODate(valid_to)) {
-        Promise.reject(new Error('Date not valid' + valid_to));
+        return Promise.reject(new Error('Date not valid' + valid_to));
     }
     const newurl = getUrl(source.updateValidation);
     const data = "l=" + login + "&d=" + valid_to;
@@ -25,7 +40,7 @@ function serverUpdateValidTo(login: string, valid_to: string) {
 function serverRegister(login: string, password: string, name: string) {
     const newurl = getUrl(source.register);
     const data = "l=" + login + "&p=" + password + "&n=" + name;
-    console.log('data',data);
+    console.log('data', data);
     return HttpClientPOST(newurl, data);
 }
 
@@ -33,5 +48,6 @@ function serverRegister(login: string, password: string, name: string) {
 export {
 serverIsPrime,
 serverUpdateValidTo,
-serverRegister
+serverRegister,
+sendEmailVerification
 }

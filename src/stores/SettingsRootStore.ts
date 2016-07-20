@@ -22,25 +22,25 @@ let _activeRoot = _ids.lessons;
 let _rootList = {
 
     [_ids.close]: {
-        name: 'practise',
-        icon: 'moon-accessibility',
+        name: 'Practise',
+        icon: 'moon-question',
         active: false,
         disable: false
     },
     [_ids.explenation]: {
-        name: 'grammar',
+        name: 'Grammar',
         icon: 'moon-file',
         active: false,
         disable: false
     },
     [_ids.lessons]: {
-        name: 'lessons',
+        name: 'Lessons',
         icon: 'moon-drawer3',
         active: true,
         disable: false
     },
     [_ids.user]: {
-        name: 'user',
+        name: 'User',
         icon: 'moon-user2',
         active: false,
         disable: false

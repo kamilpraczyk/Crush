@@ -16,10 +16,10 @@ let styles = {
         display: 'flex',
         flexGrow: 1,
         margin: '2vmax',
-        marginBottom : '1vmax',
+        marginBottom: '1vmax',
         flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: 'left',
+        justifyContent: 'left',
     },
 
     text: {
@@ -57,7 +57,7 @@ let styles = {
     boxLabel: {
         color: css.font.color.dark,
         flexGrow: 1,
-        alignItems: 'center',
+        alignItems: 'left',
         display: 'flex',
         paddingRight: '1vw',
         minWidth: '170px',
@@ -78,6 +78,7 @@ let styles = {
         paddingRight: '1vw',
         paddingTop: '1vh',
         paddingBottom: '1vh',
+        fontSize: '0.7em',
         width: '100%'
     }
 }

@@ -1,0 +1,60 @@
+* {
+box-sizing: border-box;
+}
+
+*:focus {
+	outline: none;
+}
+body {
+font-family: Arial;
+background-color: #00999D;
+padding-top: 50px;
+font-size: 17px;
+background-image: url(paper.png);
+/*https://www.transparenttextures.com/*/
+}
+
+
+.login {
+margin: 20px auto;
+width: 300px;
+}
+
+     .success{
+         font-size : 17px;
+         color : #00999D;
+     }
+     .error{
+         font-size : 17px;
+         color : #DE5145;
+     }
+
+.login-screen {
+background-color: #FFF;
+padding: 20px;
+border-radius: 5px;
+    display: flex;
+    flex-flow: column;
+    flex-grow: 1;
+    width: calc(100% - 40px);
+}
+
+.app-title {
+text-align: center;
+color: #777;
+}
+
+.login-form {
+text-align: center;
+}
+.control-group {
+margin-bottom: 10px;
+}
+
+
+.login-link {
+  font-size: 13px;
+  color: #444;
+  display: block;
+	margin-top: 12px;
+}

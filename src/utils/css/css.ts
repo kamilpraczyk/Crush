@@ -96,8 +96,8 @@ let style = {
             select: 'blue',
             hint: '#777',
             disable: '#555',
-            success: 'green',
-            fail: 'red',
+            success: '#00FF00',
+            fail: '#FF0000',
             ink: '#2C5781'
         }
     },
@@ -110,15 +110,15 @@ let style = {
     button: {
         background: {
             normal: 'black',
-            active: 'orange',
-            focus: 'blue',
+            active: '#00999D',
+            focus: 'black',
             disabled: 'black'
         },
         color: {
             normal: 'white',
             active: 'white',
-            focus: 'white',
-            disabled: 'gray'
+            focus: '#00999D',
+            disabled: '#777'
         },
         border: {
             normal: '5px solid gray',
@@ -153,6 +153,7 @@ let style = {
         standard: {
             backgroundImageLesson: 'url("img/10.jpg")',
             backgroundImageBeer: 'url("img/beer.png")',
+            backgroundImageRead: 'url("img/read.png")'
         }
     },
 

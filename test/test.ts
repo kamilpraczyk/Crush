@@ -11,7 +11,6 @@ describe('Lessons -', () => {
 
     it('should have right space when "space" detected in board name ', () => {
         goThrough((board: BoardFace) => {
-
             if (board.name.indexOf(space) !== -1) {
                 if (board.name.length > space.length) { // skip simple space
 
@@ -53,4 +52,3 @@ describe('Lessons -', () => {
 
 });
 
-//TODO test check if is .?! or none? for each lessons batch title

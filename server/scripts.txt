@@ -6,9 +6,16 @@ CREATE TABLE Users (
   password CHAR(41) NOT NULL,
   registered CHAR(20) NOT NULL,
   valid_to CHAR(20) NOT NULL,
+  last_login CHAR(20),
+  active INT(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (user_id),
   UNIQUE INDEX (email)
 );
+
+//Add column example
+ALTER TABLE Users ADD active INT(1) NOT NULL DEFAULT '0';
+ALTER TABLE Users ADD last_login CHAR(20);
+
 
 //Crate admin
 INSERT INTO Users (email, name, password, registered, valid_to)

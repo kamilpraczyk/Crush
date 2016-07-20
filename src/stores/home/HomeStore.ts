@@ -6,7 +6,8 @@ import BaseStore from '../../utils/store/BaseStore';
 import LessonStore = require('../lesson/LessonStore');
 import catalog = require("../../catalog/catalog");
 import dictionary = require('../../utils/dictionary');
-import {TimeOutError}  from '../../lessons/interface';
+import Promise = require("bluebird");
+import Matchers = require('../../components/settings/views/user/registering/Matchers');
 
 const initialState = {
 
@@ -25,11 +26,18 @@ const initialState = {
         error: null as string,
         process: false,
     },
+    verification: {
+        error: null as string,
+        process: false,
+        success: false
+    },
     user: {
         isPrime: false,
         name: null as string,
         email: null as string,
-        valid_to: null as string
+        valid_to: null as string,
+        active: false,
+        last_login: null as string
     },
 };
 declare type State = typeof initialState;
@@ -41,60 +49,85 @@ function reset() {
     state = JSON.parse(JSON.stringify(initialState));
 }
 
-function logIn(login: string, password: string) {
+function logIn(o: { login: string, password: string }) {
     reset();
 
-    return catalog.serverIsPrime(login, password).then((data: { error?: string, isPrime?: boolean, user?: { email: string, name: string, valid_to: string } }) => {
+    return catalog.serverIsPrime(o.login, utils.md5(o.password)).then((data: { error?: string, isPrime?: boolean, user?: { email: string, name: string, valid_to: string, active: string, last_login: string } }) => {
         data = data || {};
+        console.info('serverIsPrime data=', data);
 
         state.login.success = data.user && data.user.name ? true : false;
-        state.login.error = state.login.success ? null : dictionary.ERROR_LOGIN_INVALID;
+        if (!state.login.success)
+            return Promise.reject(new Error(dictionary.ERROR_LOGIN_INVALID));
 
         if (data.user) {
+            const active = (data.user.active === '1');
+            state.login.success = state.login.success && active;
             state.user = {
                 isPrime: _.isBoolean(data.isPrime) ? data.isPrime : false,
                 name: data.user.name,
                 email: data.user.email,
-                valid_to: data.user.valid_to
+                valid_to: data.user.valid_to,
+                active: active,
+                last_login: data.user.last_login
             };
         }
+        return Promise.resolve(null);
     }).catch((e: Error) => {
-        state.login.error = e instanceof TimeOutError ? dictionary.SERVER_ERROR_TIMEOUT : dictionary.ERROR_LOGIN_INVALID;
-        console.error(e)
+        console.error(e);
+        state.login.error = e.message;
     });
 }
 
-function updateValidation(login: string, valid_to: string) {
-    return catalog.serverUpdateValidTo(login, valid_to).then((data: { error?: string, success?: boolean }) => {
-        console.info('updateValidation data =', data)
+function updateValidation(o: { login: string, valid_to: string }) {
+    return catalog.serverUpdateValidTo(o.login, o.valid_to).then((data: { error?: string, success?: boolean }) => {
+        console.info('updateValidation data =', data);
         data = data || {};
 
-        state.subscribe.error = data.error ? dictionary.SERVER_ERROR_SUBSCRIBING_WENT_WRONG : null;
+        if (data.error)
+            return Promise.reject(new Error(dictionary.SERVER_ERROR_SUBSCRIBING_WENT_WRONG));
+
         state.user.isPrime = !!data.success;
-        state.user.valid_to = valid_to;
-
+        state.user.valid_to = o.valid_to;
+        return Promise.resolve(null);
     }).catch((e: Error) => {
         console.error(e);
-        state.subscribe.error = e instanceof TimeOutError ? dictionary.SERVER_ERROR_TIMEOUT : dictionary.SERVER_ERROR_SUBSCRIBING_WENT_WRONG;
+        state.subscribe.error = e.message;
     });
 }
 
-function register(login: string, password: string, name: string) {
-    return catalog.serverRegister(login, password, name).then((data: { error?: string, success?: boolean }) => {
-        console.info('register data =', data);
-        data = data || {};
-        if (data.error) {
-            if (data.error.indexOf('Duplicate') !== -1 || data.error.indexOf('duplicate') !== -1) {
-                state.register.error = dictionary.SERVER_ERROR_DUPLICATE_EMAIL;
-            } else {
-                state.register.error = dictionary.SERVER_ERROR_INVALID_DATA;
-            }
-        } else if (data.success) {
-            state.register.success = true;
-        }
+function sendEmailVerification(o: { login: string, password: string, name: string }) {
+    return catalog.sendEmailVerification(o.login, utils.md5(o.password), o.password, o.name).then((data: { success?: boolean }) => {
+        console.info('sendEmailVerification data =', data)
+        state.verification.success = data.success ? true : false;
+        if (!state.verification.success)
+            return Promise.reject(new Error(dictionary.SERVER_ERROR_CONFIRMATION_EMAIL));
+        return Promise.resolve(null);
     }).catch((e: Error) => {
         console.error(e);
-        state.register.error = e instanceof TimeOutError ? dictionary.SERVER_ERROR_TIMEOUT : dictionary.SERVER_ERROR_NO_RESPOND;
+        state.verification.error = e.message; //TODO (when active false and user name - )
+    });
+}
+
+function register(o: { login: string, password: string, retypePassword: string, name: string }) {
+    return Matchers.validate(o).then((e) => {
+        return catalog.serverRegister(o.login, utils.md5(o.password), o.name).then((data: { error?: string, success?: boolean }) => {
+            console.info('register data =', data);
+            data = data || {};
+            state.register.success = !data.error && data.success ? true : false;
+            if (data.error) {
+                if (data.error.indexOf('Duplicate') !== -1 || data.error.indexOf('duplicate') !== -1)
+                    return Promise.reject(new Error(dictionary.SERVER_ERROR_DUPLICATE_EMAIL));
+                return Promise.reject(new Error(dictionary.SERVER_ERROR_INVALID_DATA));
+            }
+
+            return Promise.resolve(null);
+        }).then(() => {
+            return sendEmailVerification(o);
+        });
+    }).catch((e: Error) => {
+        console.error(e);
+        state.register.error = e.message;
     });
 }
 
@@ -120,7 +153,10 @@ class Store extends BaseStore {
                 emitChange();
 
                 utils.delay().then(() => {
-                    return logIn(action.login, action.password)
+                    return logIn({
+                        login: action.login, password:
+                        action.password
+                    });
                 }).finally(() => {
                     state.login.process = false;
                     emitChange();
@@ -140,11 +176,17 @@ class Store extends BaseStore {
 
             case Constants.REGISTER_ON_SERVER:
 
-                state.register.process = true;
-                emitChange();
-
-                utils.delay().then(() => {
-                    return register(action.user.email, action.user.password, action.user.name)
+                utils.delayf(() => {
+                    state.register.process = true;
+                    state.register.error = null;
+                    emitChange();
+                }).then(() => {
+                    return register({
+                        login: action.user.email,
+                        password: action.user.password,
+                        retypePassword: action.user.retypePassword,
+                        name: action.user.name
+                    });
                 }).finally(() => {
                     state.register.process = false;
                     emitChange();
@@ -157,7 +199,10 @@ class Store extends BaseStore {
                 emitChange();
 
                 utils.delay().then(() => {
-                    return updateValidation(state.user.email, action.valid_to)
+                    return updateValidation({
+                        login: state.user.email,
+                        valid_to: action.valid_to
+                    });
                 }).finally(() => {
                     state.subscribe.process = false;
                     emitChange();

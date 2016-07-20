@@ -44,11 +44,11 @@ import prefixes_two = require('./words/prefixes/prefixes_two');
 
 //TODO offer some for free and some when registered, and rest when subscribed
 export const lessons: LessonMapFace = {
-
+ 
     prefixes_one: w(true, prefixes_one),
     prefixes_two: w(true, prefixes_two),
 
-    spellingVerbsIngOne: w(true, spellingVerbsIngOne),
+   spellingVerbsIngOne: w(true, spellingVerbsIngOne),
     spellingVerbsIngTwo: w(true, spellingVerbsIngTwo),
     spellingVerbsIngThree: w(true, spellingVerbsIngThree),
 

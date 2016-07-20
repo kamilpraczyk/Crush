@@ -5,7 +5,8 @@ let styles = {
 
     panel: {
         position: 'absolute',
-        top: 0,
+        zIndex : 1,
+        bottom: 90,
         right: 0,
         display: 'flex',
         flexFlow: 'column wrap',

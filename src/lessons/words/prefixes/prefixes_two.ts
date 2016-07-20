@@ -28,7 +28,7 @@ const lessons = [
         correct: ["un"],
         incorrect: ["dis", "re", "pre"],
         explenation: explenation
-    }, , {
+    }, {
         id: id(common), title: title,
         info: info,
         name: space + "pare",

@@ -4,6 +4,7 @@ import voice = require("./voice");
 import keys = require("./keys/keys");
 import { capital } from '../lessons/helper/constants';
 import Promise = require("bluebird");
+import md5 = require('./md5')
 
 export = {
     union,
@@ -21,17 +22,21 @@ export = {
     getNextYearISOdate,
     getNextMonthISOdate,
     isBrowserSupported,
-    delay //delay promise
+    delay, //delay promise
+    delayf,
+    md5
 };
 
 function delay(time?: number) {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            return resolve();
-        }, time || 1500);
-    });
+    return new Promise((resolve) => {
+        return resolve(null);
+    }).delay(time || 2000);
 }
 
+function delayf(f : () => void) {
+        f();
+        return delay();
+}
 
 function removeInvalidChars(s: string) {
     if (s)

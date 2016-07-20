@@ -9,7 +9,7 @@ const keys = {
 }
 
 function dispatcher(e: any) {
-    console.log('e', e);
+    //console.log('e', e);
     switch (e.keyCode) {
         case 37:
             console.log('left');

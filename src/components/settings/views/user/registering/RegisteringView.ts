@@ -7,7 +7,6 @@ import AppDispatcher = require('../../../../../dispatcher/AppDispatcher');
 import Constants = require('../../../../../constants/Constants');
 import HomeStore = require('../../../../../stores/home/HomeStore');
 const {div, label, input} = React.DOM;
-import Matchers = require('./Matchers');
 import utils = require('../../../../../utils/utils');
 import {defaultUser} from '../../../../../lessons/helper/constants';
 
@@ -22,7 +21,6 @@ interface State {
 }
 
 function getTitle(props: Props, state: State) {
-
     return ButtonView({
         name: state.message,
         isResponsibleHeight: true,
@@ -96,15 +94,9 @@ function getButtonSubmit(props: Props, state: State, setState: (s: State) => voi
         disabled: props.register.process,
         isLoader: props.register.process,
         onClick: function () {
-            Matchers.validate(state.user).then((e) => {
-                AppDispatcher.handleViewAction({
-                    actionType: Constants.REGISTER_ON_SERVER,
-                    user: state.user
-                });
-            }).catch((err: Error) => {
-                setState({
-                    message: err.message
-                });
+            AppDispatcher.handleViewAction({
+                actionType: Constants.REGISTER_ON_SERVER,
+                user: state.user
             });
         }
     });
@@ -114,7 +106,7 @@ function render(props: Props, state: State, setState: (s: State) => void) {
 
     let content: any = null;
     let box: any = null;
-    if (props.register.show) {
+    if (props.register.show && !props.register.success) {
         box = div({
             style: CommonCss.getBox()
         },
@@ -172,6 +164,10 @@ class View extends React.Component<{}, State>{
         }
 
         this.state.message = dictionary.HEADER_REGISTERING_ON;
+        if (!props.register.show) {
+            this.state.message = dictionary.HEADER_REGISTERING_OFF
+        }
+
         if (props.register.process) {
             this.state.message = dictionary.PLEASE_WAIT;
         } else if (props.register.error) {
@@ -180,9 +176,7 @@ class View extends React.Component<{}, State>{
             this.state.message = dictionary.SERVER_SUCCESS_REGISTERED;
         }
 
-        if (!props.register.show) {
-            this.state.message = dictionary.HEADER_REGISTERING_OFF
-        }
+
 
         return render(props, this.state, this.setState.bind(this));
     }

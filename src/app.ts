@@ -14,27 +14,21 @@ function onLoaded() {
     document.getElementById('deviceready').setAttribute('style', 'display:none;');
 }
 
-var app = {
-
-    initialize: function () {
-        this.bindEvents();
-    },
-
-    bindEvents: function () {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-
-    onDeviceReady: function () {
-        utils.delay(1500).then(() => {
-            onConnected();
-            utils.delay(500).then(() => {
-                onLoaded();
-                new Home(document.getElementById('app'));
-            })
+function onDeviceReady() {
+    utils.delay(1500).then(() => {
+        onConnected();
+        utils.delay(500).then(() => {
+            onLoaded();
+            new Home(document.getElementById('app'));
         });
-    }
-};
+    });
+}
 
+const app = {
+    initialize: function () {
+        document.addEventListener('deviceready', onDeviceReady, false);
+    },
+};
 
 
 app.initialize();

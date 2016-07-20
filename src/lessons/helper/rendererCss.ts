@@ -18,7 +18,7 @@ const style = {
         fontWeight: 'bold',
         fontSize: css.font.fontSize.XL2,
         width: '100%',
-        backgroundColor: 'rgb(221, 221, 221)'
+        backgroundColor: 'transparent'
     },
 
     info: {

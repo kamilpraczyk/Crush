@@ -1,6 +1,6 @@
 /// <reference path="../../typings/tsd.d.ts" />
 import Promise = require("bluebird");
-import {TimeOutError}  from '../lessons/interface';
+import {TimeOutError, InvalidServerDataError, ServerRequestError}  from '../lessons/interface';
 
 const timeMs = 20 * 1000;
 
@@ -38,7 +38,7 @@ function HttpClientGET(aUrl: string) {
                     const data = JSON.parse(anHttpRequest.responseText);
                     return resolve(data);
                 } catch (e) {
-                    return reject(e);
+                    return reject(new InvalidServerDataError());
                 }
             }
         }
@@ -46,8 +46,9 @@ function HttpClientGET(aUrl: string) {
             anHttpRequest.open("GET", aUrl, true);
             anHttpRequest.send();
         } catch (e) {
-            return reject(e);
+            return reject(new ServerRequestError());
         }
+        return null;
     });
 }
 
@@ -65,7 +66,7 @@ function HttpClientPOST(aUrl: string, data: string) {
                     const data = JSON.parse(anHttpRequest.responseText);
                     return resolve(data);
                 } catch (e) {
-                    return reject(e);
+                    return reject(new InvalidServerDataError());
                 }
             }
         }
@@ -74,8 +75,9 @@ function HttpClientPOST(aUrl: string, data: string) {
             anHttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
             anHttpRequest.send(data);
         } catch (e) {
-            return reject(e);
+            return reject(new ServerRequestError());
         }
+        return null;
     });
 }
 

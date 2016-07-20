@@ -4,7 +4,7 @@ import {space, multi, viewIds, id, icons, capital} from '../../helper/constants'
 import explenation = require('./explenation');
 const common = [viewIds.radio];
 const title = 'Either and Neither';
-const info = 'Find correct form.'
+const info = 'Find the correct form.'
 
 const lessons = [
     {

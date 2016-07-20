@@ -5,7 +5,9 @@ const baseUrl = "http://clingykoala.com/crush";
 const source = {
     isPrime: '/isPrime.php',
     updateValidation: '/updateValidation.php',
-    register: '/register.php'
+    register: '/register.php',
+    emailVerification: '/emailVerification.php',
+    emailClickConfirm: '/emailConfirm.php',
 }
 
 

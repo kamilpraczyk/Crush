@@ -1,4 +1,5 @@
 /// <reference path="../../typings/tsd.d.ts" />
+import dictionary = require('../utils/dictionary');
 
 export interface Explenation {
     exp: any //react elements
@@ -49,10 +50,37 @@ export class TimeOutError extends Error {
     constructor(public message?: string) {
         super(message);
         this.name = 'TimeOutError';
-        this.message = message;
+        this.message = dictionary.SERVER_ERROR_TIMEOUT;
         this.stack = (<any>new Error()).stack;
     }
     toString() {
         return this.name + ': ' + this.message;
     }
 }
+
+export class InvalidServerDataError extends Error {
+
+    constructor(public message?: string) {
+        super(message);
+        this.name = 'InvalidServerData';
+        this.message = dictionary.SERVER_ERROR_INVALID_DATA;
+        this.stack = (<any>new Error()).stack;
+    }
+    toString() {
+        return this.name + ': ' + this.message;
+    }
+}
+
+export class ServerRequestError extends Error {
+
+    constructor(public message?: string) {
+        super(message);
+        this.name = 'ServerRequestError';
+        this.message = dictionary.SERVER_ERROR_REQUEST;
+        this.stack = (<any>new Error()).stack;
+    }
+    toString() {
+        return this.name + ': ' + this.message;
+    }
+}
+

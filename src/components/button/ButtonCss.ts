@@ -87,6 +87,7 @@ const styles = {
         display: 'inline-flex',
         textAlign: 'left',
         alignSelf: 'center',
+        alignItems: 'center',
         flexGrow: 1
     },
 

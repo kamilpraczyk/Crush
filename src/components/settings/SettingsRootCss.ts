@@ -8,6 +8,7 @@ let styles = {
 
     panel: {
         position: 'absolute',
+        zIndex: 2,
         top: 0,
         left: 0,
         color: css.font.color.dark,
@@ -32,6 +33,7 @@ let styles = {
     panelRoot: {
         display: 'flex',
         marginBottom: '2px',
+        background: css.button.background.normal,
         flexGrow: 1,
         flexDirection: 'column',
         alignItems: 'stretch',
