@@ -1,72 +1,65 @@
+/// <reference path="../../../../typings/tsd.d.ts" />
 import css = require('../../../utils/css/css');
 import utils = require('../../../utils/utils');
 
-let styles = {
+const panel: CSSProperties = {
+    position: 'absolute',
+    zIndex: 1,
+    bottom: 90,
+    right: 0,
+    display: 'flex',
+    flexFlow: 'column wrap',
+    border: '1px solid black',
+    borderRadius: css.borderRadius,
+    backgroundColor: css.background.text.backgroundColor,
+    minWidth: '10vmin',
+    minHeight: '10vmin',
 
-    panel: {
-        position: 'absolute',
-        zIndex : 1,
-        bottom: 90,
-        right: 0,
-        display: 'flex',
-        flexFlow: 'column wrap',
-        border: '1px solid black',
-        borderRadius: css.borderRadius,
-        backgroundColor: css.background.text.backgroundColor,
-        minWidth: '10vmin',
-        minHeight: '10vmin',
+    cursor: css.cursor.pointer
+}
 
-        cursor: css.cursor.pointer
-    },
+const point: CSSProperties = {
+    display: 'flex',
+    justifyContent: 'center',
+    paddingLeft: '1vw',
+    paddingRight: '1vw',
+    paddingTop: '1vh',
+    paddingBottom: '1vh',
+}
 
-    point: {
-        display: 'flex',
-        justifyContent: 'center',
-        paddingLeft: '1vw',
-        paddingRight: '1vw',
-        paddingTop: '1vh',
-        paddingBottom: '1vh',
-    },
+const status: CSSProperties = {
+    display: 'flex',
+    paddingLeft: '1vw',
+    paddingRight: '1vw',
+    paddingBottom: '1vh',
+    justifyContent: 'center',
+}
 
-    status: {
-        display: 'flex',
-        paddingLeft: '1vw',
-        paddingRight: '1vw',
-        paddingBottom: '1vh',
-        justifyContent: 'center',
-    },
+const success: CSSProperties = {
+    color: css.font.color.success
+}
 
-    success: {
-        color: css.font.color.success
-    },
-
-    fail: {
-        color: css.font.color.fail
-    },
+const fail: CSSProperties = {
+    color: css.font.color.fail
 }
 
 export = utils.union(css, {
 
     getPanel() {
-        return styles.panel;
+        return panel;
     },
-
     getPoints() {
-        return styles.point;
+        return point;
     },
-
     getStatusSuccess() {
-        return css.get(styles.status, styles.success);
+        return css.get(status, success);
     },
-
     getStatusFail() {
-        return css.get(styles.status, styles.fail);
+        return css.get(status, fail);
     },
-
     getStatusUnknown() {
-        return css.get(styles.status);
+        return css.get(status);
     },
-
     getClassNameIconSuccess() {
         return 'moon-thumbs-up';
     },
@@ -75,7 +68,5 @@ export = utils.union(css, {
     },
     getClassNameIconUnknown() {
         return 'moon-question';
-    },
-
-
+    }
 });

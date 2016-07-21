@@ -26,7 +26,7 @@ function getLogOut(props: Props) {
 
         div({ style: CommonCss.getBoxSplit() },
             CommonCss.makeBoxLine(dictionary.LOGEDIN_AS + ' ' + props.user.name, null),
-            props.user.last_login ? CommonCss.makeBoxLine(dictionary.LAST_LOGIN + ' ' + props.user.last_login, null) : null,
+            props.user.last_login ? CommonCss.makeBoxLine(dictionary.LAST_LOGIN + ' ' + utils.getHumanizedDate(props.user.last_login), null) : null,
             !props.user.active && props.user.email ? CommonCss.makeBoxLine(dictionary.PLEASE_CONFIRM_EMAIL, null) : null
         ),
 

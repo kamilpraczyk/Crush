@@ -1,56 +1,54 @@
+/// <reference path="../../../../typings/tsd.d.ts" />
 import css = require('../../../utils/css/css');
 import utils = require('../../../utils/utils');
 
-const styles = {
-
-    panel: {
-        display: 'flex',
-        width: '100%',
-        height: '100%',
-        flexDirection: 'column',
-        alignItems: 'stretch',
-        alignContent: 'stretch',
-    },
-
-    progress: {
-        display: 'flex',
-        flexGrow: 1,
-        flexDirection: 'row',
-        alignItems: 'stretch',
-        alignContent: 'stretch',
-        height: '1vh',
-    },
-
-
-    menu: {
-        display: 'flex',
-        flexGrow: 1,
-        flexDirection: 'row',
-        alignItems: 'stretch',
-        alignContent: 'stretch',
-    },
-
-    menuItem: {
-        display: 'flex',
-        flexGrow: 1,
-        alignItems: 'center',
-    }
-
+const panel: CSSProperties = {
+    display: 'flex',
+    width: '100%',
+    height: '100%',
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    alignContent: 'stretch',
 }
+
+const progress: CSSProperties = {
+    display: 'flex',
+    flexGrow: 1,
+    flexDirection: 'row',
+    alignItems: 'stretch',
+    alignContent: 'stretch',
+    height: '1vh',
+}
+
+const menu: CSSProperties = {
+    display: 'flex',
+    flexGrow: 1,
+    flexDirection: 'row',
+    alignItems: 'stretch',
+    alignContent: 'stretch',
+}
+
+const menuItem: CSSProperties = {
+    display: 'flex',
+    flexGrow: 1,
+    alignItems: 'center',
+}
+
+
 
 export = utils.union(css, {
 
     getPanel() {
-        return styles.panel;
+        return panel;
     },
     getProgress() {
-        return styles.progress;
+        return progress;
     },
     getMenu() {
-        return styles.menu;
+        return menu;
     },
     getMenuItem() {
-        return styles.menuItem;
+        return menuItem;
     }
 
 

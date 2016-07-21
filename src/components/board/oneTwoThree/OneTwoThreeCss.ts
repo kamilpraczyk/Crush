@@ -1,24 +1,21 @@
+/// <reference path="../../../../typings/tsd.d.ts" />
 import css = require('../../../utils/css/css');
 import utils = require('../../../utils/utils');
 import _ = require('underscore');
 
-let styles = {
 
-
-
-    bodyContent: {
-        alignItems: 'center',
-    },
-
-
-    line: {
-        display: 'flex',
-        flexGrow: 1,
-        alignItems: 'stretch',
-        flexDirection: 'column',
-        justifyContent: 'center'
-    },
+const bodyContent: CSSProperties = {
+    alignItems: 'center',
 }
+
+const line: CSSProperties = {
+    display: 'flex',
+    flexGrow: 1,
+    alignItems: 'stretch',
+    flexDirection: 'column',
+    justifyContent: 'center'
+}
+
 
 export = utils.union(css, {
 
@@ -29,11 +26,11 @@ export = utils.union(css, {
 
 
     getBodyContent() {
-        return css.get(css.layout.getBodyContent(), styles.bodyContent);
+        return css.get(css.layout.getBodyContent(), bodyContent);
     },
 
     getLine() {
-        return css.get(styles.line);
+        return css.get(line);
     },
 
 

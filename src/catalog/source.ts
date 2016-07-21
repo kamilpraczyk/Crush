@@ -6,6 +6,7 @@ const source = {
     isPrime: '/isPrime.php',
     updateValidation: '/updateValidation.php',
     register: '/register.php',
+    updateLastLogin: '/updateLastLogin.php',
     emailVerification: '/emailVerification.php',
     emailClickConfirm: '/emailConfirm.php',
 }

@@ -23,6 +23,22 @@ interface SpeechSynthesisUtterance {
 
 }
 
+interface CSSProperties extends __React.CSSProperties {
+    justifyContent?: string;
+    borderRadius?: any;
+    backgroundColor?: any;
+    backgroundSize?: any;
+    backgroundPosition?: any;
+    cursor?: any;
+    bottom?: any;
+    minHeight?: any;
+    overflowY?: any;
+    opacity?: any;
+    MozBorderRadius?: any;
+    WebkitBorderRadius?: any;
+    WebkitBackgroundSize?: any;
+    MozBackgroundSize?: any;
+    OBackgroundSize?: any;
+}
 
 
-export = Function

@@ -19,6 +19,8 @@ export = {
     checkEmail,
     isValidISODate,
     removeInvalidChars,
+    getHumanizedDate,
+    getToDayISOdate,
     getNextYearISOdate,
     getNextMonthISOdate,
     isBrowserSupported,
@@ -33,9 +35,9 @@ function delay(time?: number) {
     }).delay(time || 2000);
 }
 
-function delayf(f : () => void) {
-        f();
-        return delay();
+function delayf(f: () => void) {
+    f();
+    return delay();
 }
 
 function removeInvalidChars(s: string) {
@@ -65,6 +67,10 @@ function getISOdate(date?: Date) {
     return date.toISOString().substring(0, 10);
 };
 
+function getToDayISOdate() {
+    return getISOdate();
+}
+
 function getNextYearISOdate() {
     const oneYr = new Date();
     oneYr.setFullYear(oneYr.getFullYear() + 1);
@@ -74,6 +80,14 @@ function getNextMonthISOdate() {
     const oneYr = new Date();
     oneYr.setMonth(oneYr.getMonth() + 1);
     return getISOdate(oneYr);
+}
+
+function getHumanizedDate(s: string) {
+    if (s && s.length === 10) {
+        const dArr = s.split("-");
+        return dArr[2] + "-" + dArr[1] + "-" + dArr[0];
+    }
+    return s;
 }
 
 

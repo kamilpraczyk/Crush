@@ -1,33 +1,30 @@
+/// <reference path="../../../../typings/tsd.d.ts" />
 import css = require('../../../utils/css/css');
 import utils = require('../../../utils/utils');
 import _ = require('underscore');
 import {isId}  from '../../../lessons/helper/constants';
 
-let styles = {
 
-
-    line: {
-        display: 'flex',
-        flexGrow: 1
-    },
-
-    lineText: {
-        display: 'flex',
-        justifyContent: 'center',
-    },
-
-    itemWraper: {
-        paddingTop: '2vh',
-        paddingBottom: '2vh',
-        paddingLeft: '2vw',
-        paddingRight: '2vw',
-        display: 'flex',
-        flexGrow: 1,
-        alignItems: 'stretch'
-    },
-
-
+const line: CSSProperties = {
+    display: 'flex',
+    flexGrow: 1
 }
+
+const lineText: CSSProperties = {
+    display: 'flex',
+    justifyContent: 'center',
+}
+
+const itemWraper: CSSProperties = {
+    paddingTop: '2vh',
+    paddingBottom: '2vh',
+    paddingLeft: '2vw',
+    paddingRight: '2vw',
+    display: 'flex',
+    flexGrow: 1,
+    alignItems: 'stretch'
+}
+
 
 export = utils.union(css, {
 
@@ -38,15 +35,15 @@ export = utils.union(css, {
 
 
     getLine() {
-        return css.get(styles.line);
+        return css.get(line);
     },
 
     getLineText() {
-        return styles.lineText;
+        return lineText;
     },
 
     getItemWraper() {
-        return styles.itemWraper
+        return itemWraper
     },
 
 });

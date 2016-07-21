@@ -10,7 +10,6 @@ import Promise = require("bluebird");
 import Matchers = require('../../components/settings/views/user/registering/Matchers');
 
 const initialState = {
-
     login: {
         error: null as string,
         process: false,
@@ -76,6 +75,10 @@ function logIn(o: { login: string, password: string }) {
     }).catch((e: Error) => {
         console.error(e);
         state.login.error = e.message;
+    }).finally(() => {
+        state.login.success && catalog.updateLastLogin(state.user.email).catch((e: Error) => {
+            console.error(e);
+        });
     });
 }
 
@@ -108,6 +111,7 @@ function sendEmailVerification(o: { login: string, password: string, name: strin
         state.verification.error = e.message; //TODO (when active false and user name - )
     });
 }
+
 
 function register(o: { login: string, password: string, retypePassword: string, name: string }) {
     return Matchers.validate(o).then((e) => {

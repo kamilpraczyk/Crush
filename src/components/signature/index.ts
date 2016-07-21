@@ -370,7 +370,7 @@ class SignaturePad extends React.Component<SignaturePadPropsFace, SignaturePadSt
                 display: 'flex',
                 flexGrow: 1,
                 cursor: 'pointer'
-            }
+            } as CSSProperties
         })
     }
 

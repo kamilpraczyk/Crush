@@ -1677,7 +1677,7 @@ declare namespace __React {
         writingMode?: any;
 
 
-        [propertyName: string]: any;
+      //  [propertyName: string]: any;
     }
 
     interface HTMLAttributes extends DOMAttributes {

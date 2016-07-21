@@ -25,8 +25,8 @@ const XL3 = constFont + 0.5 + constPoint;
 const XL4 = constFont + 0.8 + constPoint;
 
 
-const get = function <T1, T2, T3, T4, T5>(a: T1, b?: T2, c?: T3, d?: T4, e?: T5): T1 & T2 & T3 & T4 & T5 {
-    var res = {} as T1 & T2 & T3 & T4 & T5;
+const get = function <CSSProperties>(a: CSSProperties, b?: CSSProperties, c?: CSSProperties, d?: CSSProperties, e?: CSSProperties): CSSProperties {
+    var res = {} as CSSProperties;
     for (var i = 0; i < arguments.length; i++) {
         if (arguments[i]) {
             _.extend(res, arguments[i]);
@@ -137,13 +137,13 @@ let style = {
     },
 
     fontFamily: {
-        time: {
+        time: <CSSProperties>{
             fontFamily: fontFamilyTime
         },
-        writing: {
+        writing: <CSSProperties>{
             fontFamily: fontFamilyWriting
         },
-        journal: {
+        journal: <CSSProperties>{
             fontFamily: fontFamilyJournal
         }
     },
@@ -159,7 +159,7 @@ let style = {
 
     layout: {
         getPanel: () => {
-            return {
+            const style: CSSProperties = {
                 width: '100%',
                 height: '100%',
                 display: 'flex',
@@ -169,10 +169,11 @@ let style = {
                 fontSize: XL,
                 fontFamily: fontFamilyWriting
             }
+            return style;
         },
 
         getHeader: () => {
-            return {
+            const style: CSSProperties = {
                 display: 'flex',
                 margin: '2vh',
                 marginBottom: 0,
@@ -180,10 +181,11 @@ let style = {
                 flexDirection: 'column',
                 alignItems: 'center' //by default in center
             }
+            return style;
         },
 
         getBody: () => {
-            return {
+            const style: CSSProperties = {
                 display: 'flex',
                 flexGrow: 1,
                 paddingBottom: '2vw',
@@ -193,19 +195,21 @@ let style = {
                 flexDirection: 'column',
                 alignItems: 'stretch',
             }
+            return style;
         },
 
         getBodyContent: () => {
-            return {
+            const s: CSSProperties = {
                 display: 'flex',
                 flexGrow: 1,
                 flexDirection: 'column',
                 alignItems: 'stretch',// by default stretch
             }
+            return s;
         },
 
         getInstructions: (id?: string) => {
-            let style = {
+            let style: CSSProperties = {
                 display: 'flex',
                 paddingLeft: '2vw',
                 paddingRight: '2vw',
@@ -217,10 +221,10 @@ let style = {
                 fontSize: XL,
             }
             if (id && isId.isDigitalTime(id)) {
-                let digitalTime = {
+                const digitalTime: CSSProperties = {
                     fontSize: XL3,
                     fontFamily: fontFamilyTime,
-                    background: 'black',
+                    backgroundColor: 'black',
                     color: 'white'
                 }
                 style = get(style, digitalTime);
@@ -230,9 +234,10 @@ let style = {
 
 
         getFooter: () => {
-            return {
+            const style: CSSProperties = {
                 display: 'flex'
             }
+            return style;
         }
 
     }
