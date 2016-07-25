@@ -61,45 +61,12 @@ function render() {
     });
 
     return div({
-        style: SwitchCss.getPanel(),
-        ref: 'panelSwitcher',
+        style: SwitchCss.getPanel()
     }, buttons);
 }
 
 
 
 
-function scrollTo(el: Element, toEl: Element) {
-    el.scrollTop = 0;
-    if (toEl) {
-        const d = toEl.getBoundingClientRect();
-        el.scrollTop = d.top
-    }
-}
-
-
-
-class View extends React.Component<{}, {}> {
-
-    constructor() {
-        super();
-    }
-    scroll() {
-        scrollTo(ReactDOM.findDOMNode(this.refs["panelSwitcher"]), ReactDOM.findDOMNode(this.refs[LessonStore.getActiveId()]));
-    }
-
-    componentDidMount() {
-        this.scroll();
-    }
-
-    componentDidUpdate() {
-        this.scroll();
-    }
-
-    render() {
-        return render();
-    }
-}
-
-export =  React.createFactory(View);
+export = render;
 

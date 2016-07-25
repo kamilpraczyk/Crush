@@ -4,7 +4,6 @@ const dictonary = {
 
     LOGEDIN_AS: 'Loged in as: ',
     LAST_LOGIN: 'Last login: ',
-    PLEASE_CONFIRM_EMAIL: 'In order to complete your registration, please click the confirmation link in the email that we have sent to you.',
     LOG_OUT: 'Sign out',
 
     GRATULATIONS_TITLE: 'You answered all questions',// well done
@@ -40,14 +39,9 @@ const dictonary = {
     SERVER_ERROR_TIMEOUT: 'Sorry, server not responding.',
     SERVER_ERROR_REQUEST: 'Sorry, server request error.',
     SERVER_ERROR_DUPLICATE_EMAIL: 'Sorry, this email already exist.',
-    SERVER_ERROR_CONFIRMATION_EMAIL: 'Sorry, email confirmation fail.',
     SERVER_ERROR_NO_RESPOND: 'Sorry, server is not responding.',
     SERVER_ERROR_INVALID_DATA: 'Sorry, invalid data.',
     SERVER_ERROR_SUBSCRIBING_WENT_WRONG: 'Sorry, subscribing fail.',
-
-    SERVER_SUCCESS_REGISTERED: 'Your information has been sent successfully. In order to complete your registration, please click the confirmation link in the email that we have sent to you.',
-
-
 
     ERROR_LOGIN_INVALID: 'Incorrect login or password.',
     ERROR_REGISTERING_NO_MATCH_PASSWORDS: 'Passwords did not match.',

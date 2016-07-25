@@ -114,10 +114,6 @@ class SettingRootStore extends BaseStore {
                 _isMenuMinimalized = false;
                 this.emitChange();
                 break;
-            case Constants.EXPLENATION_SCROLL_RESET:
-                _isMenuMinimalized = false;
-                this.emitChange();
-                break;
 
 
 

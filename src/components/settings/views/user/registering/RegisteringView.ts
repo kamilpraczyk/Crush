@@ -172,12 +172,7 @@ class View extends React.Component<{}, State>{
             this.state.message = dictionary.PLEASE_WAIT;
         } else if (props.register.error) {
             this.state.message = props.register.error;
-        } else if (props.register.success) {
-            this.state.message = dictionary.SERVER_SUCCESS_REGISTERED;
-        }
-
-
-
+        } 
         return render(props, this.state, this.setState.bind(this));
     }
 };

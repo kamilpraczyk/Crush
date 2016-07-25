@@ -9,7 +9,7 @@ const panel: CSSProperties = {
     position: 'absolute',
     zIndex: 2,
     top: 0,
-    left: 0,
+    right: 0,
     color: css.font.color.dark,
     backgroundColor: 'rgba(255,255,255,0.9)',
 
@@ -20,28 +20,36 @@ const panel: CSSProperties = {
     alignItems: 'stretch',
     alignContent: 'stretch',
     fontSize: css.font.fontSize.XL,
+
+    WebkitTransition: 'right .4s ease-in-out .2s',
+    MozTransition: 'right .4s ease-in-out .2s',
+    OTransition: 'right .4s ease-in-out .2s',
+    transition: 'right .4s ease-in-out .2s',
 }
 const panelSelection: CSSProperties = {
     display: 'flex',
     flexGrow: 7,
-    flexDirection: 'column',
-    alignItems: 'stretch'
+    flexDirection: 'row',
+    alignItems: 'stretch',
+    height: '100%',
+    overflowX: 'hidden',
+    overflowY: 'auto',
 }
 const panelRoot: CSSProperties = {
     display: 'flex',
     marginBottom: '2px',
-    backgroundColor: css.button.background.normal,
     flexGrow: 1,
     flexDirection: 'column',
     alignItems: 'stretch',
     alignContent: 'stretch',
+
+    WebkitTransition: 'all .4s ease-in-out .2s',
+    MozTransition: 'all .4s ease-in-out .2s',
+    OTransition: 'all .4s ease-in-out .2s',
+    transition: 'all .4s ease-in-out .2s',
 }
 const panelRootMinimalized: CSSProperties = {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    width: '100%',
-    flexDirection: 'row',
+    
 }
 const rootItem: CSSProperties = {
     display: 'flex',
@@ -53,14 +61,14 @@ const rootItem: CSSProperties = {
 
 export = utils.union(css, {
 
-    getPanel() {
-        return panel;
+    getPanel(isMinimalized: boolean) {
+        return css.get(panel, isMinimalized ? { right: '-100%' } : { right: 0 });
     },
     getPanelSelection() {
         return panelSelection;
     },
     getPanelRoot(isMenuMinimalized: boolean) {
-        return css.get(panelRoot, isMenuMinimalized ? panelRootMinimalized : {});
+        return css.get(panelRoot, isMenuMinimalized ? panelRootMinimalized : null);
     },
     getRootItem() {
         return rootItem;

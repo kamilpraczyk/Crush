@@ -3,6 +3,7 @@ import css = require('../../utils/css/css');
 import utils = require('../../utils/utils');
 
 const button: CSSProperties = {
+    //NO minHeight - IE don't like it
     display: 'flex',
     backgroundColor: css.button.background.normal,
     color: css.button.color.normal,
@@ -12,7 +13,6 @@ const button: CSSProperties = {
     borderRadius: 28,
     cursor: 'pointer',
     fontSize: css.font.fontSize.XL,
-    minHeight: 35,
     textDecoration: 'none',
     textShadow: '0px 1px 0px #2f6627',
     margin: 0,
@@ -25,7 +25,8 @@ const button: CSSProperties = {
     MozBackgroundSize: 'contain',
     OBackgroundSize: 'contain',
     backgroundSize: 'contain',
-    minWidth: '15vw'
+    minWidth: '15vw',
+    maxWidth: '100%',
 }
 const pressed: CSSProperties = {
     position: 'relative',
@@ -53,7 +54,7 @@ const isActive: CSSProperties = {
     border: css.button.border.active
 }
 const isResponsibleHeight: CSSProperties = {
-    minHeight: '10vh'
+    // minHeight: 50//'10vh'
 }
 const isResponsibleCenter: CSSProperties = {
     justifyContent: 'center',
@@ -96,10 +97,10 @@ const leftIcon: CSSProperties = {
     paddingTop: '2vh',
     paddingBottom: '2vh',
     paddingLeft: '2vw',
-    paddingRight: '1vw',
+    paddingRight: '2vw',
     display: 'inline-flex',
     alignSelf: 'center',
-    color: css.font.color.disable,
+    color: css.font.color.disable
 }
 const leftIconActive: CSSProperties = {
     color: '#fff',
@@ -113,8 +114,6 @@ const numbers: CSSProperties = {
 const numbersActive: CSSProperties = {
     color: css.button.color.active
 }
-
-
 
 interface ButtonProps {
     pressed: boolean,
@@ -167,10 +166,6 @@ export = utils.union(css, {
         if (options.disabled)
             style = css.get(style, disabled);
 
-
-
-
-
         return style;
     },
 
@@ -201,6 +196,4 @@ export = utils.union(css, {
     getNumbers(isActive: boolean) {
         return css.get(numbers, isActive ? numbersActive : null);
     }
-
-
 });

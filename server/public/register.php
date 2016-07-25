@@ -40,7 +40,7 @@ $conn = mysqli_connect($servername, $username, $password, $db);
 
 
 //update
-$sql = "INSERT INTO Users (email, name, password, registered) VALUES ('".$email."','".$name."','".$pass."','".$date."');";
+$sql = "INSERT INTO Users (active, email, name, password, registered) VALUES ('1','".$email."','".$name."','".$pass."','".$date."');";
 
 if (mysqli_query($conn, $sql)) {
     success();

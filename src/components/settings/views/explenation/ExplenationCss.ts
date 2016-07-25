@@ -5,8 +5,6 @@ import utils = require('../../../../utils/utils');
 
 const panel: CSSProperties = {
     width: '100%',
-    overflowX: 'hidden',
-    overflowY: 'auto',
     paddingBottom: '10vh',
     fontFamily: css.fontFamily.journal.fontFamily,
     color: css.font.color.ink,

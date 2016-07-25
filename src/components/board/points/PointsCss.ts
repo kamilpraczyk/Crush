@@ -5,16 +5,16 @@ import utils = require('../../../utils/utils');
 const panel: CSSProperties = {
     position: 'absolute',
     zIndex: 1,
-    bottom: 90,
+    bottom: '20vh',
     right: 0,
     display: 'flex',
     flexFlow: 'column wrap',
-    border: '1px solid black',
+    border: '1px solid #ddd',
     borderRadius: css.borderRadius,
+    justifyContent: 'center',
     backgroundColor: css.background.text.backgroundColor,
     minWidth: '10vmin',
-    minHeight: '10vmin',
-
+    minHeight: '35vmin',
     cursor: css.cursor.pointer
 }
 

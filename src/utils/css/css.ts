@@ -117,7 +117,7 @@ let style = {
         color: {
             normal: 'white',
             active: 'white',
-            focus: '#00999D',
+            focus: 'white',
             disabled: '#777'
         },
         border: {

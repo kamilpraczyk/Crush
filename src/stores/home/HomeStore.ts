@@ -25,11 +25,6 @@ const initialState = {
         error: null as string,
         process: false,
     },
-    verification: {
-        error: null as string,
-        process: false,
-        success: false
-    },
     user: {
         isPrime: false,
         name: null as string,
@@ -67,7 +62,7 @@ function logIn(o: { login: string, password: string }) {
                 name: data.user.name,
                 email: data.user.email,
                 valid_to: data.user.valid_to,
-                active: active,
+                active: active, //TODO future ban people
                 last_login: data.user.last_login
             };
         }
@@ -99,19 +94,6 @@ function updateValidation(o: { login: string, valid_to: string }) {
     });
 }
 
-function sendEmailVerification(o: { login: string, password: string, name: string }) {
-    return catalog.sendEmailVerification(o.login, utils.md5(o.password), o.password, o.name).then((data: { success?: boolean }) => {
-        console.info('sendEmailVerification data =', data)
-        state.verification.success = data.success ? true : false;
-        if (!state.verification.success)
-            return Promise.reject(new Error(dictionary.SERVER_ERROR_CONFIRMATION_EMAIL));
-        return Promise.resolve(null);
-    }).catch((e: Error) => {
-        console.error(e);
-        state.verification.error = e.message; //TODO (when active false and user name - )
-    });
-}
-
 
 function register(o: { login: string, password: string, retypePassword: string, name: string }) {
     return Matchers.validate(o).then((e) => {
@@ -124,10 +106,13 @@ function register(o: { login: string, password: string, retypePassword: string, 
                     return Promise.reject(new Error(dictionary.SERVER_ERROR_DUPLICATE_EMAIL));
                 return Promise.reject(new Error(dictionary.SERVER_ERROR_INVALID_DATA));
             }
-
             return Promise.resolve(null);
-        }).then(() => {
-            return sendEmailVerification(o);
+        });
+    }).then(() => {
+        catalog.emailGreeting(o);
+        return logIn({
+            login: o.login,
+            password: o.password
         });
     }).catch((e: Error) => {
         console.error(e);

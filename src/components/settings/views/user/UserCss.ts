@@ -4,7 +4,7 @@ import utils = require('../../../../utils/utils');
 
 const panel: CSSProperties = {
     width: '100%',
-    overflowY: 'auto'
+    paddingBottom: '10vh',
 }
 
 export = utils.union(css, {

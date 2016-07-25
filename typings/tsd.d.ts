@@ -23,6 +23,7 @@ interface SpeechSynthesisUtterance {
 
 }
 
+
 interface CSSProperties extends __React.CSSProperties {
     justifyContent?: string;
     borderRadius?: any;
@@ -39,6 +40,9 @@ interface CSSProperties extends __React.CSSProperties {
     WebkitBackgroundSize?: any;
     MozBackgroundSize?: any;
     OBackgroundSize?: any;
+    WebkitTransition?: string;
+    MozTransition?: string;
+    OTransition?: string;
 }
 
 

@@ -7,8 +7,7 @@ const source = {
     updateValidation: '/updateValidation.php',
     register: '/register.php',
     updateLastLogin: '/updateLastLogin.php',
-    emailVerification: '/emailVerification.php',
-    emailClickConfirm: '/emailConfirm.php',
+    emailGreeting: '/emailGreeting.php',
 }
 
 

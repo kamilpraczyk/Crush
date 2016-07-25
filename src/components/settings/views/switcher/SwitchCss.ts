@@ -4,9 +4,6 @@ import utils = require('../../../../utils/utils');
 
 const panel: CSSProperties = {
     width: '100%',
-    height: '100%',
-    overflowX: 'hidden',
-    overflowY: 'auto',
     paddingBottom: '10vh'
 }
 

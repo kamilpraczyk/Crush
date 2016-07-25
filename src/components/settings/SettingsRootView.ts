@@ -1,5 +1,6 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 import React = require('react');
+import ReactDOM = require('react-dom');
 import { Component, PropTypes } from 'react';
 import css = require('../../utils/css/css');
 import ButtonView = require('../../components/button/ButtonView');
@@ -11,9 +12,15 @@ import SettingsRootStore = require('../../stores/SettingsRootStore');
 import SwitcherView = require('./views/switcher/SwitcherView');
 import ExplenationView = require('./views/explenation/ExplenationView');
 import UserView = require('./views/user/UserView');
+import LessonStore = require('../../stores/lesson/LessonStore');
 
 import {RootFace, RootFaces } from '../../stores/SettingsRootInterfaces';
 const {div} = React.DOM;
+
+const refsId = {
+    scrollDiv: 'scrollDiv',
+    panel: 'panel'
+}
 
 function getState() {
     return {
@@ -27,9 +34,12 @@ const state = getState();
 declare type State = typeof state;
 
 
+
+
 function getPanel(state: State) {
     return div({
-        style: SettingsRootCss.getPanel()
+        style: SettingsRootCss.getPanel(state.isMinimalized),
+        ref: refsId.panel
     }, getPanelSelection(), getPanelRoot(state));
 }
 
@@ -42,34 +52,31 @@ function getPanelRoot(state: State) {
 function getPanelSelection() {
 
     let view: any = null;
-    const ids = SettingsRootStore.getIds();
 
-    switch (SettingsRootStore.getActiveRoot()) {
-        case ids.lessons:
+    switch (activeRootId) {
+        case rootIds.lessons:
             view = SwitcherView();
             break;
-        case ids.explenation:
+        case rootIds.explenation:
             view = ExplenationView();
             break;
-        case ids.user:
+        case rootIds.user:
             view = UserView();
             break;
     }
 
     return div({
-        style: SettingsRootCss.getPanelSelection()
+        style: SettingsRootCss.getPanelSelection(),
+        ref: refsId.scrollDiv
     }, view);
-
-
 }
-
 
 
 function getItem(state: State, item: any, id: string) {
     return ButtonView({
         name: state.isMenuMinimalized ? '' : item.name,
         icon: item.icon,
-        onClick: function () {
+        onClick: () => {
             AppDispatcher.handleViewAction({
                 actionType: Constants.ROOT_ITEM_CLICK,
                 id: id
@@ -85,7 +92,7 @@ function getItem(state: State, item: any, id: string) {
 }
 
 function getRootList(state: State) {
-    return _.map(state.rootList, function (item: any, id: string) {
+    return _.map(state.rootList, (item: any, id: string) => {
         return div({
             key: id,
             style: SettingsRootCss.getRootItem(),
@@ -95,7 +102,25 @@ function getRootList(state: State) {
 
 
 
+let elementScroll: Element = null;
+let panel: Element = null;
+let activeRootId = SettingsRootStore.getActiveRoot();
+const rootIds = SettingsRootStore.getIds();
+let lastActiveRootId = activeRootId;
+
+
+function scrollTo(el: Element, toEl?: Element) {
+    el.scrollTop = 0;
+    if (toEl) {
+        const d = toEl.getBoundingClientRect();
+        el.scrollTop = d.top
+    }
+}
+
 class SettingRootView extends React.Component<{}, State> {
+
+    private isOnEdge = true;
+    private handleScroll = _.throttle(this._handleScroll.bind(this), 500);
 
     constructor() {
         super();
@@ -105,10 +130,42 @@ class SettingRootView extends React.Component<{}, State> {
 
     componentDidMount() {
         SettingsRootStore.addChangeListener(this.onChange);
+        elementScroll = ReactDOM.findDOMNode(this.refs[refsId.scrollDiv]);
+        elementScroll.addEventListener('scroll', this.handleScroll);
+        panel = ReactDOM.findDOMNode(this.refs[refsId.panel]);
     }
 
     componentWillUnmount() {
         SettingsRootStore.removeChangeListener(this.onChange);
+        elementScroll.removeEventListener('scroll', this.handleScroll);
+    }
+
+    componentDidUpdate() {
+        if (activeRootId !== lastActiveRootId) {
+            if (activeRootId === rootIds.lessons) {
+                const el = ReactDOM.findDOMNode(this.refs[LessonStore.getActiveId()]);
+                el && scrollTo(elementScroll, el);
+            } else {
+                scrollTo(elementScroll, null);
+            }
+        }
+        lastActiveRootId = activeRootId;
+    }
+
+    _handleScroll(e: Event) {
+
+        const b = elementScroll.getBoundingClientRect();
+        if (b.top === elementScroll.scrollTop && this.isOnEdge === false) {
+            this.isOnEdge = true;
+            AppDispatcher.handleViewAction({
+                actionType: Constants.EXPLENATION_SCROLL_TOP
+            });
+        } else if (elementScroll.scrollTop > 100 && this.isOnEdge === true) {
+            this.isOnEdge = false;
+            AppDispatcher.handleViewAction({
+                actionType: Constants.EXPLENATION_SCROLL_MIDDLE
+            });
+        }
     }
 
     onChange() {
@@ -116,9 +173,7 @@ class SettingRootView extends React.Component<{}, State> {
     }
 
     render() {
-        if (this.state.isMinimalized) {
-            return div({});
-        }
+        activeRootId = SettingsRootStore.getActiveRoot();
         return getPanel(this.state);
     }
 }

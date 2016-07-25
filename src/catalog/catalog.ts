@@ -13,18 +13,11 @@ function serverIsPrime(login: string, password: string) {
     return HttpClientGET(newurl);
 }
 
-function sendEmailVerification(login: string, passwordMD5: string, password: string, name: string) {
-    let newurl = getUrl(source.emailVerification);
-    newurl = addUrlGetParam(newurl, "l", login);
-    newurl = addUrlGetParam(newurl, "p", password);
-    newurl = addUrlGetParam(newurl, "n", name);
-
-    let u = getUrl(source.emailClickConfirm);
-    u = addUrlGetParam(u, "l", login);
-    u = addUrlGetParam(u, "p", passwordMD5);
-
-    newurl = addUrlGetParam(newurl, "u", u);
-
+function emailGreeting( o: { login: string, password: string, retypePassword: string, name: string}) {
+    let newurl = getUrl(source.emailGreeting);
+    newurl = addUrlGetParam(newurl, "l", o.login);
+    newurl = addUrlGetParam(newurl, "p", o.password);
+    newurl = addUrlGetParam(newurl, "n", o.name);
     return HttpClientGET(newurl);
 }
 
@@ -54,6 +47,6 @@ export {
 serverIsPrime,
 serverUpdateValidTo,
 serverRegister,
-sendEmailVerification,
+emailGreeting,
 updateLastLogin
 }

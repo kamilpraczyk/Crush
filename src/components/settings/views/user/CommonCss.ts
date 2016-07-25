@@ -19,20 +19,21 @@ const container: CSSProperties = {
     marginBottom: '1vmax',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    justifyContent: 'left',
+    justifyContent: 'flex-start',
+    width : 'calc(100% - 4vmax)'
 }
 const text: CSSProperties = {
     color: css.font.color.dark,
     fontSize: css.font.fontSize.XL2,
     paddingBottom: '2vh',
-    justifyContent: 'left',
+    justifyContent: 'flex-start',
 }
 const box: CSSProperties = {
     display: 'flex',
     maxWidth: '100%',
     paddingTop: '2vh',
-    flexFlow: 'row wrap',
     paddingBottom: '1vh',
+    flexDirection : 'column',
 }
 const boxSplit: CSSProperties = {
     display: 'flex',
