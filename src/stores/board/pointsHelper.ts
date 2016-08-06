@@ -4,6 +4,7 @@ import _ = require('underscore');
 import utils = require('../../utils/utils');
 
 let points = {
+    uid: null as string,
     score: 0,
     scorePercent: 0,
     currentLesson: 0,
@@ -20,6 +21,7 @@ let points = {
 
 
 function reset() {
+    points.uid = null;
     points.currentLesson = 0;
     points.lessonsLength = 0;
     points.display = '';
@@ -34,7 +36,8 @@ function reset() {
     points.scorePercent = 0;
 }
 
-function generate(board: BoardFace, boards: BoardFaces) {
+function generate(board: BoardFace, boards: BoardFaces, uid: string) {
+    points.uid = uid;
     points.boards = boards;
     points.board = board;
     points.currentLesson = _.indexOf(boards, board) + 1;
@@ -65,9 +68,8 @@ function isCompletedStatus(board: BoardFace) {
     return _.has(points.mapStatus, board.id);
 }
 
-function getState(board: BoardFace, boards: BoardFaces) {
-    generate(board, boards);
-
+function getState(board: BoardFace, boards: BoardFaces, uid: string) {
+    generate(board, boards, uid);
     return {
         points: points
     };

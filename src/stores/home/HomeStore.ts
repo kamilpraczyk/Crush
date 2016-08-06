@@ -8,6 +8,7 @@ import catalog = require("../../catalog/catalog");
 import dictionary = require('../../utils/dictionary');
 import Promise = require("bluebird");
 import Matchers = require('../../components/settings/views/user/registering/Matchers');
+import pointsHelper = require('../board/pointsHelper');
 
 const initialState = {
     login: {
@@ -33,6 +34,12 @@ const initialState = {
         active: false,
         last_login: null as string
     },
+    status: {
+        process: false,
+        map: {
+            prefixes_one: 10
+        }
+    }
 };
 declare type State = typeof initialState;
 
@@ -120,6 +127,27 @@ function register(o: { login: string, password: string, retypePassword: string, 
     });
 }
 
+
+function saveStatus(o: { login: string, value: string, name: string }) {
+    return catalog.updateStatus(o).catch((e: Error) => {
+        console.error(e);
+    });
+}
+
+function readStatus(o: { login: string }) {
+    return catalog.readStatus(o).then((data: { state?: { name: string, value: string }[] }) => {
+        if (data && data.state && data.state.length) {
+            let map = {};
+            data.state.map((item) => {
+                map[item.name] = parseInt(item.value)
+            });
+            state.status.map = _.extend(state.status.map, map);
+        }
+    }).catch((e: Error) => {
+        console.error(e);
+    });
+};
+
 class Store extends BaseStore {
 
     constructor() {
@@ -146,6 +174,8 @@ class Store extends BaseStore {
                         login: action.login, password:
                         action.password
                     });
+                }).then(() => {
+                    return readStatus({ login: state.user.email });
                 }).finally(() => {
                     state.login.process = false;
                     emitChange();
@@ -196,6 +226,34 @@ class Store extends BaseStore {
                     state.subscribe.process = false;
                     emitChange();
                 });
+                break;
+
+            case Constants.GREETINGS_CONTINUE:
+
+                function onFinish() {
+                    state.status.process = false;
+                    pointsHelper.reset();
+                    emitChange();
+                }
+                if (action.data && state.user.email) {
+                    state.status.process = true;
+                    emitChange();
+
+                    utils.delay(200).then(() => {
+                        return saveStatus({
+                            login: state.user.email,
+                            name: action.data.uid,
+                            value: action.data.status
+                        }).then(() => {
+                            state.status.map[action.data.uid] = action.data.status;
+                            return null;
+                        });
+                    }).finally(() => {
+                        onFinish();
+                    });
+                } else {
+                    onFinish();
+                }
                 break;
         }
         return true;

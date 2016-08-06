@@ -3,8 +3,6 @@ import css = require('../../utils/css/css');
 import utils = require('../../utils/utils');
 import React = require('react');
 
-
-
 const panel: CSSProperties = {
     position: 'absolute',
     zIndex: 2,
@@ -26,7 +24,7 @@ const panel: CSSProperties = {
     OTransition: 'right .4s ease-in-out .2s',
     transition: 'right .4s ease-in-out .2s',
 }
-const panelSelection: CSSProperties = {
+const main: CSSProperties = {
     display: 'flex',
     flexGrow: 7,
     flexDirection: 'row',
@@ -35,23 +33,21 @@ const panelSelection: CSSProperties = {
     overflowX: 'hidden',
     overflowY: 'auto',
 }
-const panelRoot: CSSProperties = {
+const menu: CSSProperties = {
     display: 'flex',
     marginBottom: '2px',
     flexGrow: 1,
     flexDirection: 'column',
     alignItems: 'stretch',
     alignContent: 'stretch',
+    width: '22%',
 
-    WebkitTransition: 'all .4s ease-in-out .2s',
-    MozTransition: 'all .4s ease-in-out .2s',
-    OTransition: 'all .4s ease-in-out .2s',
-    transition: 'all .4s ease-in-out .2s',
 }
-const panelRootMinimalized: CSSProperties = {
-    
+
+const menuMinimalized: CSSProperties = {
 }
-const rootItem: CSSProperties = {
+
+const item: CSSProperties = {
     display: 'flex',
     flexGrow: 1,
     flexDirection: 'column',
@@ -64,13 +60,13 @@ export = utils.union(css, {
     getPanel(isMinimalized: boolean) {
         return css.get(panel, isMinimalized ? { right: '-100%' } : { right: 0 });
     },
-    getPanelSelection() {
-        return panelSelection;
+    getMain() {
+        return main;
     },
-    getPanelRoot(isMenuMinimalized: boolean) {
-        return css.get(panelRoot, isMenuMinimalized ? panelRootMinimalized : null);
+    getMenu(isMenuMinimalized: boolean) {
+        return css.get(menu, isMenuMinimalized ? menuMinimalized : null);
     },
-    getRootItem() {
-        return rootItem;
+    getItem() {
+        return item;
     }
 });

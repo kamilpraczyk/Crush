@@ -14,7 +14,7 @@ interface Item {
 
 const prev = [{
     id: 'prev',
-    icon: 'icon-left-open',
+    icon: MenuCss.icons.left,
     onClick: function () {
         AppDispatcher.handleViewAction({
             actionType: Constants.BOARD_PREV
@@ -24,7 +24,7 @@ const prev = [{
 
 const next = [{
     id: 'next',
-    icon: 'icon-right-open',
+    icon: MenuCss.icons.right,
     onClick: function () {
         AppDispatcher.handleViewAction({
             actionType: Constants.BOARD_NEXT
@@ -35,7 +35,7 @@ const next = [{
 
 const nextRandom = [{
     id: 'nextrandom',
-    icon: 'moon-shuffle',
+    icon: MenuCss.icons.random,
     onClick: function () {
         AppDispatcher.handleViewAction({
             actionType: Constants.BOARD_NEXT_RANDOM

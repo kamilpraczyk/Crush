@@ -23,7 +23,7 @@ export = utils.union(css, {
     },
 
     getSupportIcon(): string {
-        return 'moon-support';
+        return css.icons.help;
     }
 
 

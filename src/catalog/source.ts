@@ -8,13 +8,14 @@ const source = {
     register: '/register.php',
     updateLastLogin: '/updateLastLogin.php',
     emailGreeting: '/emailGreeting.php',
+    updateStatus: '/updateStatus.php',
+    readStatus: '/readStatus.php'
 }
 
 
 function getUrl(part: string): string {
     return baseUrl + part;
 };
-
 
 export {
 source,

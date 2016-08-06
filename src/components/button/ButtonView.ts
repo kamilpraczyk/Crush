@@ -4,7 +4,6 @@ import LoaderView = require('../loader/LoaderView');
 import _ = require('underscore');
 const {div, button} = React.DOM;
 
-
 interface Props {
     name: string,
     key?: string,
@@ -12,6 +11,7 @@ interface Props {
     disabled?: boolean,
     icon?: string,
     leftIcon?: string,
+    numbersStatus?: number,
     numbers?: number,
     onClick: Function,
     isQuickClick?: boolean,
@@ -27,9 +27,79 @@ interface Props {
     backUrl?: string
 }
 
-
 interface State {
     pressed: boolean
+}
+
+function render(props: Props, state: State, clickHandler: () => void) {
+    let icon = null as any;
+    if (props.icon) {
+        icon = div({
+            className: props.icon,
+            style: ButtonCss.getIcon({
+                isResponsibleCenter: props.isResponsibleCenter
+            })
+        });
+    }
+    let leftIcon = null as any;
+    if (props.leftIcon) {
+        icon = div({
+            className: props.leftIcon,
+            style: ButtonCss.getLeftIcon(props.isActive)
+        });
+    }
+
+    let name: any = null;
+    if (props.name) {
+        name = div({
+            style: ButtonCss.getName({
+                isResponsibleCenter: props.isResponsibleCenter
+            })
+        }, props.name);
+    }
+
+    const loader = props.isLoader ? LoaderView() : null;
+    let numbers: any = null;
+    if (props.numbers) {
+        let numbersStatus: any = null;
+        let separator: any = null;
+        if (props.numbersStatus) {
+            numbersStatus = div({
+                style: ButtonCss.getNumbersStatus(props.numbersStatus, props.numbers)
+            }, props.numbersStatus);
+            separator = div({}, '/');
+        }
+
+        numbers = div({
+            style: ButtonCss.getNumbers(props.isActive)
+        },
+            numbersStatus,
+            separator,
+            div({}, props.numbers)
+        );
+
+
+
+    }
+
+    return button({
+        ref: props.ref,
+        key: props.key,
+        disabled: props.disabled,
+        style: ButtonCss.getButton({
+            disabled: props.disabled,
+            pressed: state.pressed,
+            isExpand: props.isExpand,
+            isExpandWidth: props.isExpandWidth,
+            isActive: props.isActive,
+            isResponsibleHeight: props.isResponsibleHeight,
+            isSuccess: props.isSuccess,
+            isFail: props.isFail,
+            backUrl: props.backUrl,
+            isTime: props.isTime,
+        }),
+        onClick: clickHandler
+    }, leftIcon, icon, name, numbers, loader);
 }
 
 class ButtonView extends React.Component<Props, State>{
@@ -61,57 +131,7 @@ class ButtonView extends React.Component<Props, State>{
     }
 
     render() {
-        let icon = null as any;
-        if (this.props.icon) {
-            icon = div({
-                className: this.props.icon,
-                style: ButtonCss.getIcon({
-                    isResponsibleCenter: this.props.isResponsibleCenter
-                })
-            });
-        }
-        let leftIcon = null as any;
-        if (this.props.leftIcon) {
-            icon = div({
-                className: this.props.leftIcon,
-                style: ButtonCss.getLeftIcon(this.props.isActive)
-            });
-        }
-
-        let name: any = null;
-        if (this.props.name) {
-            name = div({
-                style: ButtonCss.getName({
-                    isResponsibleCenter: this.props.isResponsibleCenter
-                })
-            }, this.props.name);
-        }
-
-        const loader = this.props.isLoader ? LoaderView() : null;
-        let numbers: any = null;
-        if (_.isNumber(this.props.numbers)) {
-            numbers = div({ style: ButtonCss.getNumbers(this.props.isActive) }, this.props.numbers);
-        }
-
-
-        return button({
-            ref: this.props.ref,
-            key: this.props.key,
-            disabled: this.props.disabled,
-            style: ButtonCss.getButton({
-                disabled: this.props.disabled,
-                pressed: this.state.pressed,
-                isExpand: this.props.isExpand,
-                isExpandWidth: this.props.isExpandWidth,
-                isActive: this.props.isActive,
-                isResponsibleHeight: this.props.isResponsibleHeight,
-                isSuccess: this.props.isSuccess,
-                isFail: this.props.isFail,
-                backUrl: this.props.backUrl,
-                isTime: this.props.isTime,
-            }),
-            onClick: this.clickHandler
-        }, leftIcon, icon, name, numbers, loader);
+        return render(this.props, this.state, this.clickHandler.bind(this));
     }
 };
 

@@ -52,7 +52,7 @@ function HttpClientGET(aUrl: string) {
     });
 }
 
-function HttpClientPOST(aUrl: string, data: string) {
+function HttpClientPOST(aUrl: string, data: string | FormData) {
     return new Promise((resolve, reject) => {
 
         const anHttpRequest = getHttpRequest();

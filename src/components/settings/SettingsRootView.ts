@@ -34,22 +34,50 @@ const state = getState();
 declare type State = typeof state;
 
 
-
-
 function getPanel(state: State) {
     return div({
         style: SettingsRootCss.getPanel(state.isMinimalized),
         ref: refsId.panel
-    }, getPanelSelection(), getPanelRoot(state));
+    }, getMain(), getMenu(state));
 }
 
-function getPanelRoot(state: State) {
+function getMenu(state: State) {
+
+    function getItem(item: any, id: string) {
+        const isMenuMinimalized = state.isMenuMinimalized ;
+        return ButtonView({
+            name: isMenuMinimalized ? '' : item.name,
+            icon: item.icon,
+            onClick: () => {
+                AppDispatcher.handleViewAction({
+                    actionType: Constants.ROOT_ITEM_CLICK,
+                    id: id
+                });
+            },
+            isQuickClick: id === 'close' ? false : true,
+            isExpandWidth: true,
+            isExpand: isMenuMinimalized ? false : true,
+            isActive: item.active,
+            isResponsibleHeight: isMenuMinimalized ? true : false,
+            isResponsibleCenter: isMenuMinimalized ? true : false
+        });
+    }
+
+    function getList() {
+        return _.map(state.rootList, (item: any, id: string) => {
+            return div({
+                key: id,
+                style: SettingsRootCss.getItem(),
+            }, getItem(item, id));
+        });
+    }
+
     return div({
-        style: SettingsRootCss.getPanelRoot(state.isMenuMinimalized)
-    }, getRootList(state));
+        style: SettingsRootCss.getMenu(state.isMenuMinimalized)
+    }, getList());
 }
 
-function getPanelSelection() {
+function getMain() {
 
     let view: any = null;
 
@@ -66,38 +94,9 @@ function getPanelSelection() {
     }
 
     return div({
-        style: SettingsRootCss.getPanelSelection(),
+        style: SettingsRootCss.getMain(),
         ref: refsId.scrollDiv
     }, view);
-}
-
-
-function getItem(state: State, item: any, id: string) {
-    return ButtonView({
-        name: state.isMenuMinimalized ? '' : item.name,
-        icon: item.icon,
-        onClick: () => {
-            AppDispatcher.handleViewAction({
-                actionType: Constants.ROOT_ITEM_CLICK,
-                id: id
-            });
-        },
-        isQuickClick: id === 'close' ? false : true,
-        isExpandWidth: true,
-        isExpand: state.isMenuMinimalized ? false : true,
-        isActive: item.active,
-        isResponsibleHeight: state.isMenuMinimalized ? true : false,
-        isResponsibleCenter: state.isMenuMinimalized ? true : false
-    });
-}
-
-function getRootList(state: State) {
-    return _.map(state.rootList, (item: any, id: string) => {
-        return div({
-            key: id,
-            style: SettingsRootCss.getRootItem(),
-        }, getItem(state, item, id));
-    });
 }
 
 
@@ -143,7 +142,7 @@ class SettingRootView extends React.Component<{}, State> {
     componentDidUpdate() {
         if (activeRootId !== lastActiveRootId) {
             if (activeRootId === rootIds.lessons) {
-                const el = ReactDOM.findDOMNode(this.refs[LessonStore.getActiveId()]);
+                const el = ReactDOM.findDOMNode(this.refs[LessonStore.getUid()]);
                 el && scrollTo(elementScroll, el);
             } else {
                 scrollTo(elementScroll, null);

@@ -18,12 +18,13 @@ export interface BoardFace {
 }
 
 export interface BoardFaces {
-    [id: number]: BoardFace,
+    [uid: number]: BoardFace,
     length: number,
     concat: Function
 }
 
 export interface LessonFace {
+    uid? : string,
     name: string,
     active: boolean,
     free: boolean,

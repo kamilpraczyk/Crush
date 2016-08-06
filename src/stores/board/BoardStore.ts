@@ -4,6 +4,7 @@ import utils = require('../../utils/utils');
 import _ = require('underscore');
 import BaseStore from '../../utils/store/BaseStore';
 
+import HomeStore = require('../home/HomeStore');
 import LessonStore = require('../lesson/LessonStore');
 import storageHelper = require('./storageHelper');
 import pointsHelper = require('./pointsHelper');
@@ -78,7 +79,7 @@ class BoardStore extends BaseStore {
     }
 
     getPoints() {
-        return pointsHelper.getState(list[_index], list);
+        return pointsHelper.getState(list[_index], list, LessonStore.getUid());
     }
 
     getExplenation() {
@@ -132,14 +133,6 @@ class BoardStore extends BaseStore {
                 utils.voice.stopReading();
                 this.emitChange();
                 break;
-
-
-            case Constants.GREETINGS_CONTINUE:
-                pointsHelper.reset()
-                this.emitChange();
-                break;
-
-
         }
         return true;
     })

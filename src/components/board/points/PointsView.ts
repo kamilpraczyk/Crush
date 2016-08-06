@@ -4,55 +4,38 @@ import _ = require('underscore');
 import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
 import BoardStore = require('../../../stores/board/BoardStore');
+import ButtonView = require('../../button/ButtonView');
 const {div} = React.DOM;
 
 
 function render() {
     const state = BoardStore.getPoints();
 
-    const points = div({
-        style: PointsCss.getPoints()
-    }, state.points.display);
-
-
-    function getFail() {
-        if (state.points.isCurrentFail) {
-            return div({
-                style: PointsCss.getStatusFail(),
-                className: PointsCss.getClassNameIconFail()
-            });
-        }
-        return null;
+    function getIcon() {
+        if (state.points.isCurrentSuccess)
+            return PointsCss.getClassNameIconSuccess();
+        if (state.points.isCurrentFail)
+            return PointsCss.getClassNameIconFail();
+        return PointsCss.getClassNameIconUnknown();
     }
-
-    function getSuccess() {
-        if (state.points.isCurrentSuccess) {
-            return div({
-                style: PointsCss.getStatusSuccess(),
-                className: PointsCss.getClassNameIconSuccess()
-            });
-        }
-        return null;
-    }
-    function getUnknown() {
-        if (!state.points.isCurrentSuccess && !state.points.isCurrentFail) {
-            return div({
-                style: PointsCss.getStatusUnknown(),
-                className: PointsCss.getClassNameIconUnknown()
-            });
-        }
-        return null;
-    }
-
 
     return div({
         style: PointsCss.getPanel(),
-        onClick: PointsCss.animate(function () {
-            AppDispatcher.handleViewAction({
-                actionType: Constants.MAXIMALIZE_SETTINGS
-            });
+    },
+        ButtonView({
+            name: state.points.display,
+            icon: getIcon(),
+            isFail: state.points.isCurrentFail,
+            isSuccess: state.points.isCurrentSuccess,
+            isExpand: true,
+            //isQuickClick: true,
+            onClick: () => {
+                AppDispatcher.handleViewAction({
+                    actionType: Constants.MAXIMALIZE_SETTINGS
+                });
+            }
         })
-    }, points, getSuccess(), getFail(), getUnknown());
+    );
 }
 
 export = render;

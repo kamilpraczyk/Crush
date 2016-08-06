@@ -4,43 +4,13 @@ import utils = require('../../../utils/utils');
 
 const panel: CSSProperties = {
     position: 'absolute',
-    zIndex: 1,
     bottom: '20vh',
     right: 0,
     display: 'flex',
-    flexFlow: 'column wrap',
-    border: '1px solid #ddd',
-    borderRadius: css.borderRadius,
     justifyContent: 'center',
-    backgroundColor: css.background.text.backgroundColor,
     minWidth: '10vmin',
     minHeight: '35vmin',
-    cursor: css.cursor.pointer
-}
-
-const point: CSSProperties = {
-    display: 'flex',
-    justifyContent: 'center',
-    paddingLeft: '1vw',
-    paddingRight: '1vw',
-    paddingTop: '1vh',
-    paddingBottom: '1vh',
-}
-
-const status: CSSProperties = {
-    display: 'flex',
-    paddingLeft: '1vw',
-    paddingRight: '1vw',
-    paddingBottom: '1vh',
-    justifyContent: 'center',
-}
-
-const success: CSSProperties = {
-    color: css.font.color.success
-}
-
-const fail: CSSProperties = {
-    color: css.font.color.fail
+    zIndex: 1,
 }
 
 export = utils.union(css, {
@@ -48,25 +18,13 @@ export = utils.union(css, {
     getPanel() {
         return panel;
     },
-    getPoints() {
-        return point;
-    },
-    getStatusSuccess() {
-        return css.get(status, success);
-    },
-    getStatusFail() {
-        return css.get(status, fail);
-    },
-    getStatusUnknown() {
-        return css.get(status);
-    },
     getClassNameIconSuccess() {
-        return 'moon-thumbs-up';
+        return css.icons.success;
     },
     getClassNameIconFail() {
-        return 'moon-thumbs-up2';
+         return css.icons.fail;
     },
     getClassNameIconUnknown() {
-        return 'moon-question';
+         return css.icons.menu;
     }
 });

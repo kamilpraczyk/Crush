@@ -25,7 +25,7 @@ function getTitle(props: Props, state: State) {
         name: state.message,
         isResponsibleHeight: true,
         isResponsibleCenter: true,
-        leftIcon: props.register.show ? 'icon-left-open' : '',
+        leftIcon: props.register.show ? CommonCss.icons.left : '',
         onClick: () => {
             AppDispatcher.handleViewAction({
                 actionType: Constants.TOGGLE_REGISTER_VIEW
@@ -172,7 +172,7 @@ class View extends React.Component<{}, State>{
             this.state.message = dictionary.PLEASE_WAIT;
         } else if (props.register.error) {
             this.state.message = props.register.error;
-        } 
+        }
         return render(props, this.state, this.setState.bind(this));
     }
 };

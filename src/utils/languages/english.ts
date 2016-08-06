@@ -1,17 +1,22 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 const dictonary = {
 
+    menu: {
+        USER: '',
+        LESSONS: '',
+        GRAMMAR: '',
+        PRACTISE: '',
+    },
 
     LOGEDIN_AS: 'Loged in as: ',
     LAST_LOGIN: 'Last login: ',
     LOG_OUT: 'Sign out',
+    DONATE : 'Please Buy Me a Coffee',
 
     GRATULATIONS_TITLE: 'You answered all questions',// well done
     GRATULATIONS_TEXT: 'Your score is: ',
     GRATULATIONS_BUTTON: 'Continue',
-
-    DID_I_HELP_YOU_OUT: 'Did I help you out?',
-    BUY_ME_A_BEER: 'Buy me a beer',
+    GRATULATIONS_SAVE_BUTTON: 'Save and Continue',
 
     SUBSCRIBING_EXPLANATION: 'Subscription will expire after given period, and will not be automatically extended.',
 

@@ -6,6 +6,8 @@ import {RootFace, RootFaces } from './SettingsRootInterfaces';
 import BaseStore from '../utils/store/BaseStore';
 import LessonStore = require('./lesson/LessonStore');
 import BoardStore = require('./board/BoardStore');
+import css = require('../utils/css/css');
+import dictionary = require('../utils/dictionary');
 
 const _ids = {
     close: 'close',
@@ -19,33 +21,33 @@ let _isMinimalized = true;
 let _isMenuMinimalized = false;
 let _activeRoot = _ids.lessons;
 
-let _rootList = {
+const _rootList: RootFaces = {
 
-    [_ids.close]: {
-        name: 'Practise',
-        icon: 'moon-question',
-        active: false,
-        disable: false
-    },
-    [_ids.explenation]: {
-        name: 'Grammar',
-        icon: 'moon-file',
+    [_ids.user]: {
+        name: dictionary.menu.USER,
+        icon: css.icons.user,
         active: false,
         disable: false
     },
     [_ids.lessons]: {
-        name: 'Lessons',
-        icon: 'moon-drawer3',
+        name: dictionary.menu.LESSONS,
+        icon: css.icons.lessons,
         active: true,
         disable: false
     },
-    [_ids.user]: {
-        name: 'User',
-        icon: 'moon-user2',
+    [_ids.explenation]: {
+        name: dictionary.menu.GRAMMAR,
+        icon: css.icons.grammar,
+        active: false,
+        disable: false
+    },
+    [_ids.close]: {
+        name: dictionary.menu.PRACTISE,
+        icon: css.icons.menu,
         active: false,
         disable: false
     }
-} as RootFaces;
+};
 
 
 function onClickRootItem(id: string) {
@@ -54,9 +56,7 @@ function onClickRootItem(id: string) {
         _isMinimalized = true;
     } else {
         _isMinimalized = false;
-        if (_rootList[_activeRoot])
-            _rootList[_activeRoot].active = false
-
+        _rootList[_activeRoot].active = false;
         _activeRoot = id;
         _rootList[_activeRoot].active = true;
     }
@@ -64,14 +64,13 @@ function onClickRootItem(id: string) {
 
 
 class SettingRootStore extends BaseStore {
-    private ids = _ids
 
     constructor() {
         super()
     }
 
     getIds() {
-        return this.ids;
+        return _ids;
     }
 
     getRootList() {
@@ -89,12 +88,13 @@ class SettingRootStore extends BaseStore {
         return _isMenuMinimalized;
     }
 
-    dispatcherIndex = this.register((payload: { action: any }) => {
-        let action = payload.action;
+    dispatcherIndex = this.register((payload: { action: { actionType: string, id?: string } }) => {
+        const action = payload.action;
 
         switch (action.actionType) {
             case Constants.SWITCH_ACTION:
                 this.waitFor([LessonStore.dispatcherIndex, BoardStore.dispatcherIndex], () => {
+                    onClickRootItem(_ids.explenation);
                     this.emitChange();
                 });
                 break;
@@ -114,8 +114,6 @@ class SettingRootStore extends BaseStore {
                 _isMenuMinimalized = false;
                 this.emitChange();
                 break;
-
-
 
         }
         return true;

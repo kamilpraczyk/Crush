@@ -30,7 +30,7 @@ function getLogOut(props: Props) {
         ),
 
         div({ style: CommonCss.getBoxSplit() },
-            CommonCss.makeBoxLine(null, buttonLogOut)
+           buttonLogOut
         )
     );
 }

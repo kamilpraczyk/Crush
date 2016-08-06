@@ -78,6 +78,19 @@ let style = {
         pointer: cursorPointer
     },
 
+    icons: {
+        left: 'icon-left-open',
+        right: 'icon-right-open',
+        random: 'moon-shuffle',
+        success: 'moon-thumbs-up',
+        fail: 'moon-thumbs-up2',
+        menu: 'moon-menu2',
+        help: 'moon-support',
+        user: 'moon-user2',
+        lessons: 'moon-drawer3',
+        grammar: 'moon-file',
+    },
+
     font: {
         fontSize: {
             micro: micro,
@@ -98,6 +111,7 @@ let style = {
             disable: '#555',
             success: '#00FF00',
             fail: '#FF0000',
+            average: 'orange',
             ink: '#2C5781'
         }
     },
@@ -109,15 +123,15 @@ let style = {
 
     button: {
         background: {
-            normal: 'black',
+            normal: '#252526',
             active: '#00999D',
-            focus: 'black',
-            disabled: 'black'
+            focus: '#272822',
+            disabled: '#252526'
         },
         color: {
-            normal: 'white',
-            active: 'white',
-            focus: 'white',
+            normal: '#F8F8F2',
+            active: '#F8F8F2',
+            focus: '#F8F8F2',
             disabled: '#777'
         },
         border: {
@@ -127,6 +141,9 @@ let style = {
             success: '5px solid #00FF00',
             fail: '5px solid  #FF0000',
             disabled: '5px solid gray'
+        },
+        radius: {
+            borderRadius: 28
         }
     },
 
@@ -152,7 +169,6 @@ let style = {
     themes: {
         standard: {
             backgroundImageLesson: 'url("img/10.jpg")',
-            backgroundImageBeer: 'url("img/beer.png")',
             backgroundImageRead: 'url("img/read.png")'
         }
     },

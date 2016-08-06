@@ -6,40 +6,18 @@ import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
 import BoardStore = require('../../../stores/board/BoardStore');
 import ButtonView = require('../../../components/button/ButtonView');
-const {div, form, input, img} = React.DOM;
+import HomeStore = require('../../../stores/home/HomeStore');
 
-function getPayPal() {
-    return form({
-        action: "https://www.paypal.com/cgi-bin/webscr",
-        method: "post",
-        target: "_top"
-    }, input({
-        type: "hidden",
-        name: "cmd",
-        value: "_s-xclick"
-    }),
-        input({
-            type: "hidden",
-            name: "hosted_button_id",
-            value: "HRQXPU6JQB8MS"
-        }),
-        input({
-            style: GratulationCss.getPayPal(),
-            type: 'submit',
-            value: dictionary.BUY_ME_A_BEER
-        }),
-        img({
-            alt: "",
-            src: "https://www.paypalobjects.com/en_GB/i/scr/pixel.gif",
-            width: "1",
-            height: "1"
-        })
-    )
-}
+const {div} = React.DOM;
 
 
 function render() {
-    const state = BoardStore.getPoints();
+
+    const state = {
+        points: BoardStore.getPoints().points,
+        home: HomeStore.getStateHome()
+    }
+
     if (!state.points.isFinished) {
         return null;
     }
@@ -60,7 +38,7 @@ function render() {
         return ButtonView({
             name: dictionary.GRATULATIONS_BUTTON,
             isResponsibleHeight: true,
-            onClick: function () {
+            onClick: () => {
                 AppDispatcher.handleViewAction({
                     actionType: Constants.GREETINGS_CONTINUE
                 });
@@ -68,33 +46,36 @@ function render() {
         });
     };
 
-    function getFooter() {
-
-        function getText() {
-            return div({
-                style: GratulationCss.getText()
-            }, dictionary.DID_I_HELP_YOU_OUT);
+    function getButtonSaveAndContinue() {
+        if (!state.home.user.email) {
+            return null;
         }
-
-        return div({
-            style: GratulationCss.getFooter()
-        }, getText(), getPayPal());
+        return ButtonView({
+            name: dictionary.GRATULATIONS_SAVE_BUTTON,
+            isResponsibleHeight: true,
+            isLoader: state.home.status.process,
+            onClick: () => {
+                AppDispatcher.handleViewAction({
+                    actionType: Constants.GREETINGS_CONTINUE,
+                    data: {
+                        uid: state.points.uid,
+                        status: state.points.score
+                    }
+                });
+            }
+        });
     };
 
     function getContent() {
         return div({
             style: GratulationCss.getContent()
-        }, getTitle(), getText(), getButtonContinue());
+        }, getTitle(), getText(), getButtonSaveAndContinue(), getButtonContinue());
     };
 
 
-    function getPanel() {
-        return div({
-            style: GratulationCss.getPanel()
-        }, getContent(), getFooter());
-    };
-
-    return getPanel();
+    return div({
+        style: GratulationCss.getPanel()
+    }, getContent());
 }
 
 export = render;

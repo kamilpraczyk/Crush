@@ -18,30 +18,6 @@ const content: CSSProperties = {
     justifyContent: 'center',
 }
 
-const footer: CSSProperties = {
-    backgroundImage: css.themes.standard.backgroundImageBeer,
-    backgroundSize: 'contain',
-    backgroundPosition: 'bottom',
-    backgroundRepeat: 'no-repeat',
-    display: 'flex',
-    width: '100%',
-    alignItems: 'center',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    textShadow: textShadow
-}
-
-const paypal: CSSProperties = {
-    display: 'block',
-    color: 'white',
-    backgroundColor: 'black',
-    borderRadius: css.borderRadius,
-    paddingBottom: '2vh',
-    paddingTop: '2vh',
-    paddingLeft: '2vw',
-    paddingRight: '2vw'
-}
-
 const panel: CSSProperties = {
     position: 'absolute',
     top: 0,
@@ -67,11 +43,5 @@ export = utils.union(css, {
     },
     getText() {
         return css.get(text);
-    },
-    getFooter() {
-        return css.get(footer);
-    },
-    getPayPal() {
-        return css.get(paypal);
     }
 });

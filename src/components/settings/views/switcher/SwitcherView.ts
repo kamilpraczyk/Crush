@@ -15,9 +15,11 @@ const {div} = React.DOM;
 
 
 function getState() {
+    const model = HomeStore.getStateHome();
     return {
         list: LessonStore.getAllLessons(),
-        user: HomeStore.getStateHome().user
+        status: model.status,
+        user: model.user
     }
 }
 
@@ -38,23 +40,27 @@ function getIconByIdLesson(id: string) {
     return '';
 }
 
+
 function render() {
     const state = getState();
+    console.log('state', state);
+
     const buttons = _.map(state.list, (item: LessonFace, id: string) => {
         return ButtonView({
             key: id,
             ref: id,
             leftIcon: getIconByIdLesson(item.lessons[0].id), //TODO confirm this idea?!
             name: item.name,
+            numbersStatus: state.status.map[id],
             numbers: item.lessons.length,
             disabled: !(state.user.isPrime || item.free),
-            onClick: function () {
+            onClick: () => {
                 AppDispatcher.handleViewAction({
                     actionType: Constants.SWITCH_ACTION,
                     id: id
                 });
             },
-            isQuickClick: true,
+            isQuickClick: false,
             isExpandWidth: true,
             isActive: item.active
         });

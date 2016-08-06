@@ -8,9 +8,9 @@ const button: CSSProperties = {
     backgroundColor: css.button.background.normal,
     color: css.button.color.normal,
     border: css.button.border.normal,
-    MozBorderRadius: 28,
-    WebkitBorderRadius: 28,
-    borderRadius: 28,
+    MozBorderRadius: css.button.radius.borderRadius,
+    WebkitBorderRadius: css.button.radius.borderRadius,
+    borderRadius: css.button.radius.borderRadius,
     cursor: 'pointer',
     fontSize: css.font.fontSize.XL,
     textDecoration: 'none',
@@ -83,7 +83,7 @@ const name: CSSProperties = {
     textAlign: 'left',
     alignSelf: 'center',
     alignItems: 'center',
-    flexGrow: 1
+    flexGrow: 1,
 }
 const icon: CSSProperties = {
     paddingTop: '2vh',
@@ -106,6 +106,8 @@ const leftIconActive: CSSProperties = {
     color: '#fff',
 }
 const numbers: CSSProperties = {
+    display: 'flex',
+    flexFlow: 'row nowrap',
     fontSize: css.font.fontSize.micro,
     alignSelf: 'center',
     color: css.font.color.disable,
@@ -113,6 +115,17 @@ const numbers: CSSProperties = {
 }
 const numbersActive: CSSProperties = {
     color: css.button.color.active
+}
+const numbersStatus: CSSProperties = {
+}
+const numbersGood: CSSProperties = {
+    color: css.font.color.success
+}
+const numbersSoso: CSSProperties = {
+    color: css.font.color.average
+}
+const numbersBad: CSSProperties = {
+    color: css.font.color.fail
 }
 
 interface ButtonProps {
@@ -195,5 +208,16 @@ export = utils.union(css, {
 
     getNumbers(isActive: boolean) {
         return css.get(numbers, isActive ? numbersActive : null);
-    }
+    },
+
+    getNumbersStatus(numb: number, length: number) {
+        const percent = (numb * 100) / length;
+        let mergeCss = numbersGood;
+        if (percent >= 90) {
+            mergeCss = numbersGood;
+        } else if (percent >= 75) {
+            mergeCss = numbersSoso;
+        }
+        return css.get(numbersStatus, mergeCss);
+    },
 });

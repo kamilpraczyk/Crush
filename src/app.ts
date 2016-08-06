@@ -15,9 +15,9 @@ function onLoaded() {
 }
 
 function onDeviceReady() {
-    utils.delay(1500).then(() => {
+    utils.delay(500).then(() => {
         onConnected();
-        utils.delay(500).then(() => {
+        utils.delay(200).then(() => {
             onLoaded();
             new Home(document.getElementById('app'));
         });

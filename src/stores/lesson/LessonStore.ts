@@ -1,20 +1,20 @@
-import {LessonMapFace, LessonFace} from '../../lessons/interface';
+import {LessonFace} from '../../lessons/interface';
 import Constants = require('../../constants/Constants');
 import BaseStore from '../../utils/store/BaseStore';
 import utils = require('../../utils/utils');
 import _ = require('underscore');
-import {lessons, activeStartup} from '../../lessons/lessons';
-
-let _active = activeStartup;
+import modelLessons = require('../../lessons/lessons');
+const {lessons, activeStartup} = modelLessons;
+let uid = activeStartup;
 let _lessons = lessons;
 
-_lessons[_active].active = true;
+_lessons[uid].active = true;
 
 function onSwitchAction(id: string) {
     if (_lessons[id]) {
-        _lessons[_active].active = false;
-        _active = id;
-        _lessons[_active].active = true;
+        _lessons[uid].active = false;
+        uid = id;
+        _lessons[uid].active = true;
     }
 }
 
@@ -23,7 +23,7 @@ class LessonStore extends BaseStore {
         super()
     }
 
-    getAllLessons(){
+    getAllLessons() {
         return _lessons;
     }
 
@@ -32,18 +32,18 @@ class LessonStore extends BaseStore {
     }
 
     getLessonName() {
-        return _lessons[_active].name;
+        return _lessons[uid].name;
     }
 
-    getActiveId() {
-        return _active;
+    getUid() {
+        return uid;
     }
     getLessons() {
-        return _lessons[_active].lessons;
+        return _lessons[uid].lessons;
     }
 
     dispatcherIndex = this.register((payload: { action: any }) => {
-        var action = payload.action;
+        const action = payload.action;
 
         switch (action.actionType) {
             case Constants.SWITCH_ACTION:

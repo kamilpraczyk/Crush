@@ -54,7 +54,6 @@ function prev() {
 }
 
 function bindKeys() {
-    console.log('bind');
     document.addEventListener("keydown", dispatcher);
 }
 
