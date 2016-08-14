@@ -8,6 +8,7 @@ const {div} = React.DOM;
 
 
 const title: CSSProperties = {
+    color: css.font.color.normal,
     marginTop: '5vh',
     paddingTop: '2vh',
     paddingBottom: '2vh',
@@ -30,6 +31,7 @@ const info: CSSProperties = {
     backgroundColor: 'transparent'
 }
 const item: CSSProperties = {
+    color: css.font.color.normal,
     paddingLeft: '1vh',
     paddingRight: '1vh',
     textAlign: 'left',
@@ -46,11 +48,13 @@ const itemInfo: CSSProperties = {
     backgroundColor: 'transparent'
 }
 const wrapperItemTo: CSSProperties = {
+    color: css.font.color.normal,
     display: 'flex',
     flexGrow: 1,
     flexFlow: 'row wrap'
 }
 const itemTo: CSSProperties = {
+    color: css.font.color.normal,
     display: 'flex',
     flexBasis: 0,
     justifyContent: 'center',
@@ -60,9 +64,11 @@ const itemTo: CSSProperties = {
     backgroundColor: 'transparent'
 }
 const noClick: CSSProperties = {
+    color: css.font.color.normal,
     opacity: '0.4'
 }
 const itemSep: CSSProperties = {
+    color: css.font.color.normal,
     display: 'flex',
     flexBasis: 0,
     alignItems: 'center',
@@ -70,6 +76,7 @@ const itemSep: CSSProperties = {
     paddingRight: '2vh',
 }
 const itemLineSep: CSSProperties = {
+    color: css.font.color.normal,
     marginTop: '5vh',
 }
 
@@ -82,5 +89,5 @@ export = {
     wrapperItemTo: () => { return wrapperItemTo },
     itemTo: (isClick: boolean) => { return css.get(itemTo, isClick ? {} : noClick) },
     itemSep: () => { return itemSep },
-    itemLineSep: () => { return itemLineSep },
+    itemLineSep: () => { return itemLineSep }
 }

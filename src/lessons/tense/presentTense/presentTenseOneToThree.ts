@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons, capital } from '../../helper/constants';
+import {space, viewIds, id, icons, capital, getNameMale } from '../../helper/constants';
 import explenation = require('./explenation');
 
 const separator = " ";
@@ -18,7 +18,7 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: [capital.names.Peter, "gives me", "a call", "every", "morning"],
+        correct: [getNameMale(), "gives me", "a call", "every", "morning"],
         explenation: explenation,
         placeholder: placeholder
     }, {
@@ -48,7 +48,7 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["Twice", "a week,", capital.names.Tom, "cleans", "the car"],
+        correct: ["Twice", "a week,", getNameMale(), "cleans", "the car"],
         explenation: explenation,
         placeholder: placeholder
     }, {
@@ -126,7 +126,7 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: [capital.names.Mike, "reaches", "home", "in", "time"],
+        correct: [getNameMale(), "reaches", "home", "in", "time"],
         explenation: explenation,
         placeholder: placeholder
     }

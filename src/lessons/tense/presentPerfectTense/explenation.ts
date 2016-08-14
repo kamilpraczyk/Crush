@@ -40,7 +40,7 @@ exp.push(tList({
     list: [
         { l: "You <p>have been</p> sick since last week." },
         { l: "Since when <p>have</p> you <p>been</p> sick?" },
-        { l: "I <p>have thought</p> about it for two hours." },,
+        { l: "I <p>have thought</p> about it for two hours." },
         { l: "Bob <p>has lived</p> here since 2005." },
         { l: "Sophie <p>has</p> always <p>loved</p> skiing." },
     ]

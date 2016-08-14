@@ -5,7 +5,7 @@ import utils = require('../../../utils/utils');
 const textShadow = '2px 2px 5px black';
 
 const text: CSSProperties = {
-    color: css.font.color.dark,
+    color: css.font.color.normal,
     fontSize: css.font.fontSize.XL2,
     paddingBottom: '2vh',
     textShadow: textShadow
@@ -20,6 +20,7 @@ const content: CSSProperties = {
 
 const panel: CSSProperties = {
     position: 'absolute',
+    zIndex : 100,
     top: 0,
     left: 0,
     width: '100%',

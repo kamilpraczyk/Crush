@@ -3,18 +3,18 @@ import _ = require("underscore");
 const constFont = 5.5;
 const constPoint = 'vmin'
 const borderRadius = 10;
-const borderWidth = 1;
-const borderWidthUnit = 'vh';
+const borderWidth = 3;
 const cursorPointer = 'pointer';
 const cursorDefault = 'default';
 const fontFamilyTime = 'Orbitron Medium';
-const fontFamilyWriting = 'ArchitectsDaughter';
+const fontFamilyWriting = 'standard';
 const fontFamilyJournal = 'journal';
+const fontFamilyCharcoal = 'charcoal';
 
 
 import {isId} from '../../lessons/helper/constants';
 
-const micro = constFont - 2.0 + constPoint;
+const micro = constFont - 1.8 + constPoint;
 const XS = constFont - 0.8 + constPoint;
 const S = constFont - 0.7 + constPoint;
 const M = constFont - 0.5 + constPoint;
@@ -26,8 +26,8 @@ const XL4 = constFont + 0.8 + constPoint;
 
 
 const get = function <CSSProperties>(a: CSSProperties, b?: CSSProperties, c?: CSSProperties, d?: CSSProperties, e?: CSSProperties): CSSProperties {
-    var res = {} as CSSProperties;
-    for (var i = 0; i < arguments.length; i++) {
+    let res = {} as CSSProperties;
+    for (let i = 0; i < arguments.length; i++) {
         if (arguments[i]) {
             _.extend(res, arguments[i]);
         }
@@ -104,43 +104,46 @@ let style = {
             XL4: XL4
         },
         color: {
-            light: 'white',
-            dark: 'black',
-            select: 'blue',
+            normal: 'white',
             hint: '#777',
-            disable: '#555',
             success: '#00FF00',
             fail: '#FF0000',
             average: 'orange',
-            ink: '#2C5781'
+            ink: '#99cdff'
         }
     },
 
     borderRadius: borderRadius,
-    borderWidth: borderWidth,
-    borderWidthUnit: borderWidthUnit,
-
 
     button: {
-        background: {
-            normal: '#252526',
-            active: '#00999D',
-            focus: '#272822',
-            disabled: '#252526'
-        },
         color: {
             normal: '#F8F8F2',
             active: '#F8F8F2',
             focus: '#F8F8F2',
-            disabled: '#777'
+            disabled: '#999'
         },
         border: {
-            normal: '5px solid gray',
-            active: '5px solid gray',
-            focus: '5px solid gray',
-            success: '5px solid #00FF00',
-            fail: '5px solid  #FF0000',
-            disabled: '5px solid gray'
+            normal: borderWidth + 'px solid #313131',
+            normalGuess: borderWidth + 'px solid #313131',
+            active: borderWidth + 'px solid #2b8182',
+            focus: borderWidth + 'px solid #313131',
+            success: borderWidth + 'px solid #00FF00',
+            fail: borderWidth + 'px solid  #FF0000',
+            disabled: borderWidth + 'px solid #313131'
+        },
+        backgroundColor: {
+            normal: '#252526',
+            normalGuess: 'transparent',
+            active: '#00999D',
+            focus: '#272822',
+            disabled: '#252526'
+        },
+        backgroundImage: {
+            normalGuess: 'linear-gradient(rgba(0,0,0, 0.1),rgba(7,7,7, 0.1))',
+            normal: 'linear-gradient(#4b4c4e, #1f1f21)',
+            active: null as string,
+            focus: null as string,
+            disabled: null as string,
         },
         radius: {
             borderRadius: 28
@@ -162,14 +165,17 @@ let style = {
         },
         journal: <CSSProperties>{
             fontFamily: fontFamilyJournal
+        },
+        charcoal: <CSSProperties>{
+            fontFamily: fontFamilyCharcoal
         }
     },
 
 
     themes: {
         standard: {
-            backgroundImageLesson: 'url("img/10.jpg")',
-            backgroundImageRead: 'url("img/read.png")'
+            backgroundImageRead: 'url("img/chalkboard1.jpg")',
+            backgroundImageBoard: 'url("img/chalkboard2.jpg")'
         }
     },
 

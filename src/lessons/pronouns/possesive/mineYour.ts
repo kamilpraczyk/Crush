@@ -80,7 +80,7 @@ const lessons = [
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: "Mr " + capital.names.Thomas + " is a friend of " + space + " .",
+        name: "Mr " + capital.names.Thomas + " is a friend of " + space + " .",// TODO correct to surname
         correct: ["ours"],
         incorrect: ["our"],
         explenation: explenation

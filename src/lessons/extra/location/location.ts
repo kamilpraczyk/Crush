@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons, capital } from '../../helper/constants';
+import {space, viewIds, id, icons, capital, getNameFemale } from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [viewIds.radio];
 import _ = require("underscore");
@@ -79,7 +79,7 @@ const lessons = [
     },
     {
         id: id(common), title: title,
-        name: "The dog sat " + space + " " + capital.names.Suzan + ".",
+        name: "The dog sat " + space + " " + getNameFemale() + ".",
         correct: ["beside"],
         incorrect: ["from", "off", "northern", "there"],
         explenation: explenation

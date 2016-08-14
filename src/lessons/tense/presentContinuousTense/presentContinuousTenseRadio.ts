@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {empty, space, viewIds, id, icons, multi, capital } from '../../helper/constants';
+import {empty, space, viewIds, id, icons, multi, capital, getNameMale } from '../../helper/constants';
 import explenation = require('./explenation');
 
 const common = [viewIds.radio];
@@ -30,7 +30,7 @@ const lessons = [
         placeholder: placeholder
     }, {
         id: id(common), title: title,
-        name: "Where is " + capital.names.Bob + "? He is " + space + " soccer in the sports hall.",
+        name: "Where is " + getNameMale() + "? He is " + space + " soccer in the sports hall.",
         correct: ["playing"],
         incorrect: ["having"],
         explenation: explenation,

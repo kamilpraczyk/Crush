@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons, capital } from '../../helper/constants';
+import {space, viewIds, id, icons, capital, getNameFemale, getNameMale } from '../../helper/constants';
 import explenation = require('./explenation');
 import _ = require("underscore");
 const common = [viewIds.radio];
@@ -9,7 +9,7 @@ const title = "Present Perfect Tense";
 const lessons = [
     {
         id: id(common), title: title,
-        name: "He has " + space + " a letter to " + capital.names.Maria + ".",
+        name: "He has " + space + " a letter to " + getNameFemale() + ".",
         correct: ["written"],
         incorrect: ["write"],
         explenation: explenation,
@@ -30,7 +30,7 @@ const lessons = [
         placeholder: placeholder
     }, {
         id: id(common), title: title,
-        name: capital.names.Jason + " and " + capital.names.Maria + " " + space + " to " + capital.countries.Spain + ".",
+        name: getNameMale() + " and " + getNameFemale() + " " + space + " to " + capital.countries.Spain + ".",
         correct: ["have traveled"],
         incorrect: ["had traveled", "traveled"],
         explenation: explenation,
@@ -44,7 +44,7 @@ const lessons = [
         placeholder: placeholder
     }, {
         id: id(common), title: title,
-        name: capital.names.Chris + " " + space + " my friend for " + _.sample[2, 4, 6, 8, 9, 12] + " years.",
+        name: getNameMale() + " " + space + " my friend for " + _.sample[2, 4, 6, 8, 9, 12] + " years.",
         correct: ["has been"],
         incorrect: ["had been", "was"],
         explenation: explenation,

@@ -8,8 +8,8 @@ const panel: CSSProperties = {
     zIndex: 2,
     top: 0,
     right: 0,
-    color: css.font.color.dark,
-    backgroundColor: 'rgba(255,255,255,0.9)',
+    color: css.font.color.normal,
+    backgroundColor: 'rgba(0,0,0,0.9)',
 
     width: '100%',
     height: '100%',
@@ -23,7 +23,11 @@ const panel: CSSProperties = {
     MozTransition: 'right .4s ease-in-out .2s',
     OTransition: 'right .4s ease-in-out .2s',
     transition: 'right .4s ease-in-out .2s',
+    backgroundImage: css.themes.standard.backgroundImageRead,
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat'
 }
+const wid = 22;
 const main: CSSProperties = {
     display: 'flex',
     flexGrow: 7,
@@ -32,6 +36,7 @@ const main: CSSProperties = {
     height: '100%',
     overflowX: 'hidden',
     overflowY: 'auto',
+    width: 100 - wid + '%'
 }
 const menu: CSSProperties = {
     display: 'flex',
@@ -40,8 +45,7 @@ const menu: CSSProperties = {
     flexDirection: 'column',
     alignItems: 'stretch',
     alignContent: 'stretch',
-    width: '22%',
-
+    width: wid + '%',
 }
 
 const menuMinimalized: CSSProperties = {

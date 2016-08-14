@@ -1,9 +1,10 @@
+/// <reference path="../../typings/tsd.d.ts" />
 import React = require('react');
 import ReactDOM = require('react-dom');
 import components = require('../components/components');
 import Layout = require('./layout/Layout')
 import HomeStore = require('../stores/home/HomeStore');
-import utils = require('../utils/utils')
+import utils = require('../utils/utils');
 
 class Home {
 

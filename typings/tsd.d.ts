@@ -17,12 +17,9 @@ interface UnderscoreStatic {
 
 
 interface Window {
-    speechSynthesis: any
+    speechSynthesis: any,
 }
-interface SpeechSynthesisUtterance {
-
-}
-
+interface SpeechSynthesisUtterance {}
 
 interface CSSProperties extends __React.CSSProperties {
     justifyContent?: string;

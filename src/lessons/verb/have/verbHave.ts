@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons, capital } from '../../helper/constants';
+import {space, viewIds, id, icons, capital, getNameFemale, getNameMale } from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [viewIds.radio];
 const title = "Verb: have, has";
@@ -62,13 +62,13 @@ const lessons = [
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: "Has " + capital.names.Sally + " got any books? Yes, she has " + space + ".",
+        name: "Has " + getNameFemale() + " got any books? Yes, she has " + space + ".",
         correct: ["some"],
         incorrect: ["one"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: "Has " + capital.names.Peter + " got a credit card? Yes, he has " + space + ".",
+        name: "Has " + getNameMale() + " got a credit card? Yes, he has " + space + ".",
         correct: ["one"],
         incorrect: ["some"],
         explenation: explenation
@@ -80,13 +80,13 @@ const lessons = [
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: capital.names.Sam + " has " + space + " job.",
+        name: getNameMale() + " has " + space + " job.",
         correct: ["no"],
         incorrect: ["not"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: capital.names.Rob + " has " + space + " money this month.",
+        name: getNameMale() + " has " + space + " money this month.",
         correct: ["no"],
         incorrect: ["not"],
         explenation: explenation
@@ -110,7 +110,7 @@ const lessons = [
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: capital.names.Tom + " has " + space + " got a book",
+        name: getNameMale() + " has " + space + " got a book",
         correct: ["not"],
         incorrect: ["no"],
         explenation: explenation

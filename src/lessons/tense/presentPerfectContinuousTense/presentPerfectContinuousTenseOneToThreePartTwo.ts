@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons, capital} from '../../helper/constants';
+import {space, viewIds, id, icons, capital, getNameFemale, getNameMale} from '../../helper/constants';
 import explenation = require('./explenation');
 
 const separator = " ";
@@ -18,7 +18,7 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: [capital.names.Chris, "has", "been", "teaching at the university", "since " + capital.mounths.July],
+        correct: [getNameMale(), "has", "been", "teaching at the university", "since " + capital.mounths.July],
         explenation: explenation,
         placeholder: placeholder
     }, {
@@ -30,7 +30,7 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: "",
-        correct: ["Why has " + capital.names.Jadie, "not", "been taking her medicine", "for the last", "three days?"],
+        correct: ["Why has " + getNameFemale(), "not", "been taking her medicine", "for the last", "three days?"],
         explenation: explenation,
         placeholder: placeholder
     }, {

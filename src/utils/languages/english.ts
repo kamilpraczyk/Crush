@@ -11,12 +11,14 @@ const dictonary = {
     LOGEDIN_AS: 'Loged in as: ',
     LAST_LOGIN: 'Last login: ',
     LOG_OUT: 'Sign out',
-    DONATE : 'Please Buy Me a Coffee',
+    DONATE: 'Please Buy Me a Coffee',
 
     GRATULATIONS_TITLE: 'You answered all questions',// well done
     GRATULATIONS_TEXT: 'Your score is: ',
     GRATULATIONS_BUTTON: 'Continue',
     GRATULATIONS_SAVE_BUTTON: 'Save and Continue',
+
+    GO_TEST: 'Test Yourself',
 
     SUBSCRIBING_EXPLANATION: 'Subscription will expire after given period, and will not be automatically extended.',
 

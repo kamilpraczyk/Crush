@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons, capital } from '../../helper/constants';
+import {space, viewIds, id, icons, capital, getNameMale } from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [viewIds.radio];
 const title = "Reflexive Pronouns: myself, yourself, herself...";
@@ -8,7 +8,7 @@ const title = "Reflexive Pronouns: myself, yourself, herself...";
 const lessons = [
     {
         id: id(common), title: title,
-        name: capital.names.Jack + ", you should not blame " + space + " for the accident.",
+        name: getNameMale() + ", you should not blame " + space + " for the accident.",
         correct: ["yourself"],
         incorrect: ["herself", "yourselves"],
         explenation: explenation

@@ -6,3 +6,4 @@ cordova run browser
 #Build android
 cordova build android --release
 
+

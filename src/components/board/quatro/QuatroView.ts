@@ -50,6 +50,7 @@ function getContentLine(state: BoardResult, list: any[]) {
                 isExpand: true,
                 isFail: isFail,
                 isSuccess: isSuccess,
+                isGuess: true,
                 backUrl: word ? null : name,
                 isTime: isId.isDigitalTime(state.lessonData.id),
                 onClick: function () {

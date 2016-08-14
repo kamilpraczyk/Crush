@@ -88,6 +88,7 @@ function getBody(state: BoardResult) {
                 isExpand: true,
                 isFail: isFail,
                 isSuccess: isSuccess,
+                isGuess: true,
                 isExpandWidth: true,
                 //isTime: isId.isDigitalTime(state.lessonData.id),
                 onClick: function () {

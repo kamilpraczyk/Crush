@@ -78,6 +78,17 @@ export function getRest(group: any, exclude: any): string[] {
     return _.chain(group).values().without(exclude).value();
 }
 
+const namesMale = ['Bob', 'Peter', 'Jason', 'John', 'Jack', 'Chris', 'Mike', 'Mark', 'Sam', 'Rob', 'Tom', 'Wilson', 'Thomas'];
+const namesFemale = ['Jadie', 'Mary', 'Lisa', 'Maria', 'Suzan', 'Sara', 'Sally'];
+
+export function getNameMale() {
+    return _.sample(namesMale, 1)[0] as string;
+}
+export function getNameFemale() {
+    return _.sample(namesFemale, 1)[0] as string;
+}
+
+//TODO names continue 's ect.
 export const capital = {
     exeptions: {
         I: 'I',
@@ -251,13 +262,10 @@ export const capital = {
 
 //TODO - answers have different buttons from info and main button -name.
 //TODO - make something with minimalized menu button - is on the way always
-//TODO - IE11 draw fix layout 
-//TODO - IE11 settings menu fix layout
 //TODO - IE11 grammar fix layout
-// lessons 4 pictures with time clock
-//TODO - milestone - make history about acheived lessons (encurage to carry on and finish couses - or pay for more)
-//
-//TODO  when finish - next to buy me a beer - button save score, and display last score
+//TODO - IE11 - fix number wrap
+//TODO - user - pie chart with status who many done. (lessons finished - 10 / 201) (questions answered 110/1120) (progress : '10%') - if more in statisticks then better for user, motivation. 
+// lessons 4 pictures with time clock?
 // make lessons - tences vs each other
 //make lessons - sentence to =>question sentence
 

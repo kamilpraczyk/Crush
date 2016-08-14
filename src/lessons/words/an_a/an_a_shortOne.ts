@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons, capital} from '../../helper/constants';
+import {space, viewIds, id, icons, capital, getNameMale} from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [viewIds.inradio];
 const title = "'An' or 'a'?";
@@ -8,7 +8,7 @@ const title = "'An' or 'a'?";
 const lessons = [
     {
         id: id(common), title: title,
-        name: capital.names.Bob + " gave me " + space + " apple.",
+        name: getNameMale() + " gave me " + space + " apple.",
         correct: ["an"],
         incorrect: ["a"],
         explenation: explenation

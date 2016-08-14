@@ -24,6 +24,7 @@ const refsId = {
 
 function getState() {
     return {
+        ids: SettingsRootStore.getIds(),
         rootList: SettingsRootStore.getRootList(),
         isMinimalized: SettingsRootStore.isMinimalized(),
         isMenuMinimalized: SettingsRootStore.isMenuMinimalized() && css.isMobile()
@@ -44,7 +45,7 @@ function getPanel(state: State) {
 function getMenu(state: State) {
 
     function getItem(item: any, id: string) {
-        const isMenuMinimalized = state.isMenuMinimalized ;
+        const isMenuMinimalized = state.isMenuMinimalized;
         return ButtonView({
             name: isMenuMinimalized ? '' : item.name,
             icon: item.icon,
@@ -54,7 +55,8 @@ function getMenu(state: State) {
                     id: id
                 });
             },
-            isQuickClick: id === 'close' ? false : true,
+            isQuickClick: true,
+            isTransparent: id === state.ids.close ? true : false,
             isExpandWidth: true,
             isExpand: isMenuMinimalized ? false : true,
             isActive: item.active,
@@ -152,7 +154,6 @@ class SettingRootView extends React.Component<{}, State> {
     }
 
     _handleScroll(e: Event) {
-
         const b = elementScroll.getBoundingClientRect();
         if (b.top === elementScroll.scrollTop && this.isOnEdge === false) {
             this.isOnEdge = true;

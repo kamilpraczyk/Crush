@@ -1,6 +1,7 @@
 /// <reference path="../typings/tsd.d.ts" />
 import {BoardFace} from '../src/lessons/interface';
-import {lessons} from '../src/lessons/lessons';
+import modelLessons = require('../src/lessons/lessons');
+const {lessons, activeStartup} = modelLessons;
 import _ = require("underscore");
 
 

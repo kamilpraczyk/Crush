@@ -54,6 +54,7 @@ function getContentLine(state: BoardResult, name: string) {
             isExpand: true,
             isFail: isFail,
             isSuccess: isSuccess,
+            isGuess: true,
             isExpandWidth: true,
             onClick: function () {
                 AppDispatcher.handleViewAction({

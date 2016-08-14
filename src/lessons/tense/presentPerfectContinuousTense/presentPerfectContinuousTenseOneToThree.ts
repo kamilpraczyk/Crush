@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons, capital } from '../../helper/constants';
+import {space, viewIds, id, icons, capital, getNameFemale, getNameMale } from '../../helper/constants';
 import explenation = require('./explenation');
 
 const separator = " ";
@@ -12,7 +12,7 @@ const lessons = [
     {
         id: id(common), title: title,
         name: separator, postfix: "",
-        correct: ["They", "have", "been", "playing cricket", "since 5p.m."], 
+        correct: ["They", "have", "been", "playing cricket", "since 5p.m."],
         explenation: explenation,
         placeholder: placeholder
     }, {
@@ -30,13 +30,13 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: [capital.names.Tom, "has", "not ", "been practicing", "his " + capital.nationalityNoun.English],
+        correct: [getNameMale(), "has", "not ", "been practicing", "his " + capital.nationalityNoun.English],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: [capital.names.Lisa, "has", "been feeling", "a little", "depressed"],
+        correct: [getNameFemale(), "has", "been feeling", "a little", "depressed"],
         placeholder: placeholder
     }, {
         id: id(common), title: title,
@@ -65,13 +65,13 @@ const lessons = [
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["Recently, " + capital.names.Mark, "has", "been", "doing", "the work"],
+        correct: ["Recently, " + getNameMale(), "has", "been", "doing", "the work"],
         explenation: explenation,
         placeholder: placeholder
     }, {
         id: id(common), title: title,
         name: separator, postfix: postfix,
-        correct: ["Recently, the work", "has", "been", "done", "by " + capital.names.Mark],
+        correct: ["Recently, the work", "has", "been", "done", "by " + getNameMale()],
         explenation: explenation,
         placeholder: placeholder
     }, {

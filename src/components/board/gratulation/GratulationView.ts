@@ -47,7 +47,7 @@ function render() {
     };
 
     function getButtonSaveAndContinue() {
-        if (!state.home.user.email) {
+        if (!state.home.user.email || state.points.score === 0) {
             return null;
         }
         return ButtonView({

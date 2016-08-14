@@ -28,7 +28,8 @@ function render() {
             isFail: state.points.isCurrentFail,
             isSuccess: state.points.isCurrentSuccess,
             isExpand: true,
-            //isQuickClick: true,
+            isTransparent: true,
+            isQuickClick: true,
             onClick: () => {
                 AppDispatcher.handleViewAction({
                     actionType: Constants.MAXIMALIZE_SETTINGS

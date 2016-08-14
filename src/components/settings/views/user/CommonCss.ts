@@ -23,13 +23,14 @@ const container: CSSProperties = {
     width : 'calc(100% - 4vmax)'
 }
 const text: CSSProperties = {
-    color: css.font.color.dark,
+    color: css.font.color.normal,
     fontSize: css.font.fontSize.XL2,
     paddingBottom: '2vh',
     justifyContent: 'flex-start',
 }
 const box: CSSProperties = {
     display: 'flex',
+    width : '100%',
     maxWidth: '100%',
     paddingTop: '2vh',
     paddingBottom: '1vh',
@@ -51,7 +52,7 @@ const boxLine: CSSProperties = {
     justifyContent: 'space-between'
 }
 const boxLabel: CSSProperties = {
-    color: css.font.color.dark,
+    color: css.font.color.normal,
     flexGrow: 1,
     alignItems: 'flex-start',
     display: 'flex',
@@ -67,7 +68,7 @@ const boxInput: CSSProperties = {
     border: '1px solid #e6e6e6',
     borderRadius: '4px',
     backgroundColor: '#3CBC8D',
-    color: css.font.color.dark,
+    color: css.font.color.normal,
     marginBottom: '1vh',
     paddingLeft: '1vw',
     paddingRight: '1vw',

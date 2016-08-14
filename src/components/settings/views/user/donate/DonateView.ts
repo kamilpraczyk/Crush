@@ -26,7 +26,8 @@ function getPayPal() {
             style: {
                 display: 'block',
                 color: 'white',
-                backgroundColor: css.button.background.normal,
+                backgroundColor: css.button.backgroundColor.normal,
+                backgroundImage: css.button.backgroundImage.normal,
                 borderRadius: css.button.radius.borderRadius,
                 border: css.button.border.normal,
                 paddingBottom: '2vh',

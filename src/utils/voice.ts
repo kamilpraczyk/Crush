@@ -8,9 +8,8 @@ const read = function (value: string) {
     value = value.replace(space, '');
     value = value.replace('_', '');
 
-    var utterance = new (<any>window).SpeechSynthesisUtterance(value);
-    var voices = (<any>window).speechSynthesis.getVoices();
-//TODO more options show to user
+    const utterance = new (<any>window).SpeechSynthesisUtterance(value);
+    const voices = (<any>window).speechSynthesis.getVoices();
     //Google UK English Male
     //https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance
     utterance.voice = voices.filter(function (voice: any) { return voice.name == "Google UK English Male"; })[0];

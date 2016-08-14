@@ -92,11 +92,19 @@ class SettingRootStore extends BaseStore {
         const action = payload.action;
 
         switch (action.actionType) {
+            case Constants.GREETINGS_CONTINUE:
+                onClickRootItem(_ids.lessons);
+                this.emitChange();
+                break;
             case Constants.SWITCH_ACTION:
                 this.waitFor([LessonStore.dispatcherIndex, BoardStore.dispatcherIndex], () => {
                     onClickRootItem(_ids.explenation);
                     this.emitChange();
                 });
+                break;
+            case Constants.GO_TEST:
+                onClickRootItem(_ids.close);
+                this.emitChange();
                 break;
             case Constants.ROOT_ITEM_CLICK:
                 onClickRootItem(action.id)

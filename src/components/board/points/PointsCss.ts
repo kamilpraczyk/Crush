@@ -8,8 +8,8 @@ const panel: CSSProperties = {
     right: 0,
     display: 'flex',
     justifyContent: 'center',
-    minWidth: '10vmin',
-    minHeight: '35vmin',
+    minWidth: '2vmin',
+    minHeight: '5vmin',
     zIndex: 1,
 }
 

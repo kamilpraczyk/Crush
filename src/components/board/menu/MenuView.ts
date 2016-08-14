@@ -45,7 +45,7 @@ const nextRandom = [{
 
 function render(items?: Item[]) {
     items = items || [];
-    items = [].concat(prev, items, next, nextRandom);
+    items = [].concat(items, prev, nextRandom, next);
 
     const buttons = items.map(function (item: Item) {
         return div({

@@ -43,6 +43,7 @@ import prefixes_two = require('./words/prefixes/prefixes_two');
 //TODO offer some for free and some when registered, and rest when subscribed
 const lessons: LessonMapFace = {
     //NOTE keep short uid - they are saved to database
+
     prefixes_one: w(true, prefixes_one),
     prefixes_two: w(true, prefixes_two),
 
@@ -93,12 +94,13 @@ const lessons: LessonMapFace = {
     toBeInPresentAndPast: w(true, toBeInPresentAndPast),
 
     mineYour: w(true, mineYour),
-    myselfYourself: w(true, myselfYourself),
+    myselfYourself: w(true, myselfYourself)
 };
 
 _.mapObject(lessons, (lesson, uid) => {
     lesson.uid = uid;
 });
+
 
 function w(free: boolean, data: { title: string, lessons: BoardFaces }) {
     const l: LessonFace = {
@@ -110,7 +112,9 @@ function w(free: boolean, data: { title: string, lessons: BoardFaces }) {
     return l;
 }
 
+
 export = {
     lessons,
     activeStartup: 'animals'
 }
+

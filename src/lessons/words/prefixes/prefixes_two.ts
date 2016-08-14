@@ -97,7 +97,42 @@ const lessons = [
         name: space + "happy",
         correct: ["un"],
         incorrect: ["dis", "re", "pre"],
-        explenation: explenation  //TODO make 7 more
+        explenation: explenation
+    }, {
+        id: id(common), title: title,
+        info: info,
+        name: space + "obey",
+        correct: ["dis"],
+        incorrect: ["un", "re", "pre"],
+        explenation: explenation
+    }, {
+        id: id(common), title: title,
+        info: info,
+        name: space + "equal",
+        correct: ["un"],
+        incorrect: ["dis", "re", "pre"],
+        explenation: explenation
+    }, {
+        id: id(common), title: title,
+        info: info,
+        name: space + "usual",
+        correct: ["un"],
+        incorrect: ["dis", "re", "pre"],
+        explenation: explenation
+    }, {
+        id: id(common), title: title,
+        info: info,
+        name: space + "real",
+        correct: ["un"],
+        incorrect: ["dis", "re", "pre"],
+        explenation: explenation
+    }, {
+        id: id(common), title: title,
+        info: info,
+        name: space + "card",
+        correct: ["dis"],
+        incorrect: ["un", "re", "pre"],
+        explenation: explenation//TODO make 1 more
     }
 ] as BoardFaces
 

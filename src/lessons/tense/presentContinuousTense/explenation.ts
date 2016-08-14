@@ -106,7 +106,7 @@ exp.push(tList({
 
 
 exp.push(tList({
-    t: ".",
+    t: " ",
     list: [
         { l: "<p>I</p> am going." },
         { l: "I am not going." },

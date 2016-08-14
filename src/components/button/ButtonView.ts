@@ -24,6 +24,8 @@ interface Props {
     isFail?: boolean,
     isTime?: boolean,
     isLoader?: boolean,
+    isGuess?: boolean,
+    isTransparent? :boolean,
     backUrl?: string
 }
 
@@ -51,11 +53,15 @@ function render(props: Props, state: State, clickHandler: () => void) {
 
     let name: any = null;
     if (props.name) {
-        name = div({
-            style: ButtonCss.getName({
-                isResponsibleCenter: props.isResponsibleCenter
-            })
-        }, props.name);
+        name =
+            div({
+                style: ButtonCss.getNameContainer()
+            },
+                div({
+                    style: ButtonCss.getName({
+                        isResponsibleCenter: props.isResponsibleCenter
+                    })
+                }, props.name));
     }
 
     const loader = props.isLoader ? LoaderView() : null;
@@ -97,6 +103,8 @@ function render(props: Props, state: State, clickHandler: () => void) {
             isFail: props.isFail,
             backUrl: props.backUrl,
             isTime: props.isTime,
+            isGuess: props.isGuess,
+            isTransparent : props.isTransparent
         }),
         onClick: clickHandler
     }, leftIcon, icon, name, numbers, loader);
@@ -118,7 +126,7 @@ class ButtonView extends React.Component<Props, State>{
         e.preventDefault();
         this.setState({ pressed: true });
         this.props.isQuickClick && this.props.onClick(this.props);
-        this.time = setTimeout(this.unpress, 250, this);
+        this.time = setTimeout(this.unpress, 200, this);
     }
 
     unpress() {

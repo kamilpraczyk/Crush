@@ -43,7 +43,6 @@ function getIconByIdLesson(id: string) {
 
 function render() {
     const state = getState();
-    console.log('state', state);
 
     const buttons = _.map(state.list, (item: LessonFace, id: string) => {
         return ButtonView({

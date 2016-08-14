@@ -31,7 +31,7 @@ const lessons = [
     }, {
         id: id(common), title: title,
         placeholder: placeholder,
-        name: '"Where are you going?" ' + space + " " + capital.names.Bob + ".",
+        name: '"Where are you going?" ' + space + " " + capital.names.Bob + ".",//TODO change to other names
         correct: ["asked"],
         incorrect: ["explained"],
         explenation: explenation

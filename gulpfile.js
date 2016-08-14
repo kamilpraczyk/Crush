@@ -122,6 +122,7 @@ gulp.task('test', function () {
         /*execute tests*/
         .pipe(mocha({
             reporter: 'progress'
-        }));
+        })
+        );
 });
 

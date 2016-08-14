@@ -29,8 +29,7 @@ const lessons = [
         correct: [a.camel],
         incorrect: getRest(a, a.camel),
         explenation: explenation
-    }/*,  //TODO uncoment
-     {
+    }, {
         id: id(common), title: title,
         name: 'Cat',
         correct: [a.cat],
@@ -84,7 +83,7 @@ const lessons = [
         correct: [a.wolf],
         incorrect: getRest(a, a.wolf),
         explenation: explenation
-    }*/
+    }
 ] as BoardFaces
 
 

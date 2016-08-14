@@ -9,6 +9,9 @@ import dictionary = require('../../utils/dictionary');
 import Promise = require("bluebird");
 import Matchers = require('../../components/settings/views/user/registering/Matchers');
 import pointsHelper = require('../board/pointsHelper');
+import AppDispatcher = require('../../dispatcher/AppDispatcher');
+import SettingsRootStore = require('../SettingsRootStore');
+
 
 const initialState = {
     login: {
@@ -36,9 +39,7 @@ const initialState = {
     },
     status: {
         process: false,
-        map: {
-            prefixes_one: 10
-        }
+        map: {}
     }
 };
 declare type State = typeof initialState;
@@ -229,31 +230,33 @@ class Store extends BaseStore {
                 break;
 
             case Constants.GREETINGS_CONTINUE:
+                this.waitFor([SettingsRootStore.dispatcherIndex], () => {
 
-                function onFinish() {
-                    state.status.process = false;
-                    pointsHelper.reset();
-                    emitChange();
-                }
-                if (action.data && state.user.email) {
-                    state.status.process = true;
-                    emitChange();
+                    function onFinish() {
+                        state.status.process = false;
+                        pointsHelper.reset();
+                        emitChange();
+                    }
+                    if (action.data && state.user.email) {
+                        state.status.process = true;
+                        emitChange();
 
-                    utils.delay(200).then(() => {
-                        return saveStatus({
-                            login: state.user.email,
-                            name: action.data.uid,
-                            value: action.data.status
-                        }).then(() => {
-                            state.status.map[action.data.uid] = action.data.status;
-                            return null;
+                        utils.delay(200).then(() => {
+                            return saveStatus({
+                                login: state.user.email,
+                                name: action.data.uid,
+                                value: action.data.status
+                            }).then(() => {
+                                state.status.map[action.data.uid] = action.data.status;
+                                return null;
+                            });
+                        }).finally(() => {
+                            onFinish();
                         });
-                    }).finally(() => {
+                    } else {
                         onFinish();
-                    });
-                } else {
-                    onFinish();
-                }
+                    }
+                });
                 break;
         }
         return true;

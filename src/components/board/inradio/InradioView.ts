@@ -70,7 +70,8 @@ function getBody(state: BoardResult) {
                 isFail: isFail,
                 isResponsibleCenter: true,
                 isSuccess: isSuccess,
-                onClick: function () {
+                isGuess: true,
+                onClick: () => {
                     AppDispatcher.handleViewAction({
                         actionType: Constants.CHOOSE_RADIO,
                         id: name
@@ -96,7 +97,7 @@ function getBody(state: BoardResult) {
                     isResponsibleCenter: true,
                     isSuccess: true,
                     name: state.text,
-                    onClick: function () {
+                    onClick: () => {
                         onRead(state.text);
                     }
                 })
@@ -107,7 +108,7 @@ function getBody(state: BoardResult) {
         if (_.first(text)) {
             firstPart = ButtonView({
                 name: _.first(text),
-                onClick: function () {
+                onClick: () => {
                     onRead(_.first(text));
                 }
             });
@@ -117,7 +118,7 @@ function getBody(state: BoardResult) {
         if (_.last(text)) {
             lastPart = ButtonView({
                 name: _.last(text),
-                onClick: function () {
+                onClick: () => {
                     onRead(_.last(text));
                 }
             })
