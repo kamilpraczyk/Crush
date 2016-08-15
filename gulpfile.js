@@ -9,8 +9,7 @@ var source = require('vinyl-source-stream');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var runSequence = require('run-sequence');
-
-
+var gulpif = require('gulp-if');
 
 var tsconfig = require('./tsconfig.json');
 var cordova = require("cordova-lib").cordova;
@@ -28,6 +27,7 @@ var config = {
     }
 };
 
+
 gulp.task('clean', function () {
     return gulp.src([config.app.path + '/']).pipe(vinylPaths(del));
 });
@@ -39,28 +39,25 @@ gulp.task('copy', function () {
 
 
 gulp.task('compile-js', function () {
+    var isProduction = process.env.NODE_ENV === 'production';
 
     return browserify({
         basedir: config.app.path,
         plugin: [["tsify", tsconfig.compilerOptions]],
-        debug: true
+        debug: !isProduction
     })
         .add(config.app.path + '/' + config.app.main)
         .plugin(tsify)
         .bundle()
         .on('error', function (e) { console.log('Browserify Error' + e) })
         .pipe(source(config.app.result))
+        .pipe(buffer())
+        .pipe(gulpif(!isProduction, sourcemaps.init({ loadMaps: true })))
+        .pipe(gulpif(isProduction, uglify()))
+        .pipe(gulpif(!isProduction, sourcemaps.write()))
         .pipe(gulp.dest(config.publicPath));
 });
 
-
-gulp.task('compress', function () {
-    return gulp.src(config.publicPath + '/*.js')
-        .pipe(sourcemaps.init())
-        .pipe(uglify())
-        //.pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest(config.publicPath));
-});
 
 
 gulp.task('toCordova', function () {
@@ -91,22 +88,7 @@ gulp.task("package", function () {
 });
 
 
-
-gulp.task("watch", function () {
-    return gulp.watch([config.codePath + '/**/*.ts', config.codePath + '/**/*.js'], { cwd: config.codePath }, ['default', 'clean']);
-})
-
-gulp.task("default", function (cb) {
-    runSequence('clean', 'copy', 'compile-js', 'toCordova', 'package', 'clean', 'watch', cb);
-});
-
-gulp.task("build", function (cb) {
-    runSequence('clean', 'copy', 'compile-js', 'compress', 'toCordova', 'package', 'clean', 'watch', cb);
-});
-
-
-
-gulp.task('test-build', function () {
+gulp.task('_test', function () {
     var mocha = require('gulp-mocha');
     var tsProject = ts.createProject('tsconfig.json');
     return gulp.src(['test/**/*.ts'])
@@ -120,8 +102,21 @@ gulp.task('test-build', function () {
         }));
 });
 
+gulp.task("watch", function () {
+    return gulp.watch([config.codePath + '/**/*.ts', config.codePath + '/**/*.js'], { cwd: config.codePath }, ['default', 'clean']);
+})
+
+gulp.task("default", function (cb) {
+    runSequence('clean', 'copy', 'compile-js', 'toCordova', 'package', 'clean', 'watch', cb);
+});
+
+gulp.task("build", function (cb) {
+    process.env.NODE_ENV = 'production';
+    runSequence('default');
+});
+
 gulp.task("test", function (cb) {
-    runSequence('clean', 'test-build', 'clean');
+    runSequence('clean', '_test', 'clean');
 });
 
 
