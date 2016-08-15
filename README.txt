@@ -7,3 +7,5 @@ cordova run browser
 cordova build android --release
 
 
+tests:
+npm install tsd -g

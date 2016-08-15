@@ -106,23 +106,22 @@ gulp.task("build", function (cb) {
 
 
 
-//Test
-var mocha = require('gulp-mocha');
-
-
-//optional - use a tsconfig file
-var tsProject = ts.createProject('./tsconfig.json');
-gulp.task('test', function () {
-    //find test code - note use of 'base'
-    return gulp.src('./test/**/*.ts', { base: '.', timeout: 19000 })
+gulp.task('test-build', function () {
+    var mocha = require('gulp-mocha');
+    var tsProject = ts.createProject('tsconfig.json');
+    return gulp.src(['test/**/*.ts'])
         /*transpile*/
-        .pipe(ts(tsProject))
+        .pipe(ts(tsProject)).js
         /*flush to disk*/
-        .pipe(gulp.dest('./test'))
+        .pipe(gulp.dest('temp/'))
         /*execute tests*/
         .pipe(mocha({
             reporter: 'progress'
-        })
-        );
+        }));
 });
+
+gulp.task("test", function (cb) {
+    runSequence('clean', 'test-build', 'clean');
+});
+
 

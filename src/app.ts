@@ -1,5 +1,5 @@
-import Home = require("./home/Home");
-import utils = require('./utils/utils');
+//import Home = require("./home/Home");
+import appf = require('./app1');
 
 function onConnected() {
     const parentElement = document.getElementById('deviceready');
@@ -15,19 +15,19 @@ function onLoaded() {
 }
 
 function onDeviceReady() {
-    utils.delay(500).then(() => {
+   /* utils.delay(500).then(() => {
         onConnected();
         utils.delay(200).then(() => {
             onLoaded();
             new Home(document.getElementById('app'));
         });
-    });
+    });*/
 }
 
 const app = {
-    initialize: function () {
+    initialize () {
         document.addEventListener('deviceready', onDeviceReady, false);
-    },
+    }
 };
 
 

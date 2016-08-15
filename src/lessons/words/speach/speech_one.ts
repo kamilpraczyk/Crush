@@ -4,7 +4,7 @@ import {space, viewIds, id, icons, capital, displayIds} from '../../helper/const
 import explenation = require('./explenation');
 const common = [viewIds.radio, displayIds.noSpace];
 const title = "Writing speech";
-const placeholder = null;
+const placeholder:string = null;
 
 const lessons = [
     { //TODO check this if is right, many mistakes in sentences

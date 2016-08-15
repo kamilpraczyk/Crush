@@ -2,19 +2,17 @@
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
+        "moduleResolution": "node",
+        "isolatedModules": false,
         "sourceMap": true,
         "declaration": false,
         "noImplicitAny": true,
         "removeComments": true,
         "noLib": false,
         "preserveConstEnums": true,
-        "suppressImplicitAnyIndexErrors": true,
-        "out": "app.js"
+        "suppressImplicitAnyIndexErrors": true
     },
     "exclude": [
         "node_modules"
-    ],
-    "files": [
-        "temp/app.ts"
     ]
 }
