@@ -7,12 +7,15 @@ import LoginView = require('./login/LoginView');
 import SubscribingView = require('./subscribing/SubscribingView');
 import InfosView = require('./infos/InfosView')
 import DonateView = require('./donate/DonateView');
+import StatisticsView = require('./statistics/StatisticsView');
+
+
 
 function render() {
-
     return div({
         style: UserCss.getPanel()
     },
+        StatisticsView(),
         LogoutView(),
         LoginView(),
         RegisteringView(),
@@ -20,7 +23,6 @@ function render() {
         InfosView(),
         DonateView()
     );
-
 }
 
 export = render;

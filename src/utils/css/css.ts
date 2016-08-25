@@ -106,6 +106,7 @@ let style = {
         color: {
             normal: 'white',
             hint: '#777',
+            merge: '#444547',
             success: '#00FF00',
             fail: '#FF0000',
             average: 'orange',

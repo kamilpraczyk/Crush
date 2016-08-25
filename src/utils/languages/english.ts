@@ -8,6 +8,12 @@ const dictonary = {
         PRACTISE: '',
     },
 
+    statistics: {
+        entriesCorrect: 'Correct',
+        entriesIncorrect: 'Incorrect',
+        entriesUndane: 'Undane'
+    },
+
     LOGEDIN_AS: 'Loged in as: ',
     LAST_LOGIN: 'Last login: ',
     LOG_OUT: 'Sign out',

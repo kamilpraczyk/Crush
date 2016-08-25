@@ -116,7 +116,7 @@ function render(props: Props, state: State, setState: (s: State) => void) {
                 CommonCss.makeBoxLine(dictionary.PASSWORD, getPassword(props, state, setState)),
                 CommonCss.makeBoxLine(dictionary.RETYPE_PASSWORD, getRetypePassword(props, state, setState))
             ),
-            div({ style: CommonCss.getBoxSplit() },
+            div({ style: CommonCss.getBoxLineRight() },
                 getButtonSubmit(props, state, setState)
             )
         );

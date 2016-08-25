@@ -20,7 +20,7 @@ const container: CSSProperties = {
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    width : 'calc(100% - 4vmax)'
+    width: 'calc(100% - 4vmax)'
 }
 const text: CSSProperties = {
     color: css.font.color.normal,
@@ -30,11 +30,11 @@ const text: CSSProperties = {
 }
 const box: CSSProperties = {
     display: 'flex',
-    width : '100%',
+    width: '100%',
     maxWidth: '100%',
     paddingTop: '2vh',
     paddingBottom: '1vh',
-    flexDirection : 'column',
+    flexDirection: 'column',
 }
 const boxSplit: CSSProperties = {
     display: 'flex',
@@ -42,22 +42,21 @@ const boxSplit: CSSProperties = {
     maxWidth: '100%',
     paddingLeft: '1vw',
     paddingRight: '1vw',
-    flexDirection: 'column',
-    justifyContent: 'flex-end'
+    flexFlow: 'row wrap',
+    justifyContent: 'flex-start'
 }
 const boxLine: CSSProperties = {
     display: 'flex',
     maxWidth: '100%',
+    width: '100%',
     flexFlow: 'row wrap',
     justifyContent: 'space-between'
 }
 const boxLabel: CSSProperties = {
     color: css.font.color.normal,
-    flexGrow: 1,
     alignItems: 'flex-start',
     display: 'flex',
     paddingRight: '1vw',
-    minWidth: '170px',
     maxWidth: '100%'
 }
 const boxInput: CSSProperties = {
@@ -81,25 +80,28 @@ const boxInput: CSSProperties = {
 
 export = utils.union(css, {
     getPanel() {
-        return panel;
+        return css.get(panel);
     },
     getText() {
-        return text;
+        return css.get(text);
     },
     getContainer() {
-        return container;
+        return css.get(container);
     },
     getBox() {
-        return box;
+        return css.get(box);
     },
     getBoxSplit() {
-        return boxSplit;
+        return css.get(boxSplit);
     },
     getBoxLine() {
-        return boxLine;
+        return css.get(boxLine);
+    },
+    getBoxLineRight() {
+        return css.get(boxLine, { justifyContent: 'flex-end' });
     },
     getBoxLabel() {
-        return boxLabel;
+        return css.get(boxLabel);
     },
     getBoxInput() {
         return css.get(boxInput);

@@ -84,11 +84,13 @@ function render(props: Props, state: State, setState: SetState) {
             style: CommonCss.getBox()
         },
             div({ style: CommonCss.getBoxSplit() },
-                CommonCss.makeBoxLine(dictionary.EMAIL, getEmail(props, state, setState)),
-                CommonCss.makeBoxLine(dictionary.PASSWORD, getPassword(props, state, setState))
-            ),
-            div({ style: CommonCss.getBoxSplit() },
-                getButtonSubmit(props, state, setState))
+                div({ style: CommonCss.getBoxLine() },
+                    CommonCss.makeBoxLine(dictionary.EMAIL, getEmail(props, state, setState)),
+                    CommonCss.makeBoxLine(dictionary.PASSWORD, getPassword(props, state, setState))
+                ),
+                div({ style: CommonCss.getBoxLineRight() },
+                    getButtonSubmit(props, state, setState))
+            )
         );
     }
 

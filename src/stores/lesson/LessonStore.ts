@@ -27,8 +27,8 @@ class LessonStore extends BaseStore {
         return _lessons;
     }
 
-    getItem(id: string): LessonFace {
-        return _lessons[id]
+    getItem(uid: string): LessonFace {
+        return _lessons[uid];
     }
 
     getLessonName() {

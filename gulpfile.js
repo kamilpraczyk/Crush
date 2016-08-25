@@ -37,7 +37,6 @@ gulp.task('copy', function () {
     return gulp.src([config.codePath + '/**/*']).pipe(gulp.dest(config.app.path));
 });
 
-
 gulp.task('compile-js', function () {
     var isProduction = process.env.NODE_ENV === 'production';
 
@@ -81,12 +80,18 @@ gulp.task("package", function () {
 
     });
 
-
     //   "options": ["BILLING_KEY='MIIB...AQAB'"]
     //       ]
     //    }
 });
 
+gulp.task('_compileSource', function () {
+    var mocha = require('gulp-mocha');
+    var tsProject = ts.createProject('tsconfig.json');
+    return gulp.src(['src/**/*.ts'])
+        .pipe(ts(tsProject)).js
+        .pipe(gulp.dest('temp/src'))
+});
 
 gulp.task('_test', function () {
     var mocha = require('gulp-mocha');
@@ -95,19 +100,20 @@ gulp.task('_test', function () {
         /*transpile*/
         .pipe(ts(tsProject)).js
         /*flush to disk*/
-        .pipe(gulp.dest('temp/'))
+        .pipe(gulp.dest('temp/test'))
         /*execute tests*/
         .pipe(mocha({
             reporter: 'progress'
         }));
 });
 
+
 gulp.task("watch", function () {
     return gulp.watch([config.codePath + '/**/*.ts', config.codePath + '/**/*.js'], { cwd: config.codePath }, ['default', 'clean']);
 })
 
 gulp.task("default", function (cb) {
-    runSequence('clean', 'copy', 'compile-js', 'toCordova', 'package', 'clean', 'watch', cb);
+    runSequence('clean', 'copy', 'compile-js', 'toCordova', 'package', 'watch', cb);
 });
 
 gulp.task("build", function (cb) {
@@ -116,7 +122,7 @@ gulp.task("build", function (cb) {
 });
 
 gulp.task("test", function (cb) {
-    runSequence('clean', '_test', 'clean');
+    runSequence('clean', '_compileSource', '_test');
 });
 
 

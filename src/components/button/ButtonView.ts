@@ -25,7 +25,7 @@ interface Props {
     isTime?: boolean,
     isLoader?: boolean,
     isGuess?: boolean,
-    isTransparent? :boolean,
+    isTransparent?: boolean,
     backUrl?: string
 }
 
@@ -69,7 +69,7 @@ function render(props: Props, state: State, clickHandler: () => void) {
     if (props.numbers) {
         let numbersStatus: any = null;
         let separator: any = null;
-        if (props.numbersStatus) {
+        if (_.isNumber(props.numbersStatus)) {
             numbersStatus = div({
                 style: ButtonCss.getNumbersStatus(props.numbersStatus, props.numbers)
             }, props.numbersStatus);
@@ -83,9 +83,6 @@ function render(props: Props, state: State, clickHandler: () => void) {
             separator,
             div({}, props.numbers)
         );
-
-
-
     }
 
     return button({
@@ -104,7 +101,7 @@ function render(props: Props, state: State, clickHandler: () => void) {
             backUrl: props.backUrl,
             isTime: props.isTime,
             isGuess: props.isGuess,
-            isTransparent : props.isTransparent
+            isTransparent: props.isTransparent
         }),
         onClick: clickHandler
     }, leftIcon, icon, name, numbers, loader);

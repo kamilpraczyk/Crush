@@ -39,10 +39,12 @@ import spellingVerbsIngTwo = require('./words/ing/spellingVerbsIngTwo');
 import spellingVerbsIngThree = require('./words/ing/spellingVerbsIngThree');
 import prefixes_one = require('./words/prefixes/prefixes_one');
 import prefixes_two = require('./words/prefixes/prefixes_two');
-
+import verbEndings = require('./verb/endings/verbEndings');
 //TODO offer some for free and some when registered, and rest when subscribed
 const lessons: LessonMapFace = {
     //NOTE keep short uid - they are saved to database
+
+    verbEndings: w(true, verbEndings),
 
     prefixes_one: w(true, prefixes_one),
     prefixes_two: w(true, prefixes_two),
@@ -97,10 +99,11 @@ const lessons: LessonMapFace = {
     myselfYourself: w(true, myselfYourself)
 };
 
+let lessonsEntriesLength = 0;
 _.mapObject(lessons, (lesson, uid) => {
     lesson.uid = uid;
+    lessonsEntriesLength += lesson.lessons.length;
 });
-
 
 function w(free: boolean, data: { title: string, lessons: BoardFaces }) {
     const l: LessonFace = {
@@ -112,9 +115,9 @@ function w(free: boolean, data: { title: string, lessons: BoardFaces }) {
     return l;
 }
 
-
 export = {
     lessons,
-    activeStartup: 'animals'
+    lessonsEntriesLength,
+    activeStartup: 'verbEndings',
 }
 

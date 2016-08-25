@@ -39,7 +39,10 @@ const initialState = {
     },
     status: {
         process: false,
-        map: {}
+        map: {},
+        entriesCorrect: 0,
+        entriesIncorrect: 0,//TODO
+
     }
 };
 declare type State = typeof initialState;
@@ -144,10 +147,23 @@ function readStatus(o: { login: string }) {
             });
             state.status.map = _.extend(state.status.map, map);
         }
+        updateStatus();
     }).catch((e: Error) => {
         console.error(e);
     });
 };
+
+function updateStatus(uid?: string, nr?: number) {
+    if (uid && _.isNumber(nr)) { state.status.map[uid] = nr };
+    state.status.entriesCorrect = 0;
+    state.status.entriesIncorrect = 0;
+    _.mapObject(state.status.map, (nr, uid) => {
+        state.status.entriesCorrect += nr;
+        console.log(uid, nr);
+        state.status.entriesIncorrect += (LessonStore.getItem(uid).lessons.length - nr);
+    });
+}
+
 
 class Store extends BaseStore {
 
@@ -247,7 +263,7 @@ class Store extends BaseStore {
                                 name: action.data.uid,
                                 value: action.data.status
                             }).then(() => {
-                                state.status.map[action.data.uid] = action.data.status;
+                                updateStatus(action.data.uid, action.data.status);
                                 return null;
                             });
                         }).finally(() => {
