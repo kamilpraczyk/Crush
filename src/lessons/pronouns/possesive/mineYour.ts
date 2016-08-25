@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons, capital } from '../../helper/constants';
+import {space, viewIds, id, icons, capital, getPossessiveNameFemale, getPossessiveNameMale, getSurname } from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [viewIds.radio];
 const title = 'Possessive Pronouns: mine, yours, hers...';
@@ -38,13 +38,13 @@ const lessons = [
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: "This pen is not " + space + ", it's " + capital.names.Robs,
+        name: "This pen is not " + space + ", it's " + getPossessiveNameMale(),
         correct: ["mine"],
         incorrect: ["my"],
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: capital.names.Kates + " father is very rich. Some day all this will be " + space,
+        name: getPossessiveNameFemale() + " father is very rich. Some day all this will be " + space,
         correct: ["hers"],
         incorrect: ["her"],
         explenation: explenation
@@ -80,7 +80,7 @@ const lessons = [
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: "Mr " + capital.names.Thomas + " is a friend of " + space + " .",// TODO correct to surname
+        name: "Mr " + getSurname() + " is a friend of " + space + " .",// TODO correct to surname
         correct: ["ours"],
         incorrect: ["our"],
         explenation: explenation
@@ -113,6 +113,18 @@ const lessons = [
         name: "That food is ours and not " + space + ".",
         correct: ["theirs"],
         incorrect: ["their"],
+        explenation: explenation
+    }, {
+        id: id(common), title: title,
+        name: "Their mother gets along well with " + space + ".",
+        correct: ["yours"],
+        incorrect: ["your"],
+        explenation: explenation
+    }, {
+        id: id(common), title: title,
+        name: "I appreciate " + space + " understanding of the matter.",
+        correct: ["your"],
+        incorrect: ["yours"],
         explenation: explenation
     }
 ] as BoardFaces

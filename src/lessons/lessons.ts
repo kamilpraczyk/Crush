@@ -40,11 +40,15 @@ import spellingVerbsIngThree = require('./words/ing/spellingVerbsIngThree');
 import prefixes_one = require('./words/prefixes/prefixes_one');
 import prefixes_two = require('./words/prefixes/prefixes_two');
 import verbEndings = require('./verb/endings/verbEndings');
+import speech_one = require('./words/speach/speech_one');
+
+
 //TODO offer some for free and some when registered, and rest when subscribed
 const lessons: LessonMapFace = {
     //NOTE keep short uid - they are saved to database
 
     verbEndings: w(true, verbEndings),
+    speech_one: w(true, speech_one),
 
     prefixes_one: w(true, prefixes_one),
     prefixes_two: w(true, prefixes_two),

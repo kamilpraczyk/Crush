@@ -8,10 +8,10 @@ import HomeStore = require('../home/HomeStore');
 import LessonStore = require('../lesson/LessonStore');
 import storageHelper = require('./storageHelper');
 import pointsHelper = require('./pointsHelper');
-
+import {BoardFace, BoardFaces} from '../../lessons/interface';
 import {viewIds} from '../../lessons/helper/constants';
 
-let list = LessonStore.getLessons();
+let list: BoardFaces = LessonStore.getLessons();
 let _index = 0;
 
 let lastActiveLesson = null as string;
@@ -114,6 +114,11 @@ class BoardStore extends BaseStore {
                     loadLesson();
                     this.emitChange();
                 });
+                break;
+
+            case Constants.SUPPORT_SHOW_ANSWER:
+                storageHelper.toggleSupportHelp();
+                this.emitChange();
                 break;
 
             case Constants.BOARD_PREV:

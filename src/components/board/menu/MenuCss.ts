@@ -4,8 +4,7 @@ import utils = require('../../../utils/utils');
 
 const panel: CSSProperties = {
     display: 'flex',
-    width: '100%',
-    height: '100%',
+    width: '100%', //do not apply height 100% - will hide some pixels
     flexDirection: 'column',
     alignItems: 'stretch',
     alignContent: 'stretch',

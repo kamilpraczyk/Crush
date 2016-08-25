@@ -32,12 +32,12 @@ describe('Capitalized -', () => {
                 let prevWord = words[index - 1];
                 prevWord = prevWord.replace(' ', '');
                 if (!(prevWord.indexOf('?') !== -1 || prevWord.indexOf('.') !== -1 || prevWord.indexOf('!') !== -1)) {
-                    word = word.replace('.', '').replace('?', '').replace('!', '.').replace(',', '').replace(' ', '');
+                    word = word.replace('.', '').replace('?', '').replace('!', '.').replace(',', '').replace(' ', '').replace('"', '');
 
                     //combine folowing capital words
                     while ((!(words[index].indexOf('?') !== -1 || words[index].indexOf('.') !== -1 || words[index].indexOf('!') !== -1)) && /[A-Z]/.test(words[index + 1]) === true) {
                         let nextWord = words[index + 1];
-                        nextWord = nextWord.replace('.', '').replace('?', '').replace('!', '.').replace(',', '').replace(' ', '');
+                        nextWord = nextWord.replace('.', '').replace('?', '').replace('!', '.').replace(',', '').replace(' ', '').replace('"', '');
                         word = word + ' ' + nextWord;
                         index++;
                     }
@@ -47,7 +47,7 @@ describe('Capitalized -', () => {
                         const pWord = prevWord + ' ' + word;
                         if (!isCalitapizedWordAllowed(pWord)) {
                             if (capital.books.GameOfThrones.indexOf(pWord) === -1) {
-                                throw Error('Word cannot be capitalized:' + word + '+');
+                                throw Error('Word cannot be capitalized:' + word + ': words:' + words.toString());
                             }
                         }
                     }

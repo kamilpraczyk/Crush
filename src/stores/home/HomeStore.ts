@@ -41,8 +41,7 @@ const initialState = {
         process: false,
         map: {},
         entriesCorrect: 0,
-        entriesIncorrect: 0,//TODO
-
+        entriesIncorrect: 0
     }
 };
 declare type State = typeof initialState;

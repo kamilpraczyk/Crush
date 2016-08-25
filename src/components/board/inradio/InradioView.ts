@@ -3,6 +3,7 @@ import InradioCss = require('./InradioCss');
 import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
 import MenuView = require('../menu/MenuView');
+import HeaderView = require('../header/HeaderView');
 import ButtonView = require('../../button/ButtonView');
 import {BoardResult} from '../../../lessons/interface';
 import {isId, space} from '../../../lessons/helper/constants';
@@ -22,32 +23,6 @@ function getFooter() {
         style: InradioCss.layout.getFooter()
     }, MenuView());
 }
-
-function getHeader(state: BoardResult) {
-    let instructions: any = null;
-
-    if (state.lessonData.info) {
-        instructions = div({
-            onClick: InradioCss.animate(onRead, state.lessonData.info),
-            style: InradioCss.getInstructions(state.lessonData.id)
-        }, state.lessonData.info);
-
-
-        instructions = ButtonView({
-            name: state.lessonData.info,
-            onClick: function () {
-                onRead(state.lessonData.info);
-            }
-        })
-    }
-
-    return div({
-        style: InradioCss.getHeader(state.lessonData.id)
-    },
-        instructions
-    );
-}
-
 
 function getBody(state: BoardResult) {
 
@@ -135,9 +110,8 @@ function getBody(state: BoardResult) {
 
 function render(state: BoardResult) {
     return div({
-        key: 'inradioView',
         style: InradioCss.layout.getPanel()
-    }, getHeader(state), getBody(state), getFooter());
+    }, HeaderView(state), getBody(state), getFooter());
 };
 
 export = render;

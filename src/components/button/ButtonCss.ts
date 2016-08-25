@@ -165,6 +165,7 @@ interface ButtonProps {
     isGuess: boolean,
     disabled: boolean,
     isTransparent: boolean
+    isInstructions: boolean
 }
 
 export = utils.union(css, {
@@ -204,12 +205,18 @@ export = utils.union(css, {
                 backgroundColor: css.background.text.backgroundColor
             });
         }
+        if (options.isInstructions) {
+            style = css.get(style, {
+                color: 'red', //TODO
+            });
+        }
         if (options.isTransparent) {
             delete style.backgroundImage;
             style = css.get(style, {
                 backgroundColor: 'transparent'
             });
         }
+
 
 
         if (options.disabled)
@@ -252,10 +259,10 @@ export = utils.union(css, {
 
     getNumbersStatus(numb: number, length: number) {
         const percent = (numb * 100) / length;
-        let mergeCss = numbersGood;
+        let mergeCss = numbersBad;
         if (percent >= 90) {
             mergeCss = numbersGood;
-        } else if (percent >= 75) {
+        } else if (percent >= 50) {
             mergeCss = numbersSoso;
         }
         return css.get(numbersStatus, mergeCss);

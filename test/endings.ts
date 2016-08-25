@@ -14,7 +14,7 @@ describe('Endings -', () => {
             goThrough((board: BoardFace) => { expect(board.name[board.name.length - 1]).to.not.eql('-'); });
         });
         it(' " ', () => {
-            goThrough((board: BoardFace) => { expect(board.name[board.name.length - 1]).to.not.eql('"'); });
+            goThrough((board: BoardFace) => { expect(board.name[board.name.length - 1]).to.not.eql(' "'); }); //speach
         });
         it(" ' ", () => {
             goThrough((board: BoardFace) => { expect(board.name[board.name.length - 1]).to.not.eql("'"); });

@@ -3,7 +3,7 @@ import {BoardFaces} from '../../interface';
 import {space, viewIds, id, icons, capital, displayIds} from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [viewIds.inradio, displayIds.noSpace];
-const title = "Prefixes";
+const title = "Prefixes: re, dis, pre, un";
 const info = 'Make the word mean the opposite.'
 
 const lessons = [

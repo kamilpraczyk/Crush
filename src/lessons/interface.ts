@@ -13,6 +13,7 @@ export interface BoardFace {
     incorrect?: Array<string>,
     explenation?: Explenation,
     info?: string,
+    isHelp?: boolean,
     placeholder?: string  //e.g Simple Present Tense
     postfix?: string //add dot sometimes when sentence is finish
 }
@@ -24,7 +25,7 @@ export interface BoardFaces {
 }
 
 export interface LessonFace {
-    uid? : string,
+    uid?: string,
     name: string,
     active: boolean,
     free: boolean,
@@ -41,7 +42,8 @@ export interface BoardResult {
     generatedList: string[],
     text: string,
     lessonData: BoardFace,
-    isCorrect: boolean
+    isCorrect: boolean,
+    isSupportShowAnswer: boolean
 }
 
 

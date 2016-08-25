@@ -7,6 +7,7 @@ import ButtonView = require('../../button/ButtonView');
 import _ = require('underscore');
 import {BoardResult} from '../../../lessons/interface';
 import {isId}  from '../../../lessons/helper/constants';
+import HeaderView = require('../header/HeaderView');
 const {div} = React.DOM;
 
 
@@ -53,7 +54,7 @@ function getContentLine(state: BoardResult, list: any[]) {
                 isGuess: true,
                 backUrl: word ? null : name,
                 isTime: isId.isDigitalTime(state.lessonData.id),
-                onClick: function () {
+                onClick() {
                     AppDispatcher.handleViewAction({
                         actionType: Constants.CHOOSE_PICTURE,
                         id: name
@@ -69,34 +70,19 @@ function getContentLine(state: BoardResult, list: any[]) {
 
 function getBody(state: BoardResult) {
     const line1 = getContentLine(state, state.generatedList.slice(0, 2))
-
-    const line2 = div({
-        style: QuatroCss.getLineText()
-    },
-        ButtonView({
-            name: state.text,
-            isResponsibleCenter: true,
-            onClick: function () {
-                onRead(state.text)
-            }
-        })
-    );
-    const line3 = getContentLine(state, state.generatedList.slice(2, 4))
-
+    const line2 = getContentLine(state, state.generatedList.slice(2, 4))
 
     return div({
         style: QuatroCss.getBody()
     },
         div({
             style: QuatroCss.getBodyContent()
-        }, line1, line2, line3));
+        }, line1, line2));
 };
 
-function render(state: BoardResult) {
+export = function render(state: BoardResult) {
     return div({
-        key: 'quatroView',
         style: QuatroCss.getPanel()
-    }, getBody(state), getFooter());
+    }, HeaderView(state), getBody(state), getFooter());
 };
 
-export =  render

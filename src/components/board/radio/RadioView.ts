@@ -4,68 +4,18 @@ import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
 import MenuView = require('../menu/MenuView');
 import ButtonView = require('../../button/ButtonView');
-import TimeView = require('../time/TimeView');
 import {BoardResult} from '../../../lessons/interface';
 import {isId} from '../../../lessons/helper/constants';
+import HeaderView = require('../header/HeaderView');
 import _ = require('underscore');
 const {div} = React.DOM;
 
-
-function onRead(read: string) {
-    AppDispatcher.handleViewAction({
-        actionType: Constants.READ,
-        read: read
-    });
-}
 
 function getFooter() {
     return div({
         style: RadioCss.layout.getFooter()
     }, MenuView());
 }
-
-function getHeader(state: BoardResult) {
-    let instructions: any = null;
-
-    if (isId.isAnalogTime(state.lessonData.id)) {
-        const time = state.lessonData.info.split(':');
-        instructions = div({
-            onClick: RadioCss.animate(onRead, state.lessonData.info),
-            style: RadioCss.getInstructions(state.lessonData.id)
-        }, TimeView({
-            hour: parseInt(time[0]),
-            minute: parseInt(time[1])
-        }));
-    } else if (state.lessonData.info) {
-        instructions = div({
-            onClick: RadioCss.animate(onRead, state.lessonData.info),
-            style: RadioCss.getInstructions(state.lessonData.id)
-        }, state.lessonData.info);
-
-
-        instructions = ButtonView({
-            name: state.lessonData.info,
-            isTime: isId.isDigitalTime(state.lessonData.id),
-            onClick: function () {
-                onRead(state.lessonData.info);
-            }
-        })
-    }
-
-
-    return div({
-        style: RadioCss.getHeader(state.lessonData.id)
-    },
-        instructions,
-        ButtonView({
-            name: state.text,
-            onClick: function () {
-                onRead(state.text);
-            }
-        })
-    );
-}
-
 
 function getBody(state: BoardResult) {
 
@@ -91,7 +41,7 @@ function getBody(state: BoardResult) {
                 isGuess: true,
                 isExpandWidth: true,
                 //isTime: isId.isDigitalTime(state.lessonData.id),
-                onClick: function () {
+                onClick() {
                     AppDispatcher.handleViewAction({
                         actionType: Constants.CHOOSE_RADIO,
                         id: name
@@ -101,23 +51,24 @@ function getBody(state: BoardResult) {
         });
     }
 
-    const list = div({
-        style: RadioCss.getList()
-    }, getItems(state));
 
     return div({
         style: RadioCss.getBody()
-    }, div({
-        style: RadioCss.getBodyContent()
-    }, list));
+    },
+        div({
+            style: RadioCss.getBodyContent()
+        },
+            div({
+                style: RadioCss.getList()
+            }, getItems(state))
+        )
+    );
 };
 
 
-function render(state: BoardResult) {
+export = function render(state: BoardResult) {
     return div({
-        key: 'radioView',
         style: RadioCss.layout.getPanel()
-    }, getHeader(state), getBody(state), getFooter());
+    }, HeaderView(state), getBody(state), getFooter());
 };
 
-export = render;

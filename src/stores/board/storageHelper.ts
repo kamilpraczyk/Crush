@@ -11,6 +11,7 @@ let _selectedAnswer: string = null;
 let _selectedAnswerQueue: any[] = [];
 let _board: BoardFace = null;
 let wasLastCorrect: boolean = null;
+let isSupportShowAnswer: boolean = null; //null do not show it
 
 
 function generate(board: BoardFace) {
@@ -19,6 +20,7 @@ function generate(board: BoardFace) {
         _selectedAnswer = null;
         _selectedAnswerQueue = [];
         wasLastCorrect = false;
+        isSupportShowAnswer = board.isHelp ? false : null;
         const incorrent = _.sample(board.incorrect, 3) as string[];
         _board = board;
         generatedList = [].concat(board.correct).concat(incorrent) as string[];
@@ -154,13 +156,20 @@ function getState(board: BoardFace) {
         generatedList: generatedList,
         text: name,
         lessonData: board,
-        isCorrect: wasLastCorrect
+        isCorrect: wasLastCorrect,
+        isSupportShowAnswer: isSupportShowAnswer
     }
     return boardResult;
+}
+
+
+function toggleSupportHelp() {
+    isSupportShowAnswer = !isSupportShowAnswer;
 }
 
 export = {
     reset,
     setPressedAnswer,
-    getState
+    getState,
+    toggleSupportHelp
 }

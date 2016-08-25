@@ -10,10 +10,6 @@ const line: CSSProperties = {
     flexGrow: 1
 }
 
-const lineText: CSSProperties = {
-    display: 'flex',
-    justifyContent: 'center',
-}
 
 const itemWraper: CSSProperties = {
     paddingTop: '2vh',
@@ -36,10 +32,6 @@ export = utils.union(css, {
 
     getLine() {
         return css.get(line);
-    },
-
-    getLineText() {
-        return lineText;
     },
 
     getItemWraper() {

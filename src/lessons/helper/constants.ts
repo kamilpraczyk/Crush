@@ -38,31 +38,31 @@ export const defaultUser = {
 }
 
 export const isId = {
-    isOneTwoThree: function (id: string) {
+    isOneTwoThree(id: string) {
         return id.indexOf(viewIds.oneTwoThree) !== -1;
     },
-    isRadio: function (id: string) {
+    isRadio(id: string) {
         return id.indexOf(viewIds.radio) !== -1;
     },
-    isInradio: function (id: string) {
+    isInradio(id: string) {
         return id.indexOf(viewIds.inradio) !== -1;
     },
-    isDraw: function (id: string) {
+    isDraw(id: string) {
         return id.indexOf(viewIds.draw) !== -1;
     },
-    isFourPictures: function (id: string) {
+    isFourPictures(id: string) {
         return id.indexOf(viewIds.fourPictures) !== -1;
     },
-    isFourWords: function (id: string) {
+    isFourWords(id: string) {
         return id.indexOf(viewIds.fourWords) !== -1;
     },
-    isDigitalTime: function (id: string) {
+    isDigitalTime(id: string) {
         return id.indexOf(displayIds.digitalTime) !== -1;
     },
-    isAnalogTime: function (id: string) {
+    isAnalogTime(id: string) {
         return id.indexOf(displayIds.analogTime) !== -1;
     },
-    isNoSpace: function (id: string) {
+    isNoSpace(id: string) {
         return id.indexOf(displayIds.noSpace) !== -1;
     }
 
@@ -78,8 +78,10 @@ export function getRest(group: any, exclude: any): string[] {
     return _.chain(group).values().without(exclude).value();
 }
 
-const namesMale = ['Bob', 'Peter', 'Jason', 'John', 'Jack', 'Chris', 'Mike', 'Mark', 'Sam', 'Rob', 'Tom', 'Wilson', 'Thomas'];
+const namesMale = ['Paul', 'Bob', 'Peter', 'Jason', 'John', 'Jack', 'Chris', 'Mike', 'Mark', 'Sam', 'Rob', 'Tom'];
 const namesFemale = ['Jadie', 'Mary', 'Lisa', 'Maria', 'Suzan', 'Sara', 'Sally'];
+const possessiveNamesMale = ["Rob's"];
+const possessiveNamesFemale = ["Kate's"];
 
 export function getNameMale() {
     return _.sample(namesMale, 1)[0] as string;
@@ -87,39 +89,30 @@ export function getNameMale() {
 export function getNameFemale() {
     return _.sample(namesFemale, 1)[0] as string;
 }
+export function getPossessiveNameMale() {
+    return _.sample(possessiveNamesMale, 1)[0] as string;
+}
+export function getPossessiveNameFemale() {
+    return _.sample(possessiveNamesFemale, 1)[0] as string;
+}
+const surname = ['Wilson', 'Thomas'];
+export function getSurname() {
+    return _.sample(surname, 1)[0] as string;
+}
 
-//TODO names continue 's ect.
+
+
+let _names: any = [].concat(namesMale).concat(namesFemale).concat(possessiveNamesMale).concat(possessiveNamesFemale).concat(surname);
+_names = _.object(_names, _names);
+
 export const capital = {
     exeptions: {
         I: 'I',
         Iam: "I'm",
         Ihave: "I've"
     },
-
-    names: {
-        Bob: 'Bob',
-        Peter: 'Peter',
-        Jason: 'Jason',
-        Jadie: 'Jadie',
-        John: 'John',
-        Jack: 'Jack',
-        Chris: 'Chris',
-        Lisa: 'Lisa',
-        Mike: 'Mike',
-        Mary: 'Mary',
-        Mark: 'Mark',
-        Maria: 'Maria',
-        Suzan: 'Suzan',
-        Sara: 'Sara',
-        Sally: 'Sally',
-        Sam: 'Sam',
-        Rob: 'Rob',
-        Robs: "Rob's",
-        Tom: 'Tom',
-        Wilson: 'Wilson',
-        Kates: "Kate's",
-        Thomas: 'Thomas',
-    },
+    //for tests
+    names: _names,
 
     places: {
         Antartica: 'Antartica',
@@ -259,7 +252,7 @@ export const capital = {
     }
 
 };
-
+// TODO would be nice if track bad answers or mark them to favourite and review later?
 //TODO - answers have different buttons from info and main button -name.
 //TODO - make something with minimalized menu button - is on the way always
 //TODO - IE11 grammar fix layout

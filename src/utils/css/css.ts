@@ -61,6 +61,7 @@ let style = {
 
     get: get,
     isMobile: isMobile,
+    getSize: getSize,
 
 
     animate: function (callback: Function, object?: any) {
@@ -109,7 +110,7 @@ let style = {
             merge: '#444547',
             success: '#00FF00',
             fail: '#FF0000',
-            average: 'orange',
+            average: '#ffa500',
             ink: '#99cdff'
         }
     },
@@ -211,8 +212,8 @@ let style = {
             const style: CSSProperties = {
                 display: 'flex',
                 flexGrow: 1,
-                paddingBottom: '2vw',
-                paddingTop: '2vw',
+                paddingBottom: '2vh',
+                paddingTop: '2vh',
                 paddingLeft: '2vw',
                 paddingRight: '2vw',
                 flexDirection: 'column',

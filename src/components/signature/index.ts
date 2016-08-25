@@ -3,6 +3,7 @@ import React = require('react');
 import ReactDOM = require('react-dom');
 import Bezier from "./bezier";
 import Point = require("./point");
+import css = require('../../utils/css/css');
 
 interface SignaturePadPropsFace {
     id: string,
@@ -30,7 +31,7 @@ class SignaturePad extends React.Component<SignaturePadPropsFace, SignaturePadSt
     public penColor: any;
     public onEnd: any;
     public onBegin: any;
-    public backgroundColor: any;
+    public backgroundColor: string;
     private _canvas: any;
     private _ctx: any;
     private _isEmpty: any;
@@ -45,29 +46,27 @@ class SignaturePad extends React.Component<SignaturePadPropsFace, SignaturePadSt
     constructor(props: SignaturePadPropsFace) {
         super(props);
         this.id = props.id;
-        this.velocityFilterWeight = this.props.velocityFilterWeight || 0.7;
-        this.minWidth = this.props.minWidth || 0.5;
-        this.maxWidth = this.props.maxWidth || 2.5;
-        this.dotSize = this.props.dotSize || function () {
+        this.velocityFilterWeight = props.velocityFilterWeight || 0.7;
+        this.minWidth = props.minWidth || 0.5;
+        this.maxWidth = props.maxWidth || 2.5;
+        this.dotSize = props.dotSize || function () {
             return (this.minWidth + this.maxWidth) / 2;
         };
-        this.penColor = this.props.penColor || "black";
-        this.backgroundColor = this.props.backgroundColor || "rgba(0,0,0,0)";
-        this.onEnd = this.props.onEnd;
-        this.onBegin = this.props.onBegin;
+        this.penColor = props.penColor || "black";
+        this.backgroundColor = props.backgroundColor || "rgba(0,0,0,0)";
+        this.onEnd = props.onEnd;
+        this.onBegin = props.onBegin;
         this.clear = this.clear.bind(this);
     }
 
     componentDidMount() {
-        this._canvas = ReactDOM.findDOMNode(this.refs["cv"]),
-            this._ctx = this._canvas.getContext("2d");
-        this.clear();
+        this._canvas = ReactDOM.findDOMNode(this.refs["cv"]);
+        this._ctx = this._canvas.getContext("2d");
 
         this._handleMouseEvents();
         this._handleTouchEvents();
-        this._resizeCanvas();
-
-        this.props.onGetInterface(this.clear)
+        this.clear();
+        this.props.onGetInterface(this.clear);
     }
 
     componentWillUnmount() {
@@ -86,13 +85,14 @@ class SignaturePad extends React.Component<SignaturePadPropsFace, SignaturePadSt
         if (e) {
             e.preventDefault();
         }
-        var ctx = this._ctx,
-            canvas = this._canvas;
+        var ctx = this._ctx;
+        var canvas = this._canvas;
 
-        ctx.fillStyle = this.backgroundColor;
+        ctx.fillStyle = "rgba(0,0,0,0)";
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         this._reset();
+        this._resizeCanvas();
     }
 
     toDataURL(imageType: any, quality: any) {
@@ -120,8 +120,8 @@ class SignaturePad extends React.Component<SignaturePadPropsFace, SignaturePadSt
     }
 
     _resizeCanvas() {
-        var ctx = this._ctx,
-            canvas = this._canvas;
+        var ctx = this._ctx;
+        var canvas = this._canvas;
         // When zoomed out to less than 100%, for some very strange reason,
         // some browsers report devicePixelRatio as less than 1
         // and only part of the canvas is cleared then.
@@ -145,7 +145,7 @@ class SignaturePad extends React.Component<SignaturePadPropsFace, SignaturePadSt
         this._canvas.addEventListener("mousedown", this._handleMouseDown.bind(this));
         this._canvas.addEventListener("mousemove", this._handleMouseMove.bind(this));
         document.addEventListener("mouseup", this._handleMouseUp.bind(this));
-        window.addEventListener("resize", this._resizeCanvas.bind(this));
+        window.addEventListener("resize", this.clear.bind(this));
     };
 
     _handleTouchEvents() {
@@ -364,29 +364,22 @@ class SignaturePad extends React.Component<SignaturePadPropsFace, SignaturePadSt
     };
 
     public render() {
+        const size = css.getSize();
+
         return React.DOM.canvas({
             ref: 'cv',
             style: {
                 display: 'flex',
                 flexGrow: 1,
-                cursor: 'pointer'
+                width: size.x - 5,
+                height: size.y - 150,
+                cursor: 'pointer',
+                backgroundColor: this.props.backgroundColor
             } as CSSProperties
         })
     }
 
 }
 
-function getSize() {
-    const w = window;
-    const d = document;
-    const e = d.documentElement;
-    const g = d.getElementsByTagName('body')[0];
-    let x = w.innerWidth || e.clientWidth || g.clientWidth;
-    let y = w.innerHeight || e.clientHeight || g.clientHeight;
-    return {
-        x: x,
-        y: y - 100
-    }
-}
 
 export = React.createFactory(SignaturePad);

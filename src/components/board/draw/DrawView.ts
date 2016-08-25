@@ -7,43 +7,8 @@ import Constants = require('../../../constants/Constants');
 import {BoardResult} from '../../../lessons/interface';
 import ButtonView = require('../../button/ButtonView');
 import {isId} from '../../../lessons/helper/constants';
+import HeaderView = require('../header/HeaderView');
 const {div} = React.DOM;
-
-
-function getHeader(props: BoardResult, state: State, setState: Function) {
-
-    function getAnswerOrSupport() {
-        if (props.lessonData.correct && props.lessonData.correct.length) {
-            return ButtonView({
-                icon: state.showAnswer ? null : DrawCss.getSupportIcon(),
-                isTime: isId.isDigitalTime(props.lessonData.id),
-                isResponsibleCenter: true,
-                name: state.showAnswer ? props.lessonData.correct.join(" ") : null,
-                onClick: function () {
-                    setState({
-                        showAnswer: !state.showAnswer
-                    });
-                }
-            });
-        }
-        return null;
-    };
-
-    return div({
-        style: DrawCss.getHeader()
-    },
-        ButtonView({
-            name: props.lessonData.name,
-            onClick: function () {
-                AppDispatcher.handleViewAction({
-                    actionType: Constants.READ,
-                    read: props.lessonData.name
-                });
-            }
-        }),
-        getAnswerOrSupport()
-    );
-}
 
 
 function getFooter(onClick: Function) {
@@ -73,6 +38,7 @@ function getBody(props: BoardResult) {
         },
             Signature({
                 id: props.lessonData.id,
+                backgroundColor: DrawCss.background.text.backgroundColor,
                 onGetInterface: onGetInterfaceClear
             })
         )
@@ -84,36 +50,10 @@ function clearSignature() {
 }
 
 
-function render(props: BoardResult, state: State, setState: Function) {
+export = function render(props: BoardResult) {
     return div({
-        key: 'drawView',
         style: DrawCss.getPanel()
-    }, getHeader(props, state, setState), getBody(props), getFooter(clearSignature));
+    }, HeaderView(props), getBody(props), getFooter(clearSignature));
 }
 
 
-interface State {
-    showAnswer: boolean
-}
-
-class DrawView extends React.Component<BoardResult, State>{
-
-    constructor(props: BoardResult) {
-        super(props);
-        this.state = {
-            showAnswer: false
-        }
-    }
-
-    componentWillReceiveProps() {
-        this.setState({
-            showAnswer: false
-        });
-    }
-
-    render() {
-        return render(this.props, this.state, this.setState.bind(this))
-    }
-};
-
-export = React.createFactory(DrawView);

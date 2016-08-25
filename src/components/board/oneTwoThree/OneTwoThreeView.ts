@@ -6,6 +6,7 @@ import Constants = require('../../../constants/Constants');
 import {BoardResult} from '../../../lessons/interface';
 import MenuView = require('../menu/MenuView');
 import ButtonView = require('../../button/ButtonView');
+import HeaderView = require('../header/HeaderView');
 import _ = require('underscore');
 const {div} = React.DOM;
 
@@ -14,23 +15,6 @@ function getFooter() {
     return div({
         style: OneTwoThreeCss.getFooter()
     }, MenuView())
-}
-
-
-function getHeader(state: BoardResult) {
-    return div({
-        style: OneTwoThreeCss.getHeader(),
-    },
-        ButtonView({
-            name: state.text,
-            onClick: function () {
-                AppDispatcher.handleViewAction({
-                    actionType: Constants.READ,
-                    read: state.text
-                });
-            }
-        })
-    );
 }
 
 function getContentLine(state: BoardResult, name: string) {
@@ -86,9 +70,8 @@ function getBody(state: BoardResult) {
 
 function render(state: BoardResult) {
     return div({
-        key: 'oneTwoThreeView',
         style: OneTwoThreeCss.getPanel()
-    }, getHeader(state), getBody(state), getFooter());
+    }, HeaderView(state), getBody(state), getFooter());
 };
 
 export =  render;

@@ -20,10 +20,8 @@ const line: CSSProperties = {
 export = utils.union(css, {
 
     getPanel: css.layout.getPanel,
-    getHeader: css.layout.getHeader,
     getBody: css.layout.getBody,
     getFooter: css.layout.getFooter,
-
 
     getBodyContent() {
         return css.get(css.layout.getBodyContent(), bodyContent);

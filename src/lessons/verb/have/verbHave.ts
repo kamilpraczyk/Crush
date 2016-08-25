@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../interface';
-import {space, viewIds, id, icons, capital, getNameFemale, getNameMale } from '../../helper/constants';
+import {space, viewIds, id, icons, capital, getNameFemale, getNameMale, getSurname } from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [viewIds.radio];
 const title = "Verb: have, has";
@@ -26,7 +26,7 @@ const lessons = [
         explenation: explenation
     }, {
         id: id(common), title: title,
-        name: "Has " + capital.names.Wilson + " got any money? No, " + space + ".",
+        name: "Has " + getSurname() + " got any money? No, " + space + ".",
         correct: ["he has not"],
         incorrect: ["he have", "he has"],
         explenation: explenation

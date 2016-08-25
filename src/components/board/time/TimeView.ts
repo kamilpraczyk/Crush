@@ -3,6 +3,7 @@ import AppDispatcher = require('../../../dispatcher/AppDispatcher');
 import Constants = require('../../../constants/Constants');
 import MenuView = require('../menu/MenuView');
 import utils = require('../../../utils/utils');
+import css = require('../../../utils/css/css');
 import {BoardResult} from '../../../lessons/interface';
 import _ = require('underscore');
 const {div, canvas} = React.DOM;
@@ -83,14 +84,10 @@ function drawHand(ctx: any, pos: any, length: any, width: any) {
 }
 
 function getSize() {
-    const w = window;
-    const d = document;
-    const e = d.documentElement;
-    const g = d.getElementsByTagName('body')[0];
-    let x = w.innerWidth || e.clientWidth || g.clientWidth;
-    x = (x / 3);
-    let y = w.innerHeight || e.clientHeight || g.clientHeight;
-    y = (y / 3);
+    const s = css.getSize();
+    let x = (s.x / 3);
+    let y = (s.y / 3);
+
     let size = Math.min(x, y);
     size = Math.max(x, 100); //not smaller than 100px;
     size = Math.min(x, 150); //bigger than 150px

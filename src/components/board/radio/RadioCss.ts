@@ -5,12 +5,7 @@ import {isId} from '../../../lessons/helper/constants';
 import _ = require('underscore');
 
 
-const header: CSSProperties = {
-    marginTop: '1vh'
-}
-const headerShrink: CSSProperties = {
-    marginTop: '1vh'
-}
+
 const bodyContent: CSSProperties = {
     alignItems: 'center',
 }
@@ -27,13 +22,6 @@ const list: CSSProperties = {
 export = utils.union(css, {
 
     getPanel: css.layout.getPanel,
-    getHeader(id: string) {
-        let style = css.get(css.layout.getHeader(), header);
-        if (isId.isAnalogTime(id)) {
-            style = css.get(style, headerShrink);
-        }
-        return style;
-    },
     getBody: css.layout.getBody,
     getFooter: css.layout.getFooter,
 
@@ -46,6 +34,5 @@ export = utils.union(css, {
 
     getList() {
         return list;
-    },
-
+    }
 });
