@@ -23,6 +23,7 @@ const XL = constFont + constPoint;
 const XL2 = constFont + 0.2 + constPoint;
 const XL3 = constFont + 0.5 + constPoint;
 const XL4 = constFont + 0.8 + constPoint;
+const mega = constFont + 1.8 + constPoint;
 
 
 const get = function <CSSProperties>(a: CSSProperties, b?: CSSProperties, c?: CSSProperties, d?: CSSProperties, e?: CSSProperties): CSSProperties {
@@ -102,7 +103,8 @@ let style = {
             XL: XL,
             XL2: XL2,
             XL3: XL3,
-            XL4: XL4
+            XL4: XL4,
+            mega: mega
         },
         color: {
             normal: 'white',

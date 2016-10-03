@@ -14,7 +14,7 @@ const title: CSSProperties = {
     paddingBottom: '2vh',
     paddingLeft: '1vh',
     paddingRight: '1vh',
-    textAlign: 'center',
+    textAlign: 'left',
     fontWeight: 'bold',
     fontSize: css.font.fontSize.XL2,
     width: '100%',
@@ -39,8 +39,8 @@ const item: CSSProperties = {
     backgroundColor: 'transparent'
 }
 const itemInfo: CSSProperties = {
-    color: '#777',
-    fontSize: '0.7em',
+    color: '#999',
+    fontSize: '0.8em',
     paddingLeft: '1vh',
     paddingRight: '1vh',
     textAlign: 'left',
@@ -55,9 +55,8 @@ const wrapperItemTo: CSSProperties = {
 }
 const itemTo: CSSProperties = {
     color: css.font.color.normal,
-    display: 'flex',
-    flexBasis: 0,
-    justifyContent: 'center',
+    display: 'block',
+    textAlign: 'left',
     flexGrow: 1,
     paddingLeft: '1vh',
     paddingRight: '1vh',
@@ -71,7 +70,7 @@ const itemSep: CSSProperties = {
     color: css.font.color.normal,
     display: 'flex',
     flexBasis: 0,
-    alignItems: 'center',
+    alignItems: 'flex-start',
     paddingLeft: '2vh',
     paddingRight: '2vh',
 }

@@ -9,6 +9,7 @@ const dictonary = {
     },
 
     statistics: {
+        titleEntries : 'Lessons:',
         entriesCorrect: 'Correct',
         entriesIncorrect: 'Incorrect',
         entriesUndane: 'Undane'

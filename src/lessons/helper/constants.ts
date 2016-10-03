@@ -258,7 +258,6 @@ export const capital = {
 //TODO - IE11 grammar fix layout
 //TODO - IE11 - fix number wrap
 //TODO - user - pie chart with status who many done. (lessons finished - 10 / 201) (questions answered 110/1120) (progress : '10%') - if more in statisticks then better for user, motivation. 
-// lessons 4 pictures with time clock?
 // make lessons - tences vs each other
 //make lessons - sentence to =>question sentence
 

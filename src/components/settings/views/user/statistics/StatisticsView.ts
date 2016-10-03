@@ -30,6 +30,7 @@ function render(props: Props) {
             style: CommonCss.getBox()
         },
             div({ style: CommonCss.getBoxSplit() },
+                div({ style: CommonCss.getBoxLine() }, d.titleEntries),
                 canvas({
                     ref: pie,
                     style: StatisticsCss.getPie()
@@ -44,7 +45,7 @@ function render(props: Props) {
     }
 
     return div({
-        style: CommonCss.getPanel()
+        style: CommonCss.getPanel(!props.isVisible)
     }, div({
         style: CommonCss.getContainer()
     }, getBox()));
@@ -87,12 +88,14 @@ interface State {
 }
 
 function getProps() {
-    const status = HomeStore.getStateHome().status;
+    const home = HomeStore.getStateHome();
+    const status = home.status;
     return {
         entriesAll: lessonsEntriesLength,
         entriesUndane: lessonsEntriesLength - status.entriesCorrect - status.entriesIncorrect,
         entriesCorrect: status.entriesCorrect,
-        entriesIncorrect: status.entriesIncorrect
+        entriesIncorrect: status.entriesIncorrect,
+        isVisible: !!home.user.email
     }
 }
 const p = getProps();

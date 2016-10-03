@@ -25,7 +25,7 @@ interface Props {
     isTime?: boolean,
     isLoader?: boolean,
     isGuess?: boolean, //button for user to try to answer
-    isInstructions?: boolean, //header for instructions //TODO
+    isInstructions?: boolean, //header for instructions
     isTransparent?: boolean, // transparent button
     backUrl?: string
 }

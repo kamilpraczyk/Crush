@@ -114,7 +114,8 @@ const icon: CSSProperties = {
     paddingBottom: '2vh',
     paddingLeft: '2vw',
     paddingRight: '2vw',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    fontSize: css.font.fontSize.mega
 }
 const leftIcon: CSSProperties = {
     paddingTop: '2vh',
@@ -140,8 +141,7 @@ const numbers: CSSProperties = {
 const numbersActive: CSSProperties = {
     color: css.button.color.active
 }
-const numbersStatus: CSSProperties = {
-}
+const numbersStatus: CSSProperties = {}
 const numbersGood: CSSProperties = {
     color: css.font.color.success
 }
@@ -266,5 +266,5 @@ export = utils.union(css, {
             mergeCss = numbersSoso;
         }
         return css.get(numbersStatus, mergeCss);
-    },
+    }
 });

@@ -79,8 +79,8 @@ const boxInput: CSSProperties = {
 
 
 export = utils.union(css, {
-    getPanel() {
-        return css.get(panel);
+    getPanel(isHidden?: boolean) {
+        return css.get(panel, isHidden ? { display: 'none' } : null);
     },
     getText() {
         return css.get(text);

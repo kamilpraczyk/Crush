@@ -15,10 +15,10 @@ function render() {
     return div({
         style: UserCss.getPanel()
     },
-        StatisticsView(),
         LogoutView(),
         LoginView(),
         RegisteringView(),
+        StatisticsView(),
         SubscribingView(),
         InfosView(),
         DonateView()

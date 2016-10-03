@@ -7,8 +7,8 @@ exp.push(tList({
     i: ' The ending of the verb changes depending no who is doing the activity and:',
     list: [
         { l: 'whether it has already happened (past),' },
-        { l: 'is happening (present),' },
-        { l: 'now or will happen (future).' },
+        { l: 'is happening now (present),' },
+        { l: 'or will happen (future).' },
 
     ]
 }));
@@ -17,7 +17,7 @@ exp.push(tList({
     list: [
         { eq: ['PAST', 'he walk<p>ed</p>'] },
         { eq: ['PRESENT', 'he walk<p>s</p>'] },
-        { eq: ['FUTURE', 'he will be walk<p>ing</p>'] }, //TODO fix display css - p is droping line below
+        { eq: ['FUTURE', 'he will be walk<p>ing</p>'] }
     ]
 }));
 

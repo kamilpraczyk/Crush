@@ -136,14 +136,14 @@ const lessons = [
     }, {
         id: id(common), title: title,
         placeholder: placeholder,
-        name: 'She  ' + space + ' "I will meet you tonight at seven."',
+        name: 'She ' + space + ' "I will meet you tonight at seven."',
         correct: ["said"],
         incorrect: ["questioned"],
         explenation: explenation
     }, {
         id: id(common), title: title,
         placeholder: placeholder,
-        name: 'Did she  ' + space + ' "May I go?"',
+        name: 'Did she ' + space + ' "May I go?"',
         correct: ["say"],
         incorrect: ["ask"],
         explenation: explenation
