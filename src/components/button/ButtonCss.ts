@@ -201,8 +201,7 @@ export = utils.union(css, {
 
         if (options.backUrl) {
             style = css.get(style, {
-                backgroundImage: 'url(' + options.backUrl + ')',
-                backgroundColor: css.background.text.backgroundColor
+                backgroundImage: 'url(' + options.backUrl + ')'
             });
         }
         if (options.isInstructions) {
@@ -211,7 +210,6 @@ export = utils.union(css, {
             });
         }
         if (options.isTransparent) {
-            delete style.backgroundImage;
             style = css.get(style, {
                 backgroundColor: 'transparent'
             });
@@ -225,32 +223,20 @@ export = utils.union(css, {
         return style;
     },
 
-    getName(options: { isResponsibleCenter: boolean }) {
-        let style = name;
-        if (options.isResponsibleCenter) {
-            style = css.get(style, isResponsibleCenter);
-        }
-        return style;
+    getName(o: { isResponsibleCenter: boolean }) {
+        return css.get(name, o.isResponsibleCenter ? isResponsibleCenter : null);
     },
 
     getNameContainer() {
         return nameContainer;
     },
 
-    getIcon(options: { isResponsibleCenter: boolean }) {
-        let style = icon;
-        if (options.isResponsibleCenter) {
-            style = css.get(style, isResponsibleCenter);
-        }
-        return style;
+    getIcon(o: { isResponsibleCenter: boolean }) {
+        return css.get(icon, o.isResponsibleCenter ? isResponsibleCenter : null);
     },
 
     getLeftIcon(isActive: boolean) {
-        let style = leftIcon;
-        if (isActive) {
-            style = css.get(style, leftIconActive);
-        }
-        return style;
+        return css.get(leftIcon, isActive ? leftIconActive : null);
     },
 
     getNumbers(isActive: boolean) {

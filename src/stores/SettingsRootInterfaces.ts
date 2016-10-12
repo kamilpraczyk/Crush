@@ -1,10 +1,11 @@
 /// <reference path="../../typings/tsd.d.ts" />
 
 export interface RootFace {
-    name?: string,
+    id: string,
+    name: string,
     active: boolean,
     disable: boolean,
-    icon? : string
+    backUrl: string
 }
 
 export interface RootFaces {

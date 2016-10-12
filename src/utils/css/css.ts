@@ -64,17 +64,6 @@ let style = {
     isMobile: isMobile,
     getSize: getSize,
 
-
-    animate: function (callback: Function, object?: any) {
-        if (callback) {
-            return function (e: any) {
-                var call = object ? _.partial(callback, object, _.extend({}, e) as any) : callback;
-                call();
-            };
-        }
-        return null;
-    },
-
     cursor: {
         normal: cursorDefault,
         pointer: cursorPointer
@@ -87,11 +76,19 @@ let style = {
         success: 'moon-thumbs-up',
         fail: 'moon-thumbs-up2',
         menu: 'moon-menu2',
-        help: 'moon-support',
-        user: 'moon-user2',
-        lessons: 'moon-drawer3',
-        grammar: 'moon-file',
+        help: 'moon-support'
     },
+
+    backUrl: {
+        user: 'img/icons/About-me-icon.png',
+        lessons: 'img/icons/My-blog-icon.png',
+        grammar: 'img/icons/Freelance-icon.png',
+        menu: 'img/icons/Hire-me-icon.png',
+        random: 'img/icons/button-round-random-icon.png',
+        left: 'img/icons/button-arrow-left-icon.png',
+        right: 'img/icons/button-arrow-right-icon.png'
+    },
+
 
     font: {
         fontSize: {

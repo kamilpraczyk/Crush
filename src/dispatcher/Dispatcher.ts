@@ -31,32 +31,32 @@ function dispatch(payload: Object) {
     // First create array of promises for callbacks to reference.
     var resolves = [] as any[];
     var rejects = [] as any[];
-    _promises = _callbacks.map(function(_, i) {
-        return new Promise(function(resolve: any, reject: any) {
+    _promises = _callbacks.map(function (_, i) {
+        return new Promise(function (resolve: any, reject: any) {
             resolves[i] = resolve;
             rejects[i] = reject;
         });
     });
     // Dispatch to callbacks and resolve/reject promises.
-    _callbacks.forEach(function(callback: Function, i: any) {
+    _callbacks.forEach(function (callback: Function, i: any) {
         // Callback can return an obj, to resolve, or a promise, to chain.
         // See waitFor() for why this might be useful.
-        Promise.resolve(callback(payload)).then(function() {
+        Promise.resolve(callback(payload)).then(function () {
             resolves[i](payload);
-        }, function() {
+        }, function () {
             rejects[i](new Error('Dispatcher callback unsuccessful'));
         });
     });
     _promises = [];
 }
 
-    
+
 /**
 * @param  {array} promiseIndexes
 * @param  {function} callback
 */
 function waitFor(promiseIndexes: Array<any>, callback: Function) {
-    var selectedPromises = promiseIndexes.map(function(index) {
+    var selectedPromises = promiseIndexes.map(index => {
         return _promises[index];
     });
     return Promise.all(selectedPromises).then(callback);

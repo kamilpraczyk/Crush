@@ -5,10 +5,10 @@ import ReactDOM = require('react-dom');
 const {div} = React.DOM;
 
 interface LayoutPropsFace {
-    onComponentDidMount: Function
+    onComponentDidMount: (o: { settingsRegion: any, boardRegion: any }) => void
 }
 
-class Layout extends React.Component<LayoutPropsFace, {}>{
+class Layout extends React.Component<LayoutPropsFace, void>{
 
     constructor(props: LayoutPropsFace) {
         super(props)

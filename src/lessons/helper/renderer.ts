@@ -31,7 +31,7 @@ const cleanText = function (l: string) {
 export const tList = (o: TList) => {
     let aTitle: any = null;
     if (o.t) {
-        const onClick = css.animate(utils.voice.read, cleanText(o.t));
+        const onClick = () => utils.voice.read(cleanText(o.t));
         aTitle = button({
             style: rendererCss.title(!!onClick),
             dangerouslySetInnerHTML: {
@@ -43,7 +43,7 @@ export const tList = (o: TList) => {
 
     let aInfo: any = null;
     if (o.i) {
-        const onClick = css.animate(utils.voice.read, cleanText(o.i));
+        const onClick = () => utils.voice.read(cleanText(o.i));
         aInfo = button({
             style: rendererCss.info(!!onClick),
             dangerouslySetInnerHTML: {
@@ -54,7 +54,7 @@ export const tList = (o: TList) => {
     }
     const aList = o.list.map((item) => {
         if (item.l) {
-            const onClick = css.animate(utils.voice.read, cleanText(item.l));
+            const onClick = () => utils.voice.read(cleanText(item.l));
             return button({
                 key: _.uniqueId('_'),
                 style: rendererCss.item(!!onClick),
@@ -64,7 +64,7 @@ export const tList = (o: TList) => {
                 onClick: onClick
             });
         } else if (item.i) {
-            const onClick = css.animate(utils.voice.read, cleanText(item.i));
+            const onClick = () => utils.voice.read(cleanText(item.i));
             return button({
                 key: _.uniqueId('_'),
                 style: rendererCss.itemInfo(!!onClick),
@@ -77,7 +77,7 @@ export const tList = (o: TList) => {
             const to = item.eq || item.to || item.mute_to;
 
             const getTo = function (eq: string) {
-                const onClick = !!item.mute_to ? null : css.animate(utils.voice.read, cleanText(eq));
+                const onClick = !!item.mute_to ? null : () => utils.voice.read(cleanText(eq));
                 return button({
                     key: _.uniqueId('_'),
                     style: rendererCss.itemTo(!!onClick),

@@ -24,26 +24,30 @@ let _activeRoot = _ids.lessons;
 const _rootList: RootFaces = {
 
     [_ids.user]: {
+        id: _ids.user,
         name: dictionary.menu.USER,
-        icon: css.icons.user,
+        backUrl: css.backUrl.user,
         active: false,
         disable: false
     },
     [_ids.lessons]: {
+        id: _ids.lessons,
         name: dictionary.menu.LESSONS,
-        icon: css.icons.lessons,
+        backUrl: css.backUrl.lessons,
         active: true,
         disable: false
     },
     [_ids.explenation]: {
+        id: _ids.explenation,
         name: dictionary.menu.GRAMMAR,
-        icon: css.icons.grammar,
+        backUrl: css.backUrl.grammar,
         active: false,
         disable: false
     },
     [_ids.close]: {
+        id: _ids.close,
         name: dictionary.menu.PRACTISE,
-        icon: css.icons.menu,
+        backUrl: css.backUrl.menu,
         active: false,
         disable: false
     }

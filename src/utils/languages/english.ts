@@ -18,7 +18,7 @@ const dictonary = {
     LOGEDIN_AS: 'Loged in as: ',
     LAST_LOGIN: 'Last login: ',
     LOG_OUT: 'Sign out',
-    DONATE: 'Please Buy Me a Coffee',
+    DONATE: 'by me a Coffee',
 
     GRATULATIONS_TITLE: 'You answered all questions',// well done
     GRATULATIONS_TEXT: 'Your score is: ',

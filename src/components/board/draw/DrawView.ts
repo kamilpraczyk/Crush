@@ -11,7 +11,7 @@ import HeaderView = require('../header/HeaderView');
 const {div} = React.DOM;
 
 
-function getFooter(onClick: Function) {
+function getFooter(onClick: () => void) {
     return div({
         style: DrawCss.getFooter()
     }, MenuView(
@@ -23,8 +23,8 @@ function getFooter(onClick: Function) {
     ))
 }
 
-let signatureClear: Function = null;
-function onGetInterfaceClear(onClear: Function) {
+let signatureClear: () => void = null;
+function onGetInterfaceClear(onClear: () => void) {
     signatureClear = onClear;
 }
 

@@ -44,19 +44,19 @@ function getPanel(state: State) {
 
 function getMenu(state: State) {
 
-    function getItem(item: any, id: string) {
+    function getItem(item: RootFace) {
         const isMenuMinimalized = state.isMenuMinimalized;
         return ButtonView({
             name: isMenuMinimalized ? '' : item.name,
-            icon: item.icon,
-            onClick: () => {
+            backUrl: item.backUrl,
+            onClick() {
                 AppDispatcher.handleViewAction({
                     actionType: Constants.ROOT_ITEM_CLICK,
-                    id: id
+                    id: item.id
                 });
             },
             isQuickClick: true,
-            isTransparent: id === state.ids.close ? true : false,
+            isTransparent: item.id === state.ids.close ? true : false,
             isExpandWidth: true,
             isExpand: isMenuMinimalized ? false : true,
             isActive: item.active,
@@ -66,11 +66,11 @@ function getMenu(state: State) {
     }
 
     function getList() {
-        return _.map(state.rootList, (item: any, id: string) => {
+        return _.map(state.rootList, item => {
             return div({
-                key: id,
+                key: item.id,
                 style: SettingsRootCss.getItem(),
-            }, getItem(item, id));
+            }, getItem(item));
         });
     }
 

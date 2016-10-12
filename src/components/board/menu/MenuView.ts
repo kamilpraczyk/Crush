@@ -8,24 +8,23 @@ import ProgressView = require('./progress/ProgressView');
 const {div} = React.DOM;
 
 interface Item {
-    id: string, name: string, icon?: string, onClick: Function
+    id: string, name?: string, icon?: string, onClick: () => void
 }
 
-
-const prev = [{
+const prev: Item[] = [{
     id: 'prev',
     icon: MenuCss.icons.left,
-    onClick: function () {
+    onClick() {
         AppDispatcher.handleViewAction({
             actionType: Constants.BOARD_PREV
         })
     }
 }];
 
-const next = [{
+const next: Item[] = [{
     id: 'next',
     icon: MenuCss.icons.right,
-    onClick: function () {
+    onClick() {
         AppDispatcher.handleViewAction({
             actionType: Constants.BOARD_NEXT
         })
@@ -33,10 +32,10 @@ const next = [{
 }];
 
 
-const nextRandom = [{
+const nextRandom: Item[] = [{
     id: 'nextrandom',
     icon: MenuCss.icons.random,
-    onClick: function () {
+    onClick() {
         AppDispatcher.handleViewAction({
             actionType: Constants.BOARD_NEXT_RANDOM
         })
@@ -47,7 +46,7 @@ function render(items?: Item[]) {
     items = items || [];
     items = [].concat(items, prev, nextRandom, next);
 
-    const buttons = items.map(function (item: Item) {
+    const buttons = items.map(item => {
         return div({
             key: item.id,
             style: MenuCss.getMenuItem()

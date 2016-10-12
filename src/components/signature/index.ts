@@ -16,7 +16,7 @@ interface SignaturePadPropsFace {
     onEnd?: number,
     onBegin?: number,
     backgroundColor?: string,
-    onGetInterface: Function
+    onGetInterface: (onClear: () => void) => void
 }
 interface SignaturePadStatesFace {
     velocityFilterWeight: number

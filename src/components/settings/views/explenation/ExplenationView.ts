@@ -15,7 +15,7 @@ function render() {
 
         const title = div({
             style: ExplenationCss.getTitle(),
-            onClick: ExplenationCss.animate(utils.voice.read, state.title)
+            onClick: () => utils.voice.read(state.title)
         }, state.title);
 
         const buttonGoPractice = ButtonView({

@@ -13,7 +13,7 @@ interface Props {
     leftIcon?: string,
     numbersStatus?: number,
     numbers?: number,
-    onClick: Function,
+    onClick: (props: Props) => void,
     isQuickClick?: boolean,
     isExpand?: boolean,
     isActive?: boolean,
@@ -103,7 +103,7 @@ function render(props: Props, state: State, clickHandler: () => void) {
             isTime: props.isTime,
             isGuess: props.isGuess,
             isTransparent: props.isTransparent,
-            isInstructions : props.isInstructions
+            isInstructions: props.isInstructions
         }),
         onClick: clickHandler
     }, leftIcon, icon, name, numbers, loader);

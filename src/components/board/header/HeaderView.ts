@@ -41,7 +41,7 @@ function getHeader(state: BoardResult) {
     if (isId.isAnalogTime(state.lessonData.id)) {
         const time = state.lessonData.name.split(':');
         instructions = div({
-            onClick: HeaderCss.animate(onRead, state.lessonData.info),
+            onClick: () => onRead(state.lessonData.info),
             style: HeaderCss.getInstructions(state.lessonData.id)
         }, TimeView({
             hour: parseInt(time[0]),
