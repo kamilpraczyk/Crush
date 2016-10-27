@@ -1,6 +1,6 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 import _ = require("underscore");
-const constFont = 5.5;
+const constFont = 5.0;
 const constPoint = 'vmin'
 const borderRadius = 10;
 const borderWidth = 3;
@@ -105,7 +105,7 @@ const style = {
         color: {
             normal: 'white',
             hint: '#777',
-            merge: '#444547',
+            merge: '#555658',
             success: '#00FF00',
             fail: '#FF0000',
             ink: '#99cdff'

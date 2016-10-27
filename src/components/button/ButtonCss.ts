@@ -44,7 +44,7 @@ const isExpand: CSSProperties = {
     alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'center',
-    textAlign: 'left'
+    textAlign: 'center'
 }
 const isExpandWidth: CSSProperties = {
     width: '100%',
@@ -101,16 +101,18 @@ const name: CSSProperties = {
     wordBreak: 'break-word',
     wordWrap: 'break-word'
 }
+
 const nameNoBottom: CSSProperties = {
     paddingBottom: 0,
 }
 
 const nameContainer: CSSProperties = {
-    alignSelf: 'center',
-    alignItems: 'center',
-    display: 'flex',
-    flexFlow: 'column',
-    flexGrow: 1
+    textAlign: 'center',
+    display: 'block', //IE11 fix no flex
+    width: '100%' //IE11 fix 100%
+}
+const nameContainerIsExpand: CSSProperties = {
+    textAlign: 'center', //IE11 fix 
 }
 
 
@@ -229,8 +231,8 @@ export = utils.union(css, {
         return css.get(name, o.isResponsibleCenter ? isResponsibleCenter : null, o.isIconSet ? nameNoBottom : null);
     },
 
-    getNameContainer() {
-        return nameContainer;
+    getNameContainer(isExpand: boolean) {
+        return css.get(nameContainer, isExpand ? nameContainerIsExpand : null);
     },
 
     getIcon(o: { isResponsibleCenter: boolean }) {

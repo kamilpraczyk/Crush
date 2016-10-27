@@ -12,7 +12,8 @@ const dictonary = {
         titleEntries: 'Status:',
         entriesCorrect: 'Correct',
         entriesIncorrect: 'Incorrect',
-        entriesUndane: 'Undane'
+        entriesUndane: 'Undane',
+        lessonsFinished: 'Lessons finished:'
     },
     BACK: 'Back',
 

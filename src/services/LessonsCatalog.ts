@@ -52,6 +52,10 @@ class LessonsCatalog {
         this.map = {};
     }
 
+    resetActiveLesson() {
+        this.setActiveLesson(this.activeUid);
+    }
+
     setActiveLesson(uid: string) {
         if (this.map[uid]) {
             if (this.map[this.activeUid]) this.map[this.activeUid].active = false;

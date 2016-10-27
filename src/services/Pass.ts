@@ -38,7 +38,7 @@ const initialState = {
 
 
 declare type State = typeof initialState;
-let pass = getInitialPass();
+
 
 function getInitialPass(): State {
     return JSON.parse(JSON.stringify(initialState));
@@ -76,7 +76,7 @@ function login(o: { email: string, password: string }) {
     return catalog.serverIsPrime(o.email, utils.md5(o.password)).then(data => {
         pass.login.success = true;
         pass.login.process = false;
-        const active = (data.user.active === '1'); //TODO future ban people ?!!!? if is not active then ban it !!! ?=impoartant!!!!
+        const active = (data.user.active === '1'); //TODO future ban people
         pass.user = {
             isPrime: (!!data.isPrime) && active,
             name: data.user.name,
@@ -203,15 +203,25 @@ function saveStatus(data: { uid: string, status: number }) {
 }
 
 
+let pass = getInitialPass();
+
+class Pass {
+
+    constructor() { }
+
+    getStatus() {
+        return pass;
+    }
+}
 
 
 export {
+Pass,
 startLogin,
 login,
 logout,
 updataLastLogin,
 toogleRegister,
-pass,
 readStatus,
 saveStatus,
 startSaveStatus,

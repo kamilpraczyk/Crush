@@ -79,7 +79,7 @@ function getName(props: Props) {
     if (!props.name) return null;
 
     return div({
-        style: ButtonCss.getNameContainer()
+        style: ButtonCss.getNameContainer(props.isExpand)
     },
         div({
             style: ButtonCss.getName({

@@ -50,6 +50,19 @@ function getPercentStatus(props: Props) {
     }, status.entriesCorrectPercentage);
 }
 
+function getLessonsFinished(props: Props) {
+    const status = props.lessonsStatus.getStatus();
+    return div({
+        style: StatisticsCss.getLessonsFinished()
+    },
+        div({}, dictionary.statistics.lessonsFinished + ' '),
+        div({
+            style: StatisticsCss.getLessonsFinishedMark()
+        }, + status.finishedLessons));
+}
+
+
+
 function getLegend(text: string, colour: string) {
     return div({
         style: StatisticsCss.getBrickLine()
@@ -78,7 +91,10 @@ function getBox(props: Props) {
             getLegend(d.entriesCorrect + ' ' + status.entriesCorrect, StatisticsCss.correct),
             getLegend(d.entriesIncorrect + ' ' + status.entriesIncorrect, StatisticsCss.incorrect),
             getLegend(d.entriesUndane + ' ' + status.entriesUndane, StatisticsCss.rest)
-        )
+        ),
+        div({
+            style: CommonCss.getBoxLine()
+        }, getLessonsFinished(props))
     );
 }
 
@@ -96,9 +112,13 @@ interface State {
     region: any
 }
 
-function getProps() {
-    return getState();
-}
+const getProps = function () {
+    const s = getState();
+    return {
+        lessonsStatus: s.lessonsStatus,
+        pass: s.pass.getStatus()
+    }
+};
 const p = getProps();
 declare type Props = typeof p;
 

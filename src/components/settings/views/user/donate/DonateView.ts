@@ -52,7 +52,9 @@ function getPayPal() {
 function render() {
 
     const s = getState();
-    if (!s.pass.user.email || !s.pass.user.isPrime) {
+    const pass = s.pass.getStatus();
+    
+    if (!pass.user.email || !pass.user.isPrime) {
         return null;
     }
 

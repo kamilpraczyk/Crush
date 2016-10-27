@@ -34,12 +34,17 @@ function getStatusText(props: Props) {
     return null;
 }
 
-const p = getState();
+const getProps = function () {
+    return {
+        pass: getState().pass.getStatus()
+    }
+};
+const p = getProps();
 declare type Props = typeof p;
 
 function render() {
 
-    const props = getState();
+    const props = getProps();
 
     if (!props.pass.login.success ||
         props.pass.user.isPrime) {

@@ -254,7 +254,6 @@ export const capital = {
 };
 // TODO would be nice if track bad answers or mark them to favourite and review later?
 //TODO - answers have different buttons from info and main button -name.
-//TODO - make something with minimalized menu button - is on the way always
 //TODO - IE11 grammar fix layout
 //TODO - IE11 - fix number wrap
 //TODO - user - pie chart with status who many done. (lessons finished - 10 / 201) (questions answered 110/1120) (progress : '10%') - if more in statisticks then better for user, motivation. 

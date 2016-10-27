@@ -12,6 +12,7 @@ const {div} = React.DOM;
 
 function render() {
     const s = getState();
+    const pass = s.pass.getStatus();
 
     const buttons = _.map(s.lessonsCatalog.getMapLessons(), item => {
         return ButtonView({
@@ -21,7 +22,7 @@ function render() {
             name: item.name,
             numbersStatus: s.lessonsStatus.getStatusByUid(item.uid),
             numbers: item.lessons.length,
-            disabled: !(s.pass.user.isPrime || item.free),
+            disabled: !(pass.user.isPrime || item.free),
             onClick: () => events.loadNewLessonEvent.publish(item.uid),
             isQuickClick: false,
             isExpandWidth: true,

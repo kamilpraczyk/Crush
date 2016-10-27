@@ -107,7 +107,12 @@ interface State {
 }
 
 
-const p = getState();
+const getProps = function () {
+    return {
+        pass: getState().pass.getStatus()
+    }
+};
+const p = getProps();
 declare type Props = typeof p;
 declare type SetState = (state: State) => void;
 
@@ -122,7 +127,7 @@ class View extends React.Component<{}, State>{
     }
 
     render() {
-        const props = getState();
+        const props = getProps();
 
         if (props.pass.login.success || props.pass.register.show) {
             return null;

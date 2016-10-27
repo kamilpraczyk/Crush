@@ -132,7 +132,12 @@ function render(props: Props, state: State, setState: (s: State) => void) {
     ));
 }
 
-const p = getState();
+const getProps = function () {
+    return {
+        pass: getState().pass.getStatus()
+    }
+};
+const p = getProps();
 declare type Props = typeof p;
 
 class View extends React.Component<{}, State>{
@@ -150,7 +155,7 @@ class View extends React.Component<{}, State>{
     }
 
     render() {
-        const props = getState();
+        const props = getProps();
         if (props.pass.login.success) return null;
 
         if (props.pass.register.success) {

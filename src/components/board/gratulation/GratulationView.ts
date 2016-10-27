@@ -10,6 +10,7 @@ const {div} = React.DOM;
 
 function render() {
     const s = getState();
+    const pass = s.pass.getStatus();
 
     const points = s.lessonsCatalog.board.getPoints();
 
@@ -38,13 +39,13 @@ function render() {
     };
 
     function getButtonSaveAndContinue() {
-        if (!s.pass.user.email || points.score === 0) {
+        if (!pass.user.email || points.score === 0) {
             return null;
         }
         return ButtonView({
             name: dictionary.GRATULATIONS_SAVE_BUTTON,
             isResponsibleHeight: true,
-            isLoader: s.pass.status.process,
+            isLoader: pass.status.process,
             onClick: () => {
                 events.saveStatusBoardEvent.publish({
                     uid: points.uid,

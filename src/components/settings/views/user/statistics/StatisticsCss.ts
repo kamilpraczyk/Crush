@@ -30,6 +30,17 @@ const correctPercentage: CSSProperties = {
     display: 'flex'
 }
 
+const lessonsFinished: CSSProperties = {
+    alignItems: 'center',
+    display: 'flex',
+    flexFlow: 'row'
+}
+const lessonsFinishedMark: CSSProperties = {
+    color: css.font.color.success,
+    marginLeft: '1vw'
+}
+
+
 export = utils.union(css, {
 
     getPie() {
@@ -43,6 +54,12 @@ export = utils.union(css, {
     },
     getCorrectPercentage() {
         return css.get(correctPercentage);
+    },
+    getLessonsFinished() {
+        return css.get(lessonsFinished);
+    },
+    getLessonsFinishedMark() {
+        return css.get(lessonsFinishedMark);
     },
     correct: css.font.color.success,
     incorrect: css.font.color.fail,

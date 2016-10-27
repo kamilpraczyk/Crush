@@ -3,7 +3,7 @@ import React = require('react');
 import ReactDOM = require('react-dom');
 import components = require('../components/components');
 import {startLogin, login, updataLastLogin, toogleRegister, startRegister, sendEmailGreeting, register, logout} from '../services/Pass';
-import { pass, saveStatus, readStatus, startSubscribe, subscribe, startSaveStatus} from '../services/Pass';
+import { Pass, saveStatus, readStatus, startSubscribe, subscribe, startSaveStatus} from '../services/Pass';
 import utils = require('../utils/utils');
 import {events, renderEvent} from '../events';
 import {RootMenu, RootType} from '../services/RootMenu';
@@ -44,6 +44,7 @@ function onSaveStatusBoardEvent(data: { uid: string, status: number }) {
 
 function onCloseStatusBoardEvent() {
     rootMenu.setRootMenuTo(RootType.lessons);
+    lessonsCatalog.resetActiveLesson();
     publishRerender();
 }
 
@@ -85,7 +86,7 @@ function onLogin(o: { email: string, password: string }) {
         .then(() => login(o))
         .then(() => publishRerender())
         .then(() => updataLastLogin())
-        .then(() => readStatus({ email: pass.user.email }))
+        .then(() => readStatus({ email: pass.getStatus().user.email }))
         .then((data) => {
             if (data && data.state && data.state.length) {
                 data.state.map((item) => {
@@ -118,7 +119,7 @@ function onRegisterOnServer(o: { name: string, email: string, password: string, 
 function onSubscribeOnServer(valid_to: string) {
 
     startSubscribe(() => publishRerender())
-        .then(() => subscribe({ email: pass.user.email, valid_to: valid_to }))
+        .then(() => subscribe({ email: pass.getStatus().user.email, valid_to: valid_to }))
         .finally(() => publishRerender());
 }
 
@@ -158,6 +159,7 @@ class APIState {
 }
 
 
+const pass = new Pass();
 const lessonsCatalog = new LessonsCatalog();
 const lessonsStatus = new LessonsStatus({});
 const rootMenu = new RootMenu(RootType.lessons);
