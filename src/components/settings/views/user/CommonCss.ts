@@ -16,11 +16,12 @@ const container: CSSProperties = {
     display: 'flex',
     flexGrow: 1,
     margin: '2vmax',
+    marginRight: '1vmax',
     marginBottom: '1vmax',
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    width: 'calc(100% - 4vmax)'
+    width: 'calc(100% - 3vmax)'
 }
 const text: CSSProperties = {
     color: css.font.color.normal,
@@ -45,6 +46,10 @@ const boxSplit: CSSProperties = {
     flexFlow: 'row wrap',
     justifyContent: 'flex-start'
 }
+const boxSplitToCenter: CSSProperties = {
+    justifyContent: 'center'
+}
+
 const boxLine: CSSProperties = {
     display: 'flex',
     maxWidth: '100%',
@@ -76,7 +81,10 @@ const boxInput: CSSProperties = {
     fontSize: '0.7em',
     width: '100%'
 }
+const error: CSSProperties = {
+    color: '#ff0050'
 
+}
 
 export = utils.union(css, {
     getPanel(isHidden?: boolean) {
@@ -94,8 +102,11 @@ export = utils.union(css, {
     getBoxSplit() {
         return css.get(boxSplit);
     },
-    getBoxLine() {
-        return css.get(boxLine);
+    getBoxSplitToCenter() {
+        return css.get(boxSplit, boxSplitToCenter);
+    },
+    getBoxLine(isError?: boolean) {
+        return css.get(boxLine, isError ? error : null);
     },
     getBoxLineRight() {
         return css.get(boxLine, { justifyContent: 'flex-end' });

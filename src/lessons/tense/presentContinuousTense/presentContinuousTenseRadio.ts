@@ -1,5 +1,5 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import {BoardFaces} from '../../interface';
+import {BoardFaces} from '../../../types';
 import {empty, space, viewIds, id, icons, multi, capital, getNameMale } from '../../helper/constants';
 import explenation = require('./explenation');
 

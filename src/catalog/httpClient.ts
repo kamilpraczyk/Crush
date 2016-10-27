@@ -1,6 +1,6 @@
 /// <reference path="../../typings/tsd.d.ts" />
 import Promise = require("bluebird");
-import {TimeOutError, InvalidServerDataError, ServerRequestError}  from '../lessons/interface';
+import {TimeOutError, InvalidServerDataError, ServerRequestError}  from '../types';
 
 const timeMs = 20 * 1000;
 

@@ -1,63 +1,41 @@
 import React = require('react');
-import ReactDOM = require('react-dom');
 import BoardCss = require('./BoardCss');
-import BoardStore = require('../../stores/board/BoardStore');
 import DrawView = require('./draw/DrawView');
 import RadioView = require('./radio/RadioView');
 import InradioView = require('./inradio/InradioView');
 import QuatroView = require('./quatro/QuatroView');
 import OneTwoThreeView = require('./oneTwoThree/OneTwoThreeView');
-import PointsView = require('./points/PointsView');
 import GratulationView = require('./gratulation/GratulationView')
 
-import {viewIds} from '../../lessons/helper/constants';
+import {isId} from '../../lessons/helper/constants';
+import {getState} from '../../services';
 
 const {div} = React.DOM;
 
+function getView() {
+    const s = getState();
+    const state = s.lessonsCatalog.board.boardQuery.getState();
+    const id = s.lessonsCatalog.board.getCurrentBoard().id;
 
-function getView(): any {
+    if (isId.isDraw(id)) return DrawView(state);
+    if (isId.isFourPictures(id)) return QuatroView(state);
+    if (isId.isFourWords(id)) return QuatroView(state);
+    if (isId.isInradio(id)) return InradioView(state);
+    if (isId.isRadio(id)) return RadioView(state);
+    if (isId.isOneTwoThree(id)) return OneTwoThreeView(state);
 
-    switch (BoardStore.getSettingId()) {
-        case viewIds.draw:
-            return DrawView(BoardStore.getBoardState());
-        case viewIds.fourPictures:
-        case viewIds.fourWords:
-            return QuatroView(BoardStore.getBoardState());
-        case viewIds.radio:
-            return RadioView(BoardStore.getBoardState());
-        case viewIds.inradio:
-            return InradioView(BoardStore.getBoardState());
-        case viewIds.oneTwoThree:
-            return OneTwoThreeView(BoardStore.getBoardState());
-    }
-    console.error('GetView not recognized by id:' + BoardStore.getSettingId());
+    console.error('GetView not recognized by id:' + id);
+    return null;
 }
 
 
-class BoardView extends React.Component<{}, {}>{
+function render() {
+    return div({
+        style: BoardCss.getPanel()
+    },
+        GratulationView(),
+        getView()
+    );
+}
 
-    constructor() {
-        super();
-        this.onChange = this.onChange.bind(this);
-    }
-
-    onChange() {
-        this.setState({})
-    }
-
-    componentDidMount() {
-        BoardStore.addChangeListener(this.onChange);
-    }
-
-    componentWillUnmount() {
-        BoardStore.removeChangeListener(this.onChange);
-    }
-
-    render() {
-        return div({
-            style: BoardCss.getPanel()
-        }, GratulationView(), PointsView(), getView());
-    }
-};
-
-export =  React.createFactory(BoardView);
+export =  render;

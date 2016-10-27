@@ -147,49 +147,40 @@ body {
 	overflow: hidden;
 }
 
-.app {
+#deviceready {
     position:absolute;           
     left:0;
     top:0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-flow: column;
     height:100%;                  
-    width:100%;               
+    width:100%;  
 }
 
-.app .content{
- display:  flex;
- text-align:center;
- justify-content: center;
- flex-flow: row wrap;
-}
 
-.app .content .appLogo{
- background: url(../img/logo.png) no-repeat center top; /* 137px x 200px */
+#deviceready .appLogo{
+ background: url(../img/logo.png) no-repeat center;
  background-size: contain;
  text-align:center;  
- width:200px;     
+ height:150px;  
+ width: 150px;   
 }
 /* Landscape layout (with min-width) */
 @media screen  and (max-width:400px) {
-    .app .content .appLogo {  
+    #deviceready .appLogo {  
      width:100px;                           
     }
 }
 
 
 
-.app .content .line{
- display: flex;
- flex-flow: column;    
-}
-
 p{
 	text-decoration: none;
     display: inline;
 	vertical-align: baseline;
-	color: #99cdff
+	color: #99cdff;
 }
 
 h1 {
@@ -201,22 +192,27 @@ h1 {
     text-align:center;
 }
 
-.event {
+#deviceready .event {
     border-radius:4px;
     -webkit-border-radius:4px;
     color:white;
     font-size:12px;
-    margin:0px 30px;
-    padding:2px 0px;
+    margin:10px 30px;
+    padding:5px;
 }
 
-.event.listening {
-    background-color:#444;
+#deviceready .event.listening {
+    background-color:#68686A;;
     display:block;
 }
 
-.event.received {
+#deviceready .event.received {
     background-color:#00999D;
+    display:none;
+}
+
+#deviceready .event.error {
+    background-color:#c70000;
     display:none;
 }
 

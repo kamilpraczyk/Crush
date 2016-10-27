@@ -7,7 +7,8 @@ import {isId}  from '../../../lessons/helper/constants';
 
 const line: CSSProperties = {
     display: 'flex',
-    flexGrow: 1
+    flexGrow: 1,
+    flexFlow : 'row wrap'
 }
 
 

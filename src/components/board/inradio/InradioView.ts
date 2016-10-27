@@ -1,22 +1,15 @@
 import React = require('react');
 import InradioCss = require('./InradioCss');
-import AppDispatcher = require('../../../dispatcher/AppDispatcher');
-import Constants = require('../../../constants/Constants');
 import MenuView = require('../menu/MenuView');
 import HeaderView = require('../header/HeaderView');
 import ButtonView = require('../../button/ButtonView');
-import {BoardResult} from '../../../lessons/interface';
-import {isId, space} from '../../../lessons/helper/constants';
+import {BoardResult} from '../../../types';
+import {space} from '../../../lessons/helper/constants';
 import _ = require('underscore');
+import {events} from '../../../events';
 const {div} = React.DOM;
 
 
-function onRead(read: string) {
-    AppDispatcher.handleViewAction({
-        actionType: Constants.READ,
-        read: read
-    });
-}
 
 function getFooter() {
     return div({
@@ -46,12 +39,7 @@ function getBody(state: BoardResult) {
                 isResponsibleCenter: true,
                 isSuccess: isSuccess,
                 isGuess: true,
-                onClick: () => {
-                    AppDispatcher.handleViewAction({
-                        actionType: Constants.CHOOSE_RADIO,
-                        id: name
-                    });
-                }
+                onClick: () => events.onChooseRadio.publish(name)
             });
         });
     }
@@ -72,9 +60,7 @@ function getBody(state: BoardResult) {
                     isResponsibleCenter: true,
                     isSuccess: true,
                     name: state.text,
-                    onClick: () => {
-                        onRead(state.text);
-                    }
+                    onClick: () => events.readEvent.publish(state.text)
                 })
             ));
     } else {
@@ -83,9 +69,7 @@ function getBody(state: BoardResult) {
         if (_.first(text)) {
             firstPart = ButtonView({
                 name: _.first(text),
-                onClick: () => {
-                    onRead(_.first(text));
-                }
+                onClick: () => events.readEvent.publish(_.first(text))
             });
         }
 
@@ -93,9 +77,7 @@ function getBody(state: BoardResult) {
         if (_.last(text)) {
             lastPart = ButtonView({
                 name: _.last(text),
-                onClick: () => {
-                    onRead(_.last(text));
-                }
+                onClick: () => events.readEvent.publish(_.last(text))
             })
         }
 

@@ -5,7 +5,7 @@ import Bezier from "./bezier";
 import Point = require("./point");
 import css = require('../../utils/css/css');
 
-interface SignaturePadPropsFace {
+interface Props {
     id: string,
     velocityFilterWeight?: number,
     minWidth?: number,
@@ -18,11 +18,11 @@ interface SignaturePadPropsFace {
     backgroundColor?: string,
     onGetInterface: (onClear: () => void) => void
 }
-interface SignaturePadStatesFace {
+interface State {
     velocityFilterWeight: number
 }
 
-class SignaturePad extends React.Component<SignaturePadPropsFace, SignaturePadStatesFace> {
+class SignaturePad extends React.Component<Props, State> {
 
     public velocityFilterWeight: any;
     public minWidth: any;
@@ -43,7 +43,7 @@ class SignaturePad extends React.Component<SignaturePadPropsFace, SignaturePadSt
 
 
 
-    constructor(props: SignaturePadPropsFace) {
+    constructor(props: Props) {
         super(props);
         this.id = props.id;
         this.velocityFilterWeight = props.velocityFilterWeight || 0.7;
@@ -52,7 +52,7 @@ class SignaturePad extends React.Component<SignaturePadPropsFace, SignaturePadSt
         this.dotSize = props.dotSize || function () {
             return (this.minWidth + this.maxWidth) / 2;
         };
-        this.penColor = props.penColor || "black";
+        this.penColor = props.penColor || "white";
         this.backgroundColor = props.backgroundColor || "rgba(0,0,0,0)";
         this.onEnd = props.onEnd;
         this.onBegin = props.onBegin;
@@ -74,7 +74,7 @@ class SignaturePad extends React.Component<SignaturePadPropsFace, SignaturePadSt
     }
 
 
-    componentWillReceiveProps(props: SignaturePadPropsFace) {
+    componentWillReceiveProps(props: Props) {
         if (props.id !== this.id) {
             this.id = props.id
             this.clear();

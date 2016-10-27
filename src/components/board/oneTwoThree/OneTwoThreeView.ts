@@ -1,13 +1,12 @@
 import React = require('react');
 import OneTwoThreeCss = require('./OneTwoThreeCss');
 import utils = require('../../../utils/utils');
-import AppDispatcher = require('../../../dispatcher/AppDispatcher');
-import Constants = require('../../../constants/Constants');
-import {BoardResult} from '../../../lessons/interface';
+import {BoardResult} from '../../../types';
 import MenuView = require('../menu/MenuView');
 import ButtonView = require('../../button/ButtonView');
 import HeaderView = require('../header/HeaderView');
 import _ = require('underscore');
+import {events} from '../../../events';
 const {div} = React.DOM;
 
 
@@ -40,12 +39,7 @@ function getContentLine(state: BoardResult, name: string) {
             isSuccess: isSuccess,
             isGuess: true,
             isExpandWidth: true,
-            onClick: function () {
-                AppDispatcher.handleViewAction({
-                    actionType: Constants.CHOOSE_ONE_TWO_THREE,
-                    id: name
-                });
-            }
+            onClick: () => events.onChooseOneTwoThree.publish(name)
         })
     );
 }

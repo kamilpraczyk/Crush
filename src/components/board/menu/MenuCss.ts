@@ -48,6 +48,16 @@ export = utils.union(css, {
     },
     getMenuItem() {
         return menuItem;
+    },
+
+    getClassNameIconSuccess() {
+        return css.icons.success;
+    },
+    getClassNameIconFail() {
+        return css.icons.fail;
+    },
+    getClassNameIconUnknown() {
+        return css.icons.menu;
     }
 
 

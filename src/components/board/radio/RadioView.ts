@@ -1,13 +1,12 @@
 import React = require('react');
 import RadioCss = require('./RadioCss');
-import AppDispatcher = require('../../../dispatcher/AppDispatcher');
-import Constants = require('../../../constants/Constants');
 import MenuView = require('../menu/MenuView');
 import ButtonView = require('../../button/ButtonView');
-import {BoardResult} from '../../../lessons/interface';
+import {BoardResult} from '../../../types';
 import {isId} from '../../../lessons/helper/constants';
 import HeaderView = require('../header/HeaderView');
 import _ = require('underscore');
+import {events} from '../../../events';
 const {div} = React.DOM;
 
 
@@ -41,12 +40,7 @@ function getBody(state: BoardResult) {
                 isGuess: true,
                 isExpandWidth: true,
                 //isTime: isId.isDigitalTime(state.lessonData.id),
-                onClick() {
-                    AppDispatcher.handleViewAction({
-                        actionType: Constants.CHOOSE_RADIO,
-                        id: name
-                    });
-                }
+                onClick: () => events.onChooseRadio.publish(name)
             });
         });
     }

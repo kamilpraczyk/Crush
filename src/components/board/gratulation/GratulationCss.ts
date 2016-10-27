@@ -26,7 +26,7 @@ const panel: CSSProperties = {
     width: '100%',
     height: '100%',
     fontSize: css.font.fontSize.XL,
-    backgroundColor: 'rgba(100,100,100,0.7)',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
     display: 'flex',
     flexGrow: 1,
     flexDirection: 'column',

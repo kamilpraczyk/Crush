@@ -93,6 +93,7 @@ const name: CSSProperties = {
     paddingBottom: '2vh',
     paddingLeft: '1vw',
     paddingRight: '1vw',
+    justifyContent: 'flex-start',
     textAlign: 'left',
     alignSelf: 'center',
     alignItems: 'center',
@@ -100,11 +101,15 @@ const name: CSSProperties = {
     wordBreak: 'break-word',
     wordWrap: 'break-word'
 }
+const nameNoBottom: CSSProperties = {
+    paddingBottom: 0,
+}
 
 const nameContainer: CSSProperties = {
     alignSelf: 'center',
     alignItems: 'center',
     display: 'flex',
+    flexFlow: 'column',
     flexGrow: 1
 }
 
@@ -128,6 +133,20 @@ const leftIcon: CSSProperties = {
 const leftIconActive: CSSProperties = {
     color: '#fff',
 }
+const iconSet: CSSProperties = {
+    display: 'flex',
+    width: '100%',
+    flexGrow: 1,
+    paddingTop: '1vh',
+    paddingBottom: '1vh',
+    paddingLeft: '1vw',
+    paddingRight: '1vw',
+    flexFlow: 'row wrap',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: css.font.fontSize.micro
+}
+
 const numbers: CSSProperties = {
     display: 'inline-flex',
     flexFlow: 'row nowrap',
@@ -142,15 +161,6 @@ const numbersActive: CSSProperties = {
     color: css.button.color.active
 }
 const numbersStatus: CSSProperties = {}
-const numbersGood: CSSProperties = {
-    color: css.font.color.success
-}
-const numbersSoso: CSSProperties = {
-    color: css.font.color.average
-}
-const numbersBad: CSSProperties = {
-    color: css.font.color.fail
-}
 
 interface ButtonProps {
     pressed: boolean,
@@ -170,61 +180,53 @@ interface ButtonProps {
 
 export = utils.union(css, {
 
-    getButton(options: ButtonProps) {
+    getButton(o: ButtonProps) {
         let style = button;
-        if (options.isExpandWidth)
+        if (o.isExpandWidth)
             style = css.get(style, isExpandWidth);
 
-        if (options.isExpand)
+        if (o.isExpand)
             style = css.get(style, isExpand);
 
-        if (options.isActive)
+        if (o.isActive)
             style = css.get(style, isActive);
 
-        if (options.pressed)
+        if (o.pressed)
             style = css.get(style, pressed);
 
-        if (options.isResponsibleHeight)
+        if (o.isResponsibleHeight)
             style = css.get(style, isResponsibleHeight);
 
-        if (options.isGuess)
+        if (o.isGuess)
             style = css.get(style, isGuess);
 
-        if (options.isSuccess)
+        if (o.isSuccess)
             style = css.get(style, isSuccess);
 
-        if (options.isFail)
+        if (o.isFail)
             style = css.get(style, isFail);
 
-        if (options.isTime)
+        if (o.isTime)
             style = css.get(style, css.fontFamily.time);
 
-        if (options.backUrl) {
-            style = css.get(style, {
-                backgroundImage: 'url(' + options.backUrl + ')'
-            });
-        }
-        if (options.isInstructions) {
-            style = css.get(style, {
-                color: 'red', //TODO
-            });
-        }
-        if (options.isTransparent) {
-            style = css.get(style, {
-                backgroundColor: 'transparent'
-            });
-        }
+        if (o.backUrl)
+            style = css.get(style, { backgroundImage: 'url(' + o.backUrl + ')' });
+
+        if (o.isInstructions)
+            style = css.get(style, { color: 'red' });//TODO
+
+        if (o.isTransparent)
+            style = css.get(style, { backgroundColor: 'transparent' });
 
 
-
-        if (options.disabled)
+        if (o.disabled)
             style = css.get(style, disabled);
 
         return style;
     },
 
-    getName(o: { isResponsibleCenter: boolean }) {
-        return css.get(name, o.isResponsibleCenter ? isResponsibleCenter : null);
+    getName(o: { isResponsibleCenter: boolean, isIconSet: boolean }) {
+        return css.get(name, o.isResponsibleCenter ? isResponsibleCenter : null, o.isIconSet ? nameNoBottom : null);
     },
 
     getNameContainer() {
@@ -235,8 +237,12 @@ export = utils.union(css, {
         return css.get(icon, o.isResponsibleCenter ? isResponsibleCenter : null);
     },
 
-    getLeftIcon(isActive: boolean) {
-        return css.get(leftIcon, isActive ? leftIconActive : null);
+    getLeftIcon(isActive: boolean, letfIconColour: string) {
+        return css.get(leftIcon, isActive ? leftIconActive : null, letfIconColour ? { color: letfIconColour } : null);
+    },
+
+    getIconSet() {
+        return css.get(iconSet);
     },
 
     getNumbers(isActive: boolean) {
@@ -244,13 +250,19 @@ export = utils.union(css, {
     },
 
     getNumbersStatus(numb: number, length: number) {
-        const percent = (numb * 100) / length;
-        let mergeCss = numbersBad;
+        const percent = utils.toPercent(numb, length);
+        let color: string = null;
         if (percent >= 90) {
-            mergeCss = numbersGood;
+            color = '#00FF00';
+        } else if (percent >= 80) {
+            color = '#64E986';
         } else if (percent >= 50) {
-            mergeCss = numbersSoso;
+            color = '#89C35C';
+        } else if (percent >= 30) {
+            color = '#8BB381';
+        } else {
+            color = '#99C68E';
         }
-        return css.get(numbersStatus, mergeCss);
+        return css.get(numbersStatus, { color });
     }
 });

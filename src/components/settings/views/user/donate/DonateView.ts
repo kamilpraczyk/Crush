@@ -4,7 +4,7 @@ import dictionary = require('../../../../../utils/dictionary');
 import React = require('react');
 import CommonCss = require('../CommonCss');
 import css = require('../../../../../utils/css/css');
-import HomeStore = require('../../../../../stores/home/HomeStore');
+import {getState} from '../../../../../services';
 const {div, form, input, img, label} = React.DOM;
 
 function getPayPal() {
@@ -51,8 +51,8 @@ function getPayPal() {
 
 function render() {
 
-    const p = HomeStore.getStateHome();
-    if (!p.user.email || !p.user.isPrime) {
+    const s = getState();
+    if (!s.pass.user.email || !s.pass.user.isPrime) {
         return null;
     }
 

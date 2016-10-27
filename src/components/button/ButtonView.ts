@@ -11,6 +11,8 @@ interface Props {
     disabled?: boolean,
     icon?: string,
     leftIcon?: string,
+    iconSet?: string[],
+    letfIconColour?: string,
     numbersStatus?: number,
     numbers?: number,
     onClick: (props: Props) => void,
@@ -34,62 +36,92 @@ interface State {
     pressed: boolean
 }
 
-function render(props: Props, state: State, clickHandler: () => void) {
-    let icon = null as any;
-    if (props.icon) {
-        icon = div({
-            className: props.icon,
-            style: ButtonCss.getIcon({
-                isResponsibleCenter: props.isResponsibleCenter
-            })
-        });
-    }
-    let leftIcon = null as any;
-    if (props.leftIcon) {
-        icon = div({
-            className: props.leftIcon,
-            style: ButtonCss.getLeftIcon(props.isActive)
-        });
-    }
+function getIcon(props: Props) {
+    if (!props.icon) return null;
 
-    let name: any = null;
-    if (props.name) {
-        name =
-            div({
-                style: ButtonCss.getNameContainer()
-            },
-                div({
-                    style: ButtonCss.getName({
-                        isResponsibleCenter: props.isResponsibleCenter
-                    })
-                }, props.name));
-    }
+    return div({
+        className: props.icon,
+        style: ButtonCss.getIcon({
+            isResponsibleCenter: props.isResponsibleCenter
+        })
+    });
+}
+
+function getLeftIcon(props: Props) {
+    if (!props.leftIcon) return null;
+
+    return div({
+        className: props.leftIcon,
+        style: ButtonCss.getLeftIcon(props.isActive, props.letfIconColour)
+    });
+}
+
+
+
+function getIconSet(props: Props) {
+    if (!props.iconSet || !props.iconSet.length) return null;
+
+    const set = props.iconSet.map(icon => {
+        return div({
+            key: icon,
+            className: icon
+        });
+    });
+
+    return div({
+        style: ButtonCss.getIconSet()
+    }, set);
+}
+
+
+
+function getName(props: Props) {
+    if (!props.name) return null;
+
+    return div({
+        style: ButtonCss.getNameContainer()
+    },
+        div({
+            style: ButtonCss.getName({
+                isResponsibleCenter: props.isResponsibleCenter,
+                isIconSet: !!(props.iconSet && props.iconSet.length)
+            })
+        }, props.name),
+        getIconSet(props)
+    );
+}
+
+function getNumberStatus(props: Props) {
+    if (!_.isNumber(props.numbersStatus)) return null;
+
+    return div({
+        style: ButtonCss.getNumbersStatus(props.numbersStatus, props.numbers)
+    }, props.numbersStatus);
+}
+
+function getNumbers(props: Props) {
+    if (!props.numbers) return null;
+
+    const numberStatus = getNumberStatus(props);
+
+    return div({
+        style: ButtonCss.getNumbers(props.isActive)
+    },
+        numberStatus,
+        numberStatus ? '/' : null,
+        props.numbers
+    );
+}
+
+function render(props: Props, state: State, clickHandler: () => void) {
 
     const loader = props.isLoader ? LoaderView() : null;
-    let numbers: any = null;
-    if (props.numbers) {
-        let numbersStatus: any = null;
-        let separator: any = null;
-        if (_.isNumber(props.numbersStatus)) {
-            numbersStatus = div({
-                style: ButtonCss.getNumbersStatus(props.numbersStatus, props.numbers)
-            }, props.numbersStatus);
-            separator = div({}, '/');
-        }
-
-        numbers = div({
-            style: ButtonCss.getNumbers(props.isActive)
-        },
-            numbersStatus,
-            separator,
-            div({}, props.numbers)
-        );
-    }
 
     return button({
         ref: props.ref,
         key: props.key,
         disabled: props.disabled,
+        onClick: clickHandler,
         style: ButtonCss.getButton({
             disabled: props.disabled,
             pressed: state.pressed,
@@ -104,9 +136,13 @@ function render(props: Props, state: State, clickHandler: () => void) {
             isGuess: props.isGuess,
             isTransparent: props.isTransparent,
             isInstructions: props.isInstructions
-        }),
-        onClick: clickHandler
-    }, leftIcon, icon, name, numbers, loader);
+        })
+    }, getLeftIcon(props),
+        getIcon(props),
+        getName(props),
+        getNumbers(props),
+        loader
+    );
 }
 
 class ButtonView extends React.Component<Props, State>{
@@ -121,11 +157,12 @@ class ButtonView extends React.Component<Props, State>{
         this.unpress = this.unpress.bind(this);
     }
 
-    clickHandler(e: any) {
+    clickHandler(e: Event) {
         e.preventDefault();
+        e.stopPropagation();
         this.setState({ pressed: true });
         this.props.isQuickClick && this.props.onClick(this.props);
-        this.time = setTimeout(this.unpress, 200, this);
+        this.time = setTimeout(this.unpress, 100, this);
     }
 
     unpress() {

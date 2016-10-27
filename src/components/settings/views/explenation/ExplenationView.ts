@@ -1,31 +1,29 @@
 import React = require('react');
-import ExplenationCss = require('./ExplenationCss');
 const {div} = React.DOM;
-import BoardStore = require('../../../../stores/board/BoardStore');
+import ExplenationCss = require('./ExplenationCss');
 import utils = require('../../../../utils/utils');
 import ButtonView = require('../../../button/ButtonView');
-import AppDispatcher = require('../../../../dispatcher/AppDispatcher');
-import Constants = require('../../../../constants/Constants');
 import dictionary = require('../../../../utils/dictionary');
+import {getState} from '../../../../services';
+import {events} from '../../../../events';
 
 function render() {
-    const state = BoardStore.getExplenation();
-    if (state.isVisible && state.explenation) {
+    const s = getState();
+    const explenation = s.lessonsCatalog.board.getCurrentBoard().explenation;
+
+    if (explenation) {
+        const titleText = s.lessonsCatalog.getLessonTitle();
 
 
         const title = div({
             style: ExplenationCss.getTitle(),
-            onClick: () => utils.voice.read(state.title)
-        }, state.title);
+            onClick: () => utils.voice.read(titleText)
+        }, titleText);
 
         const buttonGoPractice = ButtonView({
             name: dictionary.GO_TEST,
-            onClick: () => {
-                AppDispatcher.handleViewAction({
-                    actionType: Constants.GO_TEST
-                });
-            },
-            isExpandWidth: true
+            isExpandWidth: true,
+            onClick: () => events.goTest.publish()
         });
 
         const body = div({
@@ -33,11 +31,8 @@ function render() {
         },
             div({
                 style: ExplenationCss.getBodyContent()
-            },
-                state.explenation.exp
-            ),
+            }, explenation.exp),
             buttonGoPractice
-
         );
 
         return div({

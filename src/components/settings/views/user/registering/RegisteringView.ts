@@ -3,16 +3,14 @@ import dictionary = require('../../../../../utils/dictionary');
 import React = require('react');
 import CommonCss = require('../CommonCss');
 import ButtonView = require('../../../../../components/button/ButtonView');
-import AppDispatcher = require('../../../../../dispatcher/AppDispatcher');
-import Constants = require('../../../../../constants/Constants');
-import HomeStore = require('../../../../../stores/home/HomeStore');
 const {div, label, input} = React.DOM;
 import utils = require('../../../../../utils/utils');
 import {defaultUser} from '../../../../../lessons/helper/constants';
+import {getState} from '../../../../../services';
+import {events} from '../../../../../events';
 
 interface State {
-    message?: string,
-    user?: {
+    user: {
         name: string,
         email: string,
         password: string,
@@ -20,17 +18,15 @@ interface State {
     }
 }
 
-function getTitle(props: Props, state: State) {
+
+
+function getToggleRegister(props: Props, state: State) {
     return ButtonView({
-        name: state.message,
+        name: props.pass.register.show ? dictionary.BACK : dictionary.GO_REGISTERING,
         isResponsibleHeight: true,
         isResponsibleCenter: true,
-        leftIcon: props.register.show ? CommonCss.icons.left : '',
-        onClick: () => {
-            AppDispatcher.handleViewAction({
-                actionType: Constants.TOGGLE_REGISTER_VIEW
-            });
-        }
+        leftIcon: props.pass.register.show ? CommonCss.icons.left : '',
+        onClick: () => events.onToogleRegisterView.publish()
     });
 }
 
@@ -39,8 +35,8 @@ function getName(props: Props, state: State, setState: (s: State) => void) {
         type: 'text',
         style: CommonCss.getBoxInput(),
         value: state.user.name,
-        disabled: props.register.process,
-        onChange: function (e: any) {
+        disabled: props.pass.register.process,
+        onChange(e: any) {
             state.user.name = utils.removeInvalidChars(e.target.value)
             setState({ user: state.user });
         }
@@ -52,8 +48,8 @@ function getEmail(props: Props, state: State, setState: (s: State) => void) {
         type: 'text',
         style: CommonCss.getBoxInput(),
         value: state.user.email,
-        disabled: props.register.process,
-        onChange: function (e: any) {
+        disabled: props.pass.register.process,
+        onChange(e: any) {
             state.user.email = utils.removeInvalidChars(e.target.value);
             setState({ user: state.user });
         }
@@ -65,8 +61,8 @@ function getPassword(props: Props, state: State, setState: (s: State) => void) {
         type: 'password',
         style: CommonCss.getBoxInput(),
         value: state.user.password,
-        disabled: props.register.process,
-        onChange: function (e: any) {
+        disabled: props.pass.register.process,
+        onChange(e: any) {
             state.user.password = utils.removeInvalidChars(e.target.value);
             setState({ user: state.user });
         }
@@ -78,8 +74,8 @@ function getRetypePassword(props: Props, state: State, setState: (s: State) => v
         type: 'password',
         style: CommonCss.getBoxInput(),
         value: state.user.retypePassword,
-        disabled: props.register.process,
-        onChange: function (e: any) {
+        disabled: props.pass.register.process,
+        onChange(e: any) {
             state.user.retypePassword = utils.removeInvalidChars(e.target.value);
             setState({ user: state.user });
         }
@@ -91,22 +87,23 @@ function getButtonSubmit(props: Props, state: State, setState: (s: State) => voi
         name: dictionary.SUBMIT_BUTTON_REGISTERING,
         isResponsibleHeight: true,
         isResponsibleCenter: true,
-        disabled: props.register.process,
-        isLoader: props.register.process,
-        onClick: function () {
-            AppDispatcher.handleViewAction({
-                actionType: Constants.REGISTER_ON_SERVER,
-                user: state.user
-            });
-        }
+        disabled: props.pass.register.process,
+        isLoader: props.pass.register.process,
+        onClick: () => events.onRegisterOnServer.publish(state.user)
     });
+}
+
+function getStatusText(props: Props, state: State) {
+    if (props.pass.register.error) {
+        return props.pass.register.error;
+    }
+    return null;
 }
 
 function render(props: Props, state: State, setState: (s: State) => void) {
 
-    let content: any = null;
     let box: any = null;
-    if (props.register.show && !props.register.success) {
+    if (props.pass.register.show && !props.pass.register.success) {
         box = div({
             style: CommonCss.getBox()
         },
@@ -115,6 +112,9 @@ function render(props: Props, state: State, setState: (s: State) => void) {
                 CommonCss.makeBoxLine(dictionary.EMAIL, getEmail(props, state, setState)),
                 CommonCss.makeBoxLine(dictionary.PASSWORD, getPassword(props, state, setState)),
                 CommonCss.makeBoxLine(dictionary.RETYPE_PASSWORD, getRetypePassword(props, state, setState))
+            ),
+            div({ style: CommonCss.getBoxLine(true) },
+                getStatusText(props, state)
             ),
             div({ style: CommonCss.getBoxLineRight() },
                 getButtonSubmit(props, state, setState)
@@ -127,12 +127,12 @@ function render(props: Props, state: State, setState: (s: State) => void) {
     }, div({
         style: CommonCss.getContainer()
     },
-        getTitle(props, state),
+        getToggleRegister(props, state),
         box
     ));
 }
 
-const p = HomeStore.getStateHome();
+const p = getState();
 declare type Props = typeof p;
 
 class View extends React.Component<{}, State>{
@@ -149,30 +149,17 @@ class View extends React.Component<{}, State>{
         };
     }
 
-
     render() {
-        const props = HomeStore.getStateHome();
-        if (props.login.success) {
-            return null;
-        }
+        const props = getState();
+        if (props.pass.login.success) return null;
 
-        if (props.register.success) {
+        if (props.pass.register.success) {
             this.state.user.email = null;
             this.state.user.name = null;
             this.state.user.password = null;
             this.state.user.retypePassword = null;
         }
 
-        this.state.message = dictionary.HEADER_REGISTERING_ON;
-        if (!props.register.show) {
-            this.state.message = dictionary.HEADER_REGISTERING_OFF
-        }
-
-        if (props.register.process) {
-            this.state.message = dictionary.PLEASE_WAIT;
-        } else if (props.register.error) {
-            this.state.message = props.register.error;
-        }
         return render(props, this.state, this.setState.bind(this));
     }
 };

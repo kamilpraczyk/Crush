@@ -9,18 +9,21 @@ const dictonary = {
     },
 
     statistics: {
-        titleEntries : 'Lessons:',
+        titleEntries: 'Status:',
         entriesCorrect: 'Correct',
         entriesIncorrect: 'Incorrect',
         entriesUndane: 'Undane'
     },
+    BACK: 'Back',
+
+    SIGNATURE_PAD_CLEAR: 'clear',
 
     LOGEDIN_AS: 'Loged in as: ',
     LAST_LOGIN: 'Last login: ',
     LOG_OUT: 'Sign out',
-    DONATE: 'by me a Coffee',
+    DONATE: 'Coffee',
 
-    GRATULATIONS_TITLE: 'You answered all questions',// well done
+    GRATULATIONS_TITLE: 'You answered all the questions',// well done
     GRATULATIONS_TEXT: 'Your score is: ',
     GRATULATIONS_BUTTON: 'Continue',
     GRATULATIONS_SAVE_BUTTON: 'Save and Continue',
@@ -31,10 +34,10 @@ const dictonary = {
 
     SUBMIT_BUTTON_SUBSCRIBING_ONE_YEAR: 'Subscribe £4.99 for 1 year',
     SUBMIT_BUTTON_SUBSCRIBING_ONE_MONTH: 'Subscribe £1.99 for 1 month',
+    SUBMIT_BUTTON_SUBSCRIBING_ONE_WEEK: 'Subscribe £0.99 for 1 week',
+
     SUBMIT_BUTTON_LOGIN: 'Login',
     SUBMIT_BUTTON_REGISTERING: 'Register',
-
-    PLEASE_WAIT: 'Please wait...',
 
     PERCENT: '%',
     NAME: 'Name',
@@ -42,11 +45,10 @@ const dictonary = {
     PASSWORD: 'Password',
     EMAIL: 'Email',
 
-    HEADER_REGISTERING_OFF: 'or Register',
-    HEADER_REGISTERING_ON: 'Back',
-    HEADER_LOGIN: 'Please Login',
+    GO_REGISTERING: 'or Register',
     HEADER_SUBSCRIBING: 'Why not to invest in yourself? Subscribe to unblock all interactive lessons.',
-    HEADER_SUBSCRIBING_VALID: 'Sbscription expire in:',
+    HEADER_SUBSCRIBED_VALID: 'Sbscription expire in:',
+    HEADER_SUBSCRIBED_EXPIRED: 'Sbscription expired on: ',
     DAYS: 'days.',
     DAY: 'day.',
 

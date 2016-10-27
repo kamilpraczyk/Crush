@@ -1,64 +1,25 @@
-
 /// <reference path="../../../../../../typings/tsd.d.ts" />
 import dictionary = require('../../../../../utils/dictionary');
 import React = require('react');
 import CommonCss = require('../CommonCss');
 import css = require('../../../../../utils/css/css');
 import StatisticsCss = require('./StatisticsCss');
-import HomeStore = require('../../../../../stores/home/HomeStore');
-import BoardStore = require('../../../../../stores/board/BoardStore');
-import modelLessons = require('../../../../../lessons/lessons');
-const {lessonsEntriesLength} = modelLessons;
+import utils = require('../../../../../utils/utils');
 import ReactDOM = require('react-dom');
+import {getState} from '../../../../../services';
 const {div, canvas} = React.DOM;
 const pie = 'pie';
 
-function render(props: Props) {
-
-    function getLegend(text: string, colour: string) {
-        return div({
-            style: StatisticsCss.getBrickLine()
-        }, div({
-            style: StatisticsCss.getBrick(colour)
-        }), text);
-    }
-
-    function getBox() {
-        const d = dictionary.statistics;
-
-        return div({
-            style: CommonCss.getBox()
-        },
-            div({ style: CommonCss.getBoxSplit() },
-                div({ style: CommonCss.getBoxLine() }, d.titleEntries),
-                canvas({
-                    ref: pie,
-                    style: StatisticsCss.getPie()
-                })
-            ),
-            div({ style: CommonCss.getBoxSplit() },
-                getLegend(d.entriesCorrect + ' ' + props.entriesCorrect, StatisticsCss.correct),
-                getLegend(d.entriesIncorrect + ' ' + props.entriesIncorrect, StatisticsCss.incorrect),
-                getLegend(d.entriesUndane + ' ' + props.entriesUndane, StatisticsCss.rest)
-            )
-        );
-    }
-
-    return div({
-        style: CommonCss.getPanel(!props.isVisible)
-    }, div({
-        style: CommonCss.getContainer()
-    }, getBox()));
-}
 
 function rerenderChart(props: Props, region: any) {
+    const status = props.lessonsStatus.getStatus();
     if (region) {
         const canvas = region;
         const ctx = canvas.getContext("2d");
         let lastend = 0;
 
-        const correct = 360 * props.entriesCorrect / props.entriesAll;
-        const incorrect = 360 * props.entriesIncorrect / props.entriesAll;
+        const correct = 360 * status.entriesCorrect / status.entriesAll;
+        const incorrect = 360 * status.entriesIncorrect / status.entriesAll;
         const rest = 360 - correct - incorrect;
 
         let data = [rest, correct, incorrect]; // If you add more data values make sure you add more colors
@@ -82,21 +43,61 @@ function rerenderChart(props: Props, region: any) {
     }
 }
 
+function getPercentStatus(props: Props) {
+    const status = props.lessonsStatus.getStatus();
+    return div({
+        style: StatisticsCss.getCorrectPercentage()
+    }, status.entriesCorrectPercentage);
+}
+
+function getLegend(text: string, colour: string) {
+    return div({
+        style: StatisticsCss.getBrickLine()
+    }, div({
+        style: StatisticsCss.getBrick(colour)
+    }), text);
+}
+
+
+function getBox(props: Props) {
+    const d = dictionary.statistics;
+    const status = props.lessonsStatus.getStatus();
+
+    return div({
+        style: CommonCss.getBox()
+    },
+        div({ style: CommonCss.getBoxSplitToCenter() },
+            div({ style: CommonCss.getBoxLine() }, d.titleEntries),
+            canvas({
+                ref: pie,
+                style: StatisticsCss.getPie()
+            }),
+            getPercentStatus(props)
+        ),
+        div({ style: CommonCss.getBoxSplit() },
+            getLegend(d.entriesCorrect + ' ' + status.entriesCorrect, StatisticsCss.correct),
+            getLegend(d.entriesIncorrect + ' ' + status.entriesIncorrect, StatisticsCss.incorrect),
+            getLegend(d.entriesUndane + ' ' + status.entriesUndane, StatisticsCss.rest)
+        )
+    );
+}
+
+
+
+function render(props: Props) {
+    return div({
+        style: CommonCss.getPanel(!props.pass.user.email)
+    }, div({
+        style: CommonCss.getContainer()
+    }, getBox(props)));
+}
 
 interface State {
     region: any
 }
 
 function getProps() {
-    const home = HomeStore.getStateHome();
-    const status = home.status;
-    return {
-        entriesAll: lessonsEntriesLength,
-        entriesUndane: lessonsEntriesLength - status.entriesCorrect - status.entriesIncorrect,
-        entriesCorrect: status.entriesCorrect,
-        entriesIncorrect: status.entriesIncorrect,
-        isVisible: !!home.user.email
-    }
+    return getState();
 }
 const p = getProps();
 declare type Props = typeof p;

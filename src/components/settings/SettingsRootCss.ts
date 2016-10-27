@@ -48,8 +48,7 @@ const menu: CSSProperties = {
     width: wid + '%',
 }
 
-const menuMinimalized: CSSProperties = {
-}
+
 
 const item: CSSProperties = {
     display: 'flex',
@@ -67,8 +66,8 @@ export = utils.union(css, {
     getMain() {
         return main;
     },
-    getMenu(isMenuMinimalized: boolean) {
-        return css.get(menu, isMenuMinimalized ? menuMinimalized : null);
+    getMenu() {
+        return css.get(menu);
     },
     getItem() {
         return item;

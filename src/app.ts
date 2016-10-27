@@ -1,4 +1,5 @@
 import Home = require("./home/Home");
+import {init} from './services';
 import utils = require('./utils/utils');
 
 function onConnected() {
@@ -14,24 +15,35 @@ function onLoaded() {
     document.getElementById('deviceready').setAttribute('style', 'display:none;');
 }
 
+function onError() {
+    const parentElement = document.getElementById('deviceready');
+    parentElement.querySelector('.listening').setAttribute('style', 'display:none;');
+    parentElement.querySelector('.received').setAttribute('style', 'display:none;');
+    parentElement.querySelector('.spinner').setAttribute('style', 'display:none;');
+    parentElement.querySelector('.error').setAttribute('style', 'display:block;');
+    parentElement.setAttribute('style', 'display:flex;');
+}
+
 function onDeviceReady() {
-    utils.delay(500).then(() => {
+    utils.delay(500).then(() => init()).then(() => {
         onConnected();
-        utils.delay(200).then(() => {
+        return utils.delay(200).then(() => {
             onLoaded();
             new Home(document.getElementById('app'));
+            return null;
         });
+    }).catch(e => {
+        onError();
+        console.error(e);
     });
 }
 
-const app = {
-    initialize () {
-        document.addEventListener('deviceready', onDeviceReady, false);
-    }
-};
+function initialize() {
+    document.addEventListener('deviceready', onDeviceReady, false);
+}
 
 
-app.initialize();
+initialize();
 
 
 

@@ -5,6 +5,7 @@ import LogoutView = require('./logout/LogoutView');
 import RegisteringView = require('./registering/RegisteringView');
 import LoginView = require('./login/LoginView');
 import SubscribingView = require('./subscribing/SubscribingView');
+import SubscribedView = require('./subscribed/SubscribedView');
 import InfosView = require('./infos/InfosView')
 import DonateView = require('./donate/DonateView');
 import StatisticsView = require('./statistics/StatisticsView');
@@ -17,6 +18,7 @@ function render() {
     },
         LogoutView(),
         LoginView(),
+        SubscribedView(),
         RegisteringView(),
         StatisticsView(),
         SubscribingView(),

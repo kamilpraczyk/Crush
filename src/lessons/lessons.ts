@@ -1,7 +1,6 @@
 /// <reference path="../../typings/tsd.d.ts" />
-import {LessonMapFace, LessonFace, BoardFaces} from './interface';
-import _ = require('underscore');
-
+import {LessonsCatalog} from '../services/LessonsCatalog';
+import Promise = require('bluebird');
 import animals = require('./animals/animals');
 import clockFourWords = require('./extra/clock/clockFourWords');
 import clockDraw = require('./extra/clock/clockDraw');
@@ -43,85 +42,71 @@ import verbEndings = require('./verb/endings/verbEndings');
 import speech_one = require('./words/speach/speech_one');
 
 
-//TODO offer some for free and some when registered, and rest when subscribed
-const lessons: LessonMapFace = {
-    //NOTE keep short uid - they are saved to database
+function getLessons(lessonsCatalog: LessonsCatalog) {
+    return new Promise<LessonsCatalog>((resolve, reject) => {
 
-    verbEndings: w(true, verbEndings),
-    speech_one: w(true, speech_one),
 
-    prefixes_one: w(true, prefixes_one),
-    prefixes_two: w(true, prefixes_two),
+        //TODO offer some for free and some when registered, and rest when subscribed
+        lessonsCatalog.add(true, 'A___0', verbEndings);
+        lessonsCatalog.add(true, 'A___1', speech_one);
 
-    spellingVerbsIngOne: w(true, spellingVerbsIngOne),
-    spellingVerbsIngTwo: w(true, spellingVerbsIngTwo),
-    spellingVerbsIngThree: w(true, spellingVerbsIngThree),
+        lessonsCatalog.add(true, 'PR__2', prefixes_one);
+        lessonsCatalog.add(true, 'PR__3', prefixes_two);
 
-    an_a_shortOne: w(true, an_a_shortOne),
-    an_a_shortTwo: w(true, an_a_shortTwo),
-    an_a_shortThree: w(true, an_a_shortThree),
-    an_a_shortFour: w(true, an_a_shortFour),
+        lessonsCatalog.add(true, 'SP__1', spellingVerbsIngOne);
+        lessonsCatalog.add(true, 'SP__2', spellingVerbsIngTwo);
+        lessonsCatalog.add(true, 'SP__3', spellingVerbsIngThree);
 
-    animals: w(true, animals),
-    clockFourWords: w(true, clockFourWords),
-    clockDraw: w(true, clockDraw),
-    clock: w(true, clock),
+        lessonsCatalog.add(true, 'AN__1', an_a_shortOne);
+        lessonsCatalog.add(true, 'AN__2', an_a_shortTwo);
+        lessonsCatalog.add(true, 'AN__3', an_a_shortThree);
+        lessonsCatalog.add(true, 'AN__4', an_a_shortFour);
 
-    presentTenseOneToThree: w(true, presentTenseOneToThree),
-    presentTenseOneToThreePartTwo: w(true, presentTenseOneToThreePartTwo),
-    presentTenseRadio: w(true, presentTenseRadio),
-    presentTenseMatch: w(true, presentTenseMatch),
+        lessonsCatalog.add(true, 'CL_01', clockFourWords);
+        lessonsCatalog.add(true, 'CL_02', clockDraw);
+        lessonsCatalog.add(true, 'CL_03', clock);
 
-    presentContinuousTenseOneToThree: w(true, presentContinuousTenseOneToThree),
-    presentContinuousTenseOneToThreePartTwo: w(true, presentContinuousTenseOneToThreePartTwo),
-    presentContinuousTenseRadio: w(true, presentContinuousTenseRadio),
+        lessonsCatalog.add(true, 'AN__01', animals);
 
-    presentPerfectTenseOneToThree: w(true, presentPerfectTenseOneToThree),
-    presentPerfectTenseOneToThreePartTwo: w(true, presentPerfectTenseOneToThreePartTwo),
-    presentPerfectTenseRadio: w(true, presentPerfectTenseRadio),
+        lessonsCatalog.add(true, 'PT__01', presentTenseOneToThree);
+        lessonsCatalog.add(true, 'PT__02', presentTenseOneToThreePartTwo);
+        lessonsCatalog.add(true, 'PT__03', presentTenseRadio);
+        lessonsCatalog.add(true, 'PT__04', presentTenseMatch);
 
-    presentPerfectContinuousTenseOneToThree: w(true, presentPerfectContinuousTenseOneToThree),
-    presentPerfectContinuousTenseOneToThreePartTwo: w(true, presentPerfectContinuousTenseOneToThreePartTwo),
-    presentPerfectContinuousTenseRadio: w(true, presentPerfectContinuousTenseRadio),
+        lessonsCatalog.add(true, 'PCT_01', presentContinuousTenseOneToThree);
+        lessonsCatalog.add(true, 'PCT_02', presentContinuousTenseOneToThreePartTwo);
+        lessonsCatalog.add(true, 'PCT_03', presentContinuousTenseRadio);
 
-    location: w(true, location),
+        lessonsCatalog.add(true, 'PPT_01', presentPerfectTenseOneToThree);
+        lessonsCatalog.add(true, 'PPT_02', presentPerfectTenseOneToThreePartTwo);
+        lessonsCatalog.add(true, 'PPT_03', presentPerfectTenseRadio);
 
-    eitherNeither: w(true, eitherNeither),
+        lessonsCatalog.add(true, 'PPCT_1', presentPerfectContinuousTenseOneToThree);
+        lessonsCatalog.add(true, 'PPCT_2', presentPerfectContinuousTenseOneToThreePartTwo);
+        lessonsCatalog.add(true, 'PPCT_3', presentPerfectContinuousTenseRadio);
 
-    irregularVerbs: w(true, irregularVerbs),
-    irregularVerbsOneTwoThree: w(true, irregularVerbsOneTwoThree),
+        lessonsCatalog.add(true, 'L___1', location);
 
-    singularAndPlural: w(true, singularAndPlural),
+        lessonsCatalog.add(true, 'EINE1', eitherNeither);
+        lessonsCatalog.add(true, 'IV__1', irregularVerbs);
+        lessonsCatalog.add(true, 'IV__2', irregularVerbsOneTwoThree);
 
-    fewLittle: w(true, fewLittle),
-    muchManyALot: w(true, muchManyALot),
+        lessonsCatalog.add(true, 'P_S_1', singularAndPlural);
+        lessonsCatalog.add(true, 'FEW_1', fewLittle);
+        lessonsCatalog.add(true, 'MUCH1', muchManyALot);
+        lessonsCatalog.add(true, 'V___1', verbHave);
+        lessonsCatalog.add(true, 'BE__1', toBeInPresentAndPast);
+        lessonsCatalog.add(true, 'MINE1', mineYour);
+        lessonsCatalog.add(true, 'MINE2', myselfYourself);
 
-    verbHave: w(true, verbHave),
-    toBeInPresentAndPast: w(true, toBeInPresentAndPast),
+        lessonsCatalog.setActiveLesson('A___0');
 
-    mineYour: w(true, mineYour),
-    myselfYourself: w(true, myselfYourself)
-};
-
-let lessonsEntriesLength = 0;
-_.mapObject(lessons, (lesson, uid) => {
-    lesson.uid = uid;
-    lessonsEntriesLength += lesson.lessons.length;
-});
-
-function w(free: boolean, data: { title: string, lessons: BoardFaces }) {
-    const l: LessonFace = {
-        free: free,
-        active: false,
-        name: data.title,
-        lessons: data.lessons
-    };
-    return l;
+        return resolve(lessonsCatalog);
+    });
 }
 
-export = {
-    lessons,
-    lessonsEntriesLength,
-    activeStartup: 'verbEndings',
+
+export {
+getLessons
 }
 

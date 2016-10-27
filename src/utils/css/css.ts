@@ -57,8 +57,7 @@ function isMobile() {
     return false;
 }
 
-const backgroundColourText = 'rgba(255, 255, 255, 0.60)';
-let style = {
+const style = {
 
     get: get,
     isMobile: isMobile,
@@ -109,7 +108,6 @@ let style = {
             merge: '#444547',
             success: '#00FF00',
             fail: '#FF0000',
-            average: '#ffa500',
             ink: '#99cdff'
         }
     },
@@ -151,12 +149,6 @@ let style = {
         }
     },
 
-    background: {
-        text: {
-            backgroundColor: backgroundColourText
-        }
-    },
-
     fontFamily: {
         time: <CSSProperties>{
             fontFamily: fontFamilyTime
@@ -172,11 +164,14 @@ let style = {
         }
     },
 
-
     themes: {
         standard: {
             backgroundImageRead: 'url("img/chalkboard1.jpg")',
             backgroundImageBoard: 'url("img/chalkboard2.jpg")'
+        },
+        signaturePad: {
+            background: 'rgba(0, 0, 0, 0.1)',
+            color: 'white'
         }
     },
 

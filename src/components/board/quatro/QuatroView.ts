@@ -1,13 +1,12 @@
 import React = require('react');
 import QuatroCss = require('./QuatroCss');
-import AppDispatcher = require('../../../dispatcher/AppDispatcher');
-import Constants = require('../../../constants/Constants');
 import MenuView = require('../menu/MenuView');
 import ButtonView = require('../../button/ButtonView');
 import _ = require('underscore');
-import {BoardResult} from '../../../lessons/interface';
+import {BoardResult} from '../../../types';
 import {isId}  from '../../../lessons/helper/constants';
 import HeaderView = require('../header/HeaderView');
+import {events} from '../../../events';
 const {div} = React.DOM;
 
 
@@ -17,12 +16,6 @@ function getFooter() {
     }, MenuView())
 }
 
-function onRead(read: string) {
-    AppDispatcher.handleViewAction({
-        actionType: Constants.READ,
-        read: read
-    });
-}
 
 function getContentLine(state: BoardResult, list: any[]) {
     const elements = list.map((name: string) => {
@@ -54,12 +47,7 @@ function getContentLine(state: BoardResult, list: any[]) {
                 isGuess: true,
                 backUrl: word ? null : name,
                 isTime: isId.isDigitalTime(state.lessonData.id),
-                onClick() {
-                    AppDispatcher.handleViewAction({
-                        actionType: Constants.CHOOSE_PICTURE,
-                        id: name
-                    });
-                }
+                onClick: () => events.onChoosePicture.publish(name)
             }));
     });
 

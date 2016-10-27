@@ -1,14 +1,16 @@
 /// <reference path="../typings/tsd.d.ts" />
-import {BoardFace} from '../src/lessons/interface';
-import modelLessons = require('../src/lessons/lessons');
-const {lessons, activeStartup} = modelLessons;
+import {BoardFace} from '../src/types';
+import {init, clear, getState} from '../src/services';
 import _ = require("underscore");
 
 
 export function goThrough(test: (board: BoardFace) => void) {
-    _.mapObject(lessons, (boards) => {
-        _.each(boards.lessons, (board) => {
-            test(board);
+    clear();
+    return init().then(() => {
+        _.mapObject(getState().lessonsCatalog.getMapLessons(), boards => {
+            _.each(boards.lessons, (board) => {
+                test(board);
+            });
         });
-    });
+    })
 }

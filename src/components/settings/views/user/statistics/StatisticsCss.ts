@@ -24,6 +24,11 @@ const brickLine: CSSProperties = {
     justifyContent: 'flex-start'
 }
 
+const correctPercentage: CSSProperties = {
+    color: css.font.color.success,
+    alignItems: 'center',
+    display: 'flex'
+}
 
 export = utils.union(css, {
 
@@ -35,6 +40,9 @@ export = utils.union(css, {
     },
     getBrick(colour: string) {
         return css.get(brick, { backgroundColor: colour })
+    },
+    getCorrectPercentage() {
+        return css.get(correctPercentage);
     },
     correct: css.font.color.success,
     incorrect: css.font.color.fail,

@@ -6,27 +6,29 @@ import { capital } from '../lessons/helper/constants';
 import Promise = require("bluebird");
 import md5 = require('./md5')
 
-export = {
-    union,
-    union3,
-    first,
-    voice,
-    round10,
-    keys,
-    replaceAll,
-    tryToSetLowercaseFirstLetter,
-    howManyDaysLeft,
-    checkEmail,
-    isValidISODate,
-    removeInvalidChars,
-    getHumanizedDate,
-    getToDayISOdate,
-    getNextYearISOdate,
-    getNextMonthISOdate,
-    isBrowserSupported,
-    delay, //delay promise
-    delayf,
-    md5
+export {
+union,
+union3,
+first,
+toPercentHumanize,
+toPercent,
+voice,
+round10,
+keys,
+replaceAll,
+tryToSetLowercaseFirstLetter,
+howManyDaysLeft,
+checkEmail,
+isValidISODate,
+removeInvalidChars,
+getHumanizedDate,
+getToDayISOdate,
+getNextYearISOdate,
+getNextMonthISOdate,
+getNext7DaysISOdate,
+isBrowserSupported,
+delay, //delay promise
+md5
 };
 
 function delay(time?: number) {
@@ -35,10 +37,6 @@ function delay(time?: number) {
     }).delay(time || 2000);
 }
 
-function delayf(f: () => void) {
-    f();
-    return delay();
-}
 
 function removeInvalidChars(s: string) {
     if (s)
@@ -72,14 +70,25 @@ function getToDayISOdate() {
 }
 
 function getNextYearISOdate() {
-    const oneYr = new Date();
-    oneYr.setFullYear(oneYr.getFullYear() + 1);
-    return getISOdate(oneYr);
+    const d = new Date();
+    d.setFullYear(d.getFullYear() + 1);
+    return getISOdate(d);
 }
 function getNextMonthISOdate() {
-    const oneYr = new Date();
-    oneYr.setMonth(oneYr.getMonth() + 1);
-    return getISOdate(oneYr);
+    const d = new Date();
+    d.setMonth(d.getMonth() + 1);
+    return getISOdate(d);
+}
+
+const SECOND_IN_MILLIS = 1000;
+const MINUTE_IN_MILLIS = SECOND_IN_MILLIS * 60;
+const HOUR_IN_MILLIS = MINUTE_IN_MILLIS * 60;
+const DAY_IN_MILLIS = HOUR_IN_MILLIS * 24;
+
+function getNext7DaysISOdate() {
+    const d = new Date();
+    const date = new Date(d.getTime() + (8 * DAY_IN_MILLIS)); //8 to make 7 days
+    return getISOdate(date);
 }
 
 function getHumanizedDate(s: string) {
@@ -170,6 +179,14 @@ function round10(value: number, exp: number) {
     return decimalAdjust('round', value, exp);
 };
 
+
+function toPercent(numb: number, length: number) {
+    return (numb * 100) / length;
+}
+
+function toPercentHumanize(numb: number, length: number) {
+    return toPercent(numb, length).toFixed(2) + '%';
+}
 
 
 function first(obj: any) {

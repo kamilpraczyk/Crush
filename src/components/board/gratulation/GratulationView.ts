@@ -2,23 +2,18 @@ import React = require('react');
 import dictionary = require('../../../utils/dictionary');
 import GratulationCss = require('./GratulationCss');
 import _ = require('underscore');
-import AppDispatcher = require('../../../dispatcher/AppDispatcher');
-import Constants = require('../../../constants/Constants');
-import BoardStore = require('../../../stores/board/BoardStore');
 import ButtonView = require('../../../components/button/ButtonView');
-import HomeStore = require('../../../stores/home/HomeStore');
-
+import {getState} from '../../../services';
+import {events} from '../../../events';
 const {div} = React.DOM;
 
 
 function render() {
+    const s = getState();
 
-    const state = {
-        points: BoardStore.getPoints().points,
-        home: HomeStore.getStateHome()
-    }
+    const points = s.lessonsCatalog.board.getPoints();
 
-    if (!state.points.isFinished) {
+    if (!points.isFinished) {
         return null;
     }
 
@@ -31,36 +26,29 @@ function render() {
     function getText() {
         return div({
             style: GratulationCss.getText()
-        }, dictionary.GRATULATIONS_TEXT + state.points.scorePercent + dictionary.PERCENT);
+        }, dictionary.GRATULATIONS_TEXT + points.scorePercent + dictionary.PERCENT);
     };
 
     function getButtonContinue() {
         return ButtonView({
             name: dictionary.GRATULATIONS_BUTTON,
             isResponsibleHeight: true,
-            onClick: () => {
-                AppDispatcher.handleViewAction({
-                    actionType: Constants.GREETINGS_CONTINUE
-                });
-            }
+            onClick: () => events.closeStatusBoardEvent.publish()
         });
     };
 
     function getButtonSaveAndContinue() {
-        if (!state.home.user.email || state.points.score === 0) {
+        if (!s.pass.user.email || points.score === 0) {
             return null;
         }
         return ButtonView({
             name: dictionary.GRATULATIONS_SAVE_BUTTON,
             isResponsibleHeight: true,
-            isLoader: state.home.status.process,
+            isLoader: s.pass.status.process,
             onClick: () => {
-                AppDispatcher.handleViewAction({
-                    actionType: Constants.GREETINGS_CONTINUE,
-                    data: {
-                        uid: state.points.uid,
-                        status: state.points.score
-                    }
+                events.saveStatusBoardEvent.publish({
+                    uid: points.uid,
+                    status: points.score
                 });
             }
         });

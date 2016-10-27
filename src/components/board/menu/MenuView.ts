@@ -2,49 +2,74 @@ import React = require('react');
 import MenuCss = require('./MenuCss');
 import _ = require('underscore');
 import ButtonView = require('../../button/ButtonView');
-import AppDispatcher = require('../../../dispatcher/AppDispatcher');
-import Constants = require('../../../constants/Constants');
 import ProgressView = require('./progress/ProgressView');
+import {getState} from '../../../services';
+import {events} from '../../../events';
 const {div} = React.DOM;
 
 interface Item {
     id: string, name?: string, icon?: string, onClick: () => void
 }
 
+
 const prev: Item[] = [{
     id: 'prev',
     icon: MenuCss.icons.left,
-    onClick() {
-        AppDispatcher.handleViewAction({
-            actionType: Constants.BOARD_PREV
-        })
-    }
+    onClick: () => events.onPrevBoard.publish()
 }];
 
 const next: Item[] = [{
     id: 'next',
     icon: MenuCss.icons.right,
-    onClick() {
-        AppDispatcher.handleViewAction({
-            actionType: Constants.BOARD_NEXT
-        })
-    }
+    onClick: () => events.onNextBoard.publish()
 }];
 
 
 const nextRandom: Item[] = [{
     id: 'nextrandom',
     icon: MenuCss.icons.random,
-    onClick() {
-        AppDispatcher.handleViewAction({
-            actionType: Constants.BOARD_NEXT_RANDOM
-        })
-    }
+    onClick: () => events.onNextRandomBoard.publish()
 }];
+
+
+function getMenuButton() {
+    const points = getState().lessonsCatalog.board.getPoints();
+
+    function getIcon() {
+        if (points.isCurrentSuccess)
+            return MenuCss.getClassNameIconSuccess();
+        if (points.isCurrentFail)
+            return MenuCss.getClassNameIconFail();
+        return MenuCss.getClassNameIconUnknown();
+    }
+
+    function getIconColour() {
+        if (points.isCurrentSuccess)
+            return MenuCss.font.color.success;
+        if (points.isCurrentFail)
+            return MenuCss.font.color.fail;
+        return null;
+    }
+
+    return div({
+        style: MenuCss.getMenuItem()
+    },
+        ButtonView({
+            name: points.display,
+            leftIcon: getIcon(),
+            letfIconColour: getIconColour(),
+            isExpandWidth: true,
+            isResponsibleHeight: true,
+            isResponsibleCenter: true,
+            isQuickClick: true,
+            onClick: () => events.showRootMenu.publish()
+        })
+    );
+}
 
 function render(items?: Item[]) {
     items = items || [];
-    items = [].concat(items, prev, nextRandom, next);
+    items = [].concat(items, prev, next, nextRandom);
 
     const buttons = items.map(item => {
         return div({
@@ -66,7 +91,7 @@ function render(items?: Item[]) {
     },
         div({
             style: MenuCss.getMenu()
-        }, buttons),
+        }, buttons, getMenuButton()),
         div({
             style: MenuCss.getProgress()
         }, ProgressView())

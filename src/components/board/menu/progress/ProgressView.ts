@@ -1,30 +1,26 @@
 import React = require('react');
 import ProgressCss = require('./ProgressCss');
-import _ = require('underscore');
-import BoardStore = require('../../../../stores/board/BoardStore');
+import {getState} from '../../../../services';
 const {div} = React.DOM;
 
-function render() {
-    const state = BoardStore.getPoints();
-    let bars: any[] = [];
+function getBars() {
+    const points = getState().lessonsCatalog.board.getPoints();
 
+    return points.boards.map(board => {
+        const completeTrueFalseNone = points.mapStatus[board.id];
+        const isCurrent = board.id === points.board.id;
 
-    for (let i = 0; i < state.points.boards.length; i++) {
-
-        const id = state.points.boards[i].id;
-        const completeTrueFalseNone = state.points.mapStatus[id];
-        const isCurrent = id === state.points.board.id;
-
-        bars.push(div({
-            key: 'bar_' + i,
+        return div({
+            key: board.id,
             style: ProgressCss.getBar(completeTrueFalseNone, isCurrent)
-        }));
-    }
+        })
+    })
+}
 
-
+function render() {
     return div({
         style: ProgressCss.getPanel()
-    }, bars);
+    }, getBars());
 };
 
 export =  render;

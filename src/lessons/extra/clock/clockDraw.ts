@@ -1,5 +1,5 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import {BoardFaces} from '../../interface';
+import {BoardFaces} from '../../../types';
 import {space, viewIds, id, icons, displayIds } from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [viewIds.draw, displayIds.digitalTime];

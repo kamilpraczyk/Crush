@@ -1,21 +1,15 @@
 import React = require('react');
 import HeaderCss = require('./HeaderCss');
-import AppDispatcher = require('../../../dispatcher/AppDispatcher');
-import Constants = require('../../../constants/Constants');
 import ButtonView = require('../../button/ButtonView');
 import TimeView = require('../time/TimeView');
-import {BoardResult} from '../../../lessons/interface';
+import {BoardResult} from '../../../types';
 import {isId} from '../../../lessons/helper/constants';
+import {events} from '../../../events';
 import _ = require('underscore');
 const {div} = React.DOM;
 
 
-function onRead(read: string) {
-    AppDispatcher.handleViewAction({
-        actionType: Constants.READ,
-        read: read
-    });
-}
+
 function getAnswerOrSupport(props: BoardResult) {
     if (props.lessonData.isHelp && props.lessonData.correct && props.lessonData.correct.length) {
         return ButtonView({
@@ -23,11 +17,7 @@ function getAnswerOrSupport(props: BoardResult) {
             isTime: isId.isDigitalTime(props.lessonData.id),
             isResponsibleCenter: true,
             name: props.isSupportShowAnswer ? props.lessonData.correct.join(" ") : null,
-            onClick() {
-                AppDispatcher.handleViewAction({
-                    actionType: Constants.SUPPORT_SHOW_ANSWER
-                });
-            }
+            onClick: () => events.onToogleSupportHelp.publish()
         });
     }
     return null;
@@ -41,7 +31,7 @@ function getHeader(state: BoardResult) {
     if (isId.isAnalogTime(state.lessonData.id)) {
         const time = state.lessonData.name.split(':');
         instructions = div({
-            onClick: () => onRead(state.lessonData.info),
+            onClick: () => events.readEvent.publish(state.lessonData.info),
             style: HeaderCss.getInstructions(state.lessonData.id)
         }, TimeView({
             hour: parseInt(time[0]),
@@ -53,9 +43,7 @@ function getHeader(state: BoardResult) {
             name: state.lessonData.info,
             isInstructions: true,
             isTime: isId.isDigitalTime(state.lessonData.id),
-            onClick() {
-                onRead(state.lessonData.info);
-            }
+            onClick: () => events.readEvent.publish(state.lessonData.info)
         })
     }
 
@@ -65,9 +53,7 @@ function getHeader(state: BoardResult) {
         instructions,
         ButtonView({
             name: state.text,
-            onClick() {
-                onRead(state.text);
-            }
+            onClick: () => events.readEvent.publish(state.text)
         }),
         getAnswerOrSupport(state)
     );

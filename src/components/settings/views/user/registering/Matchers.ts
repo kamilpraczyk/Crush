@@ -6,7 +6,7 @@ import Promise = require("bluebird");
 
 interface Props {
     name: string,
-    login: string,
+    email: string,
     password: string,
     retypePassword: string
 }
@@ -50,7 +50,7 @@ function isRetypedPasswordEntered(p: Props) {
 
 function isEmailEntered(p: Props) {
     return new Promise<void>((resolve, reject) => {
-        if (p.login) {
+        if (p.email) {
             return resolve(null);
         }
         return reject(new Error(dictionary.ERROR_REGISTERING_NO_EMAIL));
@@ -59,7 +59,7 @@ function isEmailEntered(p: Props) {
 
 function isValidEmail(p: Props) {
     return new Promise<void>((resolve, reject) => {
-        if (utils.checkEmail(p.login)) {
+        if (utils.checkEmail(p.email)) {
             return resolve(null);
         }
         return reject(new Error(dictionary.ERROR_REGISTERING_INVALID_EMAIL));

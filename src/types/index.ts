@@ -21,19 +21,24 @@ export interface BoardFace {
 export interface BoardFaces {
     [uid: number]: BoardFace,
     length: number,
-    concat: Function
+    concat: Function,
+    map<U>(callbackfn: (value: BoardFace, index: number, array: BoardFace[]) => U, thisArg?: any): U[];
+    filter(callbackfn: (value: BoardFace, index: number, array: BoardFace[]) => boolean, thisArg?: any): BoardFace[];
 }
+
 
 export interface LessonFace {
     uid?: string,
     name: string,
+    iconSet: string[],
     active: boolean,
     free: boolean,
     lessons: BoardFaces
 }
 
 export interface LessonMapFace {
-    [id: string]: LessonFace
+    [id: string]: LessonFace,
+    //?!?! map<U>(callbackfn: (value: LessonFace, index: string, array: LessonFace[]) => U, thisArg?: any): U[];
 }
 
 
@@ -44,6 +49,18 @@ export interface BoardResult {
     lessonData: BoardFace,
     isCorrect: boolean,
     isSupportShowAnswer: boolean
+}
+
+
+export interface RootFace {
+    id: string,
+    name: string,
+    active: boolean,
+    backUrl: string
+}
+
+export interface RootFaces {
+    [id: string]: RootFace;
 }
 
 

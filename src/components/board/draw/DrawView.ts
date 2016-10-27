@@ -2,12 +2,11 @@ import React = require('react');
 import DrawCss = require('./DrawCss');
 import Signature = require('../../signature/index');
 import MenuView = require('../menu/MenuView');
-import AppDispatcher = require('../../../dispatcher/AppDispatcher');
-import Constants = require('../../../constants/Constants');
-import {BoardResult} from '../../../lessons/interface';
+import {BoardResult} from '../../../types';
 import ButtonView = require('../../button/ButtonView');
 import {isId} from '../../../lessons/helper/constants';
 import HeaderView = require('../header/HeaderView');
+import dictionary = require('../../../utils/dictionary');
 const {div} = React.DOM;
 
 
@@ -17,7 +16,7 @@ function getFooter(onClick: () => void) {
     }, MenuView(
         [{
             id: 'clear',
-            name: 'clear',
+            name: dictionary.SIGNATURE_PAD_CLEAR,
             onClick: onClick
         }]
     ))
@@ -38,7 +37,8 @@ function getBody(props: BoardResult) {
         },
             Signature({
                 id: props.lessonData.id,
-                backgroundColor: DrawCss.background.text.backgroundColor,
+                backgroundColor: DrawCss.themes.signaturePad.background,
+                penColor: DrawCss.themes.signaturePad.color,
                 onGetInterface: onGetInterfaceClear
             })
         )

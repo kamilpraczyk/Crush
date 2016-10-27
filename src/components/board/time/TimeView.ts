@@ -1,10 +1,8 @@
 import React = require('react');
-import AppDispatcher = require('../../../dispatcher/AppDispatcher');
-import Constants = require('../../../constants/Constants');
 import MenuView = require('../menu/MenuView');
 import utils = require('../../../utils/utils');
 import css = require('../../../utils/css/css');
-import {BoardResult} from '../../../lessons/interface';
+import {BoardResult} from '../../../types';
 import _ = require('underscore');
 const {div, canvas} = React.DOM;
 
