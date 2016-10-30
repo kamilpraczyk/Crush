@@ -28,7 +28,8 @@ getNextMonthISOdate,
 getNext7DaysISOdate,
 isBrowserSupported,
 delay, //delay promise
-md5
+md5,
+getBrowser
 };
 
 function delay(time?: number) {
@@ -227,7 +228,8 @@ function union3<T, U, X>(first: T, second: U, third: X): T & U & X {
 
 
 
-function _getBrowser() {
+
+function _getBrowser(): Browser {
     function get_browser_version() {
         /*version will be cut to full number no float*/
         var ua = navigator.userAgent, tem: any = null, M: any = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
@@ -268,10 +270,26 @@ function _getBrowser() {
         version: parseInt(version, 10)
     }
 }
+interface Browser {
+    isOpera: boolean,
+    isFirefox: boolean,
+    isSafari: boolean,
+    isChrome: boolean,
+    isIE: boolean,
+    isEdge: boolean,
+    version: number
+}
+let browser: Browser = null;
 
+function getBrowser() {
+    if (!browser)
+        browser = _getBrowser();
+    return browser;
+}
 
 function isBrowserSupported(): boolean {
-    const b = _getBrowser();
+
+    const b = getBrowser();
     /*var output = 'Detecting browsers:<hr>';
     output += 'isFirefox: ' + b.isFirefox + '<br>';
     output += 'isChrome: ' + b.isChrome + '<br>';
@@ -293,12 +311,6 @@ function isBrowserSupported(): boolean {
     return false;
 }
 
-function isIE() {
-    const b = _getBrowser();
-    if (b.isIE)
-        return true;
-    return false;
-}
 
 
 

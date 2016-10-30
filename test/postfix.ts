@@ -4,11 +4,13 @@ import expect = require('expect.js');
 import {BoardFace} from '../src/types';
 import _ = require("underscore");
 import {multi, space, capital, viewIds, displayIds } from '../src/lessons/helper/constants';
-import {goThrough} from './goThrough';
+import {goThrough, mock} from './goThrough';
 
 describe('Postfix', () => {
 
-
+    beforeEach(() => {
+        mock()
+    });
     describe('when postfix is "." ', () => {
         const isPostfix = (board: BoardFace) => { return board.postfix === "." };
 

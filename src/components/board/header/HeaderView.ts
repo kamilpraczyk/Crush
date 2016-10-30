@@ -24,33 +24,36 @@ function getAnswerOrSupport(props: BoardResult) {
 };
 
 
+function getAnalogTime(state: BoardResult) {
+    if (!isId.isAnalogTime(state.lessonData.id)) return null;
+    const time = state.lessonData.name.split(':');
+    return div({
+        onClick: () => events.readEvent.publish(state.lessonData.info),
+        style: HeaderCss.getInstructions(state.lessonData.id)
+    }, TimeView({
+        hour: parseInt(time[0]),
+        minute: parseInt(time[1])
+    }));
+}
+
+function getInstructions(state: BoardResult) {
+    if (!state.lessonData.info) return null;
+
+    return ButtonView({
+        name: state.lessonData.info,
+        isInstructions: true,
+        isTransparent: true,
+        onClick: () => events.readEvent.publish(state.lessonData.info)
+    })
+}
 
 function getHeader(state: BoardResult) {
-    let instructions: any = null;
-
-    if (isId.isAnalogTime(state.lessonData.id)) {
-        const time = state.lessonData.name.split(':');
-        instructions = div({
-            onClick: () => events.readEvent.publish(state.lessonData.info),
-            style: HeaderCss.getInstructions(state.lessonData.id)
-        }, TimeView({
-            hour: parseInt(time[0]),
-            minute: parseInt(time[1])
-        }));
-    } else if (state.lessonData.info) {
-
-        instructions = ButtonView({
-            name: state.lessonData.info,
-            isInstructions: true,
-            isTime: isId.isDigitalTime(state.lessonData.id),
-            onClick: () => events.readEvent.publish(state.lessonData.info)
-        })
-    }
 
     return div({
         style: HeaderCss.getHeader(state.lessonData.id)
     },
-        instructions,
+        getInstructions(state),
+        getAnalogTime(state),
         ButtonView({
             name: state.text,
             onClick: () => events.readEvent.publish(state.text)

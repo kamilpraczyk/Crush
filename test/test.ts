@@ -4,10 +4,12 @@ import expect = require('expect.js');
 import {BoardFace} from '../src/types';
 import _ = require("underscore");
 import {multi, space, capital, viewIds, displayIds } from '../src/lessons/helper/constants';
-import {goThrough} from './goThrough';
+import {goThrough, mock} from './goThrough';
 
 describe('Lessons -', () => {
-
+    beforeEach(() => {
+        mock()
+    });
 
     it('should have right space when "space" detected in board name ', () => {
         goThrough((board: BoardFace) => {
@@ -51,4 +53,7 @@ describe('Lessons -', () => {
     //is not capitall that should be capital
 
 });
+
+//TODO test: eq, to, mute_to have max 3 items inside
+//TODO build tests with spell checker
 

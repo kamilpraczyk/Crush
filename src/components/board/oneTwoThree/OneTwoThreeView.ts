@@ -16,7 +16,7 @@ function getFooter() {
     }, MenuView())
 }
 
-function getContentLine(state: BoardResult, name: string) {
+function getContentLine(state: BoardResult, name: string, key: number) {
 
     let isFail = false;
     let isSuccess = false;
@@ -29,7 +29,7 @@ function getContentLine(state: BoardResult, name: string) {
     }
 
     return div({
-        key: _.uniqueId('_'),
+        key: 'line' + key,
         style: OneTwoThreeCss.getLine()
     },
         ButtonView({
@@ -46,10 +46,9 @@ function getContentLine(state: BoardResult, name: string) {
 
 function getBodyContent(state: BoardResult) {
 
-    const lines: any = [];
-    _.each(state.generatedList, (o: string) => {
-        lines.push(getContentLine(state, o));
-    });
+    const lines = state.generatedList.map((o, key) => {
+        return getContentLine(state, o, key);
+    })
 
     return div({
         style: OneTwoThreeCss.getBodyContent()

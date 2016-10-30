@@ -1,136 +1,96 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../../types';
-import {space, viewIds, id, icons, capital, getNameMale } from '../../helper/constants';
+import {space, viewIds, id, capital, getNameMale } from '../../helper/constants';
 import explenation = require('./explenation');
 
 const separator = " ";
 const postfix = ".";
 const common = [viewIds.oneTwoThree];
-const placeholder = "Simple Present Tense";
 const title = "Simple Present Tense";
+const info = 'Build the correct sentence.';
+
 const lessons = [
     {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["I", "have", "a big", "house"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: [getNameMale(), "gives me", "a call", "every", "morning"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["She", "enjoys", "playing", "the", "guitar"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["He", "tries", "very", "hard"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["The", "party", "starts", "at 8", "o'clock"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["She", "needs", "help", "right", "now"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["Twice", "a week,", getNameMale(), "cleans", "the car"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
+        id: id(common), title, explenation, info,
         name: separator, postfix: "",
         correct: ["Do", "you", "have", "your passport", "with you?"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["She", "is", "not", "here", "now"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["Every", "twelve months", "the " + capital.places.Earth, "circles", "the " + capital.places.Sun],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["He", "works", "at", capital.places.McDonalds],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
+        id: id(common), title, explenation, info,
         name: separator, postfix: "",
         correct: ["The", "next train", "leaves", "this evening", "at 6p.m."],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["He", "gets up", "early", "in", "the morning"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["I", "do", "not", "write", "a letter"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["The", capital.places.Sun, "rises", "in", "the east"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
+        id: id(common), title, explenation, info,
         name: separator, postfix: "",
         correct: ["Does", "he", "get up", "early", "in the morning?"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["I", "sing", "a song"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["They", "read", "lessons"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
+        id: id(common), title, explenation, info,
         name: separator, postfix: "",
         correct: ["Does", "the " + capital.places.Sun, "rise", "in", "the east?"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: [getNameMale(), "reaches", "home", "in", "time"],
-        explenation: explenation,
-        placeholder: placeholder
     }
-
 ] as BoardFaces
 
 export {

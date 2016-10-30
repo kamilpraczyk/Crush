@@ -1,269 +1,270 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../../types';
-import {space, viewIds, id, icons } from '../../helper/constants';
+import {space, viewIds, id } from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [viewIds.draw];
 const title = 'Irregular Verbs';
+const info = 'Practise your writing: Infinitive - Past Simple - Past Participle.'
 
 const lessons = [
     {
-        id: id(common), title: title,
-        name: "beat - beat - beaten", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "beat - beat - beaten", 
     }, {
-        id: id(common), title: title,
-        name: "become - became - become", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "become - became - become", 
     }, {
-        id: id(common), title: title,
-        name: "begin - began - begun", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "begin - began - begun", 
     }, {
-        id: id(common), title: title,
-        name: "bend - bent - bent", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "bend - bent - bent", 
     }, {
-        id: id(common), title: title,
-        name: "bite - bit - bitten", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "bite - bit - bitten", 
     }, {
-        id: id(common), title: title,
-        name: "blow - blew - blown", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "blow - blew - blown", 
     }, {
-        id: id(common), title: title,
-        name: "break - broke - broken", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "break - broke - broken", 
     }, {
-        id: id(common), title: title,
-        name: "bring - brought - brought", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "bring - brought - brought", 
     }, {
-        id: id(common), title: title,
-        name: "build - built - built", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "build - built - built", 
     }, {
-        id: id(common), title: title,
-        name: "burst - burst - burst", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "burst - burst - burst", 
     }, {
-        id: id(common), title: title,
-        name: "buy - bought - bought", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "buy - bought - bought", 
     }, {
-        id: id(common), title: title,
-        name: "catch - caught - caught", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "catch - caught - caught", 
     }, {
-        id: id(common), title: title,
-        name: "choose - chose - chosen", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "choose - chose - chosen", 
     }, {
-        id: id(common), title: title,
-        name: "come - came - come", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "come - came - come", 
     }, {
-        id: id(common), title: title,
-        name: "cost - cost - cost", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "cost - cost - cost", 
     }, {
-        id: id(common), title: title,
-        name: "cut - cut - cut", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "cut - cut - cut", 
     }, {
-        id: id(common), title: title,
-        name: "dig - dug - dug", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "dig - dug - dug", 
     }, {
-        id: id(common), title: title,
-        name: "do - did - done", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "do - did - done", 
     }, {
-        id: id(common), title: title,
-        name: "draw - drew - drawn", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "draw - drew - drawn", 
     }, {
-        id: id(common), title: title,
-        name: "drink - drank - drunk", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "drink - drank - drunk", 
     }, {
-        id: id(common), title: title,
-        name: "drive - drove - driven", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "drive - drove - driven", 
     }, {
-        id: id(common), title: title,
-        name: "eat - ate - eaten", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "eat - ate - eaten", 
     }, {
-        id: id(common), title: title,
-        name: "fall - fell - fallen", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "fall - fell - fallen", 
     }, {
-        id: id(common), title: title,
-        name: "feed - fed - fed", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "feed - fed - fed", 
     }, {
-        id: id(common), title: title,
-        name: "feel - felt - felt", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "feel - felt - felt", 
     }, {
-        id: id(common), title: title,
-        name: "fight - fought - fought", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "fight - fought - fought", 
     }, {
-        id: id(common), title: title,
-        name: "find - found - found", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "find - found - found", 
     }, {
-        id: id(common), title: title,
-        name: "fly - flew - flown", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "fly - flew - flown", 
     }, {
-        id: id(common), title: title,
-        name: "forget - forgot - forgotten", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "forget - forgot - forgotten", 
     }, {
-        id: id(common), title: title,
-        name: "freeze - froze - frozen", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "freeze - froze - frozen", 
     }, {
-        id: id(common), title: title,
-        name: "give - gave - given", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "give - gave - given", 
     }, {
-        id: id(common), title: title,
-        name: "go - went - gone", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "go - went - gone", 
     }, {
-        id: id(common), title: title,
-        name: "grow - grew - grown", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "grow - grew - grown", 
     }, {
-        id: id(common), title: title,
-        name: "have - had - had", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "have - had - had", 
     }, {
-        id: id(common), title: title,
-        name: "hear - heard - heard", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "hear - heard - heard", 
     }, {
-        id: id(common), title: title,
-        name: "hide - hid - hidden", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "hide - hid - hidden", 
     }, {
-        id: id(common), title: title,
-        name: "hit - hit - hit", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "hit - hit - hit", 
     }, {
-        id: id(common), title: title,
-        name: "hold - held - held", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "hold - held - held", 
     }, {
-        id: id(common), title: title,
-        name: "hurt - hurt - hurt", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "hurt - hurt - hurt", 
     }, {
-        id: id(common), title: title,
-        name: "keep - kept - kept", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "keep - kept - kept", 
     }, {
-        id: id(common), title: title,
-        name: "know - knew - known", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "know - knew - known", 
     }, {
-        id: id(common), title: title,
-        name: "lead - led - led", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "lead - led - led", 
     }, {
-        id: id(common), title: title,
-        name: "leave - left - left", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "leave - left - left", 
     }, {
-        id: id(common), title: title,
-        name: "let - let - let", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "let - let - let", 
     }, {
-        id: id(common), title: title,
-        name: "light - lit - lit", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "light - lit - lit", 
     }, {
-        id: id(common), title: title,
-        name: "lose - lost - lost", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "lose - lost - lost", 
     }, {
-        id: id(common), title: title,
-        name: "make - made - made", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "make - made - made", 
     }, {
-        id: id(common), title: title,
-        name: "mean - meant - meant", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "mean - meant - meant", 
     }, {
-        id: id(common), title: title,
-        name: "meet - met - met", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "meet - met - met", 
     }, {
-        id: id(common), title: title,
-        name: "pay - paid - paid", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "pay - paid - paid", 
     }, {
-        id: id(common), title: title,
-        name: "put - put - put", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "put - put - put", 
     }, {
-        id: id(common), title: title,
-        name: "read - read - read", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "read - read - read", 
     }, {
-        id: id(common), title: title,
-        name: "ride - rode - ridden", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "ride - rode - ridden", 
     }, {
-        id: id(common), title: title,
-        name: "ring - rang - rung", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "ring - rang - rung", 
     }, {
-        id: id(common), title: title,
-        name: "rise - rose - risen", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "rise - rose - risen", 
     }, {
-        id: id(common), title: title,
-        name: "run - ran - run", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "run - ran - run", 
     }, {
-        id: id(common), title: title,
-        name: "say - said - said", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "say - said - said", 
     }, {
-        id: id(common), title: title,
-        name: "see - saw - seen", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "see - saw - seen", 
     }, {
-        id: id(common), title: title,
-        name: "sell - sold - sold", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "sell - sold - sold", 
     }, {
-        id: id(common), title: title,
-        name: "send - sent - sent", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "send - sent - sent", 
     }, {
-        id: id(common), title: title,
-        name: "shake - shook - shaken", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "shake - shook - shaken", 
     }, {
-        id: id(common), title: title,
-        name: "shine - shone - shone", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "shine - shone - shone", 
     }, {
-        id: id(common), title: title,
-        name: "shoot - shot - shot", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "shoot - shot - shot", 
     }, {
-        id: id(common), title: title,
-        name: "shut - shut - shut", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "shut - shut - shut", 
     }, {
-        id: id(common), title: title,
-        name: "sing - sang - sung", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "sing - sang - sung", 
     }, {
-        id: id(common), title: title,
-        name: "sink - sank - sunk", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "sink - sank - sunk", 
     }, {
-        id: id(common), title: title,
-        name: "sit - sat - sat", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "sit - sat - sat", 
     }, {
-        id: id(common), title: title,
-        name: "sleep - slept - slept", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "sleep - slept - slept", 
     }, {
-        id: id(common), title: title,
-        name: "speak - spoke - spoken", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "speak - spoke - spoken", 
     }, {
-        id: id(common), title: title,
-        name: "spread - spread - spread", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "spread - spread - spread", 
     }, {
-        id: id(common), title: title,
-        name: "stand - stood - stood", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "stand - stood - stood", 
     }, {
-        id: id(common), title: title,
-        name: "steal - stole - stolen", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "steal - stole - stolen", 
     }, {
-        id: id(common), title: title,
-        name: "stick - stuck - stuck", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "stick - stuck - stuck", 
     }, {
-        id: id(common), title: title,
-        name: "strike - struck - struck", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "strike - struck - struck", 
     }, {
-        id: id(common), title: title,
-        name: "sweep - swept - swept", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "sweep - swept - swept", 
     }, {
-        id: id(common), title: title,
-        name: "swim - swam - swum", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "swim - swam - swum", 
     }, {
-        id: id(common), title: title,
-        name: "take - took - taken", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "take - took - taken", 
     }, {
-        id: id(common), title: title,
-        name: "teach - taught - taught", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "teach - taught - taught", 
     }, {
-        id: id(common), title: title,
-        name: "tear - tore - torn", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "tear - tore - torn", 
     }, {
-        id: id(common), title: title,
-        name: "tell - told - told", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "tell - told - told", 
     }, {
-        id: id(common), title: title,
-        name: "think - thought - thought", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "think - thought - thought", 
     }, {
-        id: id(common), title: title,
-        name: "throw - threw - thrown", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "throw - threw - thrown", 
     }, {
-        id: id(common), title: title,
-        name: "wake - woke - woken", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "wake - woke - woken", 
     }, {
-        id: id(common), title: title,
-        name: "wear - wore - worn", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "wear - wore - worn", 
     }, {
-        id: id(common), title: title,
-        name: "win - won - won", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "win - won - won", 
     }, {
-        id: id(common), title: title,
-        name: "write - wrote - written", explenation: explenation
+        id: id(common), title, explenation, info,
+        name: "write - wrote - written", 
     }] as BoardFaces
 
 

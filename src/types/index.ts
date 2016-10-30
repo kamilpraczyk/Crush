@@ -9,12 +9,11 @@ export interface BoardFace {
     id: string,
     title: string,
     name: string,
+    info: string,
     correct?: Array<string>,
     incorrect?: Array<string>,
     explenation?: Explenation,
-    info?: string,
     isHelp?: boolean,
-    placeholder?: string  //e.g Simple Present Tense
     postfix?: string //add dot sometimes when sentence is finish
 }
 
@@ -28,7 +27,7 @@ export interface BoardFaces {
 
 
 export interface LessonFace {
-    uid?: string,
+    uid: string,
     name: string,
     iconSet: string[],
     active: boolean,

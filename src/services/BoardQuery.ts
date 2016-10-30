@@ -27,9 +27,8 @@ function getCorrectSentence(query: QueryResult) {
         read = name;
 
     } else if (isId.isOneTwoThree(query.board.id)) {
-        //put placeholder if no answer jet 
         if (!query.selectedAnswerQueue.length) {
-            read = query.board.placeholder;  //e.g Simple Present Tense
+            read = name;
         } else {
             read = query.selectedAnswerQueue.join(name);
             if (isCompletedAndCorrect(query)) {

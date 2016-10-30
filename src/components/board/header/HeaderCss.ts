@@ -16,11 +16,7 @@ const headerShrink: CSSProperties = {
 export = utils.union(css, {
 
     getHeader(id: string) {
-        let style = css.get(css.layout.getHeader(), header);
-        if (isId.isAnalogTime(id)) {
-            style = css.get(style, headerShrink);
-        }
-        return style;
+        return css.get(css.layout.getHeader(), header, isId.isAnalogTime(id) ? headerShrink : null);
     },
 
     getInstructions: css.layout.getInstructions,

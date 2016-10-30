@@ -6,7 +6,7 @@ const button: CSSProperties = {
     //NO minHeight - IE don't like it
     display: 'flex',
     backgroundColor: css.button.backgroundColor.normal,
-    backgroundImage: css.button.backgroundImage.normal,
+    backgroundImage: css.button.backgroundImage.normal(),
     color: css.button.color.normal,
     border: css.button.border.normal,
     MozBorderRadius: css.button.radius.borderRadius,
@@ -29,6 +29,7 @@ const button: CSSProperties = {
     minWidth: '15vw',
     maxWidth: '100%',
 }
+
 const pressed: CSSProperties = {
     position: 'relative',
     top: 1,
@@ -74,10 +75,18 @@ const isFail: CSSProperties = {
 const isGuess: CSSProperties = {
     backgroundColor: css.button.backgroundColor.normalGuess,
     border: css.button.border.normalGuess,
-    backgroundImage: css.button.backgroundImage.normalGuess
+    backgroundImage: css.button.backgroundImage.normalGuess()
 }
 
-
+const isTransparent: CSSProperties = {
+    backgroundColor: css.button.backgroundColor.transparent,
+    border: css.button.border.transparent,
+    backgroundImage: css.button.backgroundImage.transparent()
+}
+const isInstructions: CSSProperties = {
+    color: css.font.color.info,
+    border: 'none',
+}
 
 const disabled: CSSProperties = {
     backgroundColor: css.button.backgroundColor.disabled,
@@ -135,18 +144,25 @@ const leftIcon: CSSProperties = {
 const leftIconActive: CSSProperties = {
     color: '#fff',
 }
-const iconSet: CSSProperties = {
+const iconSets: CSSProperties = {
     display: 'flex',
     width: '100%',
     flexGrow: 1,
-    paddingTop: '1vh',
-    paddingBottom: '1vh',
-    paddingLeft: '1vw',
-    paddingRight: '1vw',
+    paddingTop: 3,
+    paddingBottom: 3,
     flexFlow: 'row wrap',
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: css.font.fontSize.micro
+}
+
+const iconSet: CSSProperties = {
+    display: 'block',
+    width: 32,
+    height: 32,
+    backgroundImage: '',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat'
 }
 
 const numbers: CSSProperties = {
@@ -211,15 +227,14 @@ export = utils.union(css, {
         if (o.isTime)
             style = css.get(style, css.fontFamily.time);
 
+        if (o.isTransparent)
+            style = css.get(style, isTransparent);
+
         if (o.backUrl)
-            style = css.get(style, { backgroundImage: 'url(' + o.backUrl + ')' });
+            style = css.get(style, { backgroundImage: `url(${o.backUrl})` });
 
         if (o.isInstructions)
-            style = css.get(style, { color: 'red' });//TODO
-
-        if (o.isTransparent)
-            style = css.get(style, { backgroundColor: 'transparent' });
-
+            style = css.get(style, isInstructions);
 
         if (o.disabled)
             style = css.get(style, disabled);
@@ -243,8 +258,11 @@ export = utils.union(css, {
         return css.get(leftIcon, isActive ? leftIconActive : null, letfIconColour ? { color: letfIconColour } : null);
     },
 
-    getIconSet() {
-        return css.get(iconSet);
+    getIconSets() {
+        return css.get(iconSets);
+    },
+    getIconSet(icon: string) {
+        return css.get(iconSet, { backgroundImage: `url(${icon})` });
     },
 
     getNumbers(isActive: boolean) {

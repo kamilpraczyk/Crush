@@ -21,7 +21,7 @@ const title: CSSProperties = {
     backgroundColor: 'transparent'
 }
 const info: CSSProperties = {
-    color: '#777',
+    color: css.font.color.info,
     textAlign: 'left',
     fontSize: '0.7em',
     marginBottom: '1vh',
@@ -39,7 +39,7 @@ const item: CSSProperties = {
     backgroundColor: 'transparent'
 }
 const itemInfo: CSSProperties = {
-    color: '#999',
+    color: css.font.color.info,
     fontSize: '0.8em',
     paddingLeft: '1vh',
     paddingRight: '1vh',

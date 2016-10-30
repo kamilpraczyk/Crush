@@ -82,8 +82,7 @@ const boxInput: CSSProperties = {
     width: '100%'
 }
 const error: CSSProperties = {
-    color: '#ff0050'
-
+    color: css.font.color.fail
 }
 
 export = utils.union(css, {

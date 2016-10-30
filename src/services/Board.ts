@@ -64,7 +64,7 @@ function createPoint(l: LessonFace, index: number, mapStatus: MapStatus): Points
 
 function getRandomNotCompletedId(l: LessonFace, currentId: string, mapStatus: MapStatus) {
     /*Get random id of next lesson and skip current lesson */
-    const mapKeys = _.keys(mapStatus).concat(currentId);
+    const mapKeys = _.keys(mapStatus).concat([currentId]);
     const boardKeys = l.lessons.map(board => board.id);
     const diff = _.difference(boardKeys, mapKeys);
 

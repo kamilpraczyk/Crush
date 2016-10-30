@@ -1,11 +1,11 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../types';
 import _ = require('underscore');
-import {space, viewIds, id, getRest, icons} from '../helper/constants';
+import {space, viewIds, id, getRest} from '../helper/constants';
 import explenation = require('./explenation');
 
+const common = [viewIds.fourPictures];
 const s = 'img/animals/';
-
 const a = {
     camel: s + 'camel.png',
     cat: s + 'cat.png',
@@ -20,69 +20,59 @@ const a = {
 }
 
 const title = 'Animals';
-const common = [viewIds.fourPictures];
+const info = 'Choose the correct animal.'
 
 const lessons = [
     {
-        id: id(common), title: title,
+        id: id(common), title, info, explenation,
         name: 'Camel',
         correct: [a.camel],
         incorrect: getRest(a, a.camel),
-        explenation: explenation
     }, {
-        id: id(common), title: title,
+        id: id(common), title, info, explenation,
         name: 'Cat',
         correct: [a.cat],
         incorrect: getRest(a, a.cat),
-        explenation: explenation
     }, {
-        id: id(common), title: title,
+        id: id(common), title, info, explenation,
         name: "Cow",
         correct: [a.cow],
         incorrect: getRest(a, a.cow),
-        explenation: explenation
     }, {
-        id: id(common), title: title,
-        name: "Donky",
+        id: id(common), title, info, explenation,
+        name: "Donkey",
         correct: [a.donky],
         incorrect: getRest(a, a.donky),
-        explenation: explenation
     }, {
-        id: id(common), title: title,
+        id: id(common), title, info, explenation,
         name: "Lamb",
         correct: [a.lamb],
         incorrect: getRest(a, a.lamb),
-        explenation: explenation
     }, {
-        id: id(common), title: title,
+        id: id(common), title, info, explenation,
         name: "Lion",
         correct: [a.lion],
         incorrect: getRest(a, a.lion),
-        explenation: explenation
     }, {
-        id: id(common), title: title,
+        id: id(common), title, info, explenation,
         name: "Rat",
         correct: [a.rat],
         incorrect: getRest(a, a.rat),
-        explenation: explenation
     }, {
-        id: id(common), title: title,
+        id: id(common), title, info, explenation,
         name: "Rabbit",
         correct: [a.rabbit],
         incorrect: getRest(a, a.rabbit),
-        explenation: explenation
     }, {
-        id: id(common), title: title,
+        id: id(common), title, info, explenation,
         name: "Tiger",
         correct: [a.tiger],
         incorrect: getRest(a, a.tiger),
-        explenation: explenation
     }, {
-        id: id(common), title: title,
+        id: id(common), title, info, explenation,
         name: "Wolf",
         correct: [a.wolf],
         incorrect: getRest(a, a.wolf),
-        explenation: explenation
     }
 ] as BoardFaces
 

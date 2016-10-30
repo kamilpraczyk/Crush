@@ -4,10 +4,12 @@ import expect = require('expect.js');
 import {BoardFace} from '../src/types';
 import _ = require("underscore");
 import {multi, space, capital, viewIds, displayIds } from '../src/lessons/helper/constants';
-import {goThrough} from './goThrough';
+import {goThrough, mock} from './goThrough';
 
 describe('Repetition -', () => {
-
+    beforeEach(() => {
+        mock()
+    });
     it('correct - are not repeated (skip displayIds.areRepeated)', () => {
         goThrough((board: BoardFace) => {
             if (board.correct && board.id.indexOf(displayIds.areRepeated) === -1) {

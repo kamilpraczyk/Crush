@@ -11,7 +11,7 @@ interface List {
     i?: string //html info
     s?: string //separator line
     eq?: string[] //array of html separated by '='
-    to?: string[] //array of html separated by '-'
+    to?: string[] //array of html separated by ' '
     mute_to?: string[]
 }
 
@@ -28,94 +28,114 @@ const cleanText = function (l: string) {
     return utils.replaceAll(l, '<b>', '');
 }
 
-export const tList = (o: TList) => {
-    let aTitle: any = null;
-    if (o.t) {
-        const onClick = () => utils.voice.read(cleanText(o.t));
-        aTitle = button({
-            style: rendererCss.title(!!onClick),
-            dangerouslySetInnerHTML: {
-                __html: o.t
-            },
-            onClick: onClick
-        });
-    }
+function getTitle(o: TList) {
+    if (!o.t) return null;
+    const onClick = () => utils.voice.read(cleanText(o.t));
+    return button({
+        style: rendererCss.title(!!onClick),
+        dangerouslySetInnerHTML: {
+            __html: o.t
+        },
+        onClick
+    });
+}
 
-    let aInfo: any = null;
-    if (o.i) {
-        const onClick = () => utils.voice.read(cleanText(o.i));
-        aInfo = button({
-            style: rendererCss.info(!!onClick),
-            dangerouslySetInnerHTML: {
-                __html: o.i
-            },
-            onClick: onClick
-        });
-    }
-    const aList = o.list.map((item) => {
-        if (item.l) {
-            const onClick = () => utils.voice.read(cleanText(item.l));
-            return button({
-                key: _.uniqueId('_'),
-                style: rendererCss.item(!!onClick),
-                dangerouslySetInnerHTML: {
-                    __html: item.l
-                },
-                onClick: onClick
-            });
-        } else if (item.i) {
-            const onClick = () => utils.voice.read(cleanText(item.i));
-            return button({
-                key: _.uniqueId('_'),
-                style: rendererCss.itemInfo(!!onClick),
-                dangerouslySetInnerHTML: {
-                    __html: item.i
-                },
-                onClick: onClick
-            })
-        } else if (item.eq || item.to || item.mute_to) {
-            const to = item.eq || item.to || item.mute_to;
+function getInfo(o: TList) {
+    if (!o.i) return null;
+    const onClick = () => utils.voice.read(cleanText(o.i));
+    return button({
+        style: rendererCss.info(!!onClick),
+        dangerouslySetInnerHTML: {
+            __html: o.i
+        },
+        onClick
+    });
+}
 
-            const getTo = function (eq: string) {
-                const onClick = !!item.mute_to ? null : () => utils.voice.read(cleanText(eq));
-                return button({
-                    key: _.uniqueId('_'),
-                    style: rendererCss.itemTo(!!onClick),
-                    dangerouslySetInnerHTML: {
-                        __html: eq
-                    },
-                    onClick: onClick
-                });
-            }
+function getLine(item: List, key: number) {
+    if (!item.l) return null;
+    const onClick = () => utils.voice.read(cleanText(item.l));
+    return button({
+        key: 'line' + key,
+        style: rendererCss.item(!!onClick),
+        dangerouslySetInnerHTML: {
+            __html: item.l
+        },
+        onClick
+    });
+}
 
-            const getSeparator = function () {
-                const sep = item.eq ? '=' : item.to || item.mute_to ? ' ' : '-'
-                return div({
-                    style: rendererCss.itemSep()
-                }, sep);
-            }
-            /*NODE: if array contain 3 items the middle one is a separator */
-            const v1 = getTo(to[0]);
-            const v2 = to.length >= 3 ? getTo(to[1]) : getSeparator();
-            const v3 = to.length >= 3 ? getTo(to[2]) : getTo(to[1]);
+function getLineInfo(item: List, key: number) {
+    if (!item.i) return null;
+    const onClick = () => utils.voice.read(cleanText(item.i));
+    return button({
+        key: 'lineInfo' + key,
+        style: rendererCss.info(!!onClick),
+        dangerouslySetInnerHTML: {
+            __html: item.i
+        },
+        onClick
+    });
+}
 
-            return div({
-                style: rendererCss.wrapperItemTo(),
-                key: _.uniqueId('_'),
-            }, v1, v2, v3);
-
-        } else if (item.s) {
-            return div({
-                style: rendererCss.itemLineSep(),
-                key: _.uniqueId('_'),
-            })
-        }
-        return null;
+function getLineSeparator(item: List, key: number) {
+    if (!item.s) return null;
+    return div({
+        style: rendererCss.itemLineSep(),
+        key: 'separ' + key
     })
+}
+
+function getTo(text: string, isMute: boolean) {
+    const onClick = isMute ? null : () => utils.voice.read(cleanText(text));
+    return button({
+        style: rendererCss.itemTo(!!onClick),
+        dangerouslySetInnerHTML: {
+            __html: text
+        },
+        onClick
+    });
+}
+
+
+function getEQ(to: string[], key: number, sep: string, isMute: boolean) {
+
+
+    const separator = div({
+        style: rendererCss.itemSep()
+    }, sep);
+    /*NODE: if array contain 3 items the middle one is a separator */
+    const v1 = getTo(to[0], isMute);
+    const v2 = to.length >= 3 ? getTo(to[1], isMute) : separator;
+    const v3 = to.length >= 3 ? getTo(to[2], isMute) : getTo(to[1], isMute);
 
     return div({
-        key: _.uniqueId('_'),
-    }, aTitle, aInfo, _.compact(aList))
+        style: rendererCss.wrapperItemTo(),
+        key: 'eq' + key
+    }, v1, v2, v3);
+}
+
+function getList(o: TList) {
+    return _.compact(o.list.map((item, key) => {
+        if (item.l) return getLine(item, key);
+        else if (item.i) return getLineInfo(item, key);
+        else if (item.eq) return getEQ(item.eq, key, '=', false);
+        else if (item.to) return getEQ(item.to, key, ' ', false);
+        else if (item.mute_to) return getEQ(item.mute_to, key, ' ', true);
+        else if (item.s) return getLineSeparator(item, key);
+        return null;
+    }))
+}
+
+export const tList = (o: TList) => {
+
+    return div({
+        key: _.uniqueId('key') // this will be produced once on start app
+    },
+        getTitle(o),
+        getInfo(o),
+        getList(o)
+    )
 }
 
 

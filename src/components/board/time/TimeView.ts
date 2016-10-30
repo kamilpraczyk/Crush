@@ -83,12 +83,12 @@ function drawHand(ctx: any, pos: any, length: any, width: any) {
 
 function getSize() {
     const s = css.getSize();
-    let x = (s.x / 3);
-    let y = (s.y / 3);
+    let x = (s.x / 5);
+    let y = (s.y / 5);
 
     let size = Math.min(x, y);
-    size = Math.max(x, 100); //not smaller than 100px;
-    size = Math.min(x, 150); //bigger than 150px
+    size = Math.max(x, 50); //not smaller than 50px;
+    size = Math.min(x, 100); //bigger than 150px
     return utils.round10(size, 1);
 }
 
@@ -100,7 +100,7 @@ interface Props {
 }
 
 
-class TimeView extends React.Component<Props, {}>{
+class TimeView extends React.Component<Props, void>{
     private canvas: any = null;
     private ctx: any = null;
     private radius: any = null;

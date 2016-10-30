@@ -14,7 +14,7 @@ const panel: CSSProperties = {
 const item: CSSProperties = {
     display: 'inline-flex',
     flexGrow: 1,
-    backgroundColor: '#ddd',
+    backgroundColor: 'transparent',
     borderLeft: '1px solid gray',
 }
 

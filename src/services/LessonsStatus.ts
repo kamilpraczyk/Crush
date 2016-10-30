@@ -1,11 +1,9 @@
 /// <reference path="../../typings/tsd.d.ts" />
-import {isId, icons} from '../lessons/helper/constants';
 import _ = require('underscore');
 import dictionary = require('../utils/dictionary');
 import css = require('../utils/css/css');
 import {getState} from '../services';
 import utils = require('../utils/utils');
-
 
 
 interface MapStatus {

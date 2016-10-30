@@ -7,6 +7,7 @@ import ButtonView = require('../../../button/ButtonView');
 import {LessonMapFace, LessonFace} from '../../../../types';
 import {getState} from '../../../../services';
 import {events} from '../../../../events';
+import css = require('../../../../utils/css/css');
 const {div} = React.DOM;
 
 
@@ -14,11 +15,11 @@ function render() {
     const s = getState();
     const pass = s.pass.getStatus();
 
-    const buttons = _.map(s.lessonsCatalog.getMapLessons(), item => {
+    const buttons = s.lessonsCatalog.getSortedLessons().map(item => {
         return ButtonView({
             key: item.uid,
             ref: item.uid,
-            iconSet: item.iconSet,
+            iconSet: item.free ? item.iconSet : [css.iconsSets.lock].concat(item.iconSet),
             name: item.name,
             numbersStatus: s.lessonsStatus.getStatusByUid(item.uid),
             numbers: item.lessons.length,

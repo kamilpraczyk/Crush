@@ -22,15 +22,6 @@ export const displayIds = {
     noSpace: 'n'
 }
 
-export const icons = {
-    draw: 'moon-quill',
-    fourPictures: 'moon-images',
-    fourWords: 'moon-table',
-    radio: 'moon-insert-template',
-    oneTwoThree: 'moon-bubble',
-    inradio: 'moon-contrast'
-}
-
 export const defaultUser = {
     name: 'kamil',
     email: 'kamil.praczyk1@gmail.com',
@@ -115,7 +106,7 @@ export const capital = {
     names: _names,
 
     places: {
-        Antartica: 'Antartica',
+        Antarctica: 'Antarctica',
         Sun: 'Sun',//the
         Moon: 'Moon',//the
         Earth: 'Earth',//the
@@ -252,6 +243,11 @@ export const capital = {
     }
 
 };
+//Safari not supported?
+// implement search?
+//todo scroll is not working - same place.
+//todo analog clock is to big!? -not working
+//irregular verbs - two answers selected?!  - 'name' have to be in the middle button
 // TODO would be nice if track bad answers or mark them to favourite and review later?
 //TODO - answers have different buttons from info and main button -name.
 //TODO - IE11 grammar fix layout

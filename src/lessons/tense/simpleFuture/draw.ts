@@ -1,5 +1,5 @@
 //TODO
-I will go to the shops.
+/*I will go to the shops.
 I will do it tomorrow.
 She will not be attending school today.
 I wonder what will happen?
@@ -99,4 +99,4 @@ I expect Tom will pass his exam.
  f it begins to rain, I wll certainly nead an umbrella.
  He will tell him when she calls.
  I will be in Athens tomorrow.
- I wll be at a conference next month.
+ I wll be at a conference next month.*/

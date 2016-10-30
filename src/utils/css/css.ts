@@ -13,6 +13,7 @@ const fontFamilyCharcoal = 'charcoal';
 
 
 import {isId} from '../../lessons/helper/constants';
+import {getBrowser} from '../../utils/utils';
 
 const micro = constFont - 1.8 + constPoint;
 const XS = constFont - 0.8 + constPoint;
@@ -57,6 +58,25 @@ function isMobile() {
     return false;
 }
 
+//NOT the best solution for gradient, should we include some library for prefixes?
+function getBacgroundGradient(start: string, stop: string) {
+    const browser = getBrowser();
+    if (browser.isOpera) {
+        return `-o-linear-gradient(top, ${start}, ${stop})`;
+    } else if (browser.isIE) {
+        // 'linear-gradient(to bottom, start, stop);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=start, endColorstr=stop);'
+        return `-ms-linear-gradient(top, ${start}, ${stop})`;
+    } else if (browser.isEdge) {
+        return `-ms-linear-gradient(top, ${start}, ${stop})`;
+    } else if (browser.isFirefox) {
+        return `-moz-linear-gradient(top, ${start}, ${stop})`;
+    } else if (browser.isChrome) {
+        return `-webkit-gradient(linear, left top, left bottom, from(${start}), to(${stop}))`;
+    }
+
+    return `gradient( ${start}, ${stop})`;
+}
+
 const style = {
 
     get: get,
@@ -76,6 +96,17 @@ const style = {
         fail: 'moon-thumbs-up2',
         menu: 'moon-menu2',
         help: 'moon-support'
+    },
+    //http://www.iconarchive.com/show/crystal-clear-icons-by-everaldo.4.html
+    iconsSets: {
+        inradio: 'img/iconSet/App-kbounce-icon.png',
+        fourWords: 'img/iconSet/App-klickety-game-icon.png',
+        draw: 'img/iconSet/Edit-icon.png',
+        fourPictures: 'img/iconSet/Photo-icon.png',
+        oneTwoThree: 'img/iconSet/App-kfouleggs-game-icon.png',
+        radio: 'img/iconSet/App-kcmdf-cubes-icon.png',
+
+        lock: 'img/iconSet/Action-lock-silver-icon.png'
     },
 
     backUrl: {
@@ -104,6 +135,7 @@ const style = {
         },
         color: {
             normal: 'white',
+            info: '#819bcb',
             hint: '#777',
             merge: '#555658',
             success: '#00FF00',
@@ -124,6 +156,7 @@ const style = {
         border: {
             normal: borderWidth + 'px solid #313131',
             normalGuess: borderWidth + 'px solid #313131',
+            transparent: borderWidth + 'px solid #313131',
             active: borderWidth + 'px solid #2b8182',
             focus: borderWidth + 'px solid #313131',
             success: borderWidth + 'px solid #00FF00',
@@ -131,15 +164,17 @@ const style = {
             disabled: borderWidth + 'px solid #313131'
         },
         backgroundColor: {
-            normal: '#252526',
+            normal: '#49494a',
             normalGuess: 'transparent',
+            transparent: 'transparent',
             active: '#00999D',
             focus: '#272822',
-            disabled: '#252526'
+            disabled: '#49494a'
         },
         backgroundImage: {
-            normalGuess: 'linear-gradient(rgba(0,0,0, 0.1),rgba(7,7,7, 0.1))',
-            normal: 'linear-gradient(#4b4c4e, #1f1f21)',
+            normalGuess: () => getBacgroundGradient('#819bcb', '#536f9d'),
+            transparent: () => getBacgroundGradient('transparent', 'transparent'),
+            normal: () => getBacgroundGradient('#616161', '#383737'),
             active: null as string,
             focus: null as string,
             disabled: null as string,

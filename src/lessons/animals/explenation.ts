@@ -9,7 +9,7 @@ exp.push(tList({
         { l: "Camel" },
         { l: "Cat" },
         { l: "Cow" },
-        { l: "Donky" },
+        { l: "Donkey" },
         { l: "Lamb" },
         { l: "Lion" },
         { l: "Rat" },

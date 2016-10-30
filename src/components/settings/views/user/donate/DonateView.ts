@@ -27,7 +27,7 @@ function getPayPal() {
                 display: 'block',
                 color: 'white',
                 backgroundColor: css.button.backgroundColor.normal,
-                backgroundImage: css.button.backgroundImage.normal,
+                backgroundImage: css.button.backgroundImage.normal(),
                 borderRadius: css.button.radius.borderRadius,
                 border: css.button.border.normal,
                 paddingBottom: '2vh',
@@ -53,7 +53,7 @@ function render() {
 
     const s = getState();
     const pass = s.pass.getStatus();
-    
+
     if (!pass.user.email || !pass.user.isPrime) {
         return null;
     }

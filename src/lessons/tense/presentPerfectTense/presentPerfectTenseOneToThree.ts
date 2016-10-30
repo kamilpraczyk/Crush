@@ -1,142 +1,99 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import {BoardFaces} from '../../../types';
-import {space, viewIds, id, icons, capital, getNameMale } from '../../helper/constants';
+import {space, viewIds, id, capital, getNameMale } from '../../helper/constants';
 import explenation = require('./explenation');
 
 const separator = " ";
 const postfix = ".";
 const common = [viewIds.oneTwoThree];
-const placeholder = "Present Perfect Tense";
 const title = "Present Perfect Tense";
+const info = 'Build the correct sentence.';
 const lessons = [
     {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["The", "child", "has", "gone", "to bed"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["They", "have", "bought", "a new", "car"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["You", "have", "told", "a lie"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["They", "have", "gone", "to", "school"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["I", "have", "started", "a job"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["You", "have", "not", "told", "a lie"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["They", "have", "not", "gone", "to school"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
+        id: id(common), title, explenation, info,
         name: separator, postfix: "",
         correct: ["Have", "they", "gone", "to", "school?"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
+        id: id(common), title, explenation, info,
         name: separator, postfix: "",
         correct: ["Have", "they", "bought", "a new", "car?"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["It", "has", "rained"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
+        id: id(common), title, explenation, info,
         name: separator, postfix: "",
         correct: ["Have", "I", "started", "a job?"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: [getNameMale(), "has", "not", "left", "for home"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
+        id: id(common), title, explenation, info,
         name: separator, postfix: "",
         correct: ["Have", "you", "told", "a lie", "?"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
+        id: id(common), title, explenation, info,
         name: separator, postfix: "",
         correct: ["Has", "it", "rained", "?"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
+        id: id(common), title, explenation, info,
         name: separator, postfix: "",
         correct: ["Has", getNameMale(), "left", "for home", "?"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["They", "have", "not", "bought", "a new car"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["The", "guests", "have", "arrived"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["The", "guests", "have", "not", "arrived"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["It", "has", "not", "rained"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
-        name: separator, postfix: postfix,
+        id: id(common), title, explenation, info, postfix,
+        name: separator,
         correct: ["I", "have", "not", "started", "a job"],
-        explenation: explenation,
-        placeholder: placeholder
     }, {
-        id: id(common), title: title,
+        id: id(common), title, explenation, info,
         name: separator, postfix: "",
         correct: ["Have", "the", "guests", "arrived", "?"],
-        explenation: explenation,
-        placeholder: placeholder
     }
-
 ] as BoardFaces
 
 export {

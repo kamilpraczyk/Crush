@@ -30,18 +30,14 @@ export function EventFactory<Payload>(diagnosticName: string): BaseEvent<Payload
         // Pub-Sub implmentations typically do things like: cache handlers in case callers mutate, send events on nexttick, 
         // don't store null handlers, de-duplicate handlers, handle publish recursion...but we don't need any of this (yet).
         handlers.forEach(handler => {
-            try { handler(payload); }
-            catch (err) {
-                logError(err, payload);
-            }
+            handler(payload);
         });
     }
 
     // Best attempt at error message, but try not to cause an error itself. 
     function logError(err: Error, payload: Payload) {
         let payloadStr = payload && Object.keys(payload).join(',');
-        try { payloadStr = JSON.stringify(payload) } catch (e) { }
-        console.error(`Publish of event ${diagnosticName} with payload ${payloadStr} threw `, err);
+        payloadStr = JSON.stringify(payload)
     }
 
     return {

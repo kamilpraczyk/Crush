@@ -57,19 +57,18 @@ function getLeftIcon(props: Props) {
 }
 
 
-
 function getIconSet(props: Props) {
     if (!props.iconSet || !props.iconSet.length) return null;
 
     const set = props.iconSet.map(icon => {
         return div({
+            style: ButtonCss.getIconSet(icon),
             key: icon,
-            className: icon
         });
     });
 
     return div({
-        style: ButtonCss.getIconSet()
+        style: ButtonCss.getIconSets()
     }, set);
 }
 
