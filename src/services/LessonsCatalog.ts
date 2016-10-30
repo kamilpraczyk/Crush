@@ -100,7 +100,7 @@ class LessonsCatalog {
     }
 
     getLesson(uid?: string) {
-        return this.map[this.activeUid || uid];
+        return this.map[uid || this.activeUid]; //TODO
     }
 
     getUid() {

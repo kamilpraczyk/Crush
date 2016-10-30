@@ -7,7 +7,7 @@ const separator = " ";
 const postfix = ".";
 const common = [viewIds.oneTwoThree];
 const title = "Simple Present Tense";
-const info = 'Build the correct sentence.';
+const info = 'Build the correct sentence in Simple Present Tense.';
 
 const lessons = [
     {

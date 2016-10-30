@@ -172,7 +172,7 @@ const style = {
             disabled: '#49494a'
         },
         backgroundImage: {
-            normalGuess: () => getBacgroundGradient('#819bcb', '#536f9d'),
+            normalGuess: () => getBacgroundGradient('#636363', '#454444'),
             transparent: () => getBacgroundGradient('transparent', 'transparent'),
             normal: () => getBacgroundGradient('#616161', '#383737'),
             active: null as string,

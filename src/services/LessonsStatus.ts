@@ -16,17 +16,32 @@ interface Status {
     entriesCorrect: number,
     entriesIncorrect: number,
     entriesCorrectPercentage: string,
-    finishedLessons: number
+    finishedLessons: number,
+    iconSetStatus: { name: number, icon: string }[]
 }
 
 function getCountNewStatus(map: MapStatus) {
     const lessonsCatalog = getState().lessonsCatalog;
     let entriesCorrect = 0;
     let entriesIncorrect = 0;
+    const statusIcons: MapStatus = {};
 
     _.mapObject(map, (nr, uid) => {
         entriesCorrect += nr;
-        entriesIncorrect += (lessonsCatalog.getLesson(uid).lessons.length - nr);
+        const lesson = lessonsCatalog.getLesson(uid);
+        if (lesson) {
+            entriesIncorrect += (lesson.lessons.length - nr);
+            lesson.iconSet.map(icon => {
+                if (!statusIcons[icon]) statusIcons[icon] = 0;
+                ++statusIcons[icon];
+            });
+        }
+
+    });
+
+    const iconSetStatus: { name: number, icon: string }[] = [];
+    _.mapObject(statusIcons, (nr, icon) => {
+        iconSetStatus.push({ name: nr, icon });
     });
 
     const status: Status = {
@@ -35,7 +50,8 @@ function getCountNewStatus(map: MapStatus) {
         entriesCorrect,
         entriesIncorrect,
         entriesCorrectPercentage: utils.toPercentHumanize(entriesCorrect, lessonsCatalog.getLength()),
-        finishedLessons: _.intersection(lessonsCatalog.getAllUids(), _.keys(map)).length
+        finishedLessons: _.intersection(lessonsCatalog.getAllUids(), _.keys(map)).length,
+        iconSetStatus
     }
     return status;
 }

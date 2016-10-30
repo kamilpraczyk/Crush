@@ -5,7 +5,7 @@ import explenation = require('./explenation');
 import _ = require("underscore");
 const common = [viewIds.radio];
 const title = "Present Perfect Tense";
-const info = 'Build the correct sentence.';
+const info = 'Build the correct sentence in Present Perfect Tense.';
 
 const lessons = [
     {

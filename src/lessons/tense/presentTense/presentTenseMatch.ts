@@ -5,7 +5,7 @@ import explenation = require('./explenation');
 
 const common = [viewIds.radio];
 const title = "Simple Present Tense";
-const info = 'Build the correct sentence.';
+const info = 'Build the correct sentence in Simple Present Tense.';
 
 //continue with next http://www.grammar-quizzes.com/prest-diagnostic.html TODO
 const lessons = [

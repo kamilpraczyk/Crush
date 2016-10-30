@@ -4,7 +4,7 @@ import {space, viewIds, id, capital, displayIds, getNameFemale, getNameMale} fro
 import explenation = require('./explenation');
 const common = [viewIds.radio, displayIds.noSpace];
 const title = "Writing speech";
-const info = 'Use correct prefix.'
+const info = 'Use the correct prefix.'
 
 const lessons = [
     {

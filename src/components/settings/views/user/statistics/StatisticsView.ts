@@ -61,6 +61,22 @@ function getLessonsFinished(props: Props) {
         }, + status.finishedLessons));
 }
 
+function getIconStatistics(props: Props) {
+    const status = props.lessonsStatus.getStatus();
+    return status.iconSetStatus.map(item => {
+        return div({
+            key: item.icon,
+            style: StatisticsCss.getIconSets()
+        },
+            div({
+                style: StatisticsCss.getIcon(item.icon)
+            }),
+            div({
+                style: StatisticsCss.getIconNumber()
+            }, item.name)
+        )
+    })
+}
 
 
 function getLegend(text: string, colour: string) {
@@ -94,7 +110,11 @@ function getBox(props: Props) {
         ),
         div({
             style: CommonCss.getBoxLine()
-        }, getLessonsFinished(props))
+        }, getLessonsFinished(props)),
+        div({
+            style: CommonCss.getBoxSplitToCenter()
+        }, getIconStatistics(props))
+
     );
 }
 

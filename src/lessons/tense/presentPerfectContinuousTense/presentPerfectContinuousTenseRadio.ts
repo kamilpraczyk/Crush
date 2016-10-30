@@ -5,7 +5,7 @@ import explenation = require('./explenation');
 const separator = " ";
 const common = [viewIds.radio];
 const title = "Present Perfect Continuous Tense";
-const info = 'Build the correct sentence.';
+const info = 'Build the correct sentence in Present Perfect Continuous Tense.';
 const lessons = [
     {
         id: id(common), title, explenation, info,

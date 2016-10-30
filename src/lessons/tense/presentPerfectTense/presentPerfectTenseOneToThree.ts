@@ -7,7 +7,7 @@ const separator = " ";
 const postfix = ".";
 const common = [viewIds.oneTwoThree];
 const title = "Present Perfect Tense";
-const info = 'Build the correct sentence.';
+const info = 'Build the correct sentence in Present Perfect Tense.';
 const lessons = [
     {
         id: id(common), title, explenation, info, postfix,

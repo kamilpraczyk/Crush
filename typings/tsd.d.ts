@@ -19,7 +19,7 @@ interface UnderscoreStatic {
 interface Window {
     speechSynthesis: any,
 }
-interface SpeechSynthesisUtterance {}
+interface SpeechSynthesisUtterance { }
 
 interface CSSProperties extends __React.CSSProperties {
     justifyContent?: string;
@@ -40,6 +40,23 @@ interface CSSProperties extends __React.CSSProperties {
     WebkitTransition?: string;
     MozTransition?: string;
     OTransition?: string;
+
+    WebkitTransform?: string;
+    MozTransform?: string;
+    MsTransform?: string;
+    OTransform?: string;
+
+    WebkitAnimation?: string;
+    MozAnimation?: string;
+    MsAnimation?: string;
+    OAnimation?: string;
+    animation?: string;
+
+    WebkitTransformOrigin?: string;
+    MozTransformOrigin?: string;
+    MsTransformOrigin?: string;
+    OTtransformOrigin?: string;
+    transformOrigin?: string;
 }
 
 

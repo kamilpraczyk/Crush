@@ -4,7 +4,7 @@ import {space, viewIds, id, capital, displayIds} from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [viewIds.radio, displayIds.noSpace];
 const title = "Prefixes: re, dis, pre, un";
-const info = 'Use correct prefix.'
+const info = 'Use the correct prefix.'
 
 const lessons = [
     {
