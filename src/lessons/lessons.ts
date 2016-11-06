@@ -99,7 +99,7 @@ function getLessons(lessonsCatalog: LessonsCatalog) {
         lessonsCatalog.add(true, 'MINE1', mineYour);
         lessonsCatalog.add(true, 'MINE2', myselfYourself);
 
-        lessonsCatalog.setActiveLesson('A___0');
+        lessonsCatalog.setActiveLesson('CL_03');
 
         return resolve(lessonsCatalog);
     });

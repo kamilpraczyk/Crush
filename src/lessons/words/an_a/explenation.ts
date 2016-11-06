@@ -9,9 +9,9 @@ exp.push(tList({
     list: [
         { l: "The sound of a word's first letter shows you whether to say <p>a</p> or <p>an</p>." },
         { l: "If the word starts with a vowel sound, use <p>an</p>" },
-        { l: "if it starts with a consonat sound, use <p>a</p>." },
+        { l: "if it starts with a consonant sound, use <p>a</p>." },
         { l: "Be careful - it's about the way things <p>sound</p>. So you say 'an hour' not 'a hour'." },
-        { l: "<p>H</p> is a consonat, but in the word <p>hour</p> it makes a vowel sound." },
+        { l: "<p>H</p> is a consonant, but in the word <p>hour</p> it makes a vowel sound." },
     ]
 }));
 

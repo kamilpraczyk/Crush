@@ -16,6 +16,7 @@ export interface RootFace {
     name: string,
     backUrl: string,
     active: boolean,
+    scroll: number
 }
 
 export interface RootFaces {
@@ -28,24 +29,28 @@ const _rootList: RootFaces = {
         name: dictionary.menu.USER,
         backUrl: css.backUrl.user,
         active: false,
+        scroll: 0
     },
     [RootType.lessons]: {
         id: RootType.lessons,
         name: dictionary.menu.LESSONS,
         backUrl: css.backUrl.lessons,
         active: true,
+        scroll: 0
     },
     [RootType.explenation]: {
         id: RootType.explenation,
         name: dictionary.menu.GRAMMAR,
         backUrl: css.backUrl.grammar,
         active: false,
+        scroll: 0
     },
     [RootType.close]: {
         id: RootType.close,
         name: dictionary.menu.PRACTISE,
         backUrl: css.backUrl.menu,
         active: false,
+        scroll: 0
     }
 };
 
@@ -58,6 +63,17 @@ class RootMenu {
 
     constructor(id: string) {
         this.activeId = id;
+    }
+    setScrollPosition(top: number) {
+        this.rootList[this.activeId].scroll = top;
+    }
+
+    resetExplenationScroll() {
+        this.rootList[RootType.explenation].scroll = 0;
+    }
+
+    getScrollPosition() {
+        return this.rootList[this.activeId].scroll;
     }
 
     getRootMenu() {

@@ -9,7 +9,10 @@ const source = {
     updateLastLogin: '/updateLastLogin.php',
     emailGreeting: '/emailGreeting.php',
     updateStatus: '/updateStatus.php',
-    readStatus: '/readStatus.php'
+    readStatus: '/readStatus.php',
+    notify: '/notify.php',
+    cancelPage: '/cancel.html',
+    successPage: '/success.html'
 }
 
 

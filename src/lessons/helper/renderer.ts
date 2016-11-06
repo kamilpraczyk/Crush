@@ -127,8 +127,23 @@ function getList(o: TList) {
     }))
 }
 
-export const tList = (o: TList) => {
+function logExpTest(o: TList) {
+    o.i && console.info(o.i.toString());
+    o.t && console.info(o.t.toString());
 
+    if (o.list) {
+        o.list.map(item => {
+            item.l && console.info(item.l.toString());
+            item.i && console.info(item.i.toString());
+            item.eq && console.info(item.eq.join(' '));
+            item.to && console.info(item.to.join(' '));
+            item.mute_to && console.info(item.mute_to.join(' '));
+        })
+    }
+}
+
+export const tList = (o: TList) => {
+    //logExpTest(o);
     return div({
         key: _.uniqueId('key') // this will be produced once on start app
     },

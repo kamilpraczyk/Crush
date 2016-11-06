@@ -83,12 +83,14 @@ function drawHand(ctx: any, pos: any, length: any, width: any) {
 
 function getSize() {
     const s = css.getSize();
-    let x = (s.x / 5);
-    let y = (s.y / 5);
+    const x = (s.x / 5);
+    const y = (s.y / 5);
 
     let size = Math.min(x, y);
     size = Math.max(x, 50); //not smaller than 50px;
-    size = Math.min(x, 100); //bigger than 150px
+    if (size > 150) {
+        size = 150;
+    }
     return utils.round10(size, 1);
 }
 
@@ -105,6 +107,7 @@ class TimeView extends React.Component<Props, void>{
     private ctx: any = null;
     private radius: any = null;
     private interval: any = null;
+    private lastRadius = 0;
 
     constructor(props: Props) {
         super(props);
@@ -116,16 +119,28 @@ class TimeView extends React.Component<Props, void>{
     }
 
     componentDidMount() {
+        this.drawClock();
+    }
+
+    componentDidUpdate() {
+        this.drawClock();
+    }
+    drawClock() {
+        clearInterval(this.interval);
         this.canvas = ReactDOM.findDOMNode(this.refs["canvas"]);
         this.ctx = this.canvas.getContext("2d");
         this.radius = this.canvas.height / 2;
+        if (this.lastRadius) {
+            this.ctx.translate(-this.lastRadius, -this.lastRadius); //reset before change
+        }
         this.ctx.translate(this.radius, this.radius);
-        this.radius = this.radius * 0.90;
+        this.lastRadius = 0 + this.radius;
         this.draw();
         this.interval = setInterval(this.draw, 1000);
     }
+
     draw() {
-        drawClock(this.ctx, this.radius, this.props.hour, this.props.minute);
+        drawClock(this.ctx, this.radius * 0.90, this.props.hour, this.props.minute);
     }
 
     render() {

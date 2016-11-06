@@ -64,7 +64,7 @@ exp.push(tList({
 exp.push(tList({
     t: "7:00",
     list: [
-        { l: "It's 7o'clock." },
+        { l: "It's 7 o'clock." },
     ]
 }));
 

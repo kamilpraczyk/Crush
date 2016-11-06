@@ -38,10 +38,10 @@ function render() {
 
     const props = getProps();
 
-    if (!props.pass.user.isPrime) {
+    if (!props.pass.user.isPrime && !props.pass.user.valid_to) {//never subscribed before
         return null;
     }
-
+    //still subscribed or expired:
     return div({
         style: CommonCss.getPanel()
     }, div({

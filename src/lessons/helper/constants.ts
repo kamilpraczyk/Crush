@@ -245,8 +245,6 @@ export const capital = {
 };
 //Safari not supported?
 // implement search?
-//todo scroll is not working - same place.
-//todo analog clock is to big!? -not working
 //irregular verbs - two answers selected?!  - 'name' have to be in the middle button
 // TODO would be nice if track bad answers or mark them to favourite and review later?
 //TODO - answers have different buttons from info and main button -name.

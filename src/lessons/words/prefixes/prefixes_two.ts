@@ -96,7 +96,12 @@ const lessons = [
         id: id(common), title, explenation, info,
         name: space + "card",
         correct: ["dis"],
-        incorrect: ["un", "re", "pre"],//TODO make 1 more
+        incorrect: ["un", "re", "pre"],
+    }, {
+        id: id(common), title, explenation, info,
+        name: space + "run",
+        correct: ["re"],
+        incorrect: ["un", "dis", "pre"],
     }
 ] as BoardFaces
 

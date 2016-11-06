@@ -21,10 +21,10 @@ function onRootMenuEvent(id: string) {
     publishRerender();
 }
 
-
 function onLoadNewLessonEvent(uid: string) {
     lessonsCatalog.setActiveLesson(uid);
     rootMenu.setRootMenuTo(RootType.explenation);
+    rootMenu.resetExplenationScroll();
     publishRerender();
 }
 
@@ -124,6 +124,11 @@ function onSubscribeOnServer(valid_to: string) {
 }
 
 
+function onScrollPosition(top: number) {
+    rootMenu.setScrollPosition(top);
+    //do not rerender
+}
+
 
 class APIState {
 
@@ -151,8 +156,8 @@ class APIState {
             events.onChoosePicture.subscribe(setUserAnswer),
             events.onChooseRadio.subscribe(setUserAnswer),
             events.onChooseOneTwoThree.subscribe(setUserAnswer),
-            events.onToogleSupportHelp.subscribe(onToogleSupportHelp)
-
+            events.onToogleSupportHelp.subscribe(onToogleSupportHelp),
+            events.scrollPosition.subscribe(onScrollPosition)
 
         ];
     }

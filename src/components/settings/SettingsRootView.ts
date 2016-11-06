@@ -8,10 +8,11 @@ import SwitcherView = require('./views/switcher/SwitcherView');
 import ExplenationView = require('./views/explenation/ExplenationView');
 import UserView = require('./views/user/UserView');
 import {RootFace} from '../../types';
-import {rootMenu, RootType} from '../../services';
+import {getState, RootType} from '../../services';
 import {events} from '../../events';
+import ReactDOM = require('react-dom');
 const {div} = React.DOM;
-
+const scrollRef = 'scrollRef';
 
 function getItem(item: RootFace) {
     return ButtonView({
@@ -27,7 +28,8 @@ function getItem(item: RootFace) {
 }
 
 function getList() {
-    return _.map(rootMenu.getRootMenu(), item => {
+    const s = getState();
+    return _.map(s.rootMenu.getRootMenu(), item => {
         return div({
             key: item.id,
             style: SettingsRootCss.getItem(),
@@ -41,10 +43,17 @@ function getMenu() {
     }, getList());
 }
 
+function updatePosition(e: any) {
+    events.scrollPosition.publish(e.target.scrollTop);
+}
+
+const throttled = _.throttle(updatePosition, 800);
+
 function getMain() {
+    const s = getState();
 
     function getMainView() {
-        switch (rootMenu.getActiveId()) {
+        switch (s.rootMenu.getActiveId()) {
             case RootType.lessons: return SwitcherView();
             case RootType.explenation: return ExplenationView();
             case RootType.user: return UserView();
@@ -53,18 +62,46 @@ function getMain() {
     }
 
     return div({
-        style: SettingsRootCss.getMain()
+        style: SettingsRootCss.getMain(),
+        onScroll: throttled,
+        ref: scrollRef
     }, getMainView());
 }
 
 function render() {
+    const s = getState();
+    if (s.rootMenu.isMinimalized()) {
+        return null;
+    }
     return div({
-        style: SettingsRootCss.getPanel(rootMenu.isMinimalized())
+        style: SettingsRootCss.getPanel()
     }, getMain(), getMenu());
 }
 
 
-export =  render;
+class View extends React.Component<void, void>{
+
+    refs: any
+    constructor() {
+        super();
+    }
+
+    componentDidUpdate() {
+        const region = ReactDOM.findDOMNode(this.refs[scrollRef]);
+        if (region) {
+            const s = getState();
+            region.scrollTop = s.rootMenu.getScrollPosition();
+        }
+    }
+
+    render() {
+        return render();
+    }
+};
+
+export =  React.createFactory(View);
+
+
 
 
 

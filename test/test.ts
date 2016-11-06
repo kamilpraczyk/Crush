@@ -54,5 +54,4 @@ describe('Lessons -', () => {
 
 });
 
-//TODO test: eq, to, mute_to have max 3 items inside
 

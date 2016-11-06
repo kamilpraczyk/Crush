@@ -34,7 +34,6 @@ exp.push(tList({
         { to: ["raise", "raising"] },
         { to: ["revile", "reviling"] },
         { to: ["save", "saving"] },
-        { to: ["smoothe", "smoothing"] },
         { to: ["taste", "tasting"] },
         { to: ["glue", "gluing"] },
         { to: ["rue", "ruing"] },

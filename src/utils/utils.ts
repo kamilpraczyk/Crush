@@ -49,16 +49,22 @@ function isValidISODate(date: string) {
     return /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/.test(date);
 }
 
-function howManyDaysLeft(date: string): number { //ISO 2016-12-30
+
+var _MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+// a and b are javascript Date objects
+function howManyDaysLeft(date: string) {
+    // Discard the time and time-zone information.
     if (date) {
-        var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-        var firstDate = new Date();
-        var secondDate = new Date(date);
-        return Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));
+        var a = new Date();
+        var b = new Date(date);
+        var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+        var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+        return Math.floor((utc2 - utc1) / _MS_PER_DAY);
     }
     return 0;
 }
-
 
 
 function getISOdate(date?: Date) {

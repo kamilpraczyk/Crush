@@ -4,6 +4,7 @@ import {init, clear, lessonsCatalog, lessonsStatus, pass, RootType, rootMenu} fr
 
 function getState() {
     return {
+        rootMenu,
         lessonsCatalog,
         lessonsStatus,
         pass
@@ -16,6 +17,5 @@ init,
 clear,
 lessonsCatalog,
 RootType,
-rootMenu
 };
 

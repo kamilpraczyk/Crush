@@ -28,7 +28,7 @@ exp.push(tList({
     t: "Positive sentence.",
     list: [
         { l: "You <p>have been waiting</p> here for two hours." },
-        //{ l: "" }
+        { l: "I <p>have been living</p>." }
     ]
 }));
 
@@ -36,7 +36,7 @@ exp.push(tList({
     t: "Negative sentence.",
     list: [
         { l: "You <p>have not been waiting</p> here for two hours." },
-        //  { l: "" } //TOdo
+        { l: "I <p>have not been living</p>." }
     ]
 }));
 
@@ -44,7 +44,7 @@ exp.push(tList({
     t: "Interrogative sentence.",
     list: [
         { l: "<p>Have</p> you <p>been waiting</p> here for two hours?" },
-        // { l: "" }
+        { l: "<p>Have I been living</p>?" }
     ]
 }));
 

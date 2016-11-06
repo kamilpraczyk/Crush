@@ -5,6 +5,7 @@ export const unsubscribe = (unsubscribes: Array<() => void>) => unsubscribes && 
 
 
 export const events = {
+    scrollPosition: EventFactory<number>('scrollPosition'),
     onLogin: EventFactory<{ email: string, password: string }>('onLogin'),
     onLogOut: VoidEventFactory('onLogOut'),
     onToogleRegisterView: VoidEventFactory('onToogleRegisterView'),

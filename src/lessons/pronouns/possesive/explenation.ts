@@ -23,7 +23,7 @@ exp.push(tList({
         { to: ["Is this <p>your</p> bag?", "No, it's <p>hers</p>."] },
         { to: ["<p>His</p> name is Bob", "<p>Hers</p> is Joanna."] },
         { to: ["<p>My</p> name is Sue", "<p>His</p> is Bob."] },
-        { to: ["<p>Our</p> dog is friendly", "<p>Theirs</p> is agressive."] }
+        { to: ["<p>Our</p> dog is friendly", "<p>Theirs</p> is aggressive."] }
     ]
 }));
 

@@ -4,6 +4,7 @@ import dictionary = require('../../../../../utils/dictionary');
 import React = require('react');
 import CommonCss = require('../CommonCss');
 import ButtonView = require('../../../../../components/button/ButtonView');
+import {getPayPal} from '../../../../../components/button/PayPalButton';
 import {getState} from '../../../../../services';
 const {div, label, input} = React.DOM;
 import utils = require('../../../../../utils/utils');
@@ -26,6 +27,7 @@ function getButtonSubmit(props: Props, text: string, valid_to: string) {
         onClick: () => events.onSubscribeOnServer.publish(valid_to)
     });
 }
+
 
 function getStatusText(props: Props) {
     if (props.pass.subscribe.error) {
@@ -53,9 +55,33 @@ function render() {
 
     const box = div({ style: CommonCss.getBox() },
         div({ style: CommonCss.getBoxSplit() },
-            getButtonSubmit(props, dictionary.SUBMIT_BUTTON_SUBSCRIBING_ONE_YEAR, utils.getNextYearISOdate()),
-            getButtonSubmit(props, dictionary.SUBMIT_BUTTON_SUBSCRIBING_ONE_MONTH, utils.getNextMonthISOdate()),
-            getButtonSubmit(props, dictionary.SUBMIT_BUTTON_SUBSCRIBING_ONE_WEEK, utils.getNext7DaysISOdate()),
+
+            getPayPal({
+                code: "8WMXFQDNG4H7Y",
+                name: dictionary.SUBMIT_BUTTON_SUBSCRIBING_ONE_YEAR,
+                user: props.pass.user.email,
+                valid: utils.getNextYearISOdate()
+            }),
+            getPayPal({
+                code: "YPLK2MRG5WTNW",
+                name: dictionary.SUBMIT_BUTTON_SUBSCRIBING_ONE_MONTH,
+                user: props.pass.user.email,
+                valid: utils.getNextMonthISOdate()
+            }),
+            getPayPal({
+                code: "AD64JSC44JR66",
+                name: dictionary.SUBMIT_BUTTON_SUBSCRIBING_ONE_WEEK,
+                user: props.pass.user.email,
+                valid: utils.getNext7DaysISOdate()
+            }),
+            getPayPal({ //todo comment
+                code: "4PBFNAL7VPDDG",
+                name: '1p subscription test',
+                user: props.pass.user.email,
+                valid: utils.getNext7DaysISOdate()
+            }),
+            // todo comment
+            getButtonSubmit(props, '0p subscription test', utils.getNext7DaysISOdate()), //TODO TEST simple pay button for 0.01p
 
             div({ style: CommonCss.getBoxLine(true) },
                 getStatusText(props)

@@ -7,22 +7,18 @@ const panel: CSSProperties = {
     position: 'absolute',
     zIndex: 2,
     top: 0,
-    right: 0,
+    left: 0,
     color: css.font.color.normal,
     backgroundColor: 'rgba(0,0,0,0.9)',
 
     width: '100%',
     height: '100%',
     display: 'flex',
-    flexDirection: 'row',
+    flexFlow: 'row nowrap',
     alignItems: 'stretch',
     alignContent: 'stretch',
     fontSize: css.font.fontSize.XL,
 
-    WebkitTransition: 'right .4s ease-in-out .2s',
-    MozTransition: 'right .4s ease-in-out .2s',
-    OTransition: 'right .4s ease-in-out .2s',
-    transition: 'right .4s ease-in-out .2s',
     backgroundImage: css.themes.standard.backgroundImageRead,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat'
@@ -30,7 +26,6 @@ const panel: CSSProperties = {
 const wid = 22;
 const main: CSSProperties = {
     display: 'flex',
-    flexGrow: 7,
     flexDirection: 'row',
     alignItems: 'stretch',
     height: '100%',
@@ -40,14 +35,13 @@ const main: CSSProperties = {
 }
 const menu: CSSProperties = {
     display: 'flex',
+    height: '100%',
     marginBottom: '2px',
-    flexGrow: 1,
     flexDirection: 'column',
     alignItems: 'stretch',
     alignContent: 'stretch',
     width: wid + '%',
 }
-
 
 
 const item: CSSProperties = {
@@ -60,8 +54,8 @@ const item: CSSProperties = {
 
 export = utils.union(css, {
 
-    getPanel(isMinimalized: boolean) {
-        return css.get(panel, isMinimalized ? { right: '-100%' } : { right: 0 });
+    getPanel() {
+        return css.get(panel);
     },
     getMain() {
         return main;

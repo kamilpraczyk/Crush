@@ -30,6 +30,9 @@ function getView() {
 
 
 function render() {
+    const s = getState();
+    if (!s.rootMenu.isMinimalized()) return null;
+
     return div({
         style: BoardCss.getPanel()
     },
