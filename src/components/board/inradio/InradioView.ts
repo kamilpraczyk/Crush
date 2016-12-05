@@ -3,10 +3,10 @@ import InradioCss = require('./InradioCss');
 import MenuView = require('../menu/MenuView');
 import HeaderView = require('../header/HeaderView');
 import ButtonView = require('../../button/ButtonView');
-import {BoardResult} from '../../../types';
-import {space} from '../../../lessons/helper/constants';
+import { BoardResult } from '../../../types';
+import { space } from '../../../lessons/helper/constants';
 import _ = require('underscore');
-import {events} from '../../../events';
+import { events } from '../../../events';
 const {div} = React.DOM;
 
 
@@ -17,36 +17,25 @@ function getFooter() {
     }, MenuView());
 }
 
-function getBody(state: BoardResult) {
-
-    function getItems(state: BoardResult) {
-        return state.generatedList.map((name: string, index: number) => {
-
-            let isFail = false;
-            let isSuccess = false;
-            if (state.selectedAnswer === name) {
-                if (state.isCorrect) {
-                    isSuccess = true;
-                } else {
-                    isFail = true;
-                }
-            }
-
-            return ButtonView({
-                key: name + index,
-                name: name,
-                isFail: isFail,
-                isResponsibleCenter: true,
-                isSuccess: isSuccess,
-                isGuess: true,
-                onClick: () => events.onChooseRadio.publish(name)
-            });
+function getList(state: BoardResult) {
+    const list = state.generatedList.map((name, index) => {
+        return ButtonView({
+            key: name + index,
+            name,
+            isFail: state.selectedAnswer === name && !state.isCorrect,
+            isSuccess: state.selectedAnswer === name && state.isCorrect,
+            isResponsibleCenter: true,
+            isGuess: true,
+            onClick: () => events.onChooseRadio.publish(name)
         });
-    }
+    });
 
-    const list = div({
+    return div({
         style: InradioCss.getList()
-    }, getItems(state));
+    }, list);
+}
+
+function getBody(state: BoardResult) {
 
 
     if (state.text.indexOf(space) === -1) {
@@ -85,7 +74,7 @@ function getBody(state: BoardResult) {
             style: InradioCss.getBody()
         }, div({
             style: InradioCss.getBodyContent()
-        }, firstPart, list, lastPart));
+        }, firstPart, getList(state), lastPart));
     }
 };
 

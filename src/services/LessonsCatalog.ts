@@ -1,8 +1,8 @@
 /// <reference path="../../typings/tsd.d.ts" />
-import {LessonMapFace, LessonFace, BoardFaces, BoardFace} from '../types';
-import {isId} from '../lessons/helper/constants';
+import { LessonMapFace, LessonFace, BoardFaces, BoardFace } from '../types';
+import { isId } from '../lessons/helper/constants';
 import _ = require('underscore');
-import {Board} from './Board';
+import { Board } from './Board';
 import css = require('../utils/css/css');
 
 
@@ -12,11 +12,12 @@ function getIconsByIdLesson(lessons: BoardFaces) {
     lessons.map(lesson => {
         const id = lesson.id;
         if (isId.isDraw(id)) i.push(css.iconsSets.draw);
-        if (isId.isFourPictures(id)) i.push(css.iconsSets.fourPictures)
-        if (isId.isFourWords(id)) i.push(css.iconsSets.fourWords)
-        if (isId.isInradio(id)) i.push(css.iconsSets.inradio)
-        if (isId.isRadio(id)) i.push(css.iconsSets.radio)
-        if (isId.isOneTwoThree(id)) i.push(css.iconsSets.oneTwoThree)
+        if (isId.isFourPictures(id)) i.push(css.iconsSets.fourPictures);
+        if (isId.isFourWords(id)) i.push(css.iconsSets.fourWords);
+        if (isId.isInradio(id)) i.push(css.iconsSets.inradio);
+        if (isId.isRadio(id)) i.push(css.iconsSets.radio);
+        if (isId.isMultiRadio(id)) i.push(css.iconsSets.multiRadio);
+        if (isId.isOneTwoThree(id)) i.push(css.iconsSets.oneTwoThree);
     });
     return _.chain(i).compact().uniq().value();
 }
@@ -120,6 +121,6 @@ class LessonsCatalog {
 
 
 export {
-LessonsCatalog
+    LessonsCatalog
 }
 

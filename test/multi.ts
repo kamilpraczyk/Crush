@@ -1,28 +1,20 @@
 /// <reference path="../typings/tsd.d.ts" />
 import sinon = require('sinon');
 import expect = require('expect.js');
-import {BoardFace} from '../src/types';
 import _ = require("underscore");
-import {multi, space, capital, viewIds, displayIds } from '../src/lessons/helper/constants';
-import {goThrough, mock} from './goThrough';
+import { multi } from '../src/lessons/helper/constants';
+import { goThrough, mock } from './goThrough';
 
 describe('Multi -', () => {
-    beforeEach(() => {
-        mock()
-    });
 
-    it('name  - should not contain "multi"', () => {
-        goThrough((board: BoardFace) => {
-            if (board.name.indexOf(multi) !== -1) {
-                throw new Error('name should not have multi')
-            }
-        });
-    });
+    beforeEach(() => mock());
+
+    it('name  - should not contain "multi"', () => goThrough(board => expect(board.name).to.not.contain(multi)));
 
 
     it('correct - should have right space when "multi" detected', () => {
-        goThrough((board: BoardFace) => {
-            _.each(board.correct, (correct) => {
+        goThrough(board => {
+            board.correct && board.correct.map(correct => {
                 if (correct.indexOf(multi) !== -1) {
                     expect(correct).to.contain(' ' + multi + ' ');
                     expect(correct).to.not.contain('  ');
@@ -32,11 +24,11 @@ describe('Multi -', () => {
     });
 
     it('incorrect - should have right space when "multi" detected', () => {
-        goThrough((board: BoardFace) => {
-            _.each(board.incorrect, (correct) => {
-                if (correct.indexOf(multi) !== -1) {
-                    expect(correct).to.contain(' ' + multi + ' ');
-                    expect(correct).to.not.contain('  ');
+        goThrough(board => {
+            board.incorrect && board.incorrect.map(incorrect => {
+                if (incorrect.indexOf(multi) !== -1) {
+                    expect(incorrect).to.contain(' ' + multi + ' ');
+                    expect(incorrect).to.not.contain('  ');
                 }
             });
         });

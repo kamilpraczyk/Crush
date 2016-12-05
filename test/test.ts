@@ -1,18 +1,16 @@
 /// <reference path="../typings/tsd.d.ts" />
 import sinon = require('sinon');
 import expect = require('expect.js');
-import {BoardFace} from '../src/types';
+import { BoardFace } from '../src/types';
 import _ = require("underscore");
-import {multi, space, capital, viewIds, displayIds } from '../src/lessons/helper/constants';
-import {goThrough, mock} from './goThrough';
+import { multi, space, capital, viewIds, displayIds } from '../src/lessons/helper/constants';
+import { goThrough, mock } from './goThrough';
 
 describe('Lessons -', () => {
-    beforeEach(() => {
-        mock()
-    });
+    beforeEach(() => mock());
 
     it('should have right space when "space" detected in board name ', () => {
-        goThrough((board: BoardFace) => {
+        goThrough(board => {
             if (board.name.indexOf(space) !== -1) {
                 if (board.name.length > space.length) { // skip simple space
 

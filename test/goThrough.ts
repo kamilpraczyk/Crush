@@ -1,6 +1,6 @@
 /// <reference path="../typings/tsd.d.ts" />
-import {BoardFace} from '../src/types';
-import {init, clear, getState} from '../src/services';
+import { BoardFace } from '../src/types';
+import { init, clear, getState } from '../src/services';
 import _ = require("underscore");
 
 
@@ -15,10 +15,9 @@ function goThrough(test: (board: BoardFace) => void) {
     })
 }
 
-function mock() {
-    
-}
+function mock() { }
+
 export {
-goThrough,
-mock
+    goThrough,
+    mock
 }

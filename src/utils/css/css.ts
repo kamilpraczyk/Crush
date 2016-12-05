@@ -105,6 +105,7 @@ const style = {
         fourPictures: 'img/iconSet/Photo-icon.png',
         oneTwoThree: 'img/iconSet/App-kfouleggs-game-icon.png',
         radio: 'img/iconSet/App-kcmdf-cubes-icon.png',
+        multiRadio: 'img/iconSet/App-ksplash-water-icon.png', //TODO better icons?
 
         lock: 'img/iconSet/Action-lock-silver-icon.png'
     },

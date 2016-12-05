@@ -2,14 +2,14 @@
 import React = require('react');
 import ReactDOM = require('react-dom');
 import components = require('../components/components');
-import {startLogin, login, updataLastLogin, toogleRegister, startRegister, sendEmailGreeting, register, logout} from '../services/Pass';
-import { Pass, saveStatus, readStatus, startSubscribe, subscribe, startSaveStatus} from '../services/Pass';
+import { startLogin, login, updataLastLogin, toogleRegister, startRegister, sendEmailGreeting, register, logout } from '../services/Pass';
+import { Pass, saveStatus, readStatus, startSubscribe, subscribe, startSaveStatus } from '../services/Pass';
 import utils = require('../utils/utils');
-import {events, renderEvent} from '../events';
-import {RootMenu, RootType} from '../services/RootMenu';
-import {getLessons} from '../lessons/lessons';
-import {LessonsCatalog} from '../services/LessonsCatalog';
-import {LessonsStatus} from '../services/LessonsStatus';
+import { events, renderEvent } from '../events';
+import { RootMenu, RootType } from '../services/RootMenu';
+import { getLessons } from '../lessons/lessons';
+import { LessonsCatalog } from '../services/LessonsCatalog';
+import { LessonsStatus } from '../services/LessonsStatus';
 
 
 function publishRerender() {
@@ -156,6 +156,7 @@ class APIState {
             events.onChoosePicture.subscribe(setUserAnswer),
             events.onChooseRadio.subscribe(setUserAnswer),
             events.onChooseOneTwoThree.subscribe(setUserAnswer),
+            events.onChooseMultiRadio.subscribe(setUserAnswer),
             events.onToogleSupportHelp.subscribe(onToogleSupportHelp),
             events.scrollPosition.subscribe(onScrollPosition)
 
@@ -181,12 +182,12 @@ function clear() {
 }
 
 export {
-init,
-clear,
-RootType,
-lessonsCatalog,
-lessonsStatus,
-rootMenu,
-pass,
+    init,
+    clear,
+    RootType,
+    lessonsCatalog,
+    lessonsStatus,
+    rootMenu,
+    pass,
 };
 

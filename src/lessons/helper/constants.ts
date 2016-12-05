@@ -6,11 +6,12 @@ export const space = '___';
 export const multi = '−';
 export const empty = '_';
 
-export const viewIds = {
+export const viewIds = { //TODO make them enum?
     fourPictures: 'f',
     fourWords: 'w',
     oneTwoThree: 'o',
     radio: 'r',
+    multiRadio: 'm',
     inradio: 'i',
     draw: 'd',
 }
@@ -35,6 +36,9 @@ export const isId = {
     isRadio(id: string) {
         return id.indexOf(viewIds.radio) !== -1;
     },
+    isMultiRadio(id: string) {
+        return id.indexOf(viewIds.multiRadio) !== -1;
+    },
     isInradio(id: string) {
         return id.indexOf(viewIds.inradio) !== -1;
     },
@@ -55,6 +59,9 @@ export const isId = {
     },
     isNoSpace(id: string) {
         return id.indexOf(displayIds.noSpace) !== -1;
+    },
+    isRepeated(id: string) {
+        return id.indexOf(displayIds.areRepeated) !== -1;
     }
 
 }
@@ -69,11 +76,13 @@ export function getRest(group: any, exclude: any): string[] {
     return _.chain(group).values().without(exclude).value();
 }
 
-const namesMale = ['Paul', 'Bob', 'Peter', 'Jason', 'John', 'Jack', 'Chris', 'Mike', 'Mark', 'Sam', 'Rob', 'Tom'];
-const namesFemale = ['Jadie', 'Mary', 'Lisa', 'Maria', 'Suzan', 'Sara', 'Sally'];
+const namesMale = ['Tim', 'George', 'Paul', 'Bob', 'Peter', 'Jason', 'John', 'Jack', 'Chris', 'Mike', 'Mark', 'Sam', 'Rob', 'Tom'];
+const namesFemale = ['Jane', 'Jadie', 'Mary', 'Lisa', 'Maria', 'Suzan', 'Sara', 'Sally'];
 const possessiveNamesMale = ["Rob's"];
 const possessiveNamesFemale = ["Kate's"];
-
+const surname = ['Wilson', 'Thomas'];
+const mounths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 export function getNameMale() {
     return _.sample(namesMale, 1)[0] as string;
 }
@@ -86,10 +95,16 @@ export function getPossessiveNameMale() {
 export function getPossessiveNameFemale() {
     return _.sample(possessiveNamesFemale, 1)[0] as string;
 }
-const surname = ['Wilson', 'Thomas'];
 export function getSurname() {
     return _.sample(surname, 1)[0] as string;
 }
+export function getMounth() {
+    return _.sample(mounths, 1)[0] as string;
+}
+export function getDay() {
+    return _.sample(days, 1)[0] as string;
+}
+
 
 
 
@@ -250,6 +265,7 @@ export const capital = {
 //TODO - answers have different buttons from info and main button -name.
 //TODO - IE11 grammar fix layout
 //TODO - IE11 - fix number wrap 
+//test - check if postfix is defined then last correct have no ?.!
 // make lessons - tences vs each other
 //make lessons - sentence to =>question sentence
 

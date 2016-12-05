@@ -1,4 +1,4 @@
-import {EventFactory, VoidEventFactory} from './factory';
+import { EventFactory, VoidEventFactory } from './factory';
 
 export const unsubscribe = (unsubscribes: Array<() => void>) => unsubscribes && unsubscribes.forEach(u => u()); // helper
 
@@ -31,6 +31,7 @@ export const events = {
     onChoosePicture: EventFactory<string>('onChoosePicture'),
     onChooseRadio: EventFactory<string>('onChooseRadio'),
     onChooseOneTwoThree: EventFactory<string>('onChooseOneTwoThree'),
+    onChooseMultiRadio: EventFactory<string>('onChooseMultiRadio'),
     onToogleSupportHelp: VoidEventFactory('onToogleSupportHelp'),
 
 }

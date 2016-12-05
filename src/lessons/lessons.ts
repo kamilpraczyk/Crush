@@ -1,5 +1,5 @@
 /// <reference path="../../typings/tsd.d.ts" />
-import {LessonsCatalog} from '../services/LessonsCatalog';
+import { LessonsCatalog } from '../services/LessonsCatalog';
 import Promise = require('bluebird');
 import animals = require('./animals/animals');
 import clockFourWords = require('./extra/clock/clockFourWords');
@@ -40,7 +40,19 @@ import prefixes_one = require('./words/prefixes/prefixes_one');
 import prefixes_two = require('./words/prefixes/prefixes_two');
 import verbEndings = require('./verb/endings/verbEndings');
 import speech_one = require('./words/speach/speech_one');
+import simpleFutureOneToThree = require('./tense/simpleFuture/simpleFutureOneToThree');
+import simpleFutureOneToThreePartTwo = require('./tense/simpleFuture/simpleFutureOneToThreePartTwo');
+import simpleFutureOneToThreePartThree = require('./tense/simpleFuture/simpleFutureOneToThreePartThree');
+import simpleFutureOneToThreePartFour = require('./tense/simpleFuture/simpleFutureOneToThreePartFour');
+import simpleFutureRadio = require('./tense/simpleFuture/simpleFutureRadio');
 
+import occupation = require('./pictures/occupation/occupation');
+
+import synonymsAD = require('./synonyms/ad/synonymsAD');
+import synonymsDF = require('./synonyms/df/synonymsDF');
+import synonymsGL = require('./synonyms/gl/synonymsGL');
+import synonymsLS = require('./synonyms/ls/synonymsLS');
+import synonymsSW = require('./synonyms/sw/synonymsSW');
 
 function getLessons(lessonsCatalog: LessonsCatalog) {
     return new Promise<LessonsCatalog>((resolve, reject) => {
@@ -67,6 +79,7 @@ function getLessons(lessonsCatalog: LessonsCatalog) {
         lessonsCatalog.add(true, 'CL_03', clock);
 
         lessonsCatalog.add(true, 'AN__01', animals);
+        lessonsCatalog.add(true, 'PC__01', occupation);
 
         lessonsCatalog.add(true, 'PT__01', presentTenseOneToThree);
         lessonsCatalog.add(true, 'PT__02', presentTenseOneToThreePartTwo);
@@ -85,6 +98,12 @@ function getLessons(lessonsCatalog: LessonsCatalog) {
         lessonsCatalog.add(true, 'PPCT_2', presentPerfectContinuousTenseOneToThreePartTwo);
         lessonsCatalog.add(true, 'PPCT_3', presentPerfectContinuousTenseRadio);
 
+        lessonsCatalog.add(true, 'SFT_1', simpleFutureOneToThree);
+        lessonsCatalog.add(true, 'SFT_2', simpleFutureOneToThreePartTwo);
+        lessonsCatalog.add(true, 'SFT_3', simpleFutureOneToThreePartThree);
+        lessonsCatalog.add(true, 'SFT_4', simpleFutureOneToThreePartFour);
+        lessonsCatalog.add(true, 'SFT1R', simpleFutureRadio); //TODO still making
+
         lessonsCatalog.add(true, 'L___1', location);
 
         lessonsCatalog.add(true, 'EINE1', eitherNeither);
@@ -99,7 +118,13 @@ function getLessons(lessonsCatalog: LessonsCatalog) {
         lessonsCatalog.add(true, 'MINE1', mineYour);
         lessonsCatalog.add(true, 'MINE2', myselfYourself);
 
-        lessonsCatalog.setActiveLesson('CL_03');
+        lessonsCatalog.add(true, 'SY_AD', synonymsAD);
+        //   lessonsCatalog.add(true, 'SY_DF', synonymsDF);
+        //   lessonsCatalog.add(true, 'SY_GL', synonymsGL);
+        //  lessonsCatalog.add(true, 'SY_LS', synonymsLS);
+        //  lessonsCatalog.add(true, 'SY_SW', synonymsSW);
+
+        lessonsCatalog.setActiveLesson('SY_AD');
 
         return resolve(lessonsCatalog);
     });
@@ -107,6 +132,6 @@ function getLessons(lessonsCatalog: LessonsCatalog) {
 
 
 export {
-getLessons
+    getLessons
 }
 

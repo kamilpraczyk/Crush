@@ -1,9 +1,9 @@
 /// <reference path="../../typings/tsd.d.ts" />
-import { BoardFace, BoardResult} from '../types';
+import { BoardFace, BoardResult } from '../types';
 import _ = require('underscore');
 import utils = require('../utils/utils');
-import {space, empty, multi, viewIds, isId}  from '../lessons/helper/constants';
-import {getState} from '../services';
+import { space, empty, multi, viewIds, isId } from '../lessons/helper/constants';
+import { getState } from '../services';
 
 interface QueryResult {
     generatedList: string[];
@@ -36,6 +36,13 @@ function getCorrectSentence(query: QueryResult) {
             }
         }
 
+    } else if (isId.isMultiRadio(query.board.id)) {
+        if (!query.selectedAnswerQueue.length) {
+            read = '';
+        } else {
+            const selectedAnswerQueue = query.selectedAnswerQueue.map(item => utils.upercaseFirstLetter(item));
+            read = utils.upercaseFirstLetter(name) + ' - ' + selectedAnswerQueue.join(' - ');
+        }
     } else if (isId.isFourPictures(query.board.id) || isId.isFourWords(query.board.id)) {
         /*answer is a path to a picture or word*/
         return name;
@@ -73,6 +80,9 @@ function isCorrect(query: QueryResult) {
         const length = query.selectedAnswerQueue.length;
         return _.last(query.selectedAnswerQueue) === query.board.correct[length - 1];
     }
+    if (isId.isMultiRadio(query.board.id)) {
+        return _.intersection(query.selectedAnswerQueue, query.board.correct).length === query.board.correct.length;
+    }
     return _.contains(query.board.correct, query.selectedAnswer);
 }
 
@@ -81,18 +91,28 @@ function isCompletedAndCorrect(query: QueryResult) {
 }
 
 
+function getGeneratedList(board: BoardFace) {
+
+    let generatedList: string[] = [];
+    if (isId.isMultiRadio) { //reduce to max 4 lines => max 3 correct and rest not correct
+        const maxLines = 4;
+        const missing = maxLines - board.correct.length;
+        generatedList = [].concat(board.correct).concat(_.sample(board.incorrect, missing));
+    } else {
+        const incorrent = _.sample(board.incorrect, 3) as string[]; //generate randomized incorect 
+        generatedList = [].concat(board.correct).concat(incorrent);
+    }
+    return _.sample(generatedList, generatedList.length) as string[] //randomize
+}
+
 function generateQuery(board: BoardFace) {
-
-    const incorrent = _.sample(board.incorrect, 3) as string[]; //generate randomized incorect 
-    const generatedList: string[] = [].concat(board.correct).concat(incorrent);
-
     const query: QueryResult = {
         board,
         wasLastCorrect: false,
         selectedAnswer: null,
         selectedAnswerQueue: [],
         isSupportShowAnswer: board.isHelp ? false : null,
-        generatedList: _.sample(generatedList, generatedList.length) as string[] //randomize
+        generatedList: getGeneratedList(board)
     }
     return query
 }
@@ -108,6 +128,23 @@ function setUserAnswer(query: QueryResult, answer: string) {
 
         if (query.board.correct[length] === answer) {
             query.selectedAnswerQueue.push(answer);
+            query.wasLastCorrect = true;
+            utils.voice.read(answer);
+            //all answered and last one is correct?
+            if (isCompletedAndCorrect(query)) {
+                s.lessonsCatalog.board.setCompletedBoard(true);
+            }
+            return query;
+        } else {
+            s.lessonsCatalog.board.setCompletedBoard(false);
+        }
+
+    } else if (isId.isMultiRadio(query.board.id)) {
+        const isCorrect = _.contains(query.board.correct, answer) && !_.contains(query.selectedAnswerQueue, answer);
+
+        if (isCorrect) {
+            query.selectedAnswerQueue.push(answer);
+            console.log(query.selectedAnswerQueue);
             query.wasLastCorrect = true;
             utils.voice.read(answer);
             //all answered and last one is correct?
@@ -177,5 +214,5 @@ class BoardQuery {
 
 
 export {
-BoardQuery
+    BoardQuery
 }

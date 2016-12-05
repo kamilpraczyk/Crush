@@ -7,29 +7,30 @@ import Promise = require("bluebird");
 import md5 = require('./md5')
 
 export {
-union,
-union3,
-first,
-toPercentHumanize,
-toPercent,
-voice,
-round10,
-keys,
-replaceAll,
-tryToSetLowercaseFirstLetter,
-howManyDaysLeft,
-checkEmail,
-isValidISODate,
-removeInvalidChars,
-getHumanizedDate,
-getToDayISOdate,
-getNextYearISOdate,
-getNextMonthISOdate,
-getNext7DaysISOdate,
-isBrowserSupported,
-delay, //delay promise
-md5,
-getBrowser
+    union,
+    union3,
+    first,
+    toPercentHumanize,
+    toPercent,
+    voice,
+    round10,
+    keys,
+    replaceAll,
+    tryToSetLowercaseFirstLetter,
+    upercaseFirstLetter,
+    howManyDaysLeft,
+    checkEmail,
+    isValidISODate,
+    removeInvalidChars,
+    getHumanizedDate,
+    getToDayISOdate,
+    getNextYearISOdate,
+    getNextMonthISOdate,
+    getNext7DaysISOdate,
+    isBrowserSupported,
+    delay, //delay promise
+    md5,
+    getBrowser
 };
 
 function delay(time?: number) {
@@ -157,6 +158,9 @@ function checkEmail(emailAddress: string) {
 
 function lowercaseFirstLetter(s: string) {
     return s.charAt(0).toLowerCase() + s.slice(1);
+}
+function upercaseFirstLetter(s: string) {
+    return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
 function replaceAll(str: string, search: string, replacement: string) {

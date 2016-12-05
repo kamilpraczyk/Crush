@@ -24,6 +24,8 @@ interface TList {
 const cleanText = function (l: string) {
     l = utils.replaceAll(l, '<p>', '');
     l = utils.replaceAll(l, '</p>', '');
+    l = utils.replaceAll(l, '<s>', '');
+    l = utils.replaceAll(l, '</s>', '');
     l = utils.replaceAll(l, '</b>', '');
     return utils.replaceAll(l, '<b>', '');
 }
