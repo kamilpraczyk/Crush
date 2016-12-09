@@ -8,8 +8,8 @@ describe('Duplex -', () => {
     beforeEach(() => mock());
 
     it('name - contains twice: " ', () => {
-        goThrough(board => {
-            const count = board.name.split('"').length - 1;
+        goThrough(data => {
+            const count = data.name.split('"').length - 1;
             expect(count % 2).to.eql(0);
         });
     });

@@ -11,10 +11,10 @@ describe('Lessons -', () => {
 
     xit('todo print sentences and check them ', () => {
 
-        goThrough(board => {
-            //  console.log(board.title);
-            // console.log(board.name);
-            // board.correct && console.log(board.correct.join(' '));
+        goThrough(data => {
+            //  console.log(data.title);
+            // console.log(data.name);
+            // data.correct && console.log(data.correct.join(' '));
         });
     });
 

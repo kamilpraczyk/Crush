@@ -1,12 +1,12 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import {BoardFaces} from '../../../types';
-import {empty, space, viewIds, id, multi, capital, getNameMale } from '../../helper/constants';
+import { RawData } from '../../../types';
+import { empty, space, TypeId, id, multi, capital, getNameMale } from '../../helper/constants';
 import explenation = require('./explenation');
 
-const common = [viewIds.radio];
+const common = [TypeId.radio];
 const title = "Present Continuous Tense";
 const info = 'Build the correct sentence in Present Continuous Tense.';
-const lessons = [
+const lessons: RawData[] = [
     {
         id: id(common), title, explenation, info,
         name: "This work is good! Your handwriting " + space + " better and better.",
@@ -18,7 +18,7 @@ const lessons = [
         correct: ["is having"],
         incorrect: ["have", "has"],
     }, {
-        id: id(common), title, explenation, info,
+        id: id(common, [TypeId.multiAnswer]), title, explenation, info,
         name: space + " you " + space + " anything on " + capital.days.Saturday + " morning?",
         correct: ["Are " + multi + " doing"],
         incorrect: ["Do " + multi + " doing"],
@@ -38,7 +38,7 @@ const lessons = [
         correct: ["Do"],
         incorrect: ["Did", "Have"],
     }, {
-        id: id(common), title, explenation, info,
+        id: id(common, [TypeId.multiAnswer]), title, explenation, info,
         name: "You " + space + " always " + space + " me when I am talking.",
         correct: ["are " + multi + " interrupting"],
         incorrect: [empty + " " + multi + " interrupting"],
@@ -53,16 +53,16 @@ const lessons = [
         correct: ["raining"],
         incorrect: ["rain"],
     }, {
-        id: id(common), title, explenation, info,
+        id: id(common, [TypeId.multiAnswer]), title, explenation, info,
         name: "You " + space + " not " + space + " very hard today. Is anything wrong?",
         correct: ["are " + multi + " working"],
         incorrect: [empty + " " + multi + " worked"],
     },
-] as BoardFaces
+]
 
 export {
-title,
-lessons,
+    title,
+    lessons,
 }
 
 

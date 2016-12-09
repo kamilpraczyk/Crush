@@ -1,12 +1,13 @@
 /// <reference path="../../typings/tsd.d.ts" />
 import dictionary = require('../utils/dictionary');
+import { TypeId } from '../lessons/helper/constants';
 
 export interface Explenation {
     exp: any //react elements
 }
 
-export interface BoardFace {
-    id: string,
+export interface RawData {
+    id: TypeId[],
     title: string,
     name: string,
     info: string,
@@ -17,14 +18,11 @@ export interface BoardFace {
     postfix?: string //add dot sometimes when sentence is finish
 }
 
-export interface BoardFaces {
-    [uid: number]: BoardFace,
-    length: number,
-    concat: Function,
-    map<U>(callbackfn: (value: BoardFace, index: number, array: BoardFace[]) => U, thisArg?: any): U[];
-    filter(callbackfn: (value: BoardFace, index: number, array: BoardFace[]) => boolean, thisArg?: any): BoardFace[];
-}
 
+export interface Board {
+    autoId: string,
+    data: RawData
+}
 
 export interface LessonFace {
     uid: string,
@@ -32,44 +30,41 @@ export interface LessonFace {
     iconSet: string[],
     active: boolean,
     free: boolean,
-    lessons: BoardFaces
+    numberFinished: number,
+    boards: Board[]
 }
-
-export interface LessonMapFace {
-    [id: string]: LessonFace,
-    //?!?! map<U>(callbackfn: (value: LessonFace, index: string, array: LessonFace[]) => U, thisArg?: any): U[];
-}
-
 
 export interface BoardResult {
     selectedAnswer: string,
     generatedList: string[],
     text: string,
-    lessonData: BoardFace,
+    board: Board,
     isCorrect: boolean,
     isSupportShowAnswer: boolean
 }
 
+export enum RootType {
+    close = 1,
+    lessons,
+    explenation,
+    settings,
+    user,
+}
 
 export interface RootFace {
-    id: string,
+    id: RootType,
     name: string,
     active: boolean,
-    backUrl: string
+    backUrl: string,
+    scroll : number
 }
-
-export interface RootFaces {
-    [id: string]: RootFace;
-}
-
 
 
 export class TimeOutError extends Error {
 
-    constructor(public message?: string) {
+    constructor(public message = dictionary.SERVER_ERROR_TIMEOUT) {
         super(message);
         this.name = 'TimeOutError';
-        this.message = dictionary.SERVER_ERROR_TIMEOUT;
         this.stack = (<any>new Error()).stack;
     }
     toString() {
@@ -79,10 +74,9 @@ export class TimeOutError extends Error {
 
 export class InvalidServerDataError extends Error {
 
-    constructor(public message?: string) {
-        super(message);
+    constructor(public message = dictionary.SERVER_ERROR_INVALID_DATA) {
+        super();
         this.name = 'InvalidServerData';
-        this.message = dictionary.SERVER_ERROR_INVALID_DATA;
         this.stack = (<any>new Error()).stack;
     }
     toString() {
@@ -92,10 +86,9 @@ export class InvalidServerDataError extends Error {
 
 export class ServerRequestError extends Error {
 
-    constructor(public message?: string) {
-        super(message);
+    constructor(public message = dictionary.SERVER_ERROR_REQUEST) {
+        super();
         this.name = 'ServerRequestError';
-        this.message = dictionary.SERVER_ERROR_REQUEST;
         this.stack = (<any>new Error()).stack;
     }
     toString() {

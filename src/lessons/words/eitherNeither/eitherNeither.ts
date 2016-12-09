@@ -1,19 +1,19 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import {BoardFaces} from '../../../types';
-import {space, multi, viewIds, id, capital, getNameFemale, getNameMale} from '../../helper/constants';
+import { RawData } from '../../../types';
+import { space, multi, TypeId, id, capital, getNameFemale, getNameMale } from '../../helper/constants';
 import explenation = require('./explenation');
-const common = [viewIds.radio];
+const common = [TypeId.radio];
 const title = 'Either and Neither';
 const info = 'Find the correct form.'
 
-const lessons = [
+const lessons: RawData[] = [
     {
-        id: id(common), title, explenation, info,
+        id: id(common, [TypeId.multiAnswer]), title, explenation, info,
         name: "In this game, you " + space + " win " + space + " lose. It depends on you.",
         correct: ["either " + multi + " or"],
         incorrect: ["neither " + multi + " nor"],
     }, {
-        id: id(common), title, explenation, info,
+        id: id(common, [TypeId.multiAnswer]), title, explenation, info,
         name: space + " " + getNameMale() + " " + space + " " + getNameFemale() + " will help you with your work. They are both busy at the moment.",
         correct: ["Neither " + multi + " nor"],
         incorrect: ["Either " + multi + " or"],
@@ -88,16 +88,16 @@ const lessons = [
         correct: ["so do I"],
         incorrect: ["neither I"],
     }, {
-        id: id(common), title, explenation, info,
+        id: id(common, [TypeId.multiAnswer]), title, explenation, info,
         name: "No one knows that lyrics. " + space + " my brother " + space + " my mother.",
         correct: ["Neither " + multi + " nor"],
         incorrect: ["Either " + multi + " or"],
     }
-] as BoardFaces
+]
 
 export {
-title,
-lessons,
+    title,
+    lessons,
 }
 
 

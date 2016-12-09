@@ -125,7 +125,7 @@ function getLessons(lessonsCatalog: LessonsCatalog) {
         //  lessonsCatalog.add(true, 'SY_SW', synonymsSW);
 
         lessonsCatalog.setActiveLesson('SY_AD');
-
+        console.info('Finish loading lessons');
         return resolve(lessonsCatalog);
     });
 }

@@ -1,12 +1,12 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import {BoardFaces} from '../../../types';
-import {space, viewIds, id, capital, getPossessiveNameFemale, getPossessiveNameMale, getSurname } from '../../helper/constants';
+import {RawData} from '../../../types';
+import {space, TypeId, id, capital, getPossessiveNameFemale, getPossessiveNameMale, getSurname } from '../../helper/constants';
 import explenation = require('./explenation');
-const common = [viewIds.radio];
+const common = [TypeId.radio];
 const title = 'Possessive Pronouns: mine, yours, hers...';
 const info = 'Choose the correct answer.';
 
-const lessons = [
+const lessons: RawData[] = [
     {
         id: id(common), title, info, explenation,
         name: "This blunt knife is not mine. " + space,
@@ -108,7 +108,7 @@ const lessons = [
         correct: ["your"],
         incorrect: ["yours"],
     }
-] as BoardFaces
+] 
 
 
 export {

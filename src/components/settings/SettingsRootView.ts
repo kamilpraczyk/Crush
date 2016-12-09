@@ -7,9 +7,9 @@ import SettingsRootCss = require('./SettingsRootCss');
 import SwitcherView = require('./views/switcher/SwitcherView');
 import ExplenationView = require('./views/explenation/ExplenationView');
 import UserView = require('./views/user/UserView');
-import {RootFace} from '../../types';
-import {getState, RootType} from '../../services';
-import {events} from '../../events';
+import { RootFace, RootType } from '../../types';
+import { getState } from '../../services';
+import { events } from '../../events';
 import ReactDOM = require('react-dom');
 const {div} = React.DOM;
 const scrollRef = 'scrollRef';
@@ -29,7 +29,7 @@ function getItem(item: RootFace) {
 
 function getList() {
     const s = getState();
-    return _.map(s.rootMenu.getRootMenu(), item => {
+    return _.map(s.rootMenu.list, item => {
         return div({
             key: item.id,
             style: SettingsRootCss.getItem(),
@@ -53,7 +53,7 @@ function getMain() {
     const s = getState();
 
     function getMainView() {
-        switch (s.rootMenu.getActiveId()) {
+        switch (s.rootMenu.activeId) {
             case RootType.lessons: return SwitcherView();
             case RootType.explenation: return ExplenationView();
             case RootType.user: return UserView();
@@ -70,9 +70,8 @@ function getMain() {
 
 function render() {
     const s = getState();
-    if (s.rootMenu.isMinimalized()) {
-        return null;
-    }
+    if (s.rootMenu.isMinimalized) return null;
+
     return div({
         style: SettingsRootCss.getPanel()
     }, getMain(), getMenu());
@@ -90,7 +89,7 @@ class View extends React.Component<void, void>{
         const region = ReactDOM.findDOMNode(this.refs[scrollRef]);
         if (region) {
             const s = getState();
-            region.scrollTop = s.rootMenu.getScrollPosition();
+            region.scrollTop = s.rootMenu.scrollPosition;
         }
     }
 

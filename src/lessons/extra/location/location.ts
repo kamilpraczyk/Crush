@@ -1,13 +1,13 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import {BoardFaces} from '../../../types';
-import {space, viewIds, id, capital, getNameFemale } from '../../helper/constants';
+import {RawData} from '../../../types';
+import {space, TypeId, id, capital, getNameFemale } from '../../helper/constants';
 import explenation = require('./explenation');
-const common = [viewIds.radio];
+const common = [TypeId.radio];
 import _ = require("underscore");
 const title = 'Location';
 const info = 'Choose the right answer.';
 
-const lessons = [
+const lessons: RawData[] = [
     {
         id: id(common), title, info, explenation,
         name: capital.places.Barcelona + " is " + space + " of " + capital.countries.Spain + ".",
@@ -110,7 +110,7 @@ const lessons = [
         correct: ["back of"],
         incorrect: ["behind", "beyond", "below", "opposite"],
     }
-] as BoardFaces
+] 
 
 
 export {

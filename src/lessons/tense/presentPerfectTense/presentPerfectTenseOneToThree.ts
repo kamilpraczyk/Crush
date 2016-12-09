@@ -1,14 +1,14 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import {BoardFaces} from '../../../types';
-import {space, viewIds, id, capital, getNameMale } from '../../helper/constants';
+import {RawData} from '../../../types';
+import {space, TypeId, id, capital, getNameMale } from '../../helper/constants';
 import explenation = require('./explenation');
 
 const separator = " ";
 const postfix = ".";
-const common = [viewIds.oneTwoThree];
+const common = [TypeId.oneTwoThree];
 const title = "Present Perfect Tense";
 const info = 'Build the correct sentence in Present Perfect Tense.';
-const lessons = [
+const lessons: RawData[] = [
     {
         id: id(common), title, explenation, info, postfix,
         name: separator,
@@ -94,7 +94,7 @@ const lessons = [
         name: separator, postfix: "",
         correct: ["Have", "the", "guests", "arrived", "?"],
     }
-] as BoardFaces
+] 
 
 export {
 title,

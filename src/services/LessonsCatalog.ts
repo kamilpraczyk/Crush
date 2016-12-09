@@ -1,13 +1,14 @@
 /// <reference path="../../typings/tsd.d.ts" />
-import { LessonMapFace, LessonFace, BoardFaces, BoardFace } from '../types';
+import { LessonFace, Board, RawData } from '../types';
 import { isId } from '../lessons/helper/constants';
 import _ = require('underscore');
-import { Board } from './Board';
+import { BoardStatus } from './BoardStatus';
 import css = require('../utils/css/css');
+import { clone } from '../utils/utils';
+import { getNewLessonsStatus } from './LessonsStatus';
 
 
-
-function getIconsByIdLesson(lessons: BoardFaces) {
+function getIconsByIdLesson(lessons: RawData[]) {
     const i: string[] = [];
     lessons.map(lesson => {
         const id = lesson.id;
@@ -52,70 +53,73 @@ function sort(unordered: LessonsMap): LessonFace[] {
 }
 class LessonsCatalog {
 
-    map: LessonsMap = {};
-    sorted: LessonFace[];
-    lessonsLength = 0;
-    activeUid: string = null;
-    isDirty = true;
-    public board: Board = null;
-
+    private map: LessonsMap = {};
+    private sorted: LessonFace[];
+    private allBoardsLength = 0;
+    private activeUid: string = null;
+    private isDirty = true;
+    public board: BoardStatus = null;
 
     constructor() { }
 
-    add(free: boolean, uid: string, v: { title: string, lessons: BoardFaces }) {
+    add(free: boolean, uid: string, v: { title: string, lessons: RawData[] }) {
         this.isDirty = true;
-        this.lessonsLength = this.lessonsLength + v.lessons.length;
+        this.allBoardsLength = this.allBoardsLength + v.lessons.length;
         if (this.map[uid]) throw new Error('duplicate key in LessonsCatalog');
+
+        const boards = v.lessons.map(data => { //tODO create bucket with autoId do not go throug them on import?!?!
+            const lesson: Board = {
+                autoId: _.uniqueId('_'),
+                data
+            }
+            return lesson;
+        });
+
         this.map[uid] = {
             uid,
             free,
             active: false,
             name: v.title,
-            lessons: v.lessons,
-            iconSet: getIconsByIdLesson(v.lessons)
+            boards,
+            iconSet: getIconsByIdLesson(v.lessons),
+            numberFinished: null
         };
     }
-    clear() {
-        this.map = {};
-    }
-
-    resetActiveLesson() {
-        this.setActiveLesson(this.activeUid);
-    }
+    clear() { this.map = {}; }
+    resetActiveLesson() { this.setActiveLesson(this.activeUid); }
 
     setActiveLesson(uid: string) {
         if (this.map[uid]) {
             if (this.map[this.activeUid]) this.map[this.activeUid].active = false;
             this.activeUid = uid;
             this.map[this.activeUid].active = true;
-            this.board = new Board(this.getLesson());
+            this.board = new BoardStatus(this.getLesson());
         }
     }
 
-    getLessonTitle() {
-        return this.map[this.activeUid].name;
+    setNumberFinished(uid: string, nr: number) {
+        if (this.map[uid]) {
+            this.map[uid].numberFinished = nr;
+        } else console.warn('skip Uid', uid);
     }
 
-    getLength() {
-        return this.lessonsLength;
-    }
+    private getLesson() { return this.map[this.activeUid]; }
 
-    getLesson(uid?: string) {
-        return this.map[uid || this.activeUid];
-    }
-
-    getUid() {
-        return this.activeUid;
-    }
-    getAllUids() {
-        return _.keys(this.map);
-    }
-    getSortedLessons() {
-        if (this.isDirty)
+    getState() {
+        if (this.isDirty) {
             this.sorted = sort(this.map);
+            this.isDirty = false;
+        }
 
-        this.isDirty = false;
-        return this.sorted;
+        const returns = {
+            uid: this.activeUid,
+            lessonsTitle: this.map[this.activeUid].name,
+            allBoardsLength: this.allBoardsLength,
+            sortedLessons: this.sorted,
+            current: this.board.getState(),
+            status: getNewLessonsStatus(this.map, this.allBoardsLength)
+        }
+        return clone(returns);
     }
 }
 

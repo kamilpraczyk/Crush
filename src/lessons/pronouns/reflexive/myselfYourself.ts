@@ -1,12 +1,12 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import {BoardFaces} from '../../../types';
-import {space, viewIds, id, capital, getNameMale } from '../../helper/constants';
+import {RawData} from '../../../types';
+import {space, TypeId, id, capital, getNameMale } from '../../helper/constants';
 import explenation = require('./explenation');
-const common = [viewIds.radio];
+const common = [TypeId.radio];
 const title = "Reflexive Pronouns: myself, yourself, herself...";
 const info = 'Choose the correct answer.';
 
-const lessons = [
+const lessons: RawData[] = [
     {
         id: id(common), title, explenation, info,
         name: getNameMale() + ", you should not blame " + space + " for the accident.",
@@ -63,7 +63,7 @@ const lessons = [
         correct: ["myself"],
         incorrect: ["ourselves", "itself"],
     }
-] as BoardFaces
+] 
 
 
 export {

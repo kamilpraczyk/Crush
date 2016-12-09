@@ -6,32 +6,15 @@ import { capital } from '../lessons/helper/constants';
 import Promise = require("bluebird");
 import md5 = require('./md5')
 
-export {
-    union,
-    union3,
-    first,
-    toPercentHumanize,
-    toPercent,
-    voice,
-    round10,
-    keys,
-    replaceAll,
-    tryToSetLowercaseFirstLetter,
-    upercaseFirstLetter,
-    howManyDaysLeft,
-    checkEmail,
-    isValidISODate,
-    removeInvalidChars,
-    getHumanizedDate,
-    getToDayISOdate,
-    getNextYearISOdate,
-    getNextMonthISOdate,
-    getNext7DaysISOdate,
-    isBrowserSupported,
-    delay, //delay promise
-    md5,
-    getBrowser
+
+
+const clone = <T>(orig: T): T => {
+    return orig; //TODO test
+    if (typeof orig === 'undefined') return orig;
+    if (orig === null) return null;
+    return JSON.parse(JSON.stringify(orig));
 };
+
 
 function delay(time?: number) {
     return new Promise((resolve) => {
@@ -322,6 +305,33 @@ function isBrowserSupported(): boolean {
 }
 
 
+export {
+    union,
+    union3,
+    clone,
+    first,
+    toPercentHumanize,
+    toPercent,
+    voice,
+    round10,
+    keys,
+    replaceAll,
+    tryToSetLowercaseFirstLetter,
+    upercaseFirstLetter,
+    howManyDaysLeft,
+    checkEmail,
+    isValidISODate,
+    removeInvalidChars,
+    getHumanizedDate,
+    getToDayISOdate,
+    getNextYearISOdate,
+    getNextMonthISOdate,
+    getNext7DaysISOdate,
+    isBrowserSupported,
+    delay, //delay promise
+    md5,
+    getBrowser
+};
 
 
 

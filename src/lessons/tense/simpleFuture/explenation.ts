@@ -54,7 +54,7 @@ exp.push(tList({
 }));
 
 { //verbs in time clauses and if clauses
-        id: id(common), title, explenation, info,
+        id: id(common,[TypeId.multiAnswer]), title, explenation, info,
         name: "When you " + space + " arrive tonight, we " + space + " go out for dinner.",
         correct: [empty + " " + multi + " will"],
         incorrect: ["will " + multi + " will"]

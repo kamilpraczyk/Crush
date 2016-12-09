@@ -4,21 +4,19 @@ import ExplenationCss = require('./ExplenationCss');
 import utils = require('../../../../utils/utils');
 import ButtonView = require('../../../button/ButtonView');
 import dictionary = require('../../../../utils/dictionary');
-import {getState} from '../../../../services';
-import {events} from '../../../../events';
+import { getState } from '../../../../services';
+import { events } from '../../../../events';
 
 function render() {
     const s = getState();
-    const explenation = s.lessonsCatalog.board.getCurrentBoard().explenation;
+    const explenation = s.lessonsCatalog.current.board.data.explenation;
 
     if (explenation) {
-        const titleText = s.lessonsCatalog.getLessonTitle();
-
 
         const title = div({
             style: ExplenationCss.getTitle(),
-            onClick: () => utils.voice.read(titleText)
-        }, titleText);
+            onClick: () => utils.voice.read(s.lessonsCatalog.lessonsTitle)
+        }, s.lessonsCatalog.lessonsTitle);
 
         const buttonGoPractice = ButtonView({
             name: dictionary.GO_TEST,

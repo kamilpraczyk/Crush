@@ -1,12 +1,12 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import {BoardFaces} from '../../../types';
-import {space, viewIds, id, capital } from '../../helper/constants';
+import {RawData} from '../../../types';
+import {space, TypeId, id, capital } from '../../helper/constants';
 import explenation = require('./explenation');
 const separator = " ";
-const common = [viewIds.radio];
+const common = [TypeId.radio];
 const title = "Present Perfect Continuous Tense";
 const info = 'Build the correct sentence in Present Perfect Continuous Tense.';
-const lessons = [
+const lessons: RawData[] = [
     {
         id: id(common), title, explenation, info,
         name: "She's " + space + " to her regularly for a couple of years.",
@@ -58,7 +58,7 @@ const lessons = [
         correct: ["been crying"],
         incorrect: ["crying", "cry"],
     }
-] as BoardFaces
+] 
 
 export {
 title,

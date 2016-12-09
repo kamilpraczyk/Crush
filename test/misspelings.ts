@@ -10,24 +10,24 @@ describe('Missmelings - ', () => {
 
     describe('name - should not contains: ', () => {
 
-        it('double spaces', () => goThrough(board => expect(board.name).to.not.contain('  ')));
+        it('double spaces', () => goThrough(data => expect(data.name).to.not.contain('  ')));
 
-        it('!.', () => goThrough(board => expect(board.name).to.not.contain('!.')));
-        it('.!', () => goThrough(board => expect(board.name).to.not.contain('.!')));
-        it('|?', () => goThrough(board => expect(board.name).to.not.contain('!?')));
-        it('?!', () => goThrough(board => expect(board.name).to.not.contain('?!')));
-        it('!!', () => goThrough(board => expect(board.name).to.not.contain('!!')));
-        it('??', () => goThrough(board => expect(board.name).to.not.contain('??')));
-        it('-?', () => goThrough(board => expect(board.name).to.not.contain('-?')));
-        it('-.', () => goThrough(board => expect(board.name).to.not.contain('-.')));
-        it('-!', () => goThrough(board => expect(board.name).to.not.contain('-!')));
-        it('--', () => goThrough(board => expect(board.name).to.not.contain('--')));
-        it(',,', () => goThrough(board => expect(board.name).to.not.contain(',,')));
-        it('" , "', () => goThrough(board => expect(board.name).to.not.contain(' , ')));
-        it('" . "', () => goThrough(board => expect(board.name).to.not.contain(' . ')));
-        it('""', () => goThrough(board => expect(board.name).to.not.contain('""')));
-        it('::', () => goThrough(board => expect(board.name).to.not.contain('::')));
-        it('++', () => goThrough(board => expect(board.name).to.not.contain('++')));
+        it('!.', () => goThrough(data => expect(data.name).to.not.contain('!.')));
+        it('.!', () => goThrough(data => expect(data.name).to.not.contain('.!')));
+        it('|?', () => goThrough(data => expect(data.name).to.not.contain('!?')));
+        it('?!', () => goThrough(data => expect(data.name).to.not.contain('?!')));
+        it('!!', () => goThrough(data => expect(data.name).to.not.contain('!!')));
+        it('??', () => goThrough(data => expect(data.name).to.not.contain('??')));
+        it('-?', () => goThrough(data => expect(data.name).to.not.contain('-?')));
+        it('-.', () => goThrough(data => expect(data.name).to.not.contain('-.')));
+        it('-!', () => goThrough(data => expect(data.name).to.not.contain('-!')));
+        it('--', () => goThrough(data => expect(data.name).to.not.contain('--')));
+        it(',,', () => goThrough(data => expect(data.name).to.not.contain(',,')));
+        it('" , "', () => goThrough(data => expect(data.name).to.not.contain(' , ')));
+        it('" . "', () => goThrough(data => expect(data.name).to.not.contain(' . ')));
+        it('""', () => goThrough(data => expect(data.name).to.not.contain('""')));
+        it('::', () => goThrough(data => expect(data.name).to.not.contain('::')));
+        it('++', () => goThrough(data => expect(data.name).to.not.contain('++')));
     });
 });
 

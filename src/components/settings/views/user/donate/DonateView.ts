@@ -4,7 +4,7 @@ import dictionary = require('../../../../../utils/dictionary');
 import React = require('react');
 import CommonCss = require('../CommonCss');
 import css = require('../../../../../utils/css/css');
-import {getState} from '../../../../../services';
+import { getState } from '../../../../../services';
 const {div, form, input, img, label} = React.DOM;
 
 function getPayPal() {
@@ -47,27 +47,18 @@ function getPayPal() {
     )
 }
 
-
+function getBox() {
+    return div({
+        style: CommonCss.getBox()
+    },
+        div({ style: CommonCss.getBoxSplit() }, getPayPal())
+    );
+}
 
 function render() {
 
-    const s = getState();
-    const pass = s.pass.getStatus();
-
-    if (!pass.user.email || !pass.user.isPrime) {
-        return null;
-    }
-
-    function getBox() {
-
-        return div({
-            style: CommonCss.getBox()
-        },
-            div({ style: CommonCss.getBoxSplit() },
-                getPayPal()
-            )
-        );
-    }
+    const state = getState();
+    if (!state.pass.user.email || !state.pass.user.isPrime) return null;
 
     return div({
         style: CommonCss.getPanel()

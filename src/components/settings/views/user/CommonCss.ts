@@ -87,7 +87,7 @@ const error: CSSProperties = {
 
 export = utils.union(css, {
     getPanel(isHidden?: boolean) {
-        return css.get(panel, isHidden ? { display: 'none' } : null);
+        return css.get(panel, isHidden ? { display: 'none' } : null); //render as hidden - canvas statistincs rendering
     },
     getText() {
         return css.get(text);

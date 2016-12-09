@@ -2,21 +2,21 @@ import React = require('react');
 import HeaderCss = require('./HeaderCss');
 import ButtonView = require('../../button/ButtonView');
 import TimeView = require('../time/TimeView');
-import {BoardResult} from '../../../types';
-import {isId} from '../../../lessons/helper/constants';
-import {events} from '../../../events';
+import { BoardResult } from '../../../types';
+import { isId } from '../../../lessons/helper/constants';
+import { events } from '../../../events';
 import _ = require('underscore');
 const {div} = React.DOM;
 
 
 
 function getAnswerOrSupport(props: BoardResult) {
-    if (props.lessonData.isHelp && props.lessonData.correct && props.lessonData.correct.length) {
+    if (props.board.data.isHelp && props.board.data.correct && props.board.data.correct.length) {
         return ButtonView({
             icon: props.isSupportShowAnswer ? null : HeaderCss.getSupportIcon(),
-            isTime: isId.isDigitalTime(props.lessonData.id),
+            isTime: isId.isDigitalTime(props.board.data.id),
             isResponsibleCenter: true,
-            name: props.isSupportShowAnswer ? props.lessonData.correct.join(" ") : null,
+            name: props.isSupportShowAnswer ? props.board.data.correct.join(" ") : null,
             onClick: () => events.onToogleSupportHelp.publish()
         });
     }
@@ -25,11 +25,11 @@ function getAnswerOrSupport(props: BoardResult) {
 
 
 function getAnalogTime(state: BoardResult) {
-    if (!isId.isAnalogTime(state.lessonData.id)) return null;
-    const time = state.lessonData.name.split(':');
+    if (!isId.isAnalogTime(state.board.data.id)) return null;
+    const time = state.board.data.name.split(':');
     return div({
-        onClick: () => events.readEvent.publish(state.lessonData.info),
-        style: HeaderCss.getInstructions(state.lessonData.id)
+        onClick: () => events.readEvent.publish(state.board.data.info),
+        style: HeaderCss.getInstructions(state.board.data.id)
     }, TimeView({
         hour: parseInt(time[0]),
         minute: parseInt(time[1])
@@ -37,20 +37,20 @@ function getAnalogTime(state: BoardResult) {
 }
 
 function getInstructions(state: BoardResult) {
-    if (!state.lessonData.info) return null;
+    if (!state.board.data.info) return null;
 
     return ButtonView({
-        name: state.lessonData.info,
+        name: state.board.data.info,
         isInstructions: true,
         isTransparent: true,
-        onClick: () => events.readEvent.publish(state.lessonData.info)
+        onClick: () => events.readEvent.publish(state.board.data.info)
     })
 }
 
 function getHeader(state: BoardResult) {
 
     return div({
-        style: HeaderCss.getHeader(state.lessonData.id)
+        style: HeaderCss.getHeader(state.board.data.id)
     },
         getInstructions(state),
         getAnalogTime(state),

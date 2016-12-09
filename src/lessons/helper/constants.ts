@@ -6,21 +6,22 @@ export const space = '___';
 export const multi = '−';
 export const empty = '_';
 
-export const viewIds = { //TODO make them enum?
-    fourPictures: 'f',
-    fourWords: 'w',
-    oneTwoThree: 'o',
-    radio: 'r',
-    multiRadio: 'm',
-    inradio: 'i',
-    draw: 'd',
-}
 
-export const displayIds = {
-    digitalTime: 'e',
-    analogTime: 'c',
-    areRepeated: 'a',
-    noSpace: 'n'
+
+export enum TypeId { //TODO make them enum?
+    fourPictures = 1,
+    fourWords,
+    oneTwoThree,
+    radio,
+    multiRadio,
+    inradio,
+    draw,
+
+    digitalTime,
+    analogTime,
+    areRepeated,
+    noSpace,
+    multiAnswer
 }
 
 export const defaultUser = {
@@ -30,45 +31,23 @@ export const defaultUser = {
 }
 
 export const isId = {
-    isOneTwoThree(id: string) {
-        return id.indexOf(viewIds.oneTwoThree) !== -1;
-    },
-    isRadio(id: string) {
-        return id.indexOf(viewIds.radio) !== -1;
-    },
-    isMultiRadio(id: string) {
-        return id.indexOf(viewIds.multiRadio) !== -1;
-    },
-    isInradio(id: string) {
-        return id.indexOf(viewIds.inradio) !== -1;
-    },
-    isDraw(id: string) {
-        return id.indexOf(viewIds.draw) !== -1;
-    },
-    isFourPictures(id: string) {
-        return id.indexOf(viewIds.fourPictures) !== -1;
-    },
-    isFourWords(id: string) {
-        return id.indexOf(viewIds.fourWords) !== -1;
-    },
-    isDigitalTime(id: string) {
-        return id.indexOf(displayIds.digitalTime) !== -1;
-    },
-    isAnalogTime(id: string) {
-        return id.indexOf(displayIds.analogTime) !== -1;
-    },
-    isNoSpace(id: string) {
-        return id.indexOf(displayIds.noSpace) !== -1;
-    },
-    isRepeated(id: string) {
-        return id.indexOf(displayIds.areRepeated) !== -1;
-    }
-
+    isOneTwoThree: (id: TypeId[]) => _.contains(id, TypeId.oneTwoThree),
+    isRadio: (id: TypeId[]) => _.contains(id, TypeId.radio),
+    isMultiRadio: (id: TypeId[]) => _.contains(id, TypeId.multiRadio),
+    isInradio: (id: TypeId[]) => _.contains(id, TypeId.inradio),
+    isDraw: (id: TypeId[]) => _.contains(id, TypeId.draw),
+    isFourPictures: (id: TypeId[]) => _.contains(id, TypeId.fourPictures),
+    isFourWords: (id: TypeId[]) => _.contains(id, TypeId.fourWords),
+    isDigitalTime: (id: TypeId[]) => _.contains(id, TypeId.digitalTime),
+    isAnalogTime: (id: TypeId[]) => _.contains(id, TypeId.analogTime),
+    isNoSpace: (id: TypeId[]) => _.contains(id, TypeId.noSpace),
+    isRepeated: (id: TypeId[]) => _.contains(id, TypeId.areRepeated),
+    isMultiAnswer: (id: TypeId[]) => _.contains(id, TypeId.multiAnswer)
 }
 
 
-export function id(a: string[] = [], b: string[] = [], c: string[] = []) {
-    return _.uniqueId('_' + a.join('_') + b.join('_') + c.join('_'));
+export function id(a: TypeId[] = [], b: TypeId[] = [], c: TypeId[] = []) {
+    return a.concat(b).concat(c);
 }
 
 /* get rest props of simple object */
@@ -268,6 +247,9 @@ export const capital = {
 //test - check if postfix is defined then last correct have no ?.!
 // make lessons - tences vs each other
 //make lessons - sentence to =>question sentence
+
+//TODO test new error msg (constructor with message now)
+//Todo log out clear status from lessons 
 
 /*
 ACTIVE / PASSIVE

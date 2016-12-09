@@ -1,17 +1,17 @@
 import React = require('react');
 import ProgressCss = require('./ProgressCss');
-import {getState} from '../../../../services';
+import { getState } from '../../../../services';
 const {div} = React.DOM;
 
 function getBars() {
-    const points = getState().lessonsCatalog.board.getPoints();
+    const points = getState().lessonsCatalog.current.points;
 
     return points.boards.map(board => {
-        const completeTrueFalseNone = points.mapStatus[board.id];
-        const isCurrent = board.id === points.board.id;
+        const completeTrueFalseNone = points.mapStatus[board.autoId];
+        const isCurrent = board.autoId === points.board.autoId;
 
         return div({
-            key: board.id,
+            key: board.autoId,
             style: ProgressCss.getBar(completeTrueFalseNone, isCurrent)
         })
     })

@@ -3,8 +3,8 @@ import MenuCss = require('./MenuCss');
 import _ = require('underscore');
 import ButtonView = require('../../button/ButtonView');
 import ProgressView = require('./progress/ProgressView');
-import {getState} from '../../../services';
-import {events} from '../../../events';
+import { getState } from '../../../services';
+import { events } from '../../../events';
 const {div} = React.DOM;
 
 interface Item {
@@ -33,7 +33,7 @@ const nextRandom: Item[] = [{
 
 
 function getMenuButton() {
-    const points = getState().lessonsCatalog.board.getPoints();
+    const points = getState().lessonsCatalog.current.points;
 
     function getIcon() {
         if (points.isCurrentSuccess)

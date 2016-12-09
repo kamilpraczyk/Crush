@@ -1,13 +1,13 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import {BoardFaces} from '../../../types';
-import {space, viewIds, id, capital, getNameFemale, getNameMale } from '../../helper/constants';
+import {RawData} from '../../../types';
+import {space, TypeId, id, capital, getNameFemale, getNameMale } from '../../helper/constants';
 import explenation = require('./explenation');
 import _ = require("underscore");
-const common = [viewIds.radio];
+const common = [TypeId.radio];
 const title = "Present Perfect Tense";
 const info = 'Build the correct sentence in Present Perfect Tense.';
 
-const lessons = [
+const lessons: RawData[] = [
     {
         id: id(common), title, explenation, info,
         name: "He has " + space + " a letter to " + getNameFemale() + ".",
@@ -59,7 +59,7 @@ const lessons = [
         correct: ["Haven't"],
         incorrect: ["Hasn't"],
     }
-] as BoardFaces
+] 
 
 export {
 title,

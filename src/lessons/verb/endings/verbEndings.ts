@@ -1,8 +1,8 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import {BoardFaces} from '../../../types';
-import {space, viewIds, id, capital, getNameFemale, getNameMale } from '../../helper/constants';
+import {RawData} from '../../../types';
+import {space, TypeId, id, capital, getNameFemale, getNameMale } from '../../helper/constants';
 import explenation = require('./explenation');
-const common = [viewIds.radio];
+const common = [TypeId.radio];
 const title = "Verb endings: -s, -ed, -ing";
 const info = 'Choose the correct tense.'
 const PRESENT = 'PRESENT';
@@ -10,7 +10,7 @@ const PAST = 'PAST';
 const FUTURE = 'FUTURE';
 
 
-const lessons = [
+const lessons: RawData[] = [
     {
         id: id(common),
         title, explenation, info,
@@ -133,7 +133,7 @@ const lessons = [
         incorrect: [PRESENT, PAST],
     }
 
-] as BoardFaces
+] 
 
 
 export {

@@ -1,12 +1,12 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import {BoardFaces} from '../../../types';
-import {space, viewIds, id } from '../../helper/constants';
+import {RawData} from '../../../types';
+import {space, TypeId, id } from '../../helper/constants';
 import explenation = require('./explenation');
-const common = [viewIds.draw];
+const common = [TypeId.draw];
 const title = 'Irregular Verbs';
 const info = 'Practise your writing: Infinitive - Past Simple - Past Participle.'
 
-const lessons = [
+const lessons: RawData[] = [
     {
         id: id(common), title, explenation, info,
         name: "beat - beat - beaten", 
@@ -265,7 +265,7 @@ const lessons = [
     }, {
         id: id(common), title, explenation, info,
         name: "write - wrote - written", 
-    }] as BoardFaces
+    }] 
 
 
 export {

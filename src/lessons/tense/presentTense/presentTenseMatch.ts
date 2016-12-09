@@ -1,14 +1,14 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import {BoardFaces} from '../../../types';
-import {space, viewIds, id, multi, capital } from '../../helper/constants';
+import { RawData } from '../../../types';
+import { space, TypeId, id, multi, capital } from '../../helper/constants';
 import explenation = require('./explenation');
 
-const common = [viewIds.radio];
+const common = [TypeId.radio, TypeId.multiAnswer];
 const title = "Simple Present Tense";
 const info = 'Build the correct sentence in Simple Present Tense.';
 
 //continue with next http://www.grammar-quizzes.com/prest-diagnostic.html TODO
-const lessons = [
+const lessons: RawData[] = [
     {
         id: id(common), title, explenation, info,
         name: "The " + capital.places.Earth + " " + space + " 360º every day. The " + capital.places.Moon + " " + space + " the " + capital.places.Earth + ".",
@@ -60,11 +60,11 @@ const lessons = [
         correct: ["freezes " + multi + " boils"],
         incorrect: ["boils " + multi + " freezes"],
     }
-] as BoardFaces
+]
 
 export {
-title,
-lessons,
+    title,
+    lessons,
 }
 
 

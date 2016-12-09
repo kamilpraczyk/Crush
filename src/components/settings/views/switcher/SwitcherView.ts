@@ -1,43 +1,34 @@
 /// <reference path="../../../../../typings/tsd.d.ts" />
 import React = require('react');
-import ReactDOM = require('react-dom');
-import _ = require('underscore');
 import SwitchCss = require('./SwitchCss');
 import ButtonView = require('../../../button/ButtonView');
-import {LessonMapFace, LessonFace} from '../../../../types';
-import {getState} from '../../../../services';
-import {events} from '../../../../events';
+import { getState } from '../../../../services';
+import { events } from '../../../../events';
 import css = require('../../../../utils/css/css');
 const {div} = React.DOM;
 
-
-function render() {
-    const s = getState();
-    const pass = s.pass.getStatus();
-
-    const buttons = s.lessonsCatalog.getSortedLessons().map(item => {
+function getButtions() {
+    const state = getState();
+    return state.lessonsCatalog.sortedLessons.map(lesson => {
         return ButtonView({
-            key: item.uid,
-            ref: item.uid,
-            iconSet: item.free ? item.iconSet : [css.iconsSets.lock].concat(item.iconSet),
-            name: item.name,
-            numbersStatus: s.lessonsStatus.getStatusByUid(item.uid),
-            numbers: item.lessons.length,
-            disabled: !(pass.user.isPrime || item.free),
-            onClick: () => events.loadNewLessonEvent.publish(item.uid),
+            key: lesson.uid,
+            ref: lesson.uid,
+            iconSet: lesson.free ? lesson.iconSet : [css.iconsSets.lock].concat(lesson.iconSet),
+            name: lesson.name,
+            numbersStatus: lesson.numberFinished,
+            numbers: lesson.boards.length,
+            disabled: !(state.pass.user.isPrime || lesson.free),
+            onClick: () => events.loadNewLessonEvent.publish(lesson.uid),
             isQuickClick: false,
             isExpandWidth: true,
-            isActive: item.active
+            isActive: lesson.active
         });
     });
-
-    return div({
-        style: SwitchCss.getPanel()
-    }, buttons);
 }
 
-
-
+function render() {
+    return div({ style: SwitchCss.getPanel() }, getButtions());
+}
 
 export = render;
 

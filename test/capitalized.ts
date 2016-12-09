@@ -2,7 +2,7 @@
 import sinon = require('sinon');
 import expect = require('expect.js');
 import _ = require("underscore");
-import { multi, space, capital, viewIds, displayIds, isId } from '../src/lessons/helper/constants';
+import { multi, space, capital, isId } from '../src/lessons/helper/constants';
 import { goThrough, mock } from './goThrough';
 
 
@@ -73,21 +73,21 @@ describe('Capitalized -', () => {
     }
 
     it('name - check capitalized', () => {
-        goThrough(board => {
-            if (board.name) {
-                const words = board.name.split(' ');
+        goThrough(data => {
+            if (data.name) {
+                const words = data.name.split(' ');
                 checkCapitalizedWords(words);
             }
         });
     });
     it('correct - check capitalized', () => {
-        goThrough(board => {
+        goThrough(data => {
             let words: string[] = []
-            if (board.correct) {
-                if (isId.isMultiRadio(board.id)) {
-                    checkCapitalizedFirstLetter(board.correct);
+            if (data.correct) {
+                if (isId.isMultiRadio(data.id)) {
+                    checkCapitalizedFirstLetter(data.correct);
                 } else {
-                    _.each(board.correct, (correct) => {
+                    _.each(data.correct, (correct) => {
                         words = words.concat(correct.split(' '));
                     });
                     checkCapitalizedWords(words);
@@ -96,14 +96,14 @@ describe('Capitalized -', () => {
         });
     });
     it('incorrect - check capitalized', () => {
-        goThrough(board => {
+        goThrough(data => {
             let words: string[] = []
             //do not test radio
-            if (board.incorrect) {
-                if (isId.isMultiRadio(board.id)) {
-                    checkCapitalizedFirstLetter(board.incorrect);
-                } else if (board.id.indexOf(viewIds.radio) === -1) {
-                    _.each(board.incorrect, (correct) => {
+            if (data.incorrect) {
+                if (isId.isMultiRadio(data.id)) {
+                    checkCapitalizedFirstLetter(data.incorrect);
+                } else if (!isId.isRadio(data.id)) {
+                    _.each(data.incorrect, (correct) => {
                         words = words.concat(correct.split(' '));
                     });
                     checkCapitalizedWords(words);

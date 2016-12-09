@@ -2,7 +2,6 @@
 import css = require('../../../../../utils/css/css');
 import utils = require('../../../../../utils/utils');
 
-
 const pie: CSSProperties = {
     width: 250,
     height: 125
@@ -64,38 +63,18 @@ const iconSet: CSSProperties = {
     textAlign: 'center',
     alignItems: 'center'
 }
-export = utils.union(css, {
-
-    getPie() {
-        return css.get(pie);
-    },
-    getBrickLine() {
-        return css.get(brickLine);
-    },
-    getBrick(colour: string) {
-        return css.get(brick, { backgroundColor: colour })
-    },
-    getCorrectPercentage() {
-        return css.get(correctPercentage);
-    },
-    getLessonsFinished() {
-        return css.get(lessonsFinished);
-    },
-    getLessonsFinishedMark() {
-        return css.get(lessonsFinishedMark);
-    },
-    getIconSets() {
-        return css.get(iconSet);
-    },
-    getIcon(url: string) {
-        return css.get(icon, { backgroundImage: `url(${url})` });
-    },
-    getIconNumber() {
-        return css.get(iconNumber);
-    },
+export = {
+    getPie: () => css.get(pie),
+    getBrickLine: () => css.get(brickLine),
+    getBrick: (colour: string) => css.get(brick, { backgroundColor: colour }),
+    getCorrectPercentage: () => css.get(correctPercentage),
+    getLessonsFinished: () => css.get(lessonsFinished),
+    getLessonsFinishedMark: () => css.get(lessonsFinishedMark),
+    getIconSets: () => css.get(iconSet),
+    getIcon: (url: string) => css.get(icon, { backgroundImage: `url(${url})` }),
+    getIconNumber: () => css.get(iconNumber),
 
     correct: css.font.color.success,
     incorrect: css.font.color.fail,
     rest: css.font.color.merge
-
-});
+};

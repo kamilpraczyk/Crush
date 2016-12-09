@@ -1,11 +1,11 @@
 /// <reference path="../../typings/tsd.d.ts" />
-import {LessonFace, BoardFaces, BoardFace} from '../types';
+import { LessonFace, Board } from '../types';
 import _ = require('underscore');
-import utils = require('../utils/utils');
-import {BoardQuery}  from './BoardQuery';
+import { BoardAnswer } from './BoardAnswer';
+import { clone, round10 } from '../utils/utils';
 
 interface MapStatus {
-    [uid: string]: boolean
+    [autoId: string]: boolean
 }
 
 interface Points {
@@ -19,8 +19,8 @@ interface Points {
     isCurrentSuccess: boolean,
     isCurrentFail: boolean,
     isFinished: boolean,
-    boards: BoardFaces,
-    board: BoardFace,
+    boards: Board[],
+    board: Board,
     mapStatus: MapStatus
 }
 
@@ -28,25 +28,25 @@ function _isCompletedStatus(mapStatus: MapStatus, id: string) {
     return _.has(mapStatus, id);
 }
 
-function createPoint(l: LessonFace, index: number, mapStatus: MapStatus): Points {
+function createPoint(lessons: LessonFace, index: number, mapStatus: MapStatus): Points {
 
     function _isFinished() {
-        return _.keys(mapStatus).length === boards.length && _isCompletedStatus(mapStatus, board.id);
+        return _.keys(mapStatus).length === boards.length && _isCompletedStatus(mapStatus, board.autoId);
     }
-    const boards = l.lessons;
+    const boards = lessons.boards;
     const board = boards[index];
     const currentLesson = _.indexOf(boards, board) + 1;
     const lessonsLength = boards.length;
     const isLastPage = (currentLesson === lessonsLength);
-    const isCurrentSuccess = mapStatus[board.id];
+    const isCurrentSuccess = mapStatus[board.autoId];
     const isCurrentFail = isCurrentSuccess === false ? true : false;
     const isFinished = _isFinished();
     const score = _.compact(_.values(mapStatus)).length;
-    const scorePercent = utils.round10(score * (100 / lessonsLength), -1);
+    const scorePercent = round10(score * (100 / lessonsLength), -1);
     const display = currentLesson + '/' + lessonsLength;
 
     return {
-        uid: l.uid,
+        uid: lessons.uid,
         score,
         scorePercent,
         currentLesson,
@@ -62,17 +62,17 @@ function createPoint(l: LessonFace, index: number, mapStatus: MapStatus): Points
     }
 }
 
-function getRandomNotCompletedId(l: LessonFace, currentId: string, mapStatus: MapStatus) {
+function getRandomNotCompletedId(lessons: LessonFace, currentId: string, mapStatus: MapStatus) {
     /*Get random id of next lesson and skip current lesson */
     const mapKeys = _.keys(mapStatus).concat([currentId]);
-    const boardKeys = l.lessons.map(board => board.id);
+    const boardKeys = lessons.boards.map(board => board.autoId);
     const diff = _.difference(boardKeys, mapKeys);
 
     const sample = _.sample(diff, 1);
     if (sample.length) {
         const id = _.first(sample);
-        const item = _.findWhere(l.lessons, { id: id });
-        const index = _.indexOf(l.lessons, item);
+        const item = _.findWhere(lessons.boards, { autoId: id });
+        const index = _.indexOf(lessons.boards, item);
         if (_.isNumber(index)) {
             return index;
         }
@@ -80,11 +80,11 @@ function getRandomNotCompletedId(l: LessonFace, currentId: string, mapStatus: Ma
     return null;
 }
 
-class Board {
+class BoardStatus {
     activeIndex: number = 0;
     lesson: LessonFace = null;
     mapStatus: MapStatus = {};
-    public boardQuery: BoardQuery;
+    public boardAnswer: BoardAnswer;
 
     constructor(lesson: LessonFace) {
         this.activeIndex = 0;
@@ -93,56 +93,46 @@ class Board {
         this.generateNewBoardQuery();
     }
 
-    generateNewBoardQuery() {
-        this.boardQuery = new BoardQuery(this.getCurrentBoard());
-    }
+    private getCurrentBoard() { return this.lesson.boards[this.activeIndex]; }
 
-    getPoints() {
-        return createPoint(this.lesson, this.activeIndex, this.mapStatus);
-    }
-
-    getCurrentBoard() {
-        return this.lesson.lessons[this.activeIndex];
-    }
-    getLessons() {
-        return this.lesson.lessons;
-    }
+    generateNewBoardQuery() { this.boardAnswer = new BoardAnswer(this.getCurrentBoard()); }
 
     onNextBoard() {
-        if (this.activeIndex === this.getLessons().length - 1) {
+        if (this.activeIndex === this.lesson.boards.length - 1) {
             this.activeIndex = 0;
-        } else
-            this.activeIndex++;
+        } else this.activeIndex++;
         this.generateNewBoardQuery();
     }
 
     onNextRandomBoard() {
-        const id = getRandomNotCompletedId(this.lesson, this.getCurrentBoard().id, this.mapStatus);
-        if (id) {
-            this.activeIndex = id;
-        }
+        const autoId = getRandomNotCompletedId(this.lesson, this.getCurrentBoard().autoId, this.mapStatus);
+        if (autoId) this.activeIndex = autoId;
         this.generateNewBoardQuery();
     }
 
     onPrevBoard() {
         if (this.activeIndex === 0) {
-            this.activeIndex = this.getLessons().length - 1;
-        } else
-            this.activeIndex--;
+            this.activeIndex = this.lesson.boards.length - 1;
+        } else this.activeIndex--;
         this.generateNewBoardQuery();
     }
 
     setCompletedBoard(isSuccess: boolean) {
-        if (!_isCompletedStatus(this.mapStatus, this.getCurrentBoard().id)) {
-            this.mapStatus[this.getCurrentBoard().id] = isSuccess;
-        }
+        if (!_isCompletedStatus(this.mapStatus, this.getCurrentBoard().autoId))
+            this.mapStatus[this.getCurrentBoard().autoId] = isSuccess;
     }
 
+    getState() {
+        const returns = {
+            points: createPoint(this.lesson, this.activeIndex, this.mapStatus),
+            board: this.getCurrentBoard(),
+            answer: this.boardAnswer.getState()
+        }
+        return clone(returns);
+    }
 
 }
 
-
-
 export {
-Board
+    BoardStatus
 }

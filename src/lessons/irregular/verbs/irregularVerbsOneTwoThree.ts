@@ -1,16 +1,16 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import {BoardFaces} from '../../../types';
-import {space, viewIds, id, displayIds} from '../../helper/constants';
+import {RawData} from '../../../types';
+import {space, TypeId, id} from '../../helper/constants';
 import explenation = require('./explenation');
 
 const separator = " - "
-const common = [viewIds.oneTwoThree, displayIds.areRepeated];
+const common = [TypeId.oneTwoThree, TypeId.areRepeated];
 const title = 'Irregular Verbs';
 const info = 'Choose in right order: Infinitive - Past Simple - Past Participle.'
 const postfix = "";
 
 
-const lessons = [
+const lessons: RawData[] = [
     {
         id: id(common), title, info, explenation, postfix,
         name: separator,
@@ -354,7 +354,7 @@ const lessons = [
         id: id(common), title, info, explenation, postfix,
         name: separator,
         correct: ["write", "wrote", "written"],
-    }] as BoardFaces
+    }] 
 
 
 export {

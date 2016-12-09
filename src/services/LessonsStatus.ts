@@ -1,42 +1,43 @@
-/// <reference path="../../typings/tsd.d.ts" />
 import _ = require('underscore');
 import dictionary = require('../utils/dictionary');
 import css = require('../utils/css/css');
-import {getState} from '../services';
 import utils = require('../utils/utils');
+import { LessonFace } from '../types';
 
+interface LessonsMap {
+    [uid: string]: LessonFace
+}
 
 interface MapStatus {
     [uid: string]: number
 }
 
 interface Status {
-    entriesAll: number,
-    entriesUndane: number,
-    entriesCorrect: number,
-    entriesIncorrect: number,
+    allBoardsLength: number,
+    allBoardsUndane: number,
+    allBoardsCorrect: number,
+    allBoardsIncorrect: number,
     entriesCorrectPercentage: string,
     finishedLessons: number,
     iconSetStatus: { name: number, icon: string }[]
 }
 
-function getCountNewStatus(map: MapStatus) {
-    const lessonsCatalog = getState().lessonsCatalog;
-    let entriesCorrect = 0;
-    let entriesIncorrect = 0;
+function getNewLessonsStatus(map: LessonsMap, allBoardsLength: number) {
+    let allBoardsCorrect = 0;
+    let allBoardsIncorrect = 0;
+    let finishedLessons = 0;
     const statusIcons: MapStatus = {};
 
-    _.mapObject(map, (nr, uid) => {
-        entriesCorrect += nr;
-        const lesson = lessonsCatalog.getLesson(uid);
-        if (lesson) {
-            entriesIncorrect += (lesson.lessons.length - nr);
+    _.mapObject(map, (lesson, uid) => {
+        if (lesson.numberFinished) {
+            finishedLessons++;
+            allBoardsCorrect += lesson.numberFinished;
+            allBoardsIncorrect += (lesson.boards.length - lesson.numberFinished);
             lesson.iconSet.map(icon => {
                 if (!statusIcons[icon]) statusIcons[icon] = 0;
                 ++statusIcons[icon];
             });
         }
-
     });
 
     const iconSetStatus: { name: number, icon: string }[] = [];
@@ -45,44 +46,18 @@ function getCountNewStatus(map: MapStatus) {
     });
 
     const status: Status = {
-        entriesAll: lessonsCatalog.getLength(),
-        entriesUndane: lessonsCatalog.getLength() - entriesCorrect - entriesIncorrect,
-        entriesCorrect,
-        entriesIncorrect,
-        entriesCorrectPercentage: utils.toPercentHumanize(entriesCorrect, lessonsCatalog.getLength()),
-        finishedLessons: _.intersection(lessonsCatalog.getAllUids(), _.keys(map)).length,
+        allBoardsLength: allBoardsLength,
+        allBoardsUndane: allBoardsLength - allBoardsCorrect - allBoardsIncorrect,
+        allBoardsCorrect,
+        allBoardsIncorrect,
+        entriesCorrectPercentage: utils.toPercentHumanize(allBoardsCorrect, allBoardsLength),
+        finishedLessons,
         iconSetStatus
     }
     return status;
 }
 
 
-class LessonsStatus {
-
-    private map: MapStatus = {};
-    private status: Status = null;
-    private isDirty = true;
-
-    constructor(map: MapStatus) {
-        this.map = map;
-        this.isDirty = true;
-    }
-    addLesson(name: string, value: number) {
-        this.map[name] = value;
-        this.isDirty = true;
-    }
-    getStatusByUid(uid: string) {
-        return this.map[uid];
-    }
-    getStatus() {
-        if (this.isDirty) {
-            this.isDirty = false;
-            this.status = getCountNewStatus(this.map);
-        }
-        return this.status;
-    }
-}
-
 export {
-LessonsStatus,
+    getNewLessonsStatus
 }

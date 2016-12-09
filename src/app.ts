@@ -1,5 +1,5 @@
 import Home = require("./home/Home");
-import {init} from './services';
+import { init } from './services';
 import utils = require('./utils/utils');
 
 function onConnected() {

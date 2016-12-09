@@ -1,14 +1,14 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import { BoardFaces } from '../../../types';
-import { viewIds, id, getNameFemale, getNameMale, getMounth, getDay } from '../../helper/constants';
+import { RawData } from '../../../types';
+import { TypeId, id, getNameFemale, getNameMale, getMounth, getDay } from '../../helper/constants';
 import explenation = require('./explenation');
 
 const separator = " ";
 const postfix = ".";
-const common = [viewIds.oneTwoThree];
+const common = [TypeId.oneTwoThree];
 const title = "Simple Future Tense";
 const info = 'Build the correct sentence in Simple Future Tense.';
-const lessons = [
+const lessons: RawData[] = [
     {
         id: id(common), name: separator, title, explenation, info, postfix,
         correct: [getNameMale() + " will", "get married", "in", getMounth()],
@@ -70,7 +70,7 @@ const lessons = [
         id: id(common), name: separator, title, explenation, info, postfix,
         correct: ["They", "will", "cook", "dinner"],
     }
-] as BoardFaces
+] 
 
 export {
     title,

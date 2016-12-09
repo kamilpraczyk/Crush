@@ -33,7 +33,7 @@ function getContentLine(state: BoardResult, name: string, key: number) {
         style: OneTwoThreeCss.getLine()
     },
         ButtonView({
-            name: utils.tryToSetLowercaseFirstLetter(name, state.lessonData.correct),//Try to lowercase first word of sentence
+            name: utils.tryToSetLowercaseFirstLetter(name, state.board.data.correct),//Try to lowercase first word of sentence
             isExpand: true,
             isFail: isFail,
             isSuccess: isSuccess,

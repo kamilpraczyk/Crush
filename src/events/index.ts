@@ -1,4 +1,5 @@
 import { EventFactory, VoidEventFactory } from './factory';
+import { RootType } from '../types';
 
 export const unsubscribe = (unsubscribes: Array<() => void>) => unsubscribes && unsubscribes.forEach(u => u()); // helper
 
@@ -19,7 +20,7 @@ export const events = {
     goTest: VoidEventFactory('goTest'),
     showRootMenu: VoidEventFactory('showRootMenu'),
 
-    rootMenuEvent: EventFactory<string>('rootMenuEvent'),
+    rootMenuEvent: EventFactory<RootType>('rootMenuEvent'),
     loadNewLessonEvent: EventFactory<string>('loadNewLessonEvent'),
 
 

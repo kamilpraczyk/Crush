@@ -1,12 +1,12 @@
 /// <reference path="../../../typings/tsd.d.ts" />
-import {BoardFaces} from '../../types';
-import {space, empty, viewIds, id } from '../helper/constants';
+import {RawData} from '../../types';
+import {space, empty, TypeId, id } from '../helper/constants';
 import explenation = require('./explenation');
-const common = [viewIds.radio];
+const common = [TypeId.radio];
 const title = 'Singular and Plural';
 const info = 'Choose the correct answer.';
 
-const lessons = [
+const lessons: RawData[] = [
     {
         id: id(common), title, explenation, info,
         name: space + " email address",
@@ -173,7 +173,7 @@ const lessons = [
         correct: [empty],
         incorrect: ["a", "an"],
     }
-] as BoardFaces
+] 
 
 export {
 title,

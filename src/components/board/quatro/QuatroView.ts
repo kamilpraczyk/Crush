@@ -21,14 +21,14 @@ function getContentLine(state: BoardResult, list: any[]) {
     const elements = list.map((name: string) => {
         let word: string = null;
 
-        if (isId.isFourWords(state.lessonData.id)) {
+        if (isId.isFourWords(state.board.data.id)) {
             word = name;
         }
 
         let isFail = false;
         let isSuccess = false;
         if (state.selectedAnswer === name) {
-            if (_.contains(state.lessonData.correct, state.selectedAnswer)) {
+            if (_.contains(state.board.data.correct, state.selectedAnswer)) {
                 isSuccess = true;
             } else {
                 isFail = true;
@@ -46,7 +46,7 @@ function getContentLine(state: BoardResult, list: any[]) {
                 isSuccess: isSuccess,
                 isGuess: true,
                 backUrl: word ? null : name,
-                isTime: isId.isDigitalTime(state.lessonData.id),
+                isTime: isId.isDigitalTime(state.board.data.id),
                 onClick: () => events.onChoosePicture.publish(name)
             }));
     });

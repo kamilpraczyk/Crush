@@ -2,11 +2,11 @@ import React = require('react');
 import RadioCss = require('./RadioCss');
 import MenuView = require('../menu/MenuView');
 import ButtonView = require('../../button/ButtonView');
-import {BoardResult} from '../../../types';
-import {isId} from '../../../lessons/helper/constants';
+import { BoardResult } from '../../../types';
+import { isId } from '../../../lessons/helper/constants';
 import HeaderView = require('../header/HeaderView');
 import _ = require('underscore');
-import {events} from '../../../events';
+import { events } from '../../../events';
 const {div} = React.DOM;
 
 
@@ -39,7 +39,7 @@ function getBody(state: BoardResult) {
                 isSuccess: isSuccess,
                 isGuess: true,
                 isExpandWidth: true,
-                //isTime: isId.isDigitalTime(state.lessonData.id),
+                //isTime: isId.isDigitalTime(state.board.data.id),
                 onClick: () => events.onChooseRadio.publish(name)
             });
         });

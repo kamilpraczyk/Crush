@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import {BoardFaces} from '../../../types';
-import {space, viewIds, id } from '../../helper/constants';
+import {RawData} from '../../../types';
+import {space, TypeId, id } from '../../helper/constants';
 import explenation = require('./explenation');
 
 const title = 'Verb: "to be" in present and past';
@@ -8,9 +8,9 @@ const toPlural = 'Change to plural.';
 const toSingular = 'Change to singular.';
 const toPast = 'Change to Past Tense.';
 const toPresent = 'Change to Present Tense.';
-const common = [viewIds.radio];
+const common = [TypeId.radio];
 
-const lessons = [
+const lessons: RawData[] = [
     {
         id: id(common), title, explenation,
         name: "Those girls were beautiful.",
@@ -72,7 +72,7 @@ const lessons = [
         incorrect: ["Those children aren't short."],
         info: toPresent,
     }
-] as BoardFaces
+] 
 
 export {
 title,

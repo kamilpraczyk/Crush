@@ -1,114 +1,114 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import { BoardFaces } from '../../../types';
-import { viewIds, id } from '../../helper/constants';
+import { RawData } from '../../../types';
+import { TypeId, id } from '../../helper/constants';
 import explenation = require('./explenation');
-const common = [viewIds.multiRadio];
+const common = [TypeId.multiRadio];
 const title = 'Synonyms S-W';
 const info = 'Find two synonymms for a word:';
 
-const lessons = [
+const lessons: RawData[] = [
     {
         id: id(common), title, info, explenation,
         name: "Slow",
-        correct: ["Behind", "Unhurried"],
-        incorrect: ["", ""], //TODO
+        correct: ["Behind", "Unhurried", ""],
+        incorrect: ["", "", "", "", ""] //TODO
     }, {
         id: id(common), title, info, explenation,
         name: "Stop",
-        correct: ["End", "Finish"],
-        incorrect: ["", ""],
+        correct: ["End", "Finish", ""],
+        incorrect: ["", "", "", "", ""]
     }, {
         id: id(common), title, info, explenation,
         name: "Story",
-        correct: ["Legend", "Tale"],
-        incorrect: ["", ""],
+        correct: ["Legend", "Tale", ""],
+        incorrect: ["", "", "", "", ""]
     }, {
         id: id(common), title, info, explenation,
         name: "Strange",
-        correct: ["Odd", "Unusual"],
-        incorrect: ["", ""],
+        correct: ["Odd", "Unusual", ""],
+        incorrect: ["", "", "", "", ""]
     }, {
         id: id(common), title, info, explenation,
         name: "Strong",
-        correct: ["Powerful", "Intense"],
-        incorrect: ["", ""],
+        correct: ["Powerful", "Intense", ""],
+        incorrect: ["", "", "", "", ""]
     }, {
         id: id(common), title, info, explenation,
         name: "Summit",
-        correct: ["Peak", "Top"],
-        incorrect: ["", ""],
+        correct: ["Peak", "Top", ""],
+        incorrect: ["", "", "", "", ""]
     }, {
         id: id(common), title, info, explenation,
         name: "Steady",
-        correct: ["Constant", "Regular"],
-        incorrect: ["", ""],
+        correct: ["Constant", "Regular", ""],
+        incorrect: ["", "", "", "", ""]
     }, {
         id: id(common), title, info, explenation,
         name: "Sure",
-        correct: ["Certain", "Positive"],
-        incorrect: ["", ""],
+        correct: ["Certain", "Positive", ""],
+        incorrect: ["", "", "", "", ""]
     }, {
         id: id(common), title, info, explenation,
         name: "Take",
-        correct: ["Hold", "Capture"],
-        incorrect: ["", ""],
+        correct: ["Hold", "Capture", ""],
+        incorrect: ["", "", "", "", ""]
     }, {
         id: id(common), title, info, explenation,
         name: "Tell",
-        correct: ["Disclose", "Reveal"],
-        incorrect: ["", ""],
+        correct: ["Disclose", "Reveal", ""],
+        incorrect: ["", "", "", "", ""]
     }, {
         id: id(common), title, info, explenation,
         name: "Terrible",
-        correct: ["Awful", "Horrible"],
-        incorrect: ["", ""],
+        correct: ["Awful", "Horrible", ""],
+        incorrect: ["", "", "", "", ""]
     }, {
         id: id(common), title, info, explenation,
         name: "Think",
-        correct: ["Consider", "Assume"],
-        incorrect: ["", ""],
+        correct: ["Consider", "Assume", ""],
+        incorrect: ["", "", "", "", ""]
     }, {
         id: id(common), title, info, explenation,
         name: "Trouble",
-        correct: ["Worry", "Distress"],
-        incorrect: ["", ""],
+        correct: ["Worry", "Distress", ""],
+        incorrect: ["", "", "", "", ""]
     }, {
         id: id(common), title, info, explenation,
         name: "True",
-        correct: ["Right", "Accurate"],
-        incorrect: ["", ""],
+        correct: ["Right", "Accurate", ""],
+        incorrect: ["", "", "", "", ""]
     }, {
         id: id(common), title, info, explenation,
         name: "Ugly",
-        correct: ["Hideous", "Unpleasant"],
-        incorrect: ["", ""],
+        correct: ["Hideous", "Unpleasant", ""],
+        incorrect: ["", "", "", "", ""]
     }, {
         id: id(common), title, info, explenation,
         name: "Unhappy",
-        correct: ["Miserable", "Unfortunate"],
-        incorrect: ["", ""],
+        correct: ["Miserable", "Unfortunate", ""],
+        incorrect: ["", "", "", "", ""]
     }, {
         id: id(common), title, info, explenation,
         name: "Uncertain",
-        correct: ["Doubtful", "Questionable"],
-        incorrect: ["", ""],
+        correct: ["Doubtful", "Questionable", ""],
+        incorrect: ["", "", "", "", ""]
     }, {
         id: id(common), title, info, explenation,
         name: "Use",
-        correct: ["Spend", "Expend"],
-        incorrect: ["", ""],
+        correct: ["Spend", "Expend", ""],
+        incorrect: ["", "", "", "", ""]
     }, {
         id: id(common), title, info, explenation,
         name: "Weak",
-        correct: ["Frail", "Fragile"],
-        incorrect: ["", ""],
+        correct: ["Frail", "Fragile", ""],
+        incorrect: ["", "", "", "", ""]
     }, {
         id: id(common), title, info, explenation,
         name: "Wrong",
-        correct: ["Incorrect", "Mistaken"],
-        incorrect: ["", ""],
+        correct: ["Incorrect", "Mistaken", ""],
+        incorrect: ["", "", "", "", ""]
     }
-] as BoardFaces
+] 
 
 export {
     title,

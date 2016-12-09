@@ -1,13 +1,13 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import {BoardFaces} from '../../../types';
-import {space, viewIds, id, displayIds } from '../../helper/constants';
+import { RawData } from '../../../types';
+import { space, TypeId, id } from '../../helper/constants';
 import explenation = require('./explenation');
-const common = [viewIds.draw, displayIds.digitalTime];
+const common = [TypeId.draw, TypeId.digitalTime];
 import _ = require("underscore");
 const title = 'What time is it?';
 const info = 'Write the correct time.'
 const isHelp = true;
-const lessons = [
+const lessons: RawData[] = [
     {
         id: id(common), title, info, explenation, isHelp,
         name: "It's quarter to two.",
@@ -89,10 +89,10 @@ const lessons = [
         name: "It's quarter to four.",
         correct: ["03:45"],
     }
-] as BoardFaces
+] 
 
 
 export {
-title,
-lessons,
+    title,
+    lessons,
 }

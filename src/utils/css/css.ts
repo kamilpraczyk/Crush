@@ -12,8 +12,8 @@ const fontFamilyJournal = 'journal';
 const fontFamilyCharcoal = 'charcoal';
 
 
-import {isId} from '../../lessons/helper/constants';
-import {getBrowser} from '../../utils/utils';
+import { isId, TypeId } from '../../lessons/helper/constants';
+import { getBrowser } from '../../utils/utils';
 
 const micro = constFont - 1.8 + constPoint;
 const XS = constFont - 0.8 + constPoint;
@@ -262,7 +262,7 @@ const style = {
             return s;
         },
 
-        getInstructions: (id?: string) => {
+        getInstructions: (id?: TypeId[]) => {
             let style: CSSProperties = {
                 display: 'flex',
                 paddingLeft: '2vw',
@@ -274,7 +274,7 @@ const style = {
                 marginBottom: '1vh',
                 fontSize: XL,
             }
-            if (id && isId.isDigitalTime(id)) {
+            if (isId.isDigitalTime(id)) {
                 const digitalTime: CSSProperties = {
                     fontSize: XL3,
                     fontFamily: fontFamilyTime,

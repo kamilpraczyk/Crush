@@ -10,21 +10,21 @@ describe('Title -', () => {
 
     describe('should not contains: ', () => {
 
-        it('double spaces', () => goThrough(board => expect(board.title).to.not.contain('  ')));
-        it('!.', () => goThrough(board => { expect(board.title).to.not.contain('!.'); }));
-        it('.!', () => goThrough(board => { expect(board.title).to.not.contain('.!'); }));
-        it('|?', () => goThrough(board => { expect(board.title).to.not.contain('!?'); }));
-        it('?!', () => goThrough(board => { expect(board.title).to.not.contain('?!'); }));
-        it('!!', () => goThrough(board => { expect(board.title).to.not.contain('!!'); }));
-        it('??', () => goThrough(board => { expect(board.title).to.not.contain('??'); }));
-        it('-?', () => goThrough(board => { expect(board.title).to.not.contain('-?'); }));
-        it('-.', () => goThrough(board => { expect(board.title).to.not.contain('-.'); }));
-        it('-!', () => goThrough(board => { expect(board.title).to.not.contain('-!'); }));
-        it('--', () => goThrough(board => { expect(board.title).to.not.contain('--'); }));
-        it(',,', () => goThrough(board => { expect(board.title).to.not.contain(',,'); }));
-        it('" , "', () => goThrough(board => { expect(board.title).to.not.contain(' , '); }));
-        it('" , "', () => goThrough(board => { expect(board.title).to.not.contain(' . '); }));
-        it('....', () => goThrough(board => { expect(board.title).to.not.contain('....'); }));
+        it('double spaces', () => goThrough(data => expect(data.title).to.not.contain('  ')));
+        it('!.', () => goThrough(data => { expect(data.title).to.not.contain('!.'); }));
+        it('.!', () => goThrough(data => { expect(data.title).to.not.contain('.!'); }));
+        it('|?', () => goThrough(data => { expect(data.title).to.not.contain('!?'); }));
+        it('?!', () => goThrough(data => { expect(data.title).to.not.contain('?!'); }));
+        it('!!', () => goThrough(data => { expect(data.title).to.not.contain('!!'); }));
+        it('??', () => goThrough(data => { expect(data.title).to.not.contain('??'); }));
+        it('-?', () => goThrough(data => { expect(data.title).to.not.contain('-?'); }));
+        it('-.', () => goThrough(data => { expect(data.title).to.not.contain('-.'); }));
+        it('-!', () => goThrough(data => { expect(data.title).to.not.contain('-!'); }));
+        it('--', () => goThrough(data => { expect(data.title).to.not.contain('--'); }));
+        it(',,', () => goThrough(data => { expect(data.title).to.not.contain(',,'); }));
+        it('" , "', () => goThrough(data => { expect(data.title).to.not.contain(' , '); }));
+        it('" , "', () => goThrough(data => { expect(data.title).to.not.contain(' . '); }));
+        it('....', () => goThrough(data => { expect(data.title).to.not.contain('....'); }));
     });
 });
 

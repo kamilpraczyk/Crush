@@ -1,7 +1,7 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import css = require('../../../utils/css/css');
 import utils = require('../../../utils/utils');
-import {isId} from '../../../lessons/helper/constants';
+import { isId, TypeId } from '../../../lessons/helper/constants';
 import _ = require('underscore');
 
 
@@ -15,7 +15,7 @@ const headerShrink: CSSProperties = {
 
 export = utils.union(css, {
 
-    getHeader(id: string) {
+    getHeader(id: TypeId[]) {
         return css.get(css.layout.getHeader(), header, isId.isAnalogTime(id) ? headerShrink : null);
     },
 

@@ -9,9 +9,9 @@ describe('Endings -', () => {
     beforeEach(() => mock());
 
     describe('name - should not end with: ', () => {
-        it(' - ', () => goThrough(board => expect(board.name[board.name.length - 1]).to.not.eql('-')));
-        it(' " ', () => goThrough(board => expect(board.name[board.name.length - 1]).to.not.eql(' "')));
-        it(" ' ", () => goThrough(board => expect(board.name[board.name.length - 1]).to.not.eql("'")));
+        it(' - ', () => goThrough(data => { return expect(data.name[data.name.length - 1]).to.not.eql('-') }));
+        it(' " ', () => goThrough(data => { return expect(data.name[data.name.length - 1]).to.not.eql(' "') }));
+        it(" ' ", () => goThrough(data => { return expect(data.name[data.name.length - 1]).to.not.eql("'") }));
     });
 });
 

@@ -3,16 +3,14 @@ import dictionary = require('../../../utils/dictionary');
 import GratulationCss = require('./GratulationCss');
 import _ = require('underscore');
 import ButtonView = require('../../../components/button/ButtonView');
-import {getState} from '../../../services';
-import {events} from '../../../events';
+import { getState } from '../../../services';
+import { events } from '../../../events';
 const {div} = React.DOM;
 
 
 function render() {
-    const s = getState();
-    const pass = s.pass.getStatus();
-
-    const points = s.lessonsCatalog.board.getPoints();
+    const state = getState();
+    const points = state.lessonsCatalog.current.points;
 
     if (!points.isFinished) {
         return null;
@@ -39,13 +37,13 @@ function render() {
     };
 
     function getButtonSaveAndContinue() {
-        if (!pass.user.email || points.score === 0) {
+        if (!state.pass.user.email || points.score === 0) {
             return null;
         }
         return ButtonView({
             name: dictionary.GRATULATIONS_SAVE_BUTTON,
             isResponsibleHeight: true,
-            isLoader: pass.status.process,
+            isLoader: state.pass.status.process,
             onClick: () => {
                 events.saveStatusBoardEvent.publish({
                     uid: points.uid,

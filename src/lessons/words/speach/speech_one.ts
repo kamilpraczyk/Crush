@@ -1,12 +1,12 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import {BoardFaces} from '../../../types';
-import {space, viewIds, id, capital, displayIds, getNameFemale, getNameMale} from '../../helper/constants';
+import {RawData} from '../../../types';
+import {space, TypeId, id, capital, getNameFemale, getNameMale} from '../../helper/constants';
 import explenation = require('./explenation');
-const common = [viewIds.radio, displayIds.noSpace];
+const common = [TypeId.radio, TypeId.noSpace];
 const title = "Writing speech";
 const info = 'Writing speech. Use the correct form.'
 
-const lessons = [
+const lessons: RawData[] = [
     {
         id: id(common), title, explenation, info,
         name: '"Stop it!" ' + space + " " + getNameFemale() + ".",
@@ -108,7 +108,7 @@ const lessons = [
         correct: ["say"],
         incorrect: ["ask"],
     }
-] as BoardFaces
+] 
 
 export {
 title,

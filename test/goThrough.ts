@@ -1,17 +1,13 @@
 /// <reference path="../typings/tsd.d.ts" />
-import { BoardFace } from '../src/types';
+import { RawData } from '../src/types';
 import { init, clear, getState } from '../src/services';
 import _ = require("underscore");
 
 
-function goThrough(test: (board: BoardFace) => void) {
+function goThrough(test: (data: RawData) => void) {
     clear();
     return init().then(() => {
-        getState().lessonsCatalog.getSortedLessons().map(boards => {
-            boards.lessons.map(board => {
-                test(board);
-            });
-        });
+        return getState().lessonsCatalog.sortedLessons.map(lessons => lessons.boards.map(board => test(board.data)));
     })
 }
 

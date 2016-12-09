@@ -10,10 +10,10 @@ describe('Repetition -', () => {
     beforeEach(() => mock());
 
     it('correct - are not repeated (skip isRepeated)', () => {
-        goThrough(board => { if (board.correct && !isId.isRepeated(board.id)) expect(board.correct.length).to.be(_.unique(board.correct).length) });
+        goThrough(data => { if (data.correct && !isId.isRepeated(data.id)) expect(data.correct.length).to.be(_.unique(data.correct).length) });
     });
 
     it('incorrect - are not repeated (skip isRepeated)', () => {
-        goThrough(board => { if (board.incorrect && !isId.isRepeated(board.id)) expect(board.incorrect.length).to.be(_.unique(board.incorrect).length); });
+        goThrough(data => { if (data.incorrect && !isId.isRepeated(data.id)) expect(data.incorrect.length).to.be(_.unique(data.incorrect).length); });
     });
 });

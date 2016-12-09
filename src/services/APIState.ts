@@ -1,22 +1,20 @@
 /// <reference path="../../typings/tsd.d.ts" />
 import React = require('react');
+import _ = require('underscore');
 import ReactDOM = require('react-dom');
 import components = require('../components/components');
 import { startLogin, login, updataLastLogin, toogleRegister, startRegister, sendEmailGreeting, register, logout } from '../services/Pass';
 import { Pass, saveStatus, readStatus, startSubscribe, subscribe, startSaveStatus } from '../services/Pass';
-import utils = require('../utils/utils');
+import { voice } from '../utils/utils';
 import { events, renderEvent } from '../events';
-import { RootMenu, RootType } from '../services/RootMenu';
+import { RootType } from '../types';
+import { createRootMenu } from '../services/RootMenu';
 import { getLessons } from '../lessons/lessons';
 import { LessonsCatalog } from '../services/LessonsCatalog';
-import { LessonsStatus } from '../services/LessonsStatus';
 
+function publishRerender() { return renderEvent.publish(); }
 
-function publishRerender() {
-    return renderEvent.publish();
-}
-
-function onRootMenuEvent(id: string) {
+function onRootMenuEvent(id: RootType) {
     rootMenu.setRootMenuTo(id);
     publishRerender();
 }
@@ -38,7 +36,7 @@ function onSaveStatusBoardEvent(data: { uid: string, status: number }) {
     startSaveStatus(() => publishRerender())
         .then(() => rootMenu.setRootMenuTo(RootType.lessons))
         .then(() => saveStatus(data))
-        .then(() => lessonsStatus.addLesson(data.uid, data.status))
+        .then(() => lessonsCatalog.setNumberFinished(data.uid, data.status))
         .finally(() => onCloseStatusBoardEvent());
 }
 
@@ -48,35 +46,36 @@ function onCloseStatusBoardEvent() {
     publishRerender();
 }
 
-function onToogleMinimalizedRootMenu() {
+function onShowRootMenu() {
     rootMenu.showMenu();
     publishRerender();
 }
 
 function onNextBoard() {
     lessonsCatalog.board.onNextBoard();
-    utils.voice.stopReading();
+    voice.stopReading();
     publishRerender();
 }
 function onNextRandomBoard() {
     lessonsCatalog.board.onNextRandomBoard();
-    utils.voice.stopReading();
+    voice.stopReading();
     publishRerender();
 }
 function onPrevBoard() {
     lessonsCatalog.board.onPrevBoard();
-    utils.voice.stopReading();
+    voice.stopReading();
     publishRerender();
 }
 function setUserAnswer(name: string) {
-    lessonsCatalog.board.boardQuery.setUserAnswer(name);
+    const isCompletedBoard = lessonsCatalog.board.boardAnswer.setUserAnswer(name);
+    _.isBoolean(isCompletedBoard) && lessonsCatalog.board.setCompletedBoard(isCompletedBoard);
     publishRerender();
 }
 function onRead(read: string) {
-    utils.voice.read(read);
+    voice.read(read);
 }
 function onToogleSupportHelp() {
-    lessonsCatalog.board.boardQuery.toggleSupportHelp();
+    lessonsCatalog.board.boardAnswer.toggleSupportHelp();
     publishRerender();
 }
 
@@ -87,11 +86,9 @@ function onLogin(o: { email: string, password: string }) {
         .then(() => publishRerender())
         .then(() => updataLastLogin())
         .then(() => readStatus({ email: pass.getStatus().user.email }))
-        .then((data) => {
+        .then(data => {
             if (data && data.state && data.state.length) {
-                data.state.map((item) => {
-                    lessonsStatus.addLesson(item.name, parseInt(item.value))
-                });
+                data.state.map(item => lessonsCatalog.setNumberFinished(item.name, parseInt(item.value)));
             }
         })
         .finally(() => publishRerender());
@@ -129,7 +126,6 @@ function onScrollPosition(top: number) {
     //do not rerender
 }
 
-
 class APIState {
 
     subscribers: any[] = [];
@@ -145,7 +141,7 @@ class APIState {
 
             events.readEvent.subscribe(onRead),
             events.rootMenuEvent.subscribe(onRootMenuEvent),
-            events.showRootMenu.subscribe(onToogleMinimalizedRootMenu),
+            events.showRootMenu.subscribe(onShowRootMenu),
             events.loadNewLessonEvent.subscribe(onLoadNewLessonEvent), //click to load new lesson on menu
             events.goTest.subscribe(goTest),
             events.closeStatusBoardEvent.subscribe(onCloseStatusBoardEvent),
@@ -167,27 +163,24 @@ class APIState {
 
 const pass = new Pass();
 const lessonsCatalog = new LessonsCatalog();
-const lessonsStatus = new LessonsStatus({});
-const rootMenu = new RootMenu(RootType.lessons);
+const rootMenu = createRootMenu(RootType.lessons);
 const apiState = new APIState();
 
-function init() {
-    return getLessons(lessonsCatalog).then(_lessonsCatalog => {
-        return publishRerender();
-    });
+function init() { return getLessons(lessonsCatalog).then(_lessonsCatalog => publishRerender()); }
+function clear() { return lessonsCatalog.clear(); }
+function getState() {
+    console.log('getState'); //TODO reduce producing new states
+    return {
+        rootMenu: rootMenu.getState(),
+        lessonsCatalog: lessonsCatalog.getState(),
+        pass: pass.getStatus()
+    }; //TODO create class and spread it?
 }
 
-function clear() {
-    return lessonsCatalog.clear();
-}
 
 export {
     init,
     clear,
-    RootType,
-    lessonsCatalog,
-    lessonsStatus,
-    rootMenu,
-    pass,
+    getState
 };
 

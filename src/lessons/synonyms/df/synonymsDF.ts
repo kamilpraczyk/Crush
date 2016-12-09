@@ -1,12 +1,12 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import { BoardFaces } from '../../../types';
-import { viewIds, id } from '../../helper/constants';
+import { RawData } from '../../../types';
+import { TypeId, id } from '../../helper/constants';
 import explenation = require('./explenation');
-const common = [viewIds.multiRadio];
+const common = [TypeId.multiRadio];
 const title = 'Synonyms D-F';
 const info = 'Find 3 synonymms for a word:';
 
-const lessons = [
+const lessons: RawData[] = [
     {
         id: id(common), title, info, explenation,
         name: "Decide",
@@ -108,7 +108,7 @@ const lessons = [
         correct: ["Amusing", "Humorous", "Laughable"],
         incorrect: ["Terror", "Chunky", "Speedy", "Famed", "Fake"],
     }
-] as BoardFaces
+] 
 
 export {
     title,

@@ -7,7 +7,6 @@ import QuatroView = require('./quatro/QuatroView');
 import OneTwoThreeView = require('./oneTwoThree/OneTwoThreeView');
 import MultiRadioView = require('./multiRadio/MultiRadioView');
 import GratulationView = require('./gratulation/GratulationView')
-
 import { isId } from '../../lessons/helper/constants';
 import { getState } from '../../services';
 
@@ -15,8 +14,8 @@ const {div} = React.DOM;
 
 function getView() {
     const s = getState();
-    const state = s.lessonsCatalog.board.boardQuery.getState();
-    const id = s.lessonsCatalog.board.getCurrentBoard().id;
+    const state = s.lessonsCatalog.current.answer;
+    const id = s.lessonsCatalog.current.board.data.id;
 
     if (isId.isDraw(id)) return DrawView(state);
     if (isId.isFourPictures(id)) return QuatroView(state);
@@ -33,7 +32,7 @@ function getView() {
 
 function render() {
     const s = getState();
-    if (!s.rootMenu.isMinimalized()) return null;
+    if (!s.rootMenu.isMinimalized) return null;
 
     return div({
         style: BoardCss.getPanel()

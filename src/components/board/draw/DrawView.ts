@@ -2,9 +2,9 @@ import React = require('react');
 import DrawCss = require('./DrawCss');
 import Signature = require('../../signature/index');
 import MenuView = require('../menu/MenuView');
-import {BoardResult} from '../../../types';
+import { BoardResult } from '../../../types';
 import ButtonView = require('../../button/ButtonView');
-import {isId} from '../../../lessons/helper/constants';
+import { isId } from '../../../lessons/helper/constants';
 import HeaderView = require('../header/HeaderView');
 import dictionary = require('../../../utils/dictionary');
 const {div} = React.DOM;
@@ -36,7 +36,7 @@ function getBody(props: BoardResult) {
             style: DrawCss.getBodyContent()
         },
             Signature({
-                id: props.lessonData.id,
+                id: props.board.autoId,
                 backgroundColor: DrawCss.themes.signaturePad.background,
                 penColor: DrawCss.themes.signaturePad.color,
                 onGetInterface: onGetInterfaceClear

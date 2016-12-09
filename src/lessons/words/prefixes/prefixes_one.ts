@@ -1,12 +1,12 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import {BoardFaces} from '../../../types';
-import {space, viewIds, id, capital, displayIds} from '../../helper/constants';
+import {RawData} from '../../../types';
+import {space, TypeId, id, capital} from '../../helper/constants';
 import explenation = require('./explenation');
-const common = [viewIds.inradio, displayIds.noSpace];
+const common = [TypeId.inradio, TypeId.noSpace];
 const title = "Prefixes: re, dis, pre, un";
 const info = 'Make the word mean the opposite.'
 
-const lessons = [
+const lessons: RawData[] = [
     {
         id: id(common), title, explenation, info,
         name: space + "able",
@@ -58,7 +58,7 @@ const lessons = [
         correct: ["un"],
         incorrect: ["dis"],
     },
-] as BoardFaces
+] 
 
 export {
 title,

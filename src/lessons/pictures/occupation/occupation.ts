@@ -1,10 +1,10 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-import { BoardFaces } from '../../../types';
+import { RawData } from '../../../types';
 import _ = require('underscore');
-import { space, viewIds, id, getRest } from '../../helper/constants';
+import { space, TypeId, id, getRest } from '../../helper/constants';
 import explenation = require('./explenation');
 
-const common = [viewIds.fourPictures];
+const common = [TypeId.fourPictures];
 const s = 'img/occupations/';
 const a = {
     actor: s + 'actor.png',
@@ -58,7 +58,7 @@ const a = {
 const title = 'Occupations';
 const info = 'Choose the correct occupation.'
 
-const lessons = [
+const lessons: RawData[] = [
     {
         id: id(common), title, info, explenation,
         name: 'Architect',
@@ -291,7 +291,7 @@ const lessons = [
         incorrect: getRest(a, a.butcher),
     }
 
-] as BoardFaces
+] 
 
 
 export {
