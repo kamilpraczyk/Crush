@@ -2,7 +2,7 @@ import React = require('react');
 import RadioCss = require('./RadioCss');
 import MenuView = require('../menu/MenuView');
 import ButtonView = require('../../button/ButtonView');
-import { BoardResult } from '../../../types';
+import { BoardAnswerState } from '../../../types';
 import { isId } from '../../../lessons/helper/constants';
 import HeaderView = require('../header/HeaderView');
 import _ = require('underscore');
@@ -16,9 +16,9 @@ function getFooter() {
     }, MenuView());
 }
 
-function getBody(state: BoardResult) {
+function getBody(state: BoardAnswerState) {
 
-    function getItems(state: BoardResult) {
+    function getItems(state: BoardAnswerState) {
         return state.generatedList.map((name: string, index: number) => {
 
             let isFail = false;
@@ -60,7 +60,7 @@ function getBody(state: BoardResult) {
 };
 
 
-export = function render(state: BoardResult) {
+export = function render(state: BoardAnswerState) {
     return div({
         style: RadioCss.layout.getPanel()
     }, HeaderView(state), getBody(state), getFooter());

@@ -3,7 +3,7 @@ import InradioCss = require('./InradioCss');
 import MenuView = require('../menu/MenuView');
 import HeaderView = require('../header/HeaderView');
 import ButtonView = require('../../button/ButtonView');
-import { BoardResult } from '../../../types';
+import { BoardAnswerState } from '../../../types';
 import { space } from '../../../lessons/helper/constants';
 import _ = require('underscore');
 import { events } from '../../../events';
@@ -17,7 +17,7 @@ function getFooter() {
     }, MenuView());
 }
 
-function getList(state: BoardResult) {
+function getList(state: BoardAnswerState) {
     const list = state.generatedList.map((name, index) => {
         return ButtonView({
             key: name + index,
@@ -35,7 +35,7 @@ function getList(state: BoardResult) {
     }, list);
 }
 
-function getBody(state: BoardResult) {
+function getBody(state: BoardAnswerState) {
 
 
     if (state.text.indexOf(space) === -1) {
@@ -79,7 +79,7 @@ function getBody(state: BoardResult) {
 };
 
 
-function render(state: BoardResult) {
+function render(state: BoardAnswerState) {
     return div({
         style: InradioCss.layout.getPanel()
     }, HeaderView(state), getBody(state), getFooter());

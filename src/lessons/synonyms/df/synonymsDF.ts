@@ -96,19 +96,19 @@ const lessons: RawData[] = [
         id: id(common), title, info, explenation,
         name: "Fat",
         correct: ["Chubby", "Chunky", "Bulky"],
-        incorrect: ["Unprejudiced", "Justify", "Plunge", "Justify", "Involved"],
+        incorrect: ["Unprejudiced", "Justify", "Plunge", "Hasty", "Involved"],
     }, {
         id: id(common), title, info, explenation,
         name: "Fear",
         correct: ["Fright", "Panic", "Horror"],
-        incorrect: ["Deceptive", "Tumble", "Quickly", "Plump", "Deceptive"],
+        incorrect: ["Deceptive", "Tumble", "Quickly", "Plump", "Untrue"],
     }, {
         id: id(common), title, info, explenation,
         name: "Funny",
         correct: ["Amusing", "Humorous", "Laughable"],
         incorrect: ["Terror", "Chunky", "Speedy", "Famed", "Fake"],
     }
-] 
+]
 
 export {
     title,

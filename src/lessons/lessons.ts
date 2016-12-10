@@ -1,6 +1,8 @@
 /// <reference path="../../typings/tsd.d.ts" />
 import { LessonsCatalog } from '../services/LessonsCatalog';
+import { FreeType } from '../types';
 import Promise = require('bluebird');
+
 import animals = require('./animals/animals');
 import clockFourWords = require('./extra/clock/clockFourWords');
 import clockDraw = require('./extra/clock/clockDraw');
@@ -59,73 +61,72 @@ function getLessons(lessonsCatalog: LessonsCatalog) {
 
 
         //TODO offer some for free and some when registered, and rest when subscribed
-        lessonsCatalog.add(true, 'A___0', verbEndings);
-        lessonsCatalog.add(true, 'A___1', speech_one);
+        lessonsCatalog.add(FreeType.alwaysFree_____, 'A___0', verbEndings);
+        lessonsCatalog.add(FreeType.alwaysFree_____, 'A___1', speech_one);
 
-        lessonsCatalog.add(true, 'PR__2', prefixes_one);
-        lessonsCatalog.add(true, 'PR__3', prefixes_two);
+        lessonsCatalog.add(FreeType.alwaysFree_____, 'PR__2', prefixes_one);
+        lessonsCatalog.add(FreeType.alwaysFree_____, 'PR__3', prefixes_two);
 
-        lessonsCatalog.add(true, 'SP__1', spellingVerbsIngOne);
-        lessonsCatalog.add(true, 'SP__2', spellingVerbsIngTwo);
-        lessonsCatalog.add(true, 'SP__3', spellingVerbsIngThree);
+        lessonsCatalog.add(FreeType.alwaysFree_____, 'SP__1', spellingVerbsIngOne);
+        lessonsCatalog.add(FreeType.alwaysFree_____, 'SP__2', spellingVerbsIngTwo);
+        lessonsCatalog.add(FreeType.alwaysFree_____, 'SP__3', spellingVerbsIngThree);
 
-        lessonsCatalog.add(true, 'AN__1', an_a_shortOne);
-        lessonsCatalog.add(true, 'AN__2', an_a_shortTwo);
-        lessonsCatalog.add(true, 'AN__3', an_a_shortThree);
-        lessonsCatalog.add(true, 'AN__4', an_a_shortFour);
+        lessonsCatalog.add(FreeType.whenPrime______, 'AN__1', an_a_shortOne);
+        lessonsCatalog.add(FreeType.whenPrime______, 'AN__2', an_a_shortTwo);
+        lessonsCatalog.add(FreeType.whenPrime______, 'AN__3', an_a_shortThree);
+        lessonsCatalog.add(FreeType.whenPrime______, 'AN__4', an_a_shortFour);
 
-        lessonsCatalog.add(true, 'CL_01', clockFourWords);
-        lessonsCatalog.add(true, 'CL_02', clockDraw);
-        lessonsCatalog.add(true, 'CL_03', clock);
+        lessonsCatalog.add(FreeType.alwaysFree_____, 'CL_01', clockFourWords);
+        lessonsCatalog.add(FreeType.alwaysFree_____, 'CL_02', clockDraw);
+        lessonsCatalog.add(FreeType.alwaysFree_____, 'CL_03', clock);
 
-        lessonsCatalog.add(true, 'AN__01', animals);
-        lessonsCatalog.add(true, 'PC__01', occupation);
+        lessonsCatalog.add(FreeType.alwaysFree_____, 'AN__01', animals);
+        lessonsCatalog.add(FreeType.alwaysFree_____, 'PC__01', occupation);
 
-        lessonsCatalog.add(true, 'PT__01', presentTenseOneToThree);
-        lessonsCatalog.add(true, 'PT__02', presentTenseOneToThreePartTwo);
-        lessonsCatalog.add(true, 'PT__03', presentTenseRadio);
-        lessonsCatalog.add(true, 'PT__04', presentTenseMatch);
+        lessonsCatalog.add(FreeType.whenPrime______, 'PT__01', presentTenseOneToThree);
+        lessonsCatalog.add(FreeType.whenPrime______, 'PT__02', presentTenseOneToThreePartTwo);
+        lessonsCatalog.add(FreeType.whenPrime______, 'PT__03', presentTenseRadio);
+        lessonsCatalog.add(FreeType.whenPrime______, 'PT__04', presentTenseMatch);
 
-        lessonsCatalog.add(true, 'PCT_01', presentContinuousTenseOneToThree);
-        lessonsCatalog.add(true, 'PCT_02', presentContinuousTenseOneToThreePartTwo);
-        lessonsCatalog.add(true, 'PCT_03', presentContinuousTenseRadio);
+        lessonsCatalog.add(FreeType.whenPrime______, 'PCT_01', presentContinuousTenseOneToThree);
+        lessonsCatalog.add(FreeType.whenPrime______, 'PCT_02', presentContinuousTenseOneToThreePartTwo);
+        lessonsCatalog.add(FreeType.whenPrime______, 'PCT_03', presentContinuousTenseRadio);
 
-        lessonsCatalog.add(true, 'PPT_01', presentPerfectTenseOneToThree);
-        lessonsCatalog.add(true, 'PPT_02', presentPerfectTenseOneToThreePartTwo);
-        lessonsCatalog.add(true, 'PPT_03', presentPerfectTenseRadio);
+        lessonsCatalog.add(FreeType.whenPrime______, 'PPT_01', presentPerfectTenseOneToThree);
+        lessonsCatalog.add(FreeType.whenPrime______, 'PPT_02', presentPerfectTenseOneToThreePartTwo);
+        lessonsCatalog.add(FreeType.whenPrime______, 'PPT_03', presentPerfectTenseRadio);
 
-        lessonsCatalog.add(true, 'PPCT_1', presentPerfectContinuousTenseOneToThree);
-        lessonsCatalog.add(true, 'PPCT_2', presentPerfectContinuousTenseOneToThreePartTwo);
-        lessonsCatalog.add(true, 'PPCT_3', presentPerfectContinuousTenseRadio);
+        lessonsCatalog.add(FreeType.whenPrime______, 'PPCT_1', presentPerfectContinuousTenseOneToThree);
+        lessonsCatalog.add(FreeType.whenPrime______, 'PPCT_2', presentPerfectContinuousTenseOneToThreePartTwo);
+        lessonsCatalog.add(FreeType.whenPrime______, 'PPCT_3', presentPerfectContinuousTenseRadio);
 
-        lessonsCatalog.add(true, 'SFT_1', simpleFutureOneToThree);
-        lessonsCatalog.add(true, 'SFT_2', simpleFutureOneToThreePartTwo);
-        lessonsCatalog.add(true, 'SFT_3', simpleFutureOneToThreePartThree);
-        lessonsCatalog.add(true, 'SFT_4', simpleFutureOneToThreePartFour);
-        lessonsCatalog.add(true, 'SFT1R', simpleFutureRadio); //TODO still making
+        lessonsCatalog.add(FreeType.whenPrime______, 'SFT_1', simpleFutureOneToThree);
+        lessonsCatalog.add(FreeType.whenPrime______, 'SFT_2', simpleFutureOneToThreePartTwo);
+        lessonsCatalog.add(FreeType.whenPrime______, 'SFT_3', simpleFutureOneToThreePartThree);
+        lessonsCatalog.add(FreeType.whenPrime______, 'SFT_4', simpleFutureOneToThreePartFour);
+        lessonsCatalog.add(FreeType.whenPrime______, 'SFT1R', simpleFutureRadio); //TODO still making
 
-        lessonsCatalog.add(true, 'L___1', location);
+        lessonsCatalog.add(FreeType.whenPrime______, 'L___1', location);
 
-        lessonsCatalog.add(true, 'EINE1', eitherNeither);
-        lessonsCatalog.add(true, 'IV__1', irregularVerbs);
-        lessonsCatalog.add(true, 'IV__2', irregularVerbsOneTwoThree);
+        lessonsCatalog.add(FreeType.whenPrime______, 'EINE1', eitherNeither);
+        lessonsCatalog.add(FreeType.whenPrime______, 'IV__1', irregularVerbs);
+        lessonsCatalog.add(FreeType.whenPrime______, 'IV__2', irregularVerbsOneTwoThree);
 
-        lessonsCatalog.add(true, 'P_S_1', singularAndPlural);
-        lessonsCatalog.add(true, 'FEW_1', fewLittle);
-        lessonsCatalog.add(true, 'MUCH1', muchManyALot);
-        lessonsCatalog.add(true, 'V___1', verbHave);
-        lessonsCatalog.add(true, 'BE__1', toBeInPresentAndPast);
-        lessonsCatalog.add(true, 'MINE1', mineYour);
-        lessonsCatalog.add(true, 'MINE2', myselfYourself);
+        lessonsCatalog.add(FreeType.whenPrime______, 'P_S_1', singularAndPlural);
+        lessonsCatalog.add(FreeType.whenPrime______, 'FEW_1', fewLittle);
+        lessonsCatalog.add(FreeType.whenPrime______, 'MUCH1', muchManyALot);
+        lessonsCatalog.add(FreeType.whenPrime______, 'V___1', verbHave);
+        lessonsCatalog.add(FreeType.whenPrime______, 'BE__1', toBeInPresentAndPast);
+        lessonsCatalog.add(FreeType.whenPrime______, 'MINE1', mineYour);
+        lessonsCatalog.add(FreeType.whenPrime______, 'MINE2', myselfYourself);
 
-        lessonsCatalog.add(true, 'SY_AD', synonymsAD);
-        //   lessonsCatalog.add(true, 'SY_DF', synonymsDF);
-        //   lessonsCatalog.add(true, 'SY_GL', synonymsGL);
-        //  lessonsCatalog.add(true, 'SY_LS', synonymsLS);
-        //  lessonsCatalog.add(true, 'SY_SW', synonymsSW);
+        lessonsCatalog.add(FreeType.whenPrime______, 'SY_AD', synonymsAD);
+        lessonsCatalog.add(FreeType.inProgressBlock, 'SY_DF', synonymsDF);
+        lessonsCatalog.add(FreeType.inProgressBlock, 'SY_GL', synonymsGL);
+        //lessonsCatalog.add(FreeType.inProgressBlock, 'SY_LS', synonymsLS);
+        lessonsCatalog.add(FreeType.inProgressBlock, 'SY_SW', synonymsSW);
 
         lessonsCatalog.setActiveLesson('SY_AD');
-        console.info('Finish loading lessons');
         return resolve(lessonsCatalog);
     });
 }

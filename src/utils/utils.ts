@@ -9,7 +9,6 @@ import md5 = require('./md5')
 
 
 const clone = <T>(orig: T): T => {
-    return orig; //TODO test
     if (typeof orig === 'undefined') return orig;
     if (orig === null) return null;
     return JSON.parse(JSON.stringify(orig));

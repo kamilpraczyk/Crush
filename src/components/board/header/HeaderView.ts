@@ -2,7 +2,7 @@ import React = require('react');
 import HeaderCss = require('./HeaderCss');
 import ButtonView = require('../../button/ButtonView');
 import TimeView = require('../time/TimeView');
-import { BoardResult } from '../../../types';
+import { BoardAnswerState } from '../../../types';
 import { isId } from '../../../lessons/helper/constants';
 import { events } from '../../../events';
 import _ = require('underscore');
@@ -10,7 +10,7 @@ const {div} = React.DOM;
 
 
 
-function getAnswerOrSupport(props: BoardResult) {
+function getAnswerOrSupport(props: BoardAnswerState) {
     if (props.board.data.isHelp && props.board.data.correct && props.board.data.correct.length) {
         return ButtonView({
             icon: props.isSupportShowAnswer ? null : HeaderCss.getSupportIcon(),
@@ -24,7 +24,7 @@ function getAnswerOrSupport(props: BoardResult) {
 };
 
 
-function getAnalogTime(state: BoardResult) {
+function getAnalogTime(state: BoardAnswerState) {
     if (!isId.isAnalogTime(state.board.data.id)) return null;
     const time = state.board.data.name.split(':');
     return div({
@@ -36,7 +36,7 @@ function getAnalogTime(state: BoardResult) {
     }));
 }
 
-function getInstructions(state: BoardResult) {
+function getInstructions(state: BoardAnswerState) {
     if (!state.board.data.info) return null;
 
     return ButtonView({
@@ -47,7 +47,7 @@ function getInstructions(state: BoardResult) {
     })
 }
 
-function getHeader(state: BoardResult) {
+function getHeader(state: BoardAnswerState) {
 
     return div({
         style: HeaderCss.getHeader(state.board.data.id)

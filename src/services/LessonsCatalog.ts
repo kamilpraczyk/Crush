@@ -1,12 +1,19 @@
 /// <reference path="../../typings/tsd.d.ts" />
-import { LessonFace, Board, RawData } from '../types';
+import { LessonFace, Board, RawData, FreeType } from '../types';
 import { isId } from '../lessons/helper/constants';
 import _ = require('underscore');
-import { BoardStatus } from './BoardStatus';
+import { BoardStatus, BoardReturnStatus } from './BoardStatus';
 import css = require('../utils/css/css');
-import { clone } from '../utils/utils';
-import { getNewLessonsStatus } from './LessonsStatus';
+import { getNewLessonsStatus, LessonReturnStatus } from './LessonsStatus';
 
+interface LessonsCatalogReturnState {
+    uid: string,
+    lessonsTitle: string,
+    allBoardsLength: number,
+    sortedLessons: LessonFace[],
+    current: BoardReturnStatus,
+    status: LessonReturnStatus
+}
 
 function getIconsByIdLesson(lessons: RawData[]) {
     const i: string[] = [];
@@ -37,19 +44,22 @@ function compare(a: LessonFace, b: LessonFace) {
 
 
 function sort(unordered: LessonsMap): LessonFace[] {
-    const orderedFree: LessonFace[] = [];
-    const orderedNotFree: LessonFace[] = [];
+    const alwaysFree: LessonFace[] = [];
+    const whenRegistered: LessonFace[] = [];
+    const whenPrime: LessonFace[] = [];
+    const inProgressBlock: LessonFace[] = [];
     const allSorted: LessonFace[] = _.values(unordered).sort(compare);
 
     allSorted.forEach(item => {
-        if (item.free) {
-            orderedFree.push(item);
-        } else {
-            orderedNotFree.push(item);
+        switch (item.freeType) {
+            case FreeType.alwaysFree_____: return alwaysFree.push(item);
+            case FreeType.whenRegistered_: return whenRegistered.push(item);
+            case FreeType.whenPrime______: return whenPrime.push(item);
+            case FreeType.inProgressBlock: return inProgressBlock.push(item);
         }
-    })
+    });
 
-    return orderedFree.concat(orderedNotFree);
+    return inProgressBlock.concat(alwaysFree).concat(whenRegistered).concat(whenPrime);
 }
 class LessonsCatalog {
 
@@ -62,14 +72,14 @@ class LessonsCatalog {
 
     constructor() { }
 
-    add(free: boolean, uid: string, v: { title: string, lessons: RawData[] }) {
+    add(freeType: FreeType, uid: string, v: { title: string, lessons: RawData[] }) {
         this.isDirty = true;
         this.allBoardsLength = this.allBoardsLength + v.lessons.length;
         if (this.map[uid]) throw new Error('duplicate key in LessonsCatalog');
 
-        const boards = v.lessons.map(data => { //tODO create bucket with autoId do not go throug them on import?!?!
+        const boards = v.lessons.map(data => {
             const lesson: Board = {
-                autoId: _.uniqueId('_'),
+                autoId: _.uniqueId('_'),// this will be produced once when load lessons
                 data
             }
             return lesson;
@@ -77,7 +87,7 @@ class LessonsCatalog {
 
         this.map[uid] = {
             uid,
-            free,
+            freeType,
             active: false,
             name: v.title,
             boards,
@@ -111,7 +121,7 @@ class LessonsCatalog {
             this.isDirty = false;
         }
 
-        const returns = {
+        const returns: LessonsCatalogReturnState = {
             uid: this.activeUid,
             lessonsTitle: this.map[this.activeUid].name,
             allBoardsLength: this.allBoardsLength,
@@ -119,12 +129,13 @@ class LessonsCatalog {
             current: this.board.getState(),
             status: getNewLessonsStatus(this.map, this.allBoardsLength)
         }
-        return clone(returns);
+        return returns;
     }
 }
 
 
 export {
-    LessonsCatalog
+    LessonsCatalog,
+    LessonsCatalogReturnState
 }
 

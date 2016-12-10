@@ -3,66 +3,66 @@ import dictionary = require('../../../utils/dictionary');
 import GratulationCss = require('./GratulationCss');
 import _ = require('underscore');
 import ButtonView = require('../../../components/button/ButtonView');
-import { getState } from '../../../services';
+import { getState, APIState } from '../../../services';
 import { events } from '../../../events';
 const {div} = React.DOM;
 
+function getTitle() {
+    return div({
+        style: GratulationCss.getText()
+    }, dictionary.GRATULATIONS_TITLE);
+};
 
-function render() {
-    const state = getState();
-    const points = state.lessonsCatalog.current.points;
+function getButtonContinue() {
+    return ButtonView({
+        name: dictionary.GRATULATIONS_BUTTON,
+        isResponsibleHeight: true,
+        onClick: () => events.closeStatusBoardEvent.publish()
+    });
+};
 
-    if (!points.isFinished) {
+function getText(apiState: APIState) {
+    return div({
+        style: GratulationCss.getText()
+    }, dictionary.GRATULATIONS_TEXT + apiState.lessonsCatalog.current.points.scorePercent + dictionary.PERCENT);
+};
+
+function getButtonSaveAndContinue(apiState: APIState) {
+    const points = apiState.lessonsCatalog.current.points;
+    if (!apiState.pass.user.email || points.score === 0) {
         return null;
     }
-
-    function getTitle() {
-        return div({
-            style: GratulationCss.getText()
-        }, dictionary.GRATULATIONS_TITLE);
-    };
-
-    function getText() {
-        return div({
-            style: GratulationCss.getText()
-        }, dictionary.GRATULATIONS_TEXT + points.scorePercent + dictionary.PERCENT);
-    };
-
-    function getButtonContinue() {
-        return ButtonView({
-            name: dictionary.GRATULATIONS_BUTTON,
-            isResponsibleHeight: true,
-            onClick: () => events.closeStatusBoardEvent.publish()
-        });
-    };
-
-    function getButtonSaveAndContinue() {
-        if (!state.pass.user.email || points.score === 0) {
-            return null;
+    return ButtonView({
+        name: dictionary.GRATULATIONS_SAVE_BUTTON,
+        isResponsibleHeight: true,
+        isLoader: apiState.pass.status.process,
+        onClick: () => {
+            events.saveStatusBoardEvent.publish({
+                uid: points.uid,
+                status: points.score
+            });
         }
-        return ButtonView({
-            name: dictionary.GRATULATIONS_SAVE_BUTTON,
-            isResponsibleHeight: true,
-            isLoader: state.pass.status.process,
-            onClick: () => {
-                events.saveStatusBoardEvent.publish({
-                    uid: points.uid,
-                    status: points.score
-                });
-            }
-        });
-    };
+    });
+};
 
-    function getContent() {
-        return div({
-            style: GratulationCss.getContent()
-        }, getTitle(), getText(), getButtonSaveAndContinue(), getButtonContinue());
-    };
+function getContent(apiState: APIState) {
+    return div({
+        style: GratulationCss.getContent()
+    },
+        getTitle(),
+        getText(apiState),
+        getButtonSaveAndContinue(apiState),
+        getButtonContinue()
+    );
+};
 
+function render() {
+    const apiState = getState();
+    if (!apiState.lessonsCatalog.current.points.isFinished) return null;
 
     return div({
         style: GratulationCss.getPanel()
-    }, getContent());
+    }, getContent(apiState));
 }
 
 export = render;

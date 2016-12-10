@@ -107,7 +107,8 @@ const style = {
         radio: 'img/iconSet/App-kcmdf-cubes-icon.png',
         multiRadio: 'img/iconSet/App-ksplash-water-icon.png', //TODO better icons?
 
-        lock: 'img/iconSet/Action-lock-silver-icon.png'
+        lock: 'img/iconSet/Action-lock-silver-icon.png',
+        progress: 'img/iconSet/progress.png',
     },
 
     backUrl: {

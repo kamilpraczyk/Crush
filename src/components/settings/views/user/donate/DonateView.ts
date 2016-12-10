@@ -1,11 +1,10 @@
 
-/// <reference path="../../../../../../typings/tsd.d.ts" />
 import dictionary = require('../../../../../utils/dictionary');
 import React = require('react');
 import CommonCss = require('../CommonCss');
 import css = require('../../../../../utils/css/css');
 import { getState } from '../../../../../services';
-const {div, form, input, img, label} = React.DOM;
+const {div, form, input, img} = React.DOM;
 
 function getPayPal() {
     return form({
@@ -57,8 +56,8 @@ function getBox() {
 
 function render() {
 
-    const state = getState();
-    if (!state.pass.user.email || !state.pass.user.isPrime) return null;
+    const apiState = getState();
+    if (!apiState.pass.user.email || !apiState.pass.user.isPrime) return null;
 
     return div({
         style: CommonCss.getPanel()

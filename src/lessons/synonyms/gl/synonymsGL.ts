@@ -4,7 +4,7 @@ import { TypeId, id } from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [TypeId.multiRadio];
 const title = 'Synonyms G-L';
-const info = 'Find two synonymms for a word:';
+const info = 'Find 3 synonymms for a word:';
 
 const lessons: RawData[] = [
     {
@@ -21,7 +21,7 @@ const lessons: RawData[] = [
         id: id(common), title, info, explenation,
         name: "Good",
         correct: ["Excellent", "Wonderful", "Fine"],
-        incorrect: ["Depart", "Understanding", "", "", ""] //todo all file
+        incorrect: ["Depart", "Understanding", "Inspiring", "Withhold", "Acquire"]
     }, {
         id: id(common), title, info, explenation,
         name: "Great",
@@ -41,22 +41,22 @@ const lessons: RawData[] = [
         id: id(common), title, info, explenation,
         name: "Hate",
         correct: ["Dislike", "Disapprove", "Disfavor"],
-        incorrect: ["Travel", "Joyful", "Righteous", "Valid", ""]
+        incorrect: ["Travel", "Joyful", "Righteous", "Valid", "Aid"]
     }, {
         id: id(common), title, info, explenation,
         name: "Have",
         correct: ["Hold", "Own", "Maintain"],
-        incorrect: ["Fine", "Conception", "Plan", "Accelerate", ""]
+        incorrect: ["Fine", "Conception", "Plan", "Accelerate", "Conceal"]
     }, {
         id: id(common), title, info, explenation,
         name: "Help",
-        correct: ["Aid", "Assist", "support"],
+        correct: ["Aid", "Assist", "Support"],
         incorrect: ["Depart", "Travel", "Elated", "Valid", "Moving"]
     }, {
         id: id(common), title, info, explenation,
         name: "Hide",
         correct: ["Conceal", "Cover", "Mask"],
-        incorrect: ["Move", "Kindly", "Principal", "Important", ""]
+        incorrect: ["Move", "Kindly", "Principal", "Important", "Accelerate"]
     }, {
         id: id(common), title, info, explenation,
         name: "Hurry",
@@ -71,17 +71,17 @@ const lessons: RawData[] = [
         id: id(common), title, info, explenation,
         name: "Idea",
         correct: ["Concept", "Thought", "Conception"],
-        incorrect: ["Travel", "Valuable", "Moving", "", ""]
+        incorrect: ["Travel", "Valuable", "Moving", "Safe", "Proper"]
     }, {
         id: id(common), title, info, explenation,
         name: "Important",
-        correct: ["Vital", "Necessary", ""],
-        incorrect: ["Depart", "Marvelous", "Intriguing", "", ""]
+        correct: ["Vital", "Necessary", "Significant"],
+        incorrect: ["Depart", "Marvelous", "Intriguing", "Pleasurable", "Righteous"]
     }, {
         id: id(common), title, info, explenation,
         name: "Interesting",
         correct: ["Fascinating", "Engaging", "Absorbing"],
-        incorrect: ["Microscopic", "", "", "", ""]
+        incorrect: ["Microscopic", "Helpful", "Great", "Trustworthy", "Joyful"]
     }, {
         id: id(common), title, info, explenation,
         name: "Keep",
@@ -108,7 +108,7 @@ const lessons: RawData[] = [
         correct: ["Gaze", "See", "Glance"],
         incorrect: ["Move", "Rude", "Opinion", "Retain", "Conception"]
     }
-] 
+]
 
 export {
     title,

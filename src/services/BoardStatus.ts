@@ -1,8 +1,8 @@
 /// <reference path="../../typings/tsd.d.ts" />
 import { LessonFace, Board } from '../types';
 import _ = require('underscore');
-import { BoardAnswer } from './BoardAnswer';
-import { clone, round10 } from '../utils/utils';
+import { BoardAnswer, BoardAnswerState } from './BoardAnswer';
+import { round10 } from '../utils/utils';
 
 interface MapStatus {
     [autoId: string]: boolean
@@ -22,6 +22,12 @@ interface Points {
     boards: Board[],
     board: Board,
     mapStatus: MapStatus
+}
+
+interface BoardReturnStatus {
+    points: Points,
+    board: Board,
+    answer: BoardAnswerState
 }
 
 function _isCompletedStatus(mapStatus: MapStatus, id: string) {
@@ -122,17 +128,18 @@ class BoardStatus {
             this.mapStatus[this.getCurrentBoard().autoId] = isSuccess;
     }
 
-    getState() {
-        const returns = {
+
+    getState(): BoardReturnStatus {
+        return {
             points: createPoint(this.lesson, this.activeIndex, this.mapStatus),
             board: this.getCurrentBoard(),
             answer: this.boardAnswer.getState()
         }
-        return clone(returns);
     }
 
 }
 
 export {
+    BoardReturnStatus,
     BoardStatus
 }

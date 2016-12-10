@@ -8,14 +8,12 @@ import OneTwoThreeView = require('./oneTwoThree/OneTwoThreeView');
 import MultiRadioView = require('./multiRadio/MultiRadioView');
 import GratulationView = require('./gratulation/GratulationView')
 import { isId } from '../../lessons/helper/constants';
-import { getState } from '../../services';
-
+import { getState, APIState } from '../../services';
 const {div} = React.DOM;
 
-function getView() {
-    const s = getState();
-    const state = s.lessonsCatalog.current.answer;
-    const id = s.lessonsCatalog.current.board.data.id;
+function getView(apiState: APIState) {
+    const state = apiState.lessonsCatalog.current.answer;
+    const id = apiState.lessonsCatalog.current.board.data.id;
 
     if (isId.isDraw(id)) return DrawView(state);
     if (isId.isFourPictures(id)) return QuatroView(state);
@@ -31,14 +29,14 @@ function getView() {
 
 
 function render() {
-    const s = getState();
-    if (!s.rootMenu.isMinimalized) return null;
+    const apiState = getState();
+    if (!apiState.rootMenu.isMinimalized) return null;
 
     return div({
         style: BoardCss.getPanel()
     },
         GratulationView(),
-        getView()
+        getView(apiState)
     );
 }
 

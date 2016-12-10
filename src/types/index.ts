@@ -24,17 +24,24 @@ export interface Board {
     data: RawData
 }
 
+export enum FreeType {
+    alwaysFree_____ = 1, //offer free lessons
+    whenRegistered_ = 2, //offer free lessons for registoered people
+    whenPrime______ = 3, //offer free lessons for subscribers
+    inProgressBlock = 4 // lessons in progress or broken do not allow to enter
+}
+
 export interface LessonFace {
     uid: string,
     name: string,
     iconSet: string[],
     active: boolean,
-    free: boolean,
+    freeType: FreeType,
     numberFinished: number,
     boards: Board[]
 }
 
-export interface BoardResult {
+export interface BoardAnswerState {
     selectedAnswer: string,
     generatedList: string[],
     text: string,
@@ -56,7 +63,7 @@ export interface RootFace {
     name: string,
     active: boolean,
     backUrl: string,
-    scroll : number
+    scroll: number
 }
 
 

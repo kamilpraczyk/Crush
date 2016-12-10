@@ -2,7 +2,7 @@ import React = require('react');
 import DrawCss = require('./DrawCss');
 import Signature = require('../../signature/index');
 import MenuView = require('../menu/MenuView');
-import { BoardResult } from '../../../types';
+import { BoardAnswerState } from '../../../types';
 import ButtonView = require('../../button/ButtonView');
 import { isId } from '../../../lessons/helper/constants';
 import HeaderView = require('../header/HeaderView');
@@ -27,7 +27,7 @@ function onGetInterfaceClear(onClear: () => void) {
     signatureClear = onClear;
 }
 
-function getBody(props: BoardResult) {
+function getBody(props: BoardAnswerState) {
 
     return div({
         style: DrawCss.getBody()
@@ -50,7 +50,7 @@ function clearSignature() {
 }
 
 
-export = function render(props: BoardResult) {
+export = function render(props: BoardAnswerState) {
     return div({
         style: DrawCss.getPanel()
     }, HeaderView(props), getBody(props), getFooter(clearSignature));

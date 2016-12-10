@@ -1,14 +1,11 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 import _ = require('underscore');
-
-
+import { APIState } from '../../services';
 export const space = '___';
 export const multi = '−';
 export const empty = '_';
 
-
-
-export enum TypeId { //TODO make them enum?
+export enum TypeId {
     fourPictures = 1,
     fourWords,
     oneTwoThree,
@@ -19,15 +16,17 @@ export enum TypeId { //TODO make them enum?
 
     digitalTime,
     analogTime,
-    areRepeated,
+    areRepeated, //correct or incorrect can be repeated
     noSpace,
-    multiAnswer
+    multiAnswer // contains correct or incorrect contains multi 
 }
 
-export const defaultUser = {
-    name: 'kamil',
-    email: 'kamil.praczyk1@gmail.com',
-    password: 'kamil',//'abcd!'
+export function getDefaultUser(apiState: APIState) {
+    return {
+        name: apiState.isProduction ? '' : 'kamil',
+        email: apiState.isProduction ? '' : 'kamil.praczyk1@gmail.com',
+        password: apiState.isProduction ? '' : 'kamil'
+    }
 }
 
 export const isId = {
@@ -51,8 +50,8 @@ export function id(a: TypeId[] = [], b: TypeId[] = [], c: TypeId[] = []) {
 }
 
 /* get rest props of simple object */
-export function getRest(group: any, exclude: any): string[] {
-    return _.chain(group).values().without(exclude).value();
+export function getRest(group: any, exclude: any[]): string[] {
+    return _.chain(group).values().difference(exclude).value();
 }
 
 const namesMale = ['Tim', 'George', 'Paul', 'Bob', 'Peter', 'Jason', 'John', 'Jack', 'Chris', 'Mike', 'Mark', 'Sam', 'Rob', 'Tom'];
@@ -83,7 +82,6 @@ export function getMounth() {
 export function getDay() {
     return _.sample(days, 1)[0] as string;
 }
-
 
 
 
@@ -250,6 +248,7 @@ export const capital = {
 
 //TODO test new error msg (constructor with message now)
 //Todo log out clear status from lessons 
+//TODO subscribe buttons too long not braking text - overflow
 
 /*
 ACTIVE / PASSIVE

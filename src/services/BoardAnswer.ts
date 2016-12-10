@@ -1,9 +1,7 @@
-/// <reference path="../../typings/tsd.d.ts" />
-import { Board, BoardResult } from '../types';
+import { Board, BoardAnswerState } from '../types';
 import _ = require('underscore');
-import { clone, upercaseFirstLetter, voice } from '../utils/utils';
+import { upercaseFirstLetter, voice } from '../utils/utils';
 import { space, empty, multi, isId } from '../lessons/helper/constants';
-import { getState } from '../services';
 
 interface QueryResult {
     generatedList: string[];
@@ -13,7 +11,6 @@ interface QueryResult {
     wasLastCorrect: boolean;
     isSupportShowAnswer: boolean; //null do not show it
 }
-
 
 function getCorrectSentence(query: QueryResult) {
     let name = query.board.data.name;
@@ -119,7 +116,6 @@ function generateQuery(board: Board) {
 }
 
 function setUserAnswer(query: QueryResult, answer: string) {
-    const s = getState();
     query.selectedAnswer = answer;
     query.wasLastCorrect = false;
     let isCompletedBoard: boolean = null;
@@ -167,26 +163,22 @@ function setUserAnswer(query: QueryResult, answer: string) {
 class BoardAnswer {
     query: QueryResult = null;
 
-
     constructor(board: Board) { this.query = generateQuery(board); }
 
-    toggleSupportHelp() {
-        this.query.isSupportShowAnswer = !this.query.isSupportShowAnswer;
-    }
+    toggleSupportHelp() { this.query.isSupportShowAnswer = !this.query.isSupportShowAnswer; }
+
     setUserAnswer(answer: string) {
         const data = setUserAnswer(this.query, answer);
         this.query = data.query;
         return data.isCompletedBoard;
     }
 
-    getState() {
+    getState(): BoardAnswerState {
         let name = this.query.board.data.name;
         //replace name with correct sentence
-        if (isCorrect(this.query)) {
-            name = getCorrectSentence(this.query);
-        }
+        if (isCorrect(this.query)) name = getCorrectSentence(this.query);
 
-        const boardResult: BoardResult = {
+        return {
             selectedAnswer: this.query.selectedAnswer,
             generatedList: this.query.generatedList,
             text: name,
@@ -194,12 +186,11 @@ class BoardAnswer {
             isCorrect: this.query.wasLastCorrect,
             isSupportShowAnswer: this.query.isSupportShowAnswer
         }
-        return clone(boardResult);
     }
-
 }
 
 
 export {
-    BoardAnswer
+    BoardAnswer,
+    BoardAnswerState
 }

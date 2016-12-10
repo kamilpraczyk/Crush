@@ -12,7 +12,7 @@ interface MapStatus {
     [uid: string]: number
 }
 
-interface Status {
+interface LessonReturnStatus {
     allBoardsLength: number,
     allBoardsUndane: number,
     allBoardsCorrect: number,
@@ -22,7 +22,7 @@ interface Status {
     iconSetStatus: { name: number, icon: string }[]
 }
 
-function getNewLessonsStatus(map: LessonsMap, allBoardsLength: number) {
+function getNewLessonsStatus(map: LessonsMap, allBoardsLength: number): LessonReturnStatus {
     let allBoardsCorrect = 0;
     let allBoardsIncorrect = 0;
     let finishedLessons = 0;
@@ -45,7 +45,7 @@ function getNewLessonsStatus(map: LessonsMap, allBoardsLength: number) {
         iconSetStatus.push({ name: nr, icon });
     });
 
-    const status: Status = {
+    return {
         allBoardsLength: allBoardsLength,
         allBoardsUndane: allBoardsLength - allBoardsCorrect - allBoardsIncorrect,
         allBoardsCorrect,
@@ -54,10 +54,10 @@ function getNewLessonsStatus(map: LessonsMap, allBoardsLength: number) {
         finishedLessons,
         iconSetStatus
     }
-    return status;
 }
 
 
 export {
-    getNewLessonsStatus
+    getNewLessonsStatus,
+    LessonReturnStatus
 }

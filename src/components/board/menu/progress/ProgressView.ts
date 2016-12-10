@@ -1,10 +1,10 @@
 import React = require('react');
 import ProgressCss = require('./ProgressCss');
-import { getState } from '../../../../services';
+import { getState, APIState } from '../../../../services';
 const {div} = React.DOM;
 
-function getBars() {
-    const points = getState().lessonsCatalog.current.points;
+function getBars(apiState: APIState) {
+    const points = apiState.lessonsCatalog.current.points;
 
     return points.boards.map(board => {
         const completeTrueFalseNone = points.mapStatus[board.autoId];
@@ -18,9 +18,10 @@ function getBars() {
 }
 
 function render() {
+    const apiState = getState();
     return div({
         style: ProgressCss.getPanel()
-    }, getBars());
+    }, getBars(apiState));
 };
 
 export =  render;

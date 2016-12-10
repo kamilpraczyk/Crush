@@ -3,7 +3,7 @@ import QuatroCss = require('./QuatroCss');
 import MenuView = require('../menu/MenuView');
 import ButtonView = require('../../button/ButtonView');
 import _ = require('underscore');
-import {BoardResult} from '../../../types';
+import {BoardAnswerState} from '../../../types';
 import {isId}  from '../../../lessons/helper/constants';
 import HeaderView = require('../header/HeaderView');
 import {events} from '../../../events';
@@ -17,7 +17,7 @@ function getFooter() {
 }
 
 
-function getContentLine(state: BoardResult, list: any[]) {
+function getContentLine(state: BoardAnswerState, list: any[]) {
     const elements = list.map((name: string) => {
         let word: string = null;
 
@@ -56,7 +56,7 @@ function getContentLine(state: BoardResult, list: any[]) {
     }, elements);
 }
 
-function getBody(state: BoardResult) {
+function getBody(state: BoardAnswerState) {
     const line1 = getContentLine(state, state.generatedList.slice(0, 2))
     const line2 = getContentLine(state, state.generatedList.slice(2, 4))
 
@@ -68,7 +68,7 @@ function getBody(state: BoardResult) {
         }, line1, line2));
 };
 
-export = function render(state: BoardResult) {
+export = function render(state: BoardAnswerState) {
     return div({
         style: QuatroCss.getPanel()
     }, HeaderView(state), getBody(state), getFooter());

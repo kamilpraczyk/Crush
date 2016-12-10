@@ -6,13 +6,13 @@ import css = require('../../../../../utils/css/css');
 import StatisticsCss = require('./StatisticsCss');
 import utils = require('../../../../../utils/utils');
 import ReactDOM = require('react-dom');
-import { getState } from '../../../../../services';
+import { getState, APIState } from '../../../../../services';
 const {div, canvas} = React.DOM;
 const pie = 'pie';
 
-function rerenderChart(region: any) {
-    const state = getState();
-    const status = state.lessonsCatalog.status;
+function rerenderChart(apiState: APIState, region: any) {
+
+    const status = apiState.lessonsCatalog.status;
     if (region) {
         const canvas = region;
         const ctx = canvas.getContext("2d");
@@ -43,9 +43,8 @@ function rerenderChart(region: any) {
     }
 }
 
-function render() {
-    const props = getState();
-    const status = props.lessonsCatalog.status;
+function render(apiState: APIState) {
+    const status = apiState.lessonsCatalog.status;
 
     function getPercentStatus() {
         return div({
@@ -117,7 +116,7 @@ function render() {
     }
 
     return div({
-        style: CommonCss.getPanel(!props.pass.user.email)
+        style: CommonCss.getPanel(!apiState.pass.user.email)
     }, div({
         style: CommonCss.getContainer()
     }, getBox()));
@@ -138,16 +137,19 @@ class View extends React.Component<void, State>{
     }
 
     componentDidUpdate() {
-        rerenderChart(this.state.region);
+        const apiState = getState();
+        rerenderChart(apiState, this.state.region);
     }
 
     componentDidMount() {
+        const apiState = getState();
         this.state.region = ReactDOM.findDOMNode(this.refs[pie]);
-        rerenderChart(this.state.region);
+        rerenderChart(apiState, this.state.region);
     }
 
     render() {
-        return render();
+        const apiState = getState();
+        return render(apiState);
     }
 };
 

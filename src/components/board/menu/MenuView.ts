@@ -3,7 +3,7 @@ import MenuCss = require('./MenuCss');
 import _ = require('underscore');
 import ButtonView = require('../../button/ButtonView');
 import ProgressView = require('./progress/ProgressView');
-import { getState } from '../../../services';
+import { getState, APIState } from '../../../services';
 import { events } from '../../../events';
 const {div} = React.DOM;
 
@@ -32,8 +32,9 @@ const nextRandom: Item[] = [{
 }];
 
 
-function getMenuButton() {
-    const points = getState().lessonsCatalog.current.points;
+function getMenuButton(apiState: APIState) {
+
+    const points = apiState.lessonsCatalog.current.points;
 
     function getIcon() {
         if (points.isCurrentSuccess)
@@ -68,6 +69,7 @@ function getMenuButton() {
 }
 
 function render(items?: Item[]) {
+    const apiState = getState();
     items = items || [];
     items = [].concat(items, prev, next, nextRandom);
 
@@ -91,10 +93,15 @@ function render(items?: Item[]) {
     },
         div({
             style: MenuCss.getMenu()
-        }, buttons, getMenuButton()),
+        },
+            buttons,
+            getMenuButton(apiState)
+        ),
         div({
             style: MenuCss.getProgress()
-        }, ProgressView())
+        },
+            ProgressView()
+        )
     );
 };
 

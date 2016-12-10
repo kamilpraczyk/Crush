@@ -2,7 +2,6 @@ import React = require('react');
 import MenuView = require('../menu/MenuView');
 import utils = require('../../../utils/utils');
 import css = require('../../../utils/css/css');
-import {BoardResult} from '../../../types';
 import _ = require('underscore');
 const {div, canvas} = React.DOM;
 

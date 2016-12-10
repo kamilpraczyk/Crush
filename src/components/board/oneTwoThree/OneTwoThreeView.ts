@@ -1,7 +1,7 @@
 import React = require('react');
 import OneTwoThreeCss = require('./OneTwoThreeCss');
 import utils = require('../../../utils/utils');
-import {BoardResult} from '../../../types';
+import {BoardAnswerState} from '../../../types';
 import MenuView = require('../menu/MenuView');
 import ButtonView = require('../../button/ButtonView');
 import HeaderView = require('../header/HeaderView');
@@ -16,7 +16,7 @@ function getFooter() {
     }, MenuView())
 }
 
-function getContentLine(state: BoardResult, name: string, key: number) {
+function getContentLine(state: BoardAnswerState, name: string, key: number) {
 
     let isFail = false;
     let isSuccess = false;
@@ -44,7 +44,7 @@ function getContentLine(state: BoardResult, name: string, key: number) {
     );
 }
 
-function getBodyContent(state: BoardResult) {
+function getBodyContent(state: BoardAnswerState) {
 
     const lines = state.generatedList.map((o, key) => {
         return getContentLine(state, o, key);
@@ -55,13 +55,13 @@ function getBodyContent(state: BoardResult) {
     }, lines)
 }
 
-function getBody(state: BoardResult) {
+function getBody(state: BoardAnswerState) {
     return div({
         style: OneTwoThreeCss.getBody()
     }, getBodyContent(state));
 }
 
-function render(state: BoardResult) {
+function render(state: BoardAnswerState) {
     return div({
         style: OneTwoThreeCss.getPanel()
     }, HeaderView(state), getBody(state), getFooter());

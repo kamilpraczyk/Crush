@@ -1,44 +1,41 @@
 import React = require('react');
-const {div} = React.DOM;
 import ExplenationCss = require('./ExplenationCss');
-import utils = require('../../../../utils/utils');
+import { voice } from '../../../../utils/utils';
 import ButtonView = require('../../../button/ButtonView');
 import dictionary = require('../../../../utils/dictionary');
-import { getState } from '../../../../services';
+import { getState, APIState } from '../../../../services';
 import { events } from '../../../../events';
+const {div} = React.DOM;
 
 function render() {
-    const s = getState();
-    const explenation = s.lessonsCatalog.current.board.data.explenation;
+    const apiState = getState();
+    const explenation = apiState.lessonsCatalog.current.board.data.explenation;
 
-    if (explenation) {
+    if (!explenation) return null;
 
-        const title = div({
-            style: ExplenationCss.getTitle(),
-            onClick: () => utils.voice.read(s.lessonsCatalog.lessonsTitle)
-        }, s.lessonsCatalog.lessonsTitle);
+    const title = div({
+        style: ExplenationCss.getTitle(),
+        onClick: () => voice.read(apiState.lessonsCatalog.lessonsTitle)
+    }, apiState.lessonsCatalog.lessonsTitle);
 
-        const buttonGoPractice = ButtonView({
-            name: dictionary.GO_TEST,
-            isExpandWidth: true,
-            onClick: () => events.goTest.publish()
-        });
+    const buttonGoPractice = ButtonView({
+        name: dictionary.GO_TEST,
+        isExpandWidth: true,
+        onClick: () => events.goTest.publish()
+    });
 
-        const body = div({
-            style: ExplenationCss.getBody()
-        },
-            div({
-                style: ExplenationCss.getBodyContent()
-            }, explenation.exp),
-            buttonGoPractice
-        );
+    const body = div({
+        style: ExplenationCss.getBody()
+    },
+        div({
+            style: ExplenationCss.getBodyContent()
+        }, explenation.exp),
+        buttonGoPractice
+    );
 
-        return div({
-            style: ExplenationCss.getPanel()
-        }, title, body);
-
-    }
-    return null;
+    return div({
+        style: ExplenationCss.getPanel()
+    }, title, body);
 };
 
 export =  render;

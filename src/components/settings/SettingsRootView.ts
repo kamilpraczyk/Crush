@@ -8,7 +8,7 @@ import SwitcherView = require('./views/switcher/SwitcherView');
 import ExplenationView = require('./views/explenation/ExplenationView');
 import UserView = require('./views/user/UserView');
 import { RootFace, RootType } from '../../types';
-import { getState } from '../../services';
+import { getState, APIState } from '../../services';
 import { events } from '../../events';
 import ReactDOM = require('react-dom');
 const {div} = React.DOM;
@@ -27,9 +27,8 @@ function getItem(item: RootFace) {
     });
 }
 
-function getList() {
-    const s = getState();
-    return _.map(s.rootMenu.list, item => {
+function getList(apiState: APIState) {
+    return _.map(apiState.rootMenu.list, item => {
         return div({
             key: item.id,
             style: SettingsRootCss.getItem(),
@@ -37,10 +36,10 @@ function getList() {
     });
 }
 
-function getMenu() {
+function getMenu(apiState: APIState) {
     return div({
         style: SettingsRootCss.getMenu()
-    }, getList());
+    }, getList(apiState));
 }
 
 function updatePosition(e: any) {
@@ -49,11 +48,10 @@ function updatePosition(e: any) {
 
 const throttled = _.throttle(updatePosition, 800);
 
-function getMain() {
-    const s = getState();
+function getMain(apiState: APIState) {
 
     function getMainView() {
-        switch (s.rootMenu.activeId) {
+        switch (apiState.rootMenu.activeId) {
             case RootType.lessons: return SwitcherView();
             case RootType.explenation: return ExplenationView();
             case RootType.user: return UserView();
@@ -68,13 +66,16 @@ function getMain() {
     }, getMainView());
 }
 
-function render() {
-    const s = getState();
-    if (s.rootMenu.isMinimalized) return null;
+function render(apiState: APIState) {
+
+    if (apiState.rootMenu.isMinimalized) return null;
 
     return div({
         style: SettingsRootCss.getPanel()
-    }, getMain(), getMenu());
+    },
+        getMain(apiState),
+        getMenu(apiState)
+    );
 }
 
 
@@ -88,13 +89,14 @@ class View extends React.Component<void, void>{
     componentDidUpdate() {
         const region = ReactDOM.findDOMNode(this.refs[scrollRef]);
         if (region) {
-            const s = getState();
-            region.scrollTop = s.rootMenu.scrollPosition;
+            const apiState = getState();
+            region.scrollTop = apiState.rootMenu.scrollPosition;
         }
     }
 
     render() {
-        return render();
+        const apiState = getState();
+        return render(apiState);
     }
 };
 
