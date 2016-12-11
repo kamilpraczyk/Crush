@@ -1,6 +1,5 @@
-/// <reference path="../../../../typings/tsd.d.ts" />
-import {RawData} from '../../../types';
-import {space, TypeId, id, capital, getNameMale } from '../../helper/constants';
+import { RawData } from '../../../types';
+import { space, TypeId, id, capital, getNameMale, getCity } from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [TypeId.radio];
 const title = "Reflexive Pronouns: myself, yourself, herself...";
@@ -44,7 +43,7 @@ const lessons: RawData[] = [
         incorrect: ["ourselves", "itself"],
     }, {
         id: id(common), title, explenation, info,
-        name: "We often ask " + space + " why we left " + capital.places.Manchester + ".",
+        name: "We often ask " + space + " why we left " + getCity() + ".",
         correct: ["ourselves"],
         incorrect: ["myself", "itself"],
     }, {
@@ -63,10 +62,10 @@ const lessons: RawData[] = [
         correct: ["myself"],
         incorrect: ["ourselves", "itself"],
     }
-] 
+]
 
 
 export {
-title,
-lessons,
+    title,
+    lessons,
 }

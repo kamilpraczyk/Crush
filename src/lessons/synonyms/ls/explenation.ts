@@ -150,7 +150,6 @@ exp.push(tList({
         { l: 'attach' },
         { l: 'assign' },
         { l: 'establish' },
-        { l: '' },
     ]
 }));
 exp.push(tList({

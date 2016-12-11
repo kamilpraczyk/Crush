@@ -1,6 +1,5 @@
-/// <reference path="../../../../typings/tsd.d.ts" />
-import {RawData} from '../../../types';
-import {space, TypeId, id, capital } from '../../helper/constants';
+import { RawData } from '../../../types';
+import { space, TypeId, id, capital, getCity } from '../../helper/constants';
 import explenation = require('./explenation');
 import _ = require("underscore");
 
@@ -45,7 +44,7 @@ const lessons: RawData[] = [
     }, {
         id: id(common), title, explenation, info, postfix,
         name: separator,
-        correct: ["I", "have", "lived", "in " + capital.places.London, "since 19" + _.sample([83, 78, 91, 82, 79, 81, 80])],
+        correct: ["I", "have", "lived", "in " + getCity(), "since 19" + _.sample([83, 78, 91, 82, 79, 81, 80])],
     }, {
         id: id(common), title, explenation, info,
         name: separator, postfix: "",
@@ -91,11 +90,11 @@ const lessons: RawData[] = [
         name: separator, postfix: "",
         correct: ["Someone", "has", "eaten", "my sandwich", "!"],
     }
-] 
+]
 
 export {
-title,
-lessons,
+    title,
+    lessons,
 }
 
 

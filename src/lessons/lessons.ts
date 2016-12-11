@@ -47,6 +47,8 @@ import simpleFutureOneToThreePartTwo = require('./tense/simpleFuture/simpleFutur
 import simpleFutureOneToThreePartThree = require('./tense/simpleFuture/simpleFutureOneToThreePartThree');
 import simpleFutureOneToThreePartFour = require('./tense/simpleFuture/simpleFutureOneToThreePartFour');
 import simpleFutureRadio = require('./tense/simpleFuture/simpleFutureRadio');
+import beGoingToOneToThree = require('./tense/beGoingTo/beGoingToOneToThree');
+import beGoingToOneToThreePartTwo = require('./tense/beGoingTo/beGoingToOneToThreePartTwo');
 
 import occupation = require('./pictures/occupation/occupation');
 
@@ -104,7 +106,11 @@ function getLessons(lessonsCatalog: LessonsCatalog) {
         lessonsCatalog.add(FreeType.whenPrime______, 'SFT_2', simpleFutureOneToThreePartTwo);
         lessonsCatalog.add(FreeType.whenPrime______, 'SFT_3', simpleFutureOneToThreePartThree);
         lessonsCatalog.add(FreeType.whenPrime______, 'SFT_4', simpleFutureOneToThreePartFour);
-        lessonsCatalog.add(FreeType.whenPrime______, 'SFT1R', simpleFutureRadio); //TODO still making
+        lessonsCatalog.add(FreeType.inProgressBlock, 'SFT1R', simpleFutureRadio); //TODO still making
+
+
+        lessonsCatalog.add(FreeType.whenPrime______, 'BGT_1', beGoingToOneToThree);
+        lessonsCatalog.add(FreeType.inProgressBlock, 'BGT_2', beGoingToOneToThreePartTwo); //TODO still making
 
         lessonsCatalog.add(FreeType.whenPrime______, 'L___1', location);
 
@@ -121,10 +127,10 @@ function getLessons(lessonsCatalog: LessonsCatalog) {
         lessonsCatalog.add(FreeType.whenPrime______, 'MINE2', myselfYourself);
 
         lessonsCatalog.add(FreeType.whenPrime______, 'SY_AD', synonymsAD);
-        lessonsCatalog.add(FreeType.inProgressBlock, 'SY_DF', synonymsDF);
-        lessonsCatalog.add(FreeType.inProgressBlock, 'SY_GL', synonymsGL);
-        //lessonsCatalog.add(FreeType.inProgressBlock, 'SY_LS', synonymsLS);
-        lessonsCatalog.add(FreeType.inProgressBlock, 'SY_SW', synonymsSW);
+        lessonsCatalog.add(FreeType.whenPrime______, 'SY_DF', synonymsDF);
+        lessonsCatalog.add(FreeType.whenPrime______, 'SY_GL', synonymsGL);
+        lessonsCatalog.add(FreeType.whenPrime______, 'SY_LS', synonymsLS);
+        lessonsCatalog.add(FreeType.whenPrime______, 'SY_SW', synonymsSW);
 
         lessonsCatalog.setActiveLesson('SY_AD');
         return resolve(lessonsCatalog);

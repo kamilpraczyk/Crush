@@ -1,5 +1,3 @@
-/// <reference path="../../../../typings/tsd.d.ts" />
-
 import { tList } from '../../helper/renderer';
 let exp: any[] = [];
 
@@ -40,29 +38,6 @@ exp.push(tList({
     ]
 }));
 
-
-/* TODO
-//https://learnenglish.britishcouncil.org/en/english-grammar/verbs/verbs-time-clauses-and-if-clauses
-exp.push(tList({
-    t: "We do not normally use will in clauses with <p>if</p> or with <p>time words</p>.",
-    list: [
-        { l: "I'll come home when I <s>will</s> finish work." },
-        { l: "We won't be able to go out if it <s>will rain</s> rains." },
-        { l: "It will be nice to see Chris when he <s>will get here</s> gets here." },
-        { l: "You must stay home until your mother <s>will come</s> comes." },
-    ]
-}));
-
-{ //verbs in time clauses and if clauses
-        id: id(common,[TypeId.multiAnswer]), title, explenation, info,
-        name: "When you " + space + " arrive tonight, we " + space + " go out for dinner.",
-        correct: [empty + " " + multi + " will"],
-        incorrect: ["will " + multi + " will"]
-    }, //10
-
-*/
-
-
 exp.push(tList({
     t: "Positive sentence.",
     list: [
@@ -88,7 +63,6 @@ exp.push(tList({
     ]
 }));
 
-
 exp.push(tList({
     t: "Interrogative negative sentence.",
     list: [
@@ -111,8 +85,4 @@ exp.push(tList({
     ]
 }));
 
-
-
-export = {
-    exp: exp
-};
+export { exp };

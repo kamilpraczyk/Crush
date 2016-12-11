@@ -56,46 +56,50 @@ export function getRest(group: any, exclude: any[]): string[] {
 
 const namesMale = ['Tim', 'George', 'Paul', 'Bob', 'Peter', 'Jason', 'John', 'Jack', 'Chris', 'Mike', 'Mark', 'Sam', 'Rob', 'Tom'];
 const namesFemale = ['Jane', 'Jadie', 'Mary', 'Lisa', 'Maria', 'Suzan', 'Sara', 'Sally'];
-const possessiveNamesMale = ["Rob's"];
-const possessiveNamesFemale = ["Kate's"];
+const possessiveNamesMale = ["Rob's", "John's", "Jack's"];
+const possessiveNamesFemale = ["Kate's", "Mary's", "Jane's"];
 const surname = ['Wilson', 'Thomas'];
 const mounths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-export function getNameMale() {
-    return _.sample(namesMale, 1)[0] as string;
-}
-export function getNameFemale() {
-    return _.sample(namesFemale, 1)[0] as string;
-}
-export function getPossessiveNameMale() {
-    return _.sample(possessiveNamesMale, 1)[0] as string;
-}
-export function getPossessiveNameFemale() {
-    return _.sample(possessiveNamesFemale, 1)[0] as string;
-}
-export function getSurname() {
-    return _.sample(surname, 1)[0] as string;
-}
-export function getMounth() {
-    return _.sample(mounths, 1)[0] as string;
-}
-export function getDay() {
-    return _.sample(days, 1)[0] as string;
-}
+const countries = ['Germany', 'Poland', 'America', 'England', 'Scotland', 'China', 'Spain', 'India', 'Japan', 'the United Kingdom'];
+const cities = ['Barcelona', 'Manchester', 'New York', 'Madrid', 'London',]
+const nationalityAdj = ['English', 'Japanese', 'French', 'Australian', 'German', 'Arabic', 'Polish', 'Spanish'];
 
+export function getNameMale() { return _.sample(namesMale, 1)[0] as string; }
+export function getNameFemale() { return _.sample(namesFemale, 1)[0] as string; }
+export function getPossessiveNameMale() { return _.sample(possessiveNamesMale, 1)[0] as string; }
+export function getPossessiveNameFemale() { return _.sample(possessiveNamesFemale, 1)[0] as string; }
+export function getSurname() { return _.sample(surname, 1)[0] as string; }
+export function getMounth() { return _.sample(mounths, 1)[0] as string; }
+export function getDay() { return _.sample(days, 1)[0] as string; }
+export function getCity() { return _.sample(cities, 1)[0] as string; }
+export function getNationalityAdj() { return _.sample(nationalityAdj, 1)[0] as string; }
+export function getCountry(isCapitalLetter?: boolean) {
+    const country = _.sample(countries, 1)[0] as string;
+    return isCapitalLetter ? country.charAt(0).toUpperCase() + country.slice(1) : country;
+}
 
 
 let _names: any = [].concat(namesMale).concat(namesFemale).concat(possessiveNamesMale).concat(possessiveNamesFemale).concat(surname);
-_names = _.object(_names, _names);
+
 
 export const capital = {
+    //for capital tests
+    _names: _.object(_names, _names),
+    _nationalityAdj: _.object(nationalityAdj, nationalityAdj),
+    _countries: _.object(countries, countries),
+    _cities: _.object(cities, cities),
+
     exeptions: {
         I: 'I',
         Iam: "I'm",
         Ihave: "I've"
     },
-    //for tests
-    names: _names,
+
+    nationalityAdj: {
+        English: 'English',
+        Japanese: 'Japanese',
+    },
 
     places: {
         Antarctica: 'Antarctica',
@@ -107,10 +111,8 @@ export const capital = {
         Thames: 'Thames',
         McDonalds: "McDonald's",
         Barcelona: 'Barcelona',
-        Manchester: 'Manchester',
         NewYork: 'New York',
         Madrid: 'Madrid',
-        London: 'London',
         Himalayas: 'Himalayas',
         EnglishChannel: 'English Channel',//the
         Alps: 'Alps',
@@ -191,18 +193,8 @@ export const capital = {
         Spain: 'Spain',
         Japan: 'Japan',
         UnitedKingdom: 'United Kingdom'//the
+    },
 
-    },
-    nationalityAdj: {
-        English: 'English',
-        Japanese: 'Japanese',
-        French: 'French',
-        Australian: 'Australian',
-        German: 'German',
-        Arabic: 'Arabic',
-        Polish: 'Polish',
-        Spanish: 'Spanish'
-    },
     nationalityNoun: {
         English: 'English',//
         Germans: 'Germans',
@@ -267,4 +259,27 @@ Present perfect continuous:	I have been working
 
 /* The present progressive tense
 //http://www.grammar-quizzes.com/presten1.html  
+
+
+TODO
+//https://learnenglish.britishcouncil.org/en/english-grammar/verbs/verbs-time-clauses-and-if-clauses
+exp.push(tList({
+    t: "We do not normally use will in clauses with <p>if</p> or with <p>time words</p>.",
+    list: [
+        { l: "I'll come home when I <s>will</s> finish work." },
+        { l: "We won't be able to go out if it <s>will rain</s> rains." },
+        { l: "It will be nice to see Chris when he <s>will get here</s> gets here." },
+        { l: "You must stay home until your mother <s>will come</s> comes." },
+    ]
+}));
+
+{ //verbs in time clauses and if clauses
+        id: id(common,[TypeId.multiAnswer]), title, explenation, info,
+        name: "When you " + space + " arrive tonight, we " + space + " go out for dinner.",
+        correct: [empty + " " + multi + " will"],
+        incorrect: ["will " + multi + " will"]
+    }, //10
+
+
+
  */

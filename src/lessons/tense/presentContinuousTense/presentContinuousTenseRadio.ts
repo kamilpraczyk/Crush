@@ -44,7 +44,7 @@ const lessons: RawData[] = [
         incorrect: [empty + " " + multi + " interrupting"],
     }, {
         id: id(common), title, explenation, info,
-        name: "Why " + space + " always raining in " + capital.countries.England + "?",
+        name: "Why " + space + " always raining in the " + capital.countries.England + "?",
         correct: ["is it"],
         incorrect: [empty, "is"],
     }, {

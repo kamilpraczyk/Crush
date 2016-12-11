@@ -1,5 +1,3 @@
-/// <reference path="../../../../typings/tsd.d.ts" />
-
 import {tList} from '../../helper/renderer';
 let exp: any[] = [];
 
@@ -64,10 +62,4 @@ exp.push(tList({
 }));
 
 
-
-
-
-
-export = {
-    exp: exp
-};
+export { exp };

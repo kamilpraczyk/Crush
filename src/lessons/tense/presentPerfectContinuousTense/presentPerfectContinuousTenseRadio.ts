@@ -1,6 +1,5 @@
-/// <reference path="../../../../typings/tsd.d.ts" />
-import {RawData} from '../../../types';
-import {space, TypeId, id, capital } from '../../helper/constants';
+import { RawData } from '../../../types';
+import { space, TypeId, id, capital, getNationalityAdj } from '../../helper/constants';
 import explenation = require('./explenation');
 const separator = " ";
 const common = [TypeId.radio];
@@ -14,7 +13,7 @@ const lessons: RawData[] = [
         incorrect: ["writing", "write"],
     }, {
         id: id(common), title, explenation, info,
-        name: "I've " + space + " " + capital.nationalityAdj.Polish + " for 20 years and I still don't know very much.",
+        name: "I've " + space + " " + getNationalityAdj() + " for 20 years and I still don't know very much.",
         correct: ["been learning"],
         incorrect: ["learning", "not been learning"],
     }, {
@@ -58,11 +57,11 @@ const lessons: RawData[] = [
         correct: ["been crying"],
         incorrect: ["crying", "cry"],
     }
-] 
+]
 
 export {
-title,
-lessons,
+    title,
+    lessons,
 }
 
 

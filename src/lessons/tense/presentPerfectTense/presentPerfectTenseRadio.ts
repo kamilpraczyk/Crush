@@ -1,6 +1,5 @@
-/// <reference path="../../../../typings/tsd.d.ts" />
-import {RawData} from '../../../types';
-import {space, TypeId, id, capital, getNameFemale, getNameMale } from '../../helper/constants';
+import { RawData } from '../../../types';
+import { space, TypeId, id, capital, getNameFemale, getNameMale, getCountry, getCity } from '../../helper/constants';
 import explenation = require('./explenation');
 import _ = require("underscore");
 const common = [TypeId.radio];
@@ -25,17 +24,17 @@ const lessons: RawData[] = [
         incorrect: ["have"],
     }, {
         id: id(common), title, explenation, info,
-        name: getNameMale() + " and " + getNameFemale() + " " + space + " to " + capital.countries.Spain + ".",
+        name: getNameMale() + " and " + getNameFemale() + " " + space + " to " + getCountry() + ".",
         correct: ["have traveled"],
         incorrect: ["had traveled", "traveled"],
     }, {
         id: id(common), title, explenation, info,
-        name: "I " + space + " in " + capital.places.Madrid + " for one week.",
+        name: "I " + space + " in " + getCity() + " for one week.",
         correct: ["have been"],
         incorrect: ["been", "was"],
     }, {
         id: id(common), title, explenation, info,
-        name: getNameMale() + " " + space + " my friend for " + _.sample[2, 4, 6, 8, 9, 12] + " years.",
+        name: getNameMale() + " " + space + " my friend for " + _.sample([2, 4, 6, 8, 9, 12]) + " years.",
         correct: ["has been"],
         incorrect: ["had been", "was"],
     }, {
@@ -59,11 +58,11 @@ const lessons: RawData[] = [
         correct: ["Haven't"],
         incorrect: ["Hasn't"],
     }
-] 
+]
 
 export {
-title,
-lessons,
+    title,
+    lessons,
 }
 
 

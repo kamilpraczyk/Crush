@@ -1,6 +1,5 @@
-/// <reference path="../../../../typings/tsd.d.ts" />
 import { RawData } from '../../../types';
-import { space, TypeId, id, multi, capital } from '../../helper/constants';
+import { space, TypeId, id, multi, capital, getNationalityAdj } from '../../helper/constants';
 import explenation = require('./explenation');
 
 const common = [TypeId.radio];
@@ -9,7 +8,7 @@ const info = 'Build the correct sentence in Simple Present Tense.';
 const lessons: RawData[] = [
     {
         id: id(common), title, explenation, info,
-        name: "You " + space + " " + capital.nationalityAdj.English + ".",
+        name: "You " + space + " " + getNationalityAdj() + ".",
         correct: ["speak"],
         incorrect: ["speaks", "speaking"],
     }, {
@@ -19,7 +18,7 @@ const lessons: RawData[] = [
         incorrect: ["are", "are not"],
     }, {
         id: id(common), title, explenation, info,
-        name: "You " + space + " " + capital.nationalityAdj.English + ".",
+        name: "You " + space + " " + getNationalityAdj() + ".",
         correct: ["do not speak"],
         incorrect: ["do not speaking", "does not speak"],
     }, {

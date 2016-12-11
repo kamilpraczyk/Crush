@@ -1,6 +1,5 @@
-/// <reference path="../../../../typings/tsd.d.ts" />
-import {RawData} from '../../../types';
-import {space, TypeId, id, capital, getNameFemale } from '../../helper/constants';
+import { RawData } from '../../../types';
+import { space, TypeId, id, capital, getNameFemale, getCountry } from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [TypeId.radio];
 import _ = require("underscore");
@@ -110,10 +109,10 @@ const lessons: RawData[] = [
         correct: ["back of"],
         incorrect: ["behind", "beyond", "below", "opposite"],
     }
-] 
+]
 
 
 export {
-title,
-lessons,
+    title,
+    lessons,
 }

@@ -1,6 +1,5 @@
-/// <reference path="../../../../typings/tsd.d.ts" />
 import { RawData } from '../../../types';
-import { space, multi, TypeId, id, capital, getNameFemale, getNameMale } from '../../helper/constants';
+import { space, multi, TypeId, id, getNameFemale, getNameMale, getNationalityAdj } from '../../helper/constants';
 import explenation = require('./explenation');
 const common = [TypeId.radio];
 const title = 'Either and Neither';
@@ -19,7 +18,7 @@ const lessons: RawData[] = [
         incorrect: ["Either " + multi + " or"],
     }, {
         id: id(common), title, explenation, info,
-        name: "I don't speak " + capital.nationalityAdj.German + ". You don't " + space + ".",
+        name: "I don't speak " + getNationalityAdj() + ". You don't " + space + ".",
         correct: ["either"],
         incorrect: ["neither"],
     }, {
@@ -59,7 +58,7 @@ const lessons: RawData[] = [
         incorrect: ["neither"],
     }, {
         id: id(common), title, explenation, info,
-        name: "I cannot understand " + capital.nationalityAdj.English + ". " + space + ".",
+        name: "I cannot understand " + getNationalityAdj() + ". " + space + ".",
         correct: ["I can't either"],
         incorrect: ["Neither I"],
     }, {

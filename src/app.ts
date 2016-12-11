@@ -1,6 +1,7 @@
 import Home = require("./home/Home");
 import { init } from './services';
 import utils = require('./utils/utils');
+import config = require('./generated-config');
 
 function onConnected() {
     const parentElement = document.getElementById('deviceready');
@@ -25,6 +26,7 @@ function onError() {
 }
 
 function onDeviceReady() {
+    document.title = config.isProduction ? (document.title + ' ' + config.version) : ('Dev ' + config.version);
     utils.delay(500).then(() => init()).then(() => {
         onConnected();
         return utils.delay(200).then(() => {
