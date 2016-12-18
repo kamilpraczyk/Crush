@@ -1,6 +1,5 @@
-/// <reference path="../../../../typings/tsd.d.ts" />
 import { RawData } from '../../../types';
-import { TypeId, id, getNameFemale, getNameMale, getMounth, getDay } from '../../helper/constants';
+import { TypeId, id, getNameFemale, getNameMale, getMonth, getDay } from '../../helper/constants';
 import explenation = require('./explenation');
 
 const separator = " ";
@@ -11,7 +10,7 @@ const info = 'Build the correct sentence in Simple Future Tense.';
 const lessons: RawData[] = [
     {
         id: id(common), name: separator, title, explenation, info, postfix,
-        correct: [getNameMale() + " will", "get married", "in", getMounth()],
+        correct: [getNameMale() + " will", "get married", "in", getMonth()],
     }, {
         id: id(common), name: separator, title, explenation, info, postfix,
         correct: ["It", "will", "probably", "rain tonight"],

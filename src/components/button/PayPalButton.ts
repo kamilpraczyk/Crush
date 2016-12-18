@@ -3,8 +3,8 @@ import PayPalButtonCss = require('./ButtonCss');
 import LoaderView = require('../loader/LoaderView');
 import _ = require('underscore');
 import css = require('../../utils/css/css');
-import {getUrl, source} from '../../catalog/source';
-const {div, form, input, img, label} = React.DOM;
+import { getUrl, source } from '../../catalog/source';
+const {div, form, input, img, label, button} = React.DOM;
 
 //http://stackoverflow.com/questions/7642895/setting-paypal-return-url-and-making-it-auto-return
 
@@ -17,6 +17,12 @@ interface Props {
 
 function getPayPal(props: Props) {
     return form({
+        style: {
+            display: 'block',
+            maxWidth: '100%',
+            padding: 0,
+            overflow: 'hidden'
+        } as CSSProperties,
         action: "https://www.paypal.com/cgi-bin/webscr",
         method: "post",
         target: "_top"
@@ -56,9 +62,9 @@ function getPayPal(props: Props) {
             name: "notify_url",
             value: getUrl(source.notify)
         }),
-        input({
+        button({
             style: {
-                display: 'block',
+                width: '100%',
                 color: 'white',
                 backgroundColor: css.button.backgroundColor.normal,
                 backgroundImage: css.button.backgroundImage.normal(),
@@ -70,9 +76,9 @@ function getPayPal(props: Props) {
                 paddingRight: '2vw',
             } as CSSProperties,
             type: 'submit',
-            value: props.name,
+            value: '',
             alt: "PayPal – The safer, easier way to pay online!"
-        }),
+        }, props.name),
         img({
             alt: "",
             src: "https://www.paypalobjects.com/en_GB/i/scr/pixel.gif",
@@ -83,5 +89,5 @@ function getPayPal(props: Props) {
 }
 
 export {
-getPayPal
+    getPayPal
 }

@@ -1,10 +1,11 @@
-/// <reference path="../../typings/tsd.d.ts" />
 import { LessonFace, Board, RawData, FreeType } from '../types';
 import { isId } from '../lessons/helper/constants';
 import _ = require('underscore');
 import { BoardStatus, BoardReturnStatus } from './BoardStatus';
 import css = require('../utils/css/css');
+import { getIconsByIdLesson } from '../lessons/helper/constants';
 import { getNewLessonsStatus, LessonReturnStatus } from './LessonsStatus';
+import config = require('../generated-config');
 
 interface LessonsCatalogReturnState {
     uid: string,
@@ -15,20 +16,6 @@ interface LessonsCatalogReturnState {
     status: LessonReturnStatus
 }
 
-function getIconsByIdLesson(lessons: RawData[]) {
-    const i: string[] = [];
-    lessons.map(lesson => {
-        const id = lesson.id;
-        if (isId.isDraw(id)) i.push(css.iconsSets.draw);
-        if (isId.isFourPictures(id)) i.push(css.iconsSets.fourPictures);
-        if (isId.isFourWords(id)) i.push(css.iconsSets.fourWords);
-        if (isId.isInradio(id)) i.push(css.iconsSets.inradio);
-        if (isId.isRadio(id)) i.push(css.iconsSets.radio);
-        if (isId.isMultiRadio(id)) i.push(css.iconsSets.multiRadio);
-        if (isId.isOneTwoThree(id)) i.push(css.iconsSets.oneTwoThree);
-    });
-    return _.chain(i).compact().uniq().value();
-}
 
 interface LessonsMap {
     [uid: string]: LessonFace
@@ -58,9 +45,13 @@ function sort(unordered: LessonsMap): LessonFace[] {
             case FreeType.inProgressBlock: return inProgressBlock.push(item);
         }
     });
-
-    return inProgressBlock.concat(alwaysFree).concat(whenRegistered).concat(whenPrime);
+    const join = alwaysFree.concat(whenRegistered).concat(whenPrime);
+    if (config.isProduction) {
+        return join.concat(inProgressBlock);
+    }
+    return inProgressBlock.concat(join);
 }
+
 class LessonsCatalog {
 
     private map: LessonsMap = {};
@@ -97,6 +88,7 @@ class LessonsCatalog {
     }
     clear() { this.map = {}; }
     resetActiveLesson() { this.setActiveLesson(this.activeUid); }
+    getLessonByUid(uid: string) { return this.map[uid]; }
 
     setActiveLesson(uid: string) {
         if (this.map[uid]) {
@@ -111,6 +103,9 @@ class LessonsCatalog {
         if (this.map[uid]) {
             this.map[uid].numberFinished = nr;
         } else console.warn('skip Uid', uid);
+    }
+    resetAllNumberFinished() {
+        _.mapObject(this.map, item => { item.numberFinished = null; })
     }
 
     private getLesson() { return this.map[this.activeUid]; }

@@ -23,7 +23,7 @@ const menu: CSSProperties = {
     display: 'flex',
     flexGrow: 1,
     flexDirection: 'row',
-    alignItems: 'stretch',
+    alignItems: 'flex-end',
     alignContent: 'stretch',
 }
 

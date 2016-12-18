@@ -57,16 +57,6 @@ describe('Capitalized -', () => {
                         index++;
                     }
 
-
-                    if (!isCalitapizedWordAllowed(word)) {
-                        const pWord = prevWord + ' ' + word;
-                        if (!isCalitapizedWordAllowed(pWord)) {
-                            if (capital.books.GameOfThrones.indexOf(pWord) === -1) {
-                                throw Error('Word cannot be capitalized:' + word + ': words:' + words.toString());
-                            }
-                        }
-                    }
-
                 }
             }
         }
@@ -80,6 +70,10 @@ describe('Capitalized -', () => {
             }
         });
     });
+
+    function getCorrectCapitalExeptions() {
+        return _.values(capital.books);
+    }
     it('correct - check capitalized', () => {
         goThrough(data => {
             let words: string[] = []
@@ -87,9 +81,12 @@ describe('Capitalized -', () => {
                 if (isId.isMultiRadio(data.id)) {
                     checkCapitalizedFirstLetter(data.correct);
                 } else {
-                    _.each(data.correct, (correct) => {
-                        words = words.concat(correct.split(' '));
+                    _.each(data.correct, correct => {
+                        if (!_.contains(getCorrectCapitalExeptions(), correct)) {
+                            words = words.concat(correct.split(' '));
+                        }
                     });
+
                     checkCapitalizedWords(words);
                 }
             }
@@ -103,7 +100,7 @@ describe('Capitalized -', () => {
                 if (isId.isMultiRadio(data.id)) {
                     checkCapitalizedFirstLetter(data.incorrect);
                 } else if (!isId.isRadio(data.id)) {
-                    _.each(data.incorrect, (correct) => {
+                    _.each(data.incorrect, correct => {
                         words = words.concat(correct.split(' '));
                     });
                     checkCapitalizedWords(words);

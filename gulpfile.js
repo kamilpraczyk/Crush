@@ -126,7 +126,7 @@ gulp.task("watch", function () {
 })
 
 gulp.task("default", function (cb) {
-    runSequence('clean', 'copy', 'compile-js', 'toCordova', 'package', 'saveConfig', 'watch', cb);
+    runSequence('clean', 'saveConfig', 'copy', 'compile-js', 'toCordova', 'package', 'watch', cb);
 });
 
 gulp.task("build", function (cb) {

@@ -1,4 +1,3 @@
-/// <reference path="../typings/tsd.d.ts" />
 import sinon = require('sinon');
 import expect = require('expect.js');
 import { RawData } from '../src/types';

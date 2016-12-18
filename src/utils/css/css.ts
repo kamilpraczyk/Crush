@@ -1,5 +1,10 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 import _ = require("underscore");
+import { isId, TypeId } from '../../lessons/helper/constants';
+import { getBrowser } from '../../utils/utils';
+import { iconsSets } from './theme';
+
+
 const constFont = 5.0;
 const constPoint = 'vmin'
 const borderRadius = 10;
@@ -10,10 +15,6 @@ const fontFamilyTime = 'Orbitron Medium';
 const fontFamilyWriting = 'standard';
 const fontFamilyJournal = 'journal';
 const fontFamilyCharcoal = 'charcoal';
-
-
-import { isId, TypeId } from '../../lessons/helper/constants';
-import { getBrowser } from '../../utils/utils';
 
 const micro = constFont - 1.8 + constPoint;
 const XS = constFont - 0.8 + constPoint;
@@ -97,19 +98,8 @@ const style = {
         menu: 'moon-menu2',
         help: 'moon-support'
     },
-    //http://www.iconarchive.com/show/crystal-clear-icons-by-everaldo.4.html
-    iconsSets: {
-        inradio: 'img/iconSet/App-kbounce-icon.png',
-        fourWords: 'img/iconSet/App-klickety-game-icon.png',
-        draw: 'img/iconSet/Edit-icon.png',
-        fourPictures: 'img/iconSet/Photo-icon.png',
-        oneTwoThree: 'img/iconSet/App-kfouleggs-game-icon.png',
-        radio: 'img/iconSet/App-kcmdf-cubes-icon.png',
-        multiRadio: 'img/iconSet/App-ksplash-water-icon.png', //TODO better icons?
 
-        lock: 'img/iconSet/Action-lock-silver-icon.png',
-        progress: 'img/iconSet/progress.png',
-    },
+    iconsSets,
 
     backUrl: {
         user: 'img/icons/About-me-icon.png',
@@ -158,6 +148,7 @@ const style = {
         border: {
             normal: borderWidth + 'px solid #313131',
             normalGuess: borderWidth + 'px solid #313131',
+            fromName: borderWidth + 'px solid transparent',
             transparent: borderWidth + 'px solid #313131',
             active: borderWidth + 'px solid #2b8182',
             focus: borderWidth + 'px solid #313131',
@@ -167,6 +158,7 @@ const style = {
         },
         backgroundColor: {
             normal: '#49494a',
+            fromName: 'transparent',
             normalGuess: 'transparent',
             transparent: 'transparent',
             active: '#00999D',
@@ -175,6 +167,7 @@ const style = {
         },
         backgroundImage: {
             normalGuess: () => getBacgroundGradient('#636363', '#454444'),
+            fromName: () => getBacgroundGradient('transparent', 'transparent'),
             transparent: () => getBacgroundGradient('transparent', 'transparent'),
             normal: () => getBacgroundGradient('#616161', '#383737'),
             active: null as string,

@@ -1,12 +1,15 @@
-/// <reference path="../typings/tsd.d.ts" />
 import { RawData } from '../src/types';
-import { init, clear, getState } from '../src/services';
+import { init, getState } from '../src/services';
 import _ = require("underscore");
 
+const window: any = {
+    document: {
+        cookie: ''
+    }
+}
 
 function goThrough(test: (data: RawData) => void) {
-    clear();
-    return init().then(() => {
+    return init(window).then(() => {
         return getState().lessonsCatalog.sortedLessons.map(lessons => lessons.boards.map(board => test(board.data)));
     })
 }

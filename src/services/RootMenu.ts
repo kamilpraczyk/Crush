@@ -1,4 +1,3 @@
-/// <reference path="../../typings/tsd.d.ts" />
 import dictionary = require('../utils/dictionary');
 import css = require('../utils/css/css');
 import { RootFace, RootType } from '../types';
@@ -50,7 +49,7 @@ export class RootMenu {
 
     constructor(public activeId: RootType) { }
 
-    showMenu() { this.isMinimalized = false; }
+    showMenu(bool = false) { this.isMinimalized = bool; }
     resetExplenationScroll() { this.list[RootType.explenation].scroll = 0; }
     setScrollPosition(top: number) { this.list[this.activeId].scroll = top; }
 

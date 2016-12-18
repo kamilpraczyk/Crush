@@ -1,16 +1,15 @@
-/// <reference path="../../typings/tsd.d.ts" />
 import React = require('react');
 import ReactDOM = require('react-dom');
 import Layout = require('./layout/Layout')
 import utils = require('../utils/utils');
-import {renderEvent} from '../events';
+import { renderEvent } from '../events';
 class Home {
 
     subscribers: any[] = [];
     component: any = null;
 
     constructor(public el: HTMLElement) {
-        
+
         utils.keys();
         this.component = ReactDOM.render(Layout(), this.el);
 

@@ -9,7 +9,7 @@ describe('Lessons -', () => {
 
     beforeEach(() => mock());
 
-    xit('todo print sentences and check them ', () => {
+    xit('print sentences and check them ', () => {
 
         goThrough(data => {
             //  console.log(data.title);

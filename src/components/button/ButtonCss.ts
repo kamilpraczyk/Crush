@@ -88,6 +88,12 @@ const isInstructions: CSSProperties = {
     border: 'none',
 }
 
+const isFromName: CSSProperties = {
+    backgroundColor: css.button.backgroundColor.fromName,
+    backgroundImage: css.button.backgroundImage.fromName(),
+    border: css.button.border.fromName,
+}
+
 const disabled: CSSProperties = {
     backgroundColor: css.button.backgroundColor.disabled,
     backgroundImage: css.button.backgroundImage.disabled,
@@ -193,52 +199,28 @@ interface ButtonProps {
     isGuess: boolean,
     disabled: boolean,
     isTransparent: boolean
-    isInstructions: boolean
+    isInstructions: boolean,
+    isFromName: boolean
 }
 
 export = utils.union(css, {
 
     getButton(o: ButtonProps) {
         let style = button;
-        if (o.isExpandWidth)
-            style = css.get(style, isExpandWidth);
-
-        if (o.isExpand)
-            style = css.get(style, isExpand);
-
-        if (o.isActive)
-            style = css.get(style, isActive);
-
-        if (o.pressed)
-            style = css.get(style, pressed);
-
-        if (o.isResponsibleHeight)
-            style = css.get(style, isResponsibleHeight);
-
-        if (o.isGuess)
-            style = css.get(style, isGuess);
-
-        if (o.isSuccess)
-            style = css.get(style, isSuccess);
-
-        if (o.isFail)
-            style = css.get(style, isFail);
-
-        if (o.isTime)
-            style = css.get(style, css.fontFamily.time);
-
-        if (o.isTransparent)
-            style = css.get(style, isTransparent);
-
-        if (o.backUrl)
-            style = css.get(style, { backgroundImage: `url(${o.backUrl})` });
-
-        if (o.isInstructions)
-            style = css.get(style, isInstructions);
-
-        if (o.disabled)
-            style = css.get(style, disabled);
-
+        if (o.isExpandWidth) style = css.get(style, isExpandWidth);
+        if (o.isExpand) style = css.get(style, isExpand);
+        if (o.isActive) style = css.get(style, isActive);
+        if (o.pressed) style = css.get(style, pressed);
+        if (o.isResponsibleHeight) style = css.get(style, isResponsibleHeight);
+        if (o.isGuess) style = css.get(style, isGuess);
+        if (o.isSuccess) style = css.get(style, isSuccess);
+        if (o.isFail) style = css.get(style, isFail);
+        if (o.isTime) style = css.get(style, css.fontFamily.time);
+        if (o.isTransparent) style = css.get(style, isTransparent);
+        if (o.backUrl) style = css.get(style, { backgroundImage: `url(${o.backUrl})` });
+        if (o.isInstructions) style = css.get(style, isInstructions);
+        if (o.disabled) style = css.get(style, disabled);
+        if (o.isFromName) style = css.get(style, isFromName);
         return style;
     },
 
@@ -281,7 +263,7 @@ export = utils.union(css, {
         } else if (percent >= 30) {
             color = '#8BB381';
         } else {
-            color = '#99C68E';
+            color = '#ff3300';
         }
         return css.get(numbersStatus, { color });
     }

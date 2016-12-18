@@ -62,7 +62,7 @@ function render(apiState: APIState) {
             }, + status.finishedLessons));
     }
 
-    function getIconStatistics() {
+   /* function getIconStatistics() {
         return status.iconSetStatus.map(item => {
             return div({
                 key: item.icon,
@@ -76,7 +76,7 @@ function render(apiState: APIState) {
                 }, item.name)
             )
         })
-    }
+    }*/
 
 
     function getLegend(text: string, colour: string) {
@@ -108,10 +108,10 @@ function render(apiState: APIState) {
             ),
             div({
                 style: CommonCss.getBoxLine()
-            }, getLessonsFinished()),
-            div({
+            }, getLessonsFinished())
+           /* div({
                 style: CommonCss.getBoxSplitToCenter()
-            }, getIconStatistics())
+            }, getIconStatistics())*/
         );
     }
 
@@ -122,29 +122,23 @@ function render(apiState: APIState) {
     }, getBox()));
 }
 
-interface State {
-    region: any
-}
+class View extends React.Component<void, void>{
 
-class View extends React.Component<void, State>{
-
-    refs: any
     constructor() {
         super();
-        this.state = {
-            region: null
-        };
+    }
+    _updateChart() {
+        const apiState = getState();
+        const region = ReactDOM.findDOMNode(this.refs[pie]);
+        rerenderChart(apiState, region);
     }
 
     componentDidUpdate() {
-        const apiState = getState();
-        rerenderChart(apiState, this.state.region);
+        this._updateChart();
     }
 
     componentDidMount() {
-        const apiState = getState();
-        this.state.region = ReactDOM.findDOMNode(this.refs[pie]);
-        rerenderChart(apiState, this.state.region);
+        this._updateChart();
     }
 
     render() {

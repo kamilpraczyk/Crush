@@ -2,6 +2,7 @@
 import { LessonsCatalog } from '../services/LessonsCatalog';
 import { FreeType } from '../types';
 import Promise = require('bluebird');
+import config = require('../generated-config');
 
 import animals = require('./animals/animals');
 import clockFourWords = require('./extra/clock/clockFourWords');
@@ -49,6 +50,9 @@ import simpleFutureOneToThreePartFour = require('./tense/simpleFuture/simpleFutu
 import simpleFutureRadio = require('./tense/simpleFuture/simpleFutureRadio');
 import beGoingToOneToThree = require('./tense/beGoingTo/beGoingToOneToThree');
 import beGoingToOneToThreePartTwo = require('./tense/beGoingTo/beGoingToOneToThreePartTwo');
+import pastPerfectOneToThree = require('./tense/pastPerfectTense/pastPerfectOneToThree');
+import pastPerfectOneToThreePartTwo = require('./tense/pastPerfectTense/pastPerfectOneToThreePartTwo');
+
 
 import occupation = require('./pictures/occupation/occupation');
 
@@ -59,7 +63,7 @@ import synonymsLS = require('./synonyms/ls/synonymsLS');
 import synonymsSW = require('./synonyms/sw/synonymsSW');
 
 function getLessons(lessonsCatalog: LessonsCatalog) {
-    return new Promise<LessonsCatalog>((resolve, reject) => {
+    return new Promise<LessonsCatalog>((resolve) => {
 
 
         //TODO offer some for free and some when registered, and rest when subscribed
@@ -108,9 +112,12 @@ function getLessons(lessonsCatalog: LessonsCatalog) {
         lessonsCatalog.add(FreeType.whenPrime______, 'SFT_4', simpleFutureOneToThreePartFour);
         lessonsCatalog.add(FreeType.inProgressBlock, 'SFT1R', simpleFutureRadio); //TODO still making
 
+        lessonsCatalog.add(FreeType.whenPrime______, 'PAST1', pastPerfectOneToThree);
+        lessonsCatalog.add(FreeType.inProgressBlock, 'PAST2', pastPerfectOneToThreePartTwo);
+
 
         lessonsCatalog.add(FreeType.whenPrime______, 'BGT_1', beGoingToOneToThree);
-        lessonsCatalog.add(FreeType.inProgressBlock, 'BGT_2', beGoingToOneToThreePartTwo); //TODO still making
+        lessonsCatalog.add(FreeType.whenPrime______, 'BGT_2', beGoingToOneToThreePartTwo);
 
         lessonsCatalog.add(FreeType.whenPrime______, 'L___1', location);
 
@@ -132,7 +139,8 @@ function getLessons(lessonsCatalog: LessonsCatalog) {
         lessonsCatalog.add(FreeType.whenPrime______, 'SY_LS', synonymsLS);
         lessonsCatalog.add(FreeType.whenPrime______, 'SY_SW', synonymsSW);
 
-        lessonsCatalog.setActiveLesson('SY_AD');
+        const devKey = 'PAST2';
+        lessonsCatalog.setActiveLesson(config.isProduction ? 'AN__01' : devKey);
         return resolve(lessonsCatalog);
     });
 }

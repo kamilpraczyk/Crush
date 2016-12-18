@@ -38,7 +38,7 @@ const lessonsFinishedMark: CSSProperties = {
     color: css.font.color.success,
     marginLeft: '1vw'
 }
-
+/*
 const icon: CSSProperties = {
     display: 'block',
     width: 32,
@@ -62,7 +62,7 @@ const iconSet: CSSProperties = {
     justifyContent: 'center',
     textAlign: 'center',
     alignItems: 'center'
-}
+}*/
 export = {
     getPie: () => css.get(pie),
     getBrickLine: () => css.get(brickLine),
@@ -70,9 +70,9 @@ export = {
     getCorrectPercentage: () => css.get(correctPercentage),
     getLessonsFinished: () => css.get(lessonsFinished),
     getLessonsFinishedMark: () => css.get(lessonsFinishedMark),
-    getIconSets: () => css.get(iconSet),
-    getIcon: (url: string) => css.get(icon, { backgroundImage: `url(${url})` }),
-    getIconNumber: () => css.get(iconNumber),
+  //  getIconSets: () => css.get(iconSet),
+  //  getIcon: (url: string) => css.get(icon, { backgroundImage: `url(${url})` }),
+  //  getIconNumber: () => css.get(iconNumber),
 
     correct: css.font.color.success,
     incorrect: css.font.color.fail,

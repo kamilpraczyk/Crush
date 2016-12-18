@@ -12,17 +12,17 @@ function dispatcher(e: any) {
     //console.log('e', e);
     switch (e.keyCode) {
         case 37:
-            console.log('left');
+            // console.log('left');
             break;
         case 38:
-            console.log('up');
+            // console.log('up');
             prev();
             break;
         case 39:
-            console.log('right');
+            // console.log('right');
             break;
         case 40:
-            console.log('down');
+            // console.log('down');
             next();
             break;
     }

@@ -202,13 +202,8 @@ h1 {
 }
 
 #deviceready .event.listening {
-    background-color:#68686A;;
-    display:block;
-}
-
-#deviceready .event.received {
     background-color:#00999D;
-    display:none;
+    display:block;
 }
 
 #deviceready .event.error {

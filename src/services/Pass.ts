@@ -26,6 +26,7 @@ const initialState = {
         isPrime: false,
         name: null as string,
         email: null as string,
+        password: null as string,
         valid_to: null as string,
         active: false,
         last_login: null as string
@@ -82,6 +83,7 @@ class Pass {
                 isPrime: (!!data.isPrime) && active,
                 name: data.user.name,
                 email: data.user.email,
+                password: o.password,
                 valid_to: data.user.valid_to,
                 active,
                 last_login: data.user.last_login
@@ -199,7 +201,7 @@ class Pass {
             });
         })
     }
-    getStatus() { return this.pass; }
+    getStatus(): PassState { return this.pass; }
 
 }
 

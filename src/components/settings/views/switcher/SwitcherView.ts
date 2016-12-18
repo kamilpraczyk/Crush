@@ -4,17 +4,11 @@ import ButtonView = require('../../../button/ButtonView');
 import { getState, APIState } from '../../../../services';
 import { events } from '../../../../events';
 import { FreeType, LessonFace } from '../../../../types';
+import { isFree } from '../../../../lessons/helper/constants';
 import css = require('../../../../utils/css/css');
 const {div} = React.DOM;
 
-function isFree(apiState: APIState, freeType: FreeType) {
-    switch (freeType) {
-        case FreeType.alwaysFree_____: return true;
-        case FreeType.whenRegistered_: return (apiState.isProduction ? !!apiState.pass.user.email : true);
-        case FreeType.whenPrime______: return (apiState.isProduction ? !!apiState.pass.user.isPrime : true);
-        case FreeType.inProgressBlock: return (apiState.isProduction ? false : true);
-    }
-}
+
 
 function getIconSet(disabled: boolean, lesson: LessonFace) {
     let icons = lesson.iconSet;

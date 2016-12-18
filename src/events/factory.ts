@@ -3,7 +3,7 @@ interface Handler<Payload> { (payload?: Payload): void }
 
 interface BaseEvent<Payload> {
     subscribe(handler: Handler<Payload>): () => void;
-    publish(payload: Payload): void;
+    publish(payload: Payload): boolean;
 }
 
 // Must be a better way than this...
@@ -32,6 +32,7 @@ export function EventFactory<Payload>(diagnosticName: string): BaseEvent<Payload
         handlers.forEach(handler => {
             handler(payload);
         });
+        return true; //return for promises;
     }
 
     // Best attempt at error message, but try not to cause an error itself. 

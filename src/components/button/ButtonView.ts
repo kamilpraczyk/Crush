@@ -28,6 +28,7 @@ interface Props {
     isLoader?: boolean,
     isGuess?: boolean, //button for user to try to answer
     isInstructions?: boolean, //header for instructions
+    isFromName?: boolean,
     isTransparent?: boolean, // transparent button
     backUrl?: string
 }
@@ -134,7 +135,8 @@ function render(props: Props, state: State, clickHandler: () => void) {
             isTime: props.isTime,
             isGuess: props.isGuess,
             isTransparent: props.isTransparent,
-            isInstructions: props.isInstructions
+            isInstructions: props.isInstructions,
+            isFromName: props.isFromName
         })
     }, getLeftIcon(props),
         getIcon(props),

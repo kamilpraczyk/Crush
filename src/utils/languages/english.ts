@@ -33,9 +33,9 @@ const dictonary = {
 
     SUBSCRIBING_EXPLANATION: 'Subscription will expire after given period, and will not be automatically extended.',
 
-    SUBMIT_BUTTON_SUBSCRIBING_ONE_YEAR: 'Subscribe £4.99 for 1 year',
-    SUBMIT_BUTTON_SUBSCRIBING_ONE_MONTH: 'Subscribe £1.99 for 1 month',
-    SUBMIT_BUTTON_SUBSCRIBING_ONE_WEEK: 'Subscribe £0.99 for 1 week',
+    SUBMIT_BUTTON_SUBSCRIBING_ONE_YEAR: '£4.99 for 1 year',
+    SUBMIT_BUTTON_SUBSCRIBING_ONE_MONTH: '£1.99 for 1 month',
+    SUBMIT_BUTTON_SUBSCRIBING_ONE_WEEK: '£0.99 for 1 week',
 
     SUBMIT_BUTTON_LOGIN: 'Login',
     SUBMIT_BUTTON_REGISTERING: 'Register',
@@ -47,9 +47,9 @@ const dictonary = {
     EMAIL: 'Email',
 
     GO_REGISTERING: 'or Register',
-    HEADER_SUBSCRIBING: 'Why not to invest in yourself? Subscribe to unblock all interactive lessons.',
-    HEADER_SUBSCRIBED_VALID: 'Sbscription expire in:',
-    HEADER_SUBSCRIBED_EXPIRED: 'Sbscription expired on: ',
+    HEADER_SUBSCRIBING: 'Why not to invest in yourself? Unlock all interactive lessons:',
+    HEADER_SUBSCRIBED_VALID: 'Subscription expire in:',
+    HEADER_SUBSCRIBED_EXPIRED: 'Subscription expired on: ',
     DAYS: 'days.',
     DAY: 'day.',
 

@@ -47,6 +47,15 @@ function getInstructions(state: BoardAnswerState) {
     })
 }
 
+
+function getFromName(state: BoardAnswerState) {
+    return ButtonView({
+        name: state.text,
+        isFromName: true,
+        onClick: () => events.readEvent.publish(state.text)
+    });
+}
+
 function getHeader(state: BoardAnswerState) {
 
     return div({
@@ -54,10 +63,7 @@ function getHeader(state: BoardAnswerState) {
     },
         getInstructions(state),
         getAnalogTime(state),
-        ButtonView({
-            name: state.text,
-            onClick: () => events.readEvent.publish(state.text)
-        }),
+        getFromName(state),
         getAnswerOrSupport(state)
     );
 }

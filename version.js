@@ -16,9 +16,7 @@ function getVersion() {
   } catch (e) {
     console.warn('Latest commit is not tagged, assuming dev');
   }
-
   gitTag = gitTag.replace(/\r?\n|\r/g, '');
-
   if (!gitTag.match(/\d{1,4}\.\d{1,4}\.\d{1,4}/))
     gitTag = 'dev';
 

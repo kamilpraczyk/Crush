@@ -11,7 +11,7 @@ const info = 'Build the correct sentence in Simple Future Tense.';
 const lessons: RawData[] = [
     {
         id: id(common), title, explenation, info,
-        name: "Everything " + space + " be fine.",
+        name: "Everything " + space + " be fine.",//?!?!
         correct: ["will"],
         incorrect: ["shall", "won't"],
     }, {

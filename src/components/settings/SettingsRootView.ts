@@ -86,12 +86,20 @@ class View extends React.Component<void, void>{
         super();
     }
 
-    componentDidUpdate() {
+    _update() {
         const region = ReactDOM.findDOMNode(this.refs[scrollRef]);
         if (region) {
             const apiState = getState();
             region.scrollTop = apiState.rootMenu.scrollPosition;
         }
+    }
+
+    componentDidMount() {
+        this._update();
+    }
+
+    componentDidUpdate() {
+        this._update();
     }
 
     render() {

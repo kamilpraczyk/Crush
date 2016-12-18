@@ -1,4 +1,3 @@
-/// <reference path="../../typings/tsd.d.ts" />
 import { LessonFace, Board } from '../types';
 import _ = require('underscore');
 import { BoardAnswer, BoardAnswerState } from './BoardAnswer';

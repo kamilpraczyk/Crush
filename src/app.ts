@@ -3,15 +3,6 @@ import { init } from './services';
 import utils = require('./utils/utils');
 import config = require('./generated-config');
 
-function onConnected() {
-    const parentElement = document.getElementById('deviceready');
-    const listeningElement = parentElement.querySelector('.listening');
-    const receivedElement = parentElement.querySelector('.received');
-
-    listeningElement.setAttribute('style', 'display:none;');
-    receivedElement.setAttribute('style', 'display:block;');
-}
-
 function onLoaded() {
     document.getElementById('deviceready').setAttribute('style', 'display:none;');
 }
@@ -19,7 +10,6 @@ function onLoaded() {
 function onError() {
     const parentElement = document.getElementById('deviceready');
     parentElement.querySelector('.listening').setAttribute('style', 'display:none;');
-    parentElement.querySelector('.received').setAttribute('style', 'display:none;');
     parentElement.querySelector('.spinner').setAttribute('style', 'display:none;');
     parentElement.querySelector('.error').setAttribute('style', 'display:block;');
     parentElement.setAttribute('style', 'display:flex;');
@@ -27,8 +17,7 @@ function onError() {
 
 function onDeviceReady() {
     document.title = config.isProduction ? (document.title + ' ' + config.version) : ('Dev ' + config.version);
-    utils.delay(500).then(() => init()).then(() => {
-        onConnected();
+    utils.delay(500).then(() => init(window)).then(() => {
         return utils.delay(200).then(() => {
             onLoaded();
             new Home(document.getElementById('app'));
@@ -42,6 +31,7 @@ function onDeviceReady() {
 
 function initialize() {
     document.addEventListener('deviceready', onDeviceReady, false);
+    //document.addEventListener('load', onDeviceReady, false);
 }
 
 

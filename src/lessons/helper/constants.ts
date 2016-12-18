@@ -1,6 +1,8 @@
 /// <reference path="../../../typings/tsd.d.ts" />
+import { iconsSets } from '../../utils/css/theme';
 import _ = require('underscore');
 import { APIState } from '../../services';
+import { FreeType, RawData } from '../../types';
 export const space = '___';
 export const multi = '−';
 export const empty = '_';
@@ -27,6 +29,30 @@ export function getDefaultUser(apiState: APIState) {
         email: apiState.isProduction ? '' : 'kamil.praczyk1@gmail.com',
         password: apiState.isProduction ? '' : 'kamil'
     }
+}
+
+export function isFree(apiState: APIState, freeType: FreeType) {
+    switch (freeType) {
+        case FreeType.alwaysFree_____: return true;
+        case FreeType.whenRegistered_: return (apiState.isProduction ? !!apiState.pass.user.email : true);
+        case FreeType.whenPrime______: return (apiState.isProduction ? !!apiState.pass.user.isPrime : true);
+        case FreeType.inProgressBlock: return (apiState.isProduction ? false : true);
+    }
+}
+
+export function getIconsByIdLesson(lessons: RawData[]) {
+    const i: string[] = [];
+    lessons.map(lesson => {
+        const id = lesson.id;
+        if (isId.isDraw(id)) i.push(iconsSets.draw);
+        if (isId.isFourPictures(id)) i.push(iconsSets.fourPictures);
+        if (isId.isFourWords(id)) i.push(iconsSets.fourWords);
+        if (isId.isInradio(id)) i.push(iconsSets.inradio);
+        if (isId.isRadio(id)) i.push(iconsSets.radio);
+        if (isId.isMultiRadio(id)) i.push(iconsSets.multiRadio);
+        if (isId.isOneTwoThree(id)) i.push(iconsSets.oneTwoThree);
+    });
+    return _.chain(i).compact().uniq().value();
 }
 
 export const isId = {
@@ -70,7 +96,7 @@ export function getNameFemale() { return _.sample(namesFemale, 1)[0] as string; 
 export function getPossessiveNameMale() { return _.sample(possessiveNamesMale, 1)[0] as string; }
 export function getPossessiveNameFemale() { return _.sample(possessiveNamesFemale, 1)[0] as string; }
 export function getSurname() { return _.sample(surname, 1)[0] as string; }
-export function getMounth() { return _.sample(mounths, 1)[0] as string; }
+export function getMonth() { return _.sample(mounths, 1)[0] as string; }
 export function getDay() { return _.sample(days, 1)[0] as string; }
 export function getCity() { return _.sample(cities, 1)[0] as string; }
 export function getNationalityAdj() { return _.sample(nationalityAdj, 1)[0] as string; }
@@ -103,6 +129,7 @@ export const capital = {
 
     places: {
         Antarctica: 'Antarctica',
+        Africa: 'Africa',
         Sun: 'Sun',//the
         Moon: 'Moon',//the
         Earth: 'Earth',//the
@@ -175,8 +202,8 @@ export const capital = {
     },
 
     books: {
-        GameOfThrones: "'Game of Thrones'",
-        TrueBlood: "'True Blood'",
+        GameOfThrones: '"Game of Thrones"',
+        TrueBlood: '"True Blood"',
         //WarAndPeace: 'War and Peace',
         //TheMerchantOfVenice: 'The Merchant of Venice',
         //CrimeAndPunishment: 'Crime and Punishment',
@@ -230,17 +257,17 @@ export const capital = {
 //Safari not supported?
 // implement search?
 //irregular verbs - two answers selected?!  - 'name' have to be in the middle button
+//save last status - and show someting like: - last lesson: 'lesson name' increse: +0.02% or if already there: last increse: -1.2%
 // TODO would be nice if track bad answers or mark them to favourite and review later?
-//TODO - answers have different buttons from info and main button -name.
+// sort them alfabeticaly or by finished points?
 //TODO - IE11 grammar fix layout
 //TODO - IE11 - fix number wrap 
-//test - check if postfix is defined then last correct have no ?.!
 // make lessons - tences vs each other
 //make lessons - sentence to =>question sentence
 
+//icon number  => count all lessons not only icons?!
+
 //TODO test new error msg (constructor with message now)
-//Todo log out clear status from lessons 
-//TODO subscribe buttons too long not braking text - overflow
 
 /*
 ACTIVE / PASSIVE
