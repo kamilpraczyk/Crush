@@ -11,10 +11,10 @@ var sourcemaps = require('gulp-sourcemaps');
 var runSequence = require('run-sequence');
 var gulpif = require('gulp-if');
 var fs = require('fs');
+var open = require('gulp-open');
 
 var tsconfig = require('./tsconfig.json');
 var version = require("./version.js");
-var cordova = require("cordova-lib").cordova;
 
 const config = {
     isProduction: false,
@@ -26,8 +26,9 @@ const config = {
         main: 'app.ts',
         result: 'app.js'
     },
-    cordova: {
-        result: 'www/js/'
+    www: {
+        result: 'www/js/',
+        index: 'www/index.html'
     }
 };
 
@@ -62,8 +63,8 @@ gulp.task('compile-js', function () {
 });
 
 
-gulp.task('toCordova', function () {
-    return gulp.src([config.publicPath + '/**/*']).pipe(gulp.dest(config.cordova.result));
+gulp.task('toWWW', function () {
+    return gulp.src([config.publicPath + '/**/*']).pipe(gulp.dest(config.www.result));
 });
 
 
@@ -77,26 +78,6 @@ gulp.task('saveConfig', function () {
     return fs.writeFileSync(config.generatedConflictPath, contents, 'utf8');
 });
 
-
-gulp.task("package", function () {
-
-    return cordova.build({
-        "platforms": ["browser"],//android ios windows wp8
-        "options": {
-            argv: ["--release", "--gradleArg=--no-daemon"]
-        }
-
-    }, function () {
-        cordova.run({
-            "platforms": ["browser"]
-        })
-
-    });
-
-    //   "options": ["BILLING_KEY='MIIB...AQAB'"]
-    //       ]
-    //    }
-});
 
 gulp.task('_compileSource', function () {
     var mocha = require('gulp-mocha');
@@ -120,13 +101,16 @@ gulp.task('_test', function () {
         }));
 });
 
+gulp.task('openBrowser', function () {
+    gulp.src(config.www.index).pipe(open({ app: 'chrome' }));//'firefox'
+});
 
 gulp.task("watch", function () {
     return gulp.watch([config.codePath + '/**/*.ts', config.codePath + '/**/*.js'], { cwd: config.codePath }, ['default', 'clean']);
 })
 
 gulp.task("default", function (cb) {
-    runSequence('clean', 'saveConfig', 'copy', 'compile-js', 'toCordova', 'package', 'watch', cb);
+    runSequence('clean', 'saveConfig', 'copy', 'compile-js', 'toWWW', 'openBrowser', 'watch', cb);
 });
 
 gulp.task("build", function (cb) {
