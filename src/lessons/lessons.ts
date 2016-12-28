@@ -4,7 +4,16 @@ import { FreeType } from '../types';
 import Promise = require('bluebird');
 import config = require('../generated-config');
 
-import animals = require('./animals/animals');
+import animals = require('./images/animals/animals');
+import fruts = require('./images/fruts/fruts');
+import vegetables = require('./images/vegetables/vegetables');
+import furniture = require('./images/furniture/furniture');
+import insects = require('./images/insects/insects');
+import clothing = require('./images/clothing/clothing');
+import tableware = require('./images/tableware/tableware');
+import technic = require('./images/technic/technic');
+import nature = require('./images/nature/nature');
+
 import clockFourWords = require('./extra/clock/clockFourWords');
 import clockDraw = require('./extra/clock/clockDraw');
 import clock = require('./extra/clock/clock');
@@ -41,6 +50,11 @@ import spellingVerbsIngTwo = require('./words/ing/spellingVerbsIngTwo');
 import spellingVerbsIngThree = require('./words/ing/spellingVerbsIngThree');
 import prefixes_one = require('./words/prefixes/prefixes_one');
 import prefixes_two = require('./words/prefixes/prefixes_two');
+import collectiveNouns = require('./words/collectiveNouns/collectiveNouns');
+import collectiveNounsPartTwo = require('./words/collectiveNouns/collectiveNounsPartTwo');
+import collectiveNounsPartThree = require('./words/collectiveNouns/collectiveNounsPartThree');
+import collectiveNounsPartFour = require('./words/collectiveNouns/collectiveNounsPartFour');
+import collectiveNounsPartFive = require('./words/collectiveNouns/collectiveNounsPartFive');
 import verbEndings = require('./verb/endings/verbEndings');
 import speech_one = require('./words/speach/speech_one');
 import simpleFutureOneToThree = require('./tense/simpleFuture/simpleFutureOneToThree');
@@ -52,7 +66,8 @@ import beGoingToOneToThree = require('./tense/beGoingTo/beGoingToOneToThree');
 import beGoingToOneToThreePartTwo = require('./tense/beGoingTo/beGoingToOneToThreePartTwo');
 import pastPerfectOneToThree = require('./tense/pastPerfectTense/pastPerfectOneToThree');
 import pastPerfectOneToThreePartTwo = require('./tense/pastPerfectTense/pastPerfectOneToThreePartTwo');
-
+import pastPerfectInRadio = require('./tense/pastPerfectTense/pastPerfectInRadio');
+import pastPerfectInRadioPartTwo = require('./tense/pastPerfectTense/pastPerfectInRadioPartTwo');
 
 import occupation = require('./pictures/occupation/occupation');
 
@@ -86,8 +101,17 @@ function getLessons(lessonsCatalog: LessonsCatalog) {
         lessonsCatalog.add(FreeType.alwaysFree_____, 'CL_02', clockDraw);
         lessonsCatalog.add(FreeType.alwaysFree_____, 'CL_03', clock);
 
-        lessonsCatalog.add(FreeType.alwaysFree_____, 'AN__01', animals);
-        lessonsCatalog.add(FreeType.alwaysFree_____, 'PC__01', occupation);
+        lessonsCatalog.add(FreeType.alwaysFree_____, 'PC_AN1', animals);
+        lessonsCatalog.add(FreeType.alwaysFree_____, 'PC_OC1', occupation);
+        lessonsCatalog.add(FreeType.inProgressBlock, 'PC_FR1', fruts);
+        lessonsCatalog.add(FreeType.inProgressBlock, 'PC_VE1', vegetables);
+        lessonsCatalog.add(FreeType.inProgressBlock, 'PC_FU1', furniture);
+        lessonsCatalog.add(FreeType.inProgressBlock, 'PC_IN1', insects);
+        lessonsCatalog.add(FreeType.inProgressBlock, 'PC_CL1', clothing);
+        lessonsCatalog.add(FreeType.inProgressBlock, 'PC_TA1', tableware);
+        lessonsCatalog.add(FreeType.inProgressBlock, 'PC_TE1', technic);
+        lessonsCatalog.add(FreeType.inProgressBlock, 'PC_NA1', nature);
+
 
         lessonsCatalog.add(FreeType.whenPrime______, 'PT__01', presentTenseOneToThree);
         lessonsCatalog.add(FreeType.whenPrime______, 'PT__02', presentTenseOneToThreePartTwo);
@@ -113,7 +137,9 @@ function getLessons(lessonsCatalog: LessonsCatalog) {
         lessonsCatalog.add(FreeType.inProgressBlock, 'SFT1R', simpleFutureRadio); //TODO still making
 
         lessonsCatalog.add(FreeType.whenPrime______, 'PAST1', pastPerfectOneToThree);
-        lessonsCatalog.add(FreeType.inProgressBlock, 'PAST2', pastPerfectOneToThreePartTwo);
+        lessonsCatalog.add(FreeType.whenPrime______, 'PAST2', pastPerfectOneToThreePartTwo);
+        lessonsCatalog.add(FreeType.whenPrime______, 'PAT_1', pastPerfectInRadio);
+        // lessonsCatalog.add(FreeType.inProgressBlock, 'PAT_2', pastPerfectInRadioPartTwo);
 
 
         lessonsCatalog.add(FreeType.whenPrime______, 'BGT_1', beGoingToOneToThree);
@@ -133,13 +159,19 @@ function getLessons(lessonsCatalog: LessonsCatalog) {
         lessonsCatalog.add(FreeType.whenPrime______, 'MINE1', mineYour);
         lessonsCatalog.add(FreeType.whenPrime______, 'MINE2', myselfYourself);
 
-        lessonsCatalog.add(FreeType.whenPrime______, 'SY_AD', synonymsAD);
+        lessonsCatalog.add(FreeType.alwaysFree_____, 'SY_AD', synonymsAD);
         lessonsCatalog.add(FreeType.whenPrime______, 'SY_DF', synonymsDF);
         lessonsCatalog.add(FreeType.whenPrime______, 'SY_GL', synonymsGL);
         lessonsCatalog.add(FreeType.whenPrime______, 'SY_LS', synonymsLS);
         lessonsCatalog.add(FreeType.whenPrime______, 'SY_SW', synonymsSW);
 
-        const devKey = 'PAST2';
+        lessonsCatalog.add(FreeType.alwaysFree_____, 'COL_1', collectiveNouns);
+        lessonsCatalog.add(FreeType.whenPrime______, 'COL_2', collectiveNounsPartTwo);
+        lessonsCatalog.add(FreeType.whenPrime______, 'COL_3', collectiveNounsPartThree);
+        lessonsCatalog.add(FreeType.whenPrime______, 'COL_4', collectiveNounsPartFour);
+        lessonsCatalog.add(FreeType.whenPrime______, 'COL_5', collectiveNounsPartFive);
+
+        const devKey = 'COL_1';
         lessonsCatalog.setActiveLesson(config.isProduction ? 'AN__01' : devKey);
         return resolve(lessonsCatalog);
     });

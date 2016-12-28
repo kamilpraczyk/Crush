@@ -57,9 +57,10 @@ exp.push(tList({
 exp.push(tList({
     t: 'Contracted forms',
     list: [
-        { eq: ['had not', "hadn't"] },
+        { eq: ['I had', "I'd"] },
+        { eq: ['I had not', "I'd not"] },
+        { eq: ['I had not', "I hadn't"] },
     ]
 }));
-
 
 export { exp };

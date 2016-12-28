@@ -1,5 +1,6 @@
 import { RootType } from '../types';
-import { APIState, getState } from '../services'
+import { APIState, getState } from '../services';
+import _ = require('underscore');
 
 interface Cookie {
     login: string,
@@ -31,7 +32,6 @@ function cookies(window: Window): CookieReturn {
     function get(name: string): Cookie {
         const nameEQ = name + "=";
         const ca = window.document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
             let c = ca[i];
             while (c.charAt(0) === ' ') c = c.substring(1, c.length);
@@ -63,22 +63,26 @@ function cookies(window: Window): CookieReturn {
 
     function initbeforeUnload() {
         window.onbeforeunload = function (e) {
-            if (getCookie() === setCookie(getState())) {
-                return true;
+            const state = getState();
+            if (state.pass.user.email) {
+                if (!_.isEqual(getCookie(), setCookie(state))) {
+                    const confirmationMessage = "Are you sure you want to quit?";
+                    e = e || window.event;
+                    if (e) e.returnValue = confirmationMessage;
+                    return confirmationMessage;
+                }
             }
-
-            var confirmationMessage = "\o/";
-            (e || window.event).returnValue = confirmationMessage; //Gecko + IE
-            return confirmationMessage;                            //Webkit, Safari, Chrome
-        };
+            return;
+        }
     }
 
     initbeforeUnload();
     return {
         setCookie,
-        getCookie,
+        getCookie
     }
 }
+
 
 export {
     cookies,

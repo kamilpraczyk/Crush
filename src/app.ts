@@ -30,7 +30,12 @@ function onDeviceReady() {
     });
 }
 
-window.onload = onDeviceReady;
+
+if (config.isProduction) {
+    document.addEventListener("deviceready", onDeviceReady, false);
+} else {
+    window.onload = onDeviceReady;
+}
 
 
 

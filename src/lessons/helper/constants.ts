@@ -20,7 +20,8 @@ export enum TypeId {
     analogTime,
     areRepeated, //correct or incorrect can be repeated
     noSpace,
-    multiAnswer // contains correct or incorrect contains multi 
+    multiAnswer, // contains correct or incorrect contains multi 
+    allCapital  //call correct and incorrect have to be capitalized
 }
 
 export function getDefaultUser(apiState: APIState) {
@@ -67,6 +68,7 @@ export const isId = {
     isAnalogTime: (id: TypeId[]) => _.contains(id, TypeId.analogTime),
     isNoSpace: (id: TypeId[]) => _.contains(id, TypeId.noSpace),
     isRepeated: (id: TypeId[]) => _.contains(id, TypeId.areRepeated),
+    isAllCapitalized: (id: TypeId[]) => _.contains(id, TypeId.allCapital),
     isMultiAnswer: (id: TypeId[]) => _.contains(id, TypeId.multiAnswer)
 }
 
@@ -88,7 +90,7 @@ const surname = ['Wilson', 'Thomas'];
 const mounths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 const countries = ['Germany', 'Poland', 'America', 'England', 'Scotland', 'China', 'Spain', 'India', 'Japan', 'the United Kingdom'];
-const cities = ['Barcelona', 'Manchester', 'New York', 'Madrid', 'London',]
+const cities = ['Barcelona', 'Manchester', 'New York', 'Madrid', 'London', 'Tokyo']
 const nationalityAdj = ['English', 'Japanese', 'French', 'Australian', 'German', 'Arabic', 'Polish', 'Spanish'];
 
 export function getNameMale() { return _.sample(namesMale, 1)[0] as string; }
@@ -116,6 +118,9 @@ export const capital = {
     _countries: _.object(countries, countries),
     _cities: _.object(cities, cities),
 
+    cities: {
+        Tokyo: 'Tokyo'
+    },
     exeptions: {
         I: 'I',
         Iam: "I'm",
@@ -264,11 +269,14 @@ export const capital = {
 //TODO - IE11 - fix number wrap 
 // make lessons - tences vs each other
 //make lessons - sentence to =>question sentence
+//TODO cookies -> refresh page (when login then ask and state differnet)
+//TODO on startup root menu not higlighted
+//firefox lessonss buttons number, register back 
 
 //icon number  => count all lessons not only icons?!
-
+//test when femalename detected then no 'he' in the sentence (similar do with malename)
 //TODO test new error msg (constructor with message now)
-
+//TODO when many lines - 5 then reduce lines to 4 or 3 while ansering - no space when building long sentences
 /*
 ACTIVE / PASSIVE
 Once a week, Tom cleans the car. Active

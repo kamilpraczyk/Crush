@@ -1,5 +1,4 @@
 
-/// <reference path="../../typings/tsd.d.ts" />
 import Promise = require("bluebird");
 import utils = require('../utils/utils');
 import {HttpClientGET, HttpClientPOST, addUrlGetParam} from './httpClient';
@@ -35,7 +34,6 @@ function serverIsPrime(login: string, password: string): Promise<ServerIsPrime> 
         return data;
     });
 }
-
 
 function emailGreeting(o: { email: string, password: string, retypePassword: string, name: string }) {
     let newurl = getUrl(source.emailGreeting);

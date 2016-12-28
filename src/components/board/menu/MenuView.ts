@@ -5,7 +5,6 @@ import ButtonView = require('../../button/ButtonView');
 import ProgressView = require('./progress/ProgressView');
 import { getState, APIState } from '../../../services';
 import { events } from '../../../events';
-import { getIconsByIdLesson } from '../../../lessons/helper/constants';
 const {div} = React.DOM;
 
 interface Item {
@@ -61,7 +60,6 @@ function getMenuButton(apiState: APIState) {
             name: points.display,
             leftIcon: getIcon(),
             letfIconColour: getIconColour(),
-            iconSet: getIconsByIdLesson([apiState.lessonsCatalog.current.board.data]),
             isExpandWidth: true,
             isResponsibleHeight: true,
             isResponsibleCenter: true,

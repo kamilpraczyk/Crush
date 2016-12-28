@@ -47,7 +47,9 @@ export class RootMenu {
     }
     private isMinimalized = false;
 
-    constructor(public activeId: RootType) { }
+    constructor(public activeId: RootType) {
+        this.list[this.activeId].active = true;
+    }
 
     showMenu(bool = false) { this.isMinimalized = bool; }
     resetExplenationScroll() { this.list[RootType.explenation].scroll = 0; }

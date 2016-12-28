@@ -149,7 +149,8 @@ function onSubscribeOnServer(valid_to: string) {
 
 function onScrollPosition(top: number) {
     state.rootMenu.setScrollPosition(top);
-    //do not rerender
+    state.isDirty = true;
+    //do not rerender but the state is dirty
 }
 
 
@@ -217,11 +218,12 @@ function init(window: Window) {
 
 function updateAPIState(state: State) {
     state.isDirty = false;
+    const pass = state.pass.getStatus();
     state.apiState = {
         isProduction: config.isProduction,
         rootMenu: state.rootMenu.getState(),
-        lessonsCatalog: state.lessonsCatalog.getState(),
-        pass: state.pass.getStatus(),
+        lessonsCatalog: state.lessonsCatalog.getState(pass),
+        pass,
     };
     state.cookies.setCookie(state.apiState);
     return state.apiState;

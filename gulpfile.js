@@ -33,16 +33,16 @@ const config = {
 };
 
 
-gulp.task('clean', function () {
+gulp.task('clean', function() {
     return gulp.src([config.app.path + '/']).pipe(vinylPaths(del));
 });
 
 
-gulp.task('copy', function () {
+gulp.task('copy', function() {
     return gulp.src([config.codePath + '/**/*']).pipe(gulp.dest(config.app.path));
 });
 
-gulp.task('compile-js', function () {
+gulp.task('compile-js', function() {
     if (config.isProduction) process.env.NODE_ENV = 'production';
 
     return browserify({
@@ -53,7 +53,7 @@ gulp.task('compile-js', function () {
         .add(config.app.path + '/' + config.app.main)
         .plugin(tsify)
         .bundle()
-        .on('error', function (e) { console.log('Browserify Error' + e) })
+        .on('error', function(e) { console.log('Browserify Error' + e) })
         .pipe(source(config.app.result))
         .pipe(buffer())
         .pipe(gulpif(!config.isProduction, sourcemaps.init({ loadMaps: true })))
@@ -63,12 +63,12 @@ gulp.task('compile-js', function () {
 });
 
 
-gulp.task('toWWW', function () {
+gulp.task('toWWW', function() {
     return gulp.src([config.publicPath + '/**/*']).pipe(gulp.dest(config.www.result));
 });
 
 
-gulp.task('saveConfig', function () {
+gulp.task('saveConfig', function() {
     const saveConfig = {
         isProduction: config.isProduction,
         version: version.getVersion()
@@ -79,7 +79,7 @@ gulp.task('saveConfig', function () {
 });
 
 
-gulp.task('_compileSource', function () {
+gulp.task('_compileSource', function() {
     var mocha = require('gulp-mocha');
     var tsProject = ts.createProject('tsconfig.json');
     return gulp.src(['src/**/*.ts'])
@@ -87,7 +87,7 @@ gulp.task('_compileSource', function () {
         .pipe(gulp.dest('temp/src'))
 });
 
-gulp.task('_test', function () {
+gulp.task('_test', function() {
     var mocha = require('gulp-mocha');
     var tsProject = ts.createProject('tsconfig.json');
     return gulp.src(['test/**/*.ts'])
@@ -101,24 +101,24 @@ gulp.task('_test', function () {
         }));
 });
 
-gulp.task('openBrowser', function () {
-    gulp.src(config.www.index).pipe(open({ app: 'chrome' }));//'firefox'
+gulp.task('openBrowser', function() {
+    gulp.src(config.www.index).pipe(open({ app: 'firefox' }));//'firefox', 'chrome'
 });
 
-gulp.task("watch", function () {
+gulp.task("watch", function() {
     return gulp.watch([config.codePath + '/**/*.ts', config.codePath + '/**/*.js'], { cwd: config.codePath }, ['default', 'clean']);
 })
 
-gulp.task("default", function (cb) {
+gulp.task("default", function(cb) {
     runSequence('clean', 'saveConfig', 'copy', 'compile-js', 'toWWW', 'openBrowser', 'watch', cb);
 });
 
-gulp.task("build", function (cb) {
+gulp.task("build", function(cb) {
     config.isProduction = true;
     runSequence('default');
 });
 
-gulp.task("test", function (cb) {
+gulp.task("test", function(cb) {
     runSequence('clean', '_compileSource', '_test');
 });
 

@@ -17,7 +17,12 @@ describe('Existence for -', () => {
 
     describe('incorrect - ', () => {
 
-        it('if exist then should not be empty', () => goThrough(data => { if (data.incorrect) expect(data.incorrect.length).to.be.greaterThan(0); }));
+        it('if exist then should not be empty', () => goThrough(data => {
+            if (data.incorrect) {
+                if (data.incorrect.length === 0) console.log(data);
+                expect(data.incorrect.length).to.be.greaterThan(0);
+            }
+        }));
         it('are undefined for isOneTwoThree', () => goThrough(data => { if (isId.isOneTwoThree(data.id)) expect(data.incorrect).to.be(undefined); }));
         it('are undefined for isDraw', () => goThrough(data => { if (isId.isDraw(data.id)) expect(data.incorrect).to.be(undefined); }));
 

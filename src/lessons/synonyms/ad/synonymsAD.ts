@@ -1,8 +1,7 @@
-/// <reference path="../../../../typings/tsd.d.ts" />
 import { RawData } from '../../../types';
 import { TypeId, id } from '../../helper/constants';
 import explenation = require('./explenation');
-const common = [TypeId.multiRadio]; 
+const common = [TypeId.multiRadio, TypeId.allCapital]; 
 const title = 'Synonyms A-D';
 const info = 'Find 3 synonymms for a word:';
 

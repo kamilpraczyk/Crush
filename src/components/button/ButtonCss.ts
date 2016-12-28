@@ -104,8 +104,8 @@ const disabled: CSSProperties = {
 
 const name: CSSProperties = {
     display: 'flex',
-    paddingTop: '2vh',
-    paddingBottom: '2vh',
+    paddingTop: '1vh',
+    paddingBottom: '1vh',
     paddingLeft: '1vw',
     paddingRight: '1vw',
     justifyContent: 'flex-start',
@@ -123,8 +123,8 @@ const nameNoBottom: CSSProperties = {
 
 const nameContainer: CSSProperties = {
     textAlign: 'center',
-    display: 'block', //IE11 fix no flex
-    width: '100%' //IE11 fix 100%
+    display: 'block', //IE11 fix no flex but break firefox ?!?!
+    width: '100%' //IE11 fix 100% but break firefox ?!?!
 }
 const nameContainerIsExpand: CSSProperties = {
     textAlign: 'center', //IE11 fix 
@@ -132,18 +132,18 @@ const nameContainerIsExpand: CSSProperties = {
 
 
 const icon: CSSProperties = {
-    paddingTop: '2vh',
-    paddingBottom: '2vh',
-    paddingLeft: '2vw',
-    paddingRight: '2vw',
+    paddingTop: '1vh',
+    paddingBottom: '1vh',
+    paddingLeft: '1vw',
+    paddingRight: '1vw',
     alignSelf: 'center',
     fontSize: css.font.fontSize.mega
 }
 const leftIcon: CSSProperties = {
-    paddingTop: '2vh',
-    paddingBottom: '2vh',
-    paddingLeft: '2vw',
-    paddingRight: '2vw',
+    paddingTop: '1vh',
+    paddingBottom: '1vh',
+    paddingLeft: '1vw',
+    paddingRight: '1vw',
     alignSelf: 'center',
     color: css.button.color.disabled,
 }

@@ -56,7 +56,7 @@ const a = {
 }
 
 const title = 'Occupations';
-const info = 'Choose the correct occupation.'
+const info = 'Choose the correct picture.'
 
 const lessons: RawData[] = [
     {

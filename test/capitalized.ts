@@ -78,7 +78,7 @@ describe('Capitalized -', () => {
         goThrough(data => {
             let words: string[] = []
             if (data.correct) {
-                if (isId.isMultiRadio(data.id)) {
+                if (isId.isAllCapitalized(data.id)) {
                     checkCapitalizedFirstLetter(data.correct);
                 } else {
                     _.each(data.correct, correct => {
@@ -97,9 +97,9 @@ describe('Capitalized -', () => {
             let words: string[] = []
             //do not test radio
             if (data.incorrect) {
-                if (isId.isMultiRadio(data.id)) {
+                if (isId.isAllCapitalized(data.id)) {
                     checkCapitalizedFirstLetter(data.incorrect);
-                } else if (!isId.isRadio(data.id)) {
+                } else if (!isId.isRadio(data.id)) {//TODO test radio
                     _.each(data.incorrect, correct => {
                         words = words.concat(correct.split(' '));
                     });

@@ -1,5 +1,5 @@
 import { RawData } from '../../../types';
-import { TypeId, id, capital, getNameFemale, getMonth, getNameMale, getCountry, getPossessiveNameMale, getNationalityAdj } from '../../helper/constants';
+import { TypeId, id, capital, getNameFemale, getMonth, getNameMale, getNationalityAdj } from '../../helper/constants';
 import explenation = require('./explenation');
 import _ = require('underscore');
 
