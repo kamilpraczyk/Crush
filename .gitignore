@@ -31,13 +31,9 @@ RCS
 RCSLOG
 SCCS
 _$*
-
 node_modules/
 build/
 temp/
-platforms/
-plugins/
-hooks/
 test/**/*.js
 src/**/*.js
 test/test/

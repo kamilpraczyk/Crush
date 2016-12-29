@@ -16,7 +16,6 @@ function onError() {
 }
 
 function onDeviceReady() {
-    console.log('GO');
     document.title = config.isProduction ? (document.title + ' ' + config.version) : ('Dev ' + config.version);
     utils.delay(500).then(() => init(window)).then(() => {
         return utils.delay(200).then(() => {
@@ -30,12 +29,7 @@ function onDeviceReady() {
     });
 }
 
-
-if (config.isProduction) {
-    document.addEventListener("deviceready", onDeviceReady, false);
-} else {
-    window.onload = onDeviceReady;
-}
+window.onload = onDeviceReady;
 
 
 

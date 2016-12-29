@@ -2,7 +2,7 @@ import React = require('react');
 import ButtonCss = require('./ButtonCss');
 import LoaderView = require('../loader/LoaderView');
 import _ = require('underscore');
-const {div, button} = React.DOM;
+const {div, button, table, tr, td, tbody} = React.DOM;
 
 interface Props {
     name: string,
@@ -20,7 +20,6 @@ interface Props {
     isExpand?: boolean,
     isActive?: boolean,
     isExpandWidth?: boolean,
-    isResponsibleHeight?: boolean,
     isResponsibleCenter?: boolean,
     isSuccess?: boolean,
     isFail?: boolean,
@@ -75,21 +74,6 @@ function getIconSet(props: Props) {
 
 
 
-function getName(props: Props) {
-    if (!props.name) return null;
-
-    return div({
-        style: ButtonCss.getNameContainer(props.isExpand)
-    },
-        div({
-            style: ButtonCss.getName({
-                isResponsibleCenter: props.isResponsibleCenter,
-                isIconSet: !!(props.iconSet && props.iconSet.length)
-            })
-        }, props.name),
-        getIconSet(props)
-    );
-}
 
 function getNumberStatus(props: Props) {
     if (!_.isNumber(props.numbersStatus)) return null;
@@ -116,7 +100,6 @@ function getNumbers(props: Props) {
 function render(props: Props, state: State, clickHandler: () => void) {
 
     const loader = props.isLoader ? LoaderView() : null;
-
     return button({
         ref: props.ref,
         key: props.key,
@@ -128,7 +111,6 @@ function render(props: Props, state: State, clickHandler: () => void) {
             isExpand: props.isExpand,
             isExpandWidth: props.isExpandWidth,
             isActive: props.isActive,
-            isResponsibleHeight: props.isResponsibleHeight,
             isSuccess: props.isSuccess,
             isFail: props.isFail,
             backUrl: props.backUrl,
@@ -138,11 +120,30 @@ function render(props: Props, state: State, clickHandler: () => void) {
             isInstructions: props.isInstructions,
             isFromName: props.isFromName
         })
-    }, getLeftIcon(props),
-        getIcon(props),
-        getName(props),
-        getNumbers(props),
-        loader
+    },
+        table({
+            style: {
+                display: 'table',
+                width: '100%'
+            }
+        },
+            tbody({},
+                tr({},
+                    td({ colSpan: 3 }, getIcon(props))
+                ),
+                tr({},
+                    td({ style: {} }, getLeftIcon(props)),
+                    td({ style: ButtonCss.getNameContainer(props) }, props.name),
+                    td({ style: {} }, getNumbers(props))
+                ),
+                tr({},
+                    td({ colSpan: 3 }, getIconSet(props))
+                ),
+                tr({},
+                    td({ colSpan: 3, style: { textAlign: 'center' } }, loader)
+                )
+            )
+        )
     );
 }
 

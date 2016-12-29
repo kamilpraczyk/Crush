@@ -3,10 +3,10 @@ import QuatroCss = require('./QuatroCss');
 import MenuView = require('../menu/MenuView');
 import ButtonView = require('../../button/ButtonView');
 import _ = require('underscore');
-import {BoardAnswerState} from '../../../types';
-import {isId}  from '../../../lessons/helper/constants';
+import { BoardAnswerState } from '../../../types';
+import { isId } from '../../../lessons/helper/constants';
 import HeaderView = require('../header/HeaderView');
-import {events} from '../../../events';
+import { events } from '../../../events';
 const {div} = React.DOM;
 
 
@@ -46,6 +46,7 @@ function getContentLine(state: BoardAnswerState, list: any[]) {
                 isSuccess: isSuccess,
                 isGuess: true,
                 backUrl: word ? null : name,
+                isResponsibleCenter: true,
                 isTime: isId.isDigitalTime(state.board.data.id),
                 onClick: () => events.onChoosePicture.publish(name)
             }));

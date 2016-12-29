@@ -90,8 +90,8 @@ const style = {
     },
 
     icons: {
-        left: 'icon-left-open',
-        right: 'icon-right-open',
+        left: 'moon-arrow-left3',
+        right: 'moon-arrow-right2',
         random: 'moon-shuffle',
         success: 'moon-thumbs-up',
         fail: 'moon-thumbs-up2',

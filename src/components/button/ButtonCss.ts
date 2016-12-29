@@ -5,6 +5,7 @@ import utils = require('../../utils/utils');
 const button: CSSProperties = {
     //NO minHeight - IE don't like it
     display: 'flex',
+    flexFlow: 'column',
     backgroundColor: css.button.backgroundColor.normal,
     backgroundImage: css.button.backgroundImage.normal(),
     color: css.button.color.normal,
@@ -39,9 +40,7 @@ const pressed: CSSProperties = {
     border: css.button.border.focus
 }
 const isExpand: CSSProperties = {
-    display: 'flex',
     flexGrow: 1,
-    flexDirection: 'column',
     alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'center',
@@ -57,13 +56,9 @@ const isActive: CSSProperties = {
     color: css.button.color.active,
     border: css.button.border.active
 }
-const isResponsibleHeight: CSSProperties = {
-    // minHeight: 50//'10vh'
-}
+
 const isResponsibleCenter: CSSProperties = {
-    justifyContent: 'center',
-    display: 'flex',
-    flexGrow: 1
+    textAlign: 'center',
 }
 const isSuccess: CSSProperties = {
     border: css.button.border.success
@@ -102,41 +97,23 @@ const disabled: CSSProperties = {
     cursor: css.cursor.normal
 }
 
-const name: CSSProperties = {
-    display: 'flex',
+const nameContainer: CSSProperties = {
     paddingTop: '1vh',
     paddingBottom: '1vh',
     paddingLeft: '1vw',
     paddingRight: '1vw',
-    justifyContent: 'flex-start',
     textAlign: 'left',
-    alignSelf: 'center',
-    alignItems: 'center',
-    flexGrow: 1,
     wordBreak: 'break-word',
     wordWrap: 'break-word'
 }
-
-const nameNoBottom: CSSProperties = {
-    paddingBottom: 0,
-}
-
-const nameContainer: CSSProperties = {
-    textAlign: 'center',
-    display: 'block', //IE11 fix no flex but break firefox ?!?!
-    width: '100%' //IE11 fix 100% but break firefox ?!?!
-}
-const nameContainerIsExpand: CSSProperties = {
-    textAlign: 'center', //IE11 fix 
-}
-
 
 const icon: CSSProperties = {
     paddingTop: '1vh',
     paddingBottom: '1vh',
     paddingLeft: '1vw',
     paddingRight: '1vw',
-    alignSelf: 'center',
+    textAlign: 'center',
+    width: '100%',
     fontSize: css.font.fontSize.mega
 }
 const leftIcon: CSSProperties = {
@@ -144,7 +121,6 @@ const leftIcon: CSSProperties = {
     paddingBottom: '1vh',
     paddingLeft: '1vw',
     paddingRight: '1vw',
-    alignSelf: 'center',
     color: css.button.color.disabled,
 }
 const leftIconActive: CSSProperties = {
@@ -156,7 +132,7 @@ const iconSets: CSSProperties = {
     flexGrow: 1,
     paddingTop: 3,
     paddingBottom: 3,
-    flexFlow: 'row wrap',
+    flexFlow: 'row nowrap',
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: css.font.fontSize.micro
@@ -191,7 +167,6 @@ interface ButtonProps {
     isExpand: boolean,
     isExpandWidth: boolean,
     isActive: boolean,
-    isResponsibleHeight: boolean,
     isSuccess: boolean,
     isFail: boolean,
     backUrl: string,
@@ -211,7 +186,6 @@ export = utils.union(css, {
         if (o.isExpand) style = css.get(style, isExpand);
         if (o.isActive) style = css.get(style, isActive);
         if (o.pressed) style = css.get(style, pressed);
-        if (o.isResponsibleHeight) style = css.get(style, isResponsibleHeight);
         if (o.isGuess) style = css.get(style, isGuess);
         if (o.isSuccess) style = css.get(style, isSuccess);
         if (o.isFail) style = css.get(style, isFail);
@@ -224,12 +198,8 @@ export = utils.union(css, {
         return style;
     },
 
-    getName(o: { isResponsibleCenter: boolean, isIconSet: boolean }) {
-        return css.get(name, o.isResponsibleCenter ? isResponsibleCenter : null, o.isIconSet ? nameNoBottom : null);
-    },
-
-    getNameContainer(isExpand: boolean) {
-        return css.get(nameContainer, isExpand ? nameContainerIsExpand : null);
+    getNameContainer(props: { isResponsibleCenter?: boolean, name: string }) {
+        return css.get(nameContainer, props.isResponsibleCenter ? isResponsibleCenter : null, props.name ? { width: '100%' } : { display: 'none' });
     },
 
     getIcon(o: { isResponsibleCenter: boolean }) {

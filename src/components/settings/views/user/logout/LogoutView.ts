@@ -10,7 +10,6 @@ const {div} = React.DOM;
 function getButtonLogOut() {
     return ButtonView({
         name: dictionary.LOG_OUT,
-        isResponsibleHeight: true,
         isResponsibleCenter: true,
         onClick: () => events.onLogOut.publish()
     });

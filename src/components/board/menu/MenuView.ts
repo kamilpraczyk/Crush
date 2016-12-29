@@ -32,7 +32,7 @@ const nextRandom: Item[] = [{
 }];
 
 
-function getMenuButton(apiState: APIState) {
+function getMenuButton(apiState: APIState, length: number) {
 
     const points = apiState.lessonsCatalog.current.points;
 
@@ -54,14 +54,13 @@ function getMenuButton(apiState: APIState) {
     }
 
     return div({
-        style: MenuCss.getMenuItem()
+        style: MenuCss.getMenuItem(length)
     },
         ButtonView({
             name: points.display,
             leftIcon: getIcon(),
             letfIconColour: getIconColour(),
             isExpandWidth: true,
-            isResponsibleHeight: true,
             isResponsibleCenter: true,
             isQuickClick: true,
             onClick: () => events.showRootMenu.publish()
@@ -77,12 +76,11 @@ function render(items?: Item[]) {
     const buttons = items.map(item => {
         return div({
             key: item.id,
-            style: MenuCss.getMenuItem()
+            style: MenuCss.getMenuItem(items.length + 1)
         }, ButtonView({
             name: item.name,
             icon: item.icon,
             isExpandWidth: true,
-            isResponsibleHeight: true,
             isResponsibleCenter: true,
             onClick: item.onClick,
             isQuickClick: true
@@ -96,7 +94,7 @@ function render(items?: Item[]) {
             style: MenuCss.getMenu()
         },
             buttons,
-            getMenuButton(apiState)
+            getMenuButton(apiState, items.length + 1)
         ),
         div({
             style: MenuCss.getProgress()

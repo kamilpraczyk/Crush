@@ -172,7 +172,7 @@ function getLessons(lessonsCatalog: LessonsCatalog) {
         lessonsCatalog.add(FreeType.whenPrime______, 'COL_5', collectiveNounsPartFive);
 
         const devKey = 'COL_1';
-        lessonsCatalog.setActiveLesson(config.isProduction ? 'AN__01' : devKey);
+        lessonsCatalog.setActiveLesson(config.isProduction ? 'PC_AN1' : devKey);
         return resolve(lessonsCatalog);
     });
 }

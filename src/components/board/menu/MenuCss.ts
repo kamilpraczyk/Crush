@@ -31,6 +31,7 @@ const menuItem: CSSProperties = {
     display: 'flex',
     flexGrow: 1,
     alignItems: 'center',
+    maxWidth: '100%'
 }
 
 
@@ -38,16 +39,16 @@ const menuItem: CSSProperties = {
 export = utils.union(css, {
 
     getPanel() {
-        return panel;
+        return css.get(panel);
     },
     getProgress() {
-        return progress;
+        return css.get(progress);
     },
     getMenu() {
-        return menu;
+        return css.get(menu);
     },
-    getMenuItem() {
-        return menuItem;
+    getMenuItem(oneOf: number) {
+        return css.get(menuItem, { maxWidth: (100 / oneOf) + '%' });
     },
 
     getClassNameIconSuccess() {

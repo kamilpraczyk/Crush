@@ -24,7 +24,6 @@ declare type SetState = (state: State) => void;
 function getToggleRegister(apiState: APIState) {
     return ButtonView({
         name: apiState.pass.register.show ? dictionary.BACK : dictionary.GO_REGISTERING,
-        isResponsibleHeight: true,
         isResponsibleCenter: true,
         leftIcon: apiState.pass.register.show ? CommonCss.icons.left : '',
         onClick: () => events.onToogleRegisterView.publish()
@@ -86,7 +85,6 @@ function getRetypePassword(apiState: APIState, state: State, setState: SetState)
 function getButtonSubmit(apiState: APIState, state: State) {
     return ButtonView({
         name: dictionary.SUBMIT_BUTTON_REGISTERING,
-        isResponsibleHeight: true,
         isResponsibleCenter: true,
         disabled: apiState.pass.register.process,
         isLoader: apiState.pass.register.process,

@@ -53,7 +53,6 @@ function getPassword(apiState: APIState, state: State, setState: SetState) {
 function getButtonSubmit(apiState: APIState, state: State, setState: SetState) {
     return ButtonView({
         name: dictionary.SUBMIT_BUTTON_LOGIN,
-        isResponsibleHeight: true,
         isResponsibleCenter: true,
         isLoader: apiState.pass.login.process,
         disabled: apiState.pass.login.process || !state.email || !state.password ? true : false,

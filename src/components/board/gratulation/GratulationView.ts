@@ -16,7 +16,6 @@ function getTitle() {
 function getButtonContinue() {
     return ButtonView({
         name: dictionary.GRATULATIONS_BUTTON,
-        isResponsibleHeight: true,
         onClick: () => events.closeStatusBoardEvent.publish()
     });
 };
@@ -34,7 +33,6 @@ function getButtonSaveAndContinue(apiState: APIState) {
     }
     return ButtonView({
         name: dictionary.GRATULATIONS_SAVE_BUTTON,
-        isResponsibleHeight: true,
         isLoader: apiState.pass.status.process,
         onClick: () => {
             events.saveStatusBoardEvent.publish({

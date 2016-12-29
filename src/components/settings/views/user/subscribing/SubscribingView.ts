@@ -19,7 +19,6 @@ function getTitle() {
 function getButtonSubmit(apiState: APIState, text: string, valid_to: string) {
     return ButtonView({
         name: text,
-        isResponsibleHeight: true,
         isLoader: apiState.pass.subscribe.process,
         disabled: apiState.pass.subscribe.process,
         onClick: () => events.onSubscribeOnServer.publish(valid_to)
