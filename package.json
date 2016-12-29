@@ -18,6 +18,7 @@
         "underscore": "1.8.3",
         "es6-promise": "3.0.2",
         "gulp-uglify": "1.5.1",
+        "cordova-android": "^3.5.1",
         "gulp-sourcemaps": "1.6.0",
         "vinyl-buffer": "1.0.0",
         "gulp-open": "2.0.0",
@@ -30,7 +31,8 @@
         "gulp-if": "2.0.1"
     },
     "devDependencies": {
-        "gulp": "3.9.1"
+        "gulp": "3.9.1",
+        "cordova-lib": "6.0.0"
     },
     "scripts": {
         "pretest": "tsc test/endings.ts --module commonjs",
