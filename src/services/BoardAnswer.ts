@@ -1,7 +1,8 @@
 import { Board, BoardAnswerState } from '../types';
 import _ = require('underscore');
-import { upercaseFirstLetter, voice } from '../utils/utils';
+import { upercaseFirstLetter } from '../utils/utils';
 import { space, empty, multi, isId } from '../lessons/helper/constants';
+import { events } from '../events';
 
 interface QueryResult {
     generatedList: string[];
@@ -127,7 +128,7 @@ function setUserAnswer(query: QueryResult, answer: string) {
         if (query.board.data.correct[length] === answer) {
             query.selectedAnswerQueue.push(answer);
             query.wasLastCorrect = true;
-            voice.read(answer);
+            events.readEvent.publish(answer);
             if (isCompletedAndCorrect(query)) isCompletedBoard = true; //all answered and last one is correct?
 
         } else isCompletedBoard = false;
@@ -138,7 +139,7 @@ function setUserAnswer(query: QueryResult, answer: string) {
         if (isCorrect) {
             query.selectedAnswerQueue.push(answer);
             query.wasLastCorrect = true;
-            voice.read(answer);
+            events.readEvent.publish(answer);
             if (isCompletedAndCorrect(query)) isCompletedBoard = true; //all answered and last one is correct?
 
         } else isCompletedBoard = false;
@@ -147,7 +148,7 @@ function setUserAnswer(query: QueryResult, answer: string) {
 
         if (isCorrect(query)) {
             const read = getCorrectSentence(query);
-            voice.read(read);
+            events.readEvent.publish(read);
             query.wasLastCorrect = true;
             isCompletedBoard = true;
         } else isCompletedBoard = false;

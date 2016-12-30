@@ -1,6 +1,5 @@
 import React = require('react');
 import ExplenationCss = require('./ExplenationCss');
-import { voice } from '../../../../utils/utils';
 import ButtonView = require('../../../button/ButtonView');
 import dictionary = require('../../../../utils/dictionary');
 import { getState, APIState } from '../../../../services';
@@ -15,7 +14,7 @@ function render() {
 
     const title = div({
         style: ExplenationCss.getTitle(),
-        onClick: () => voice.read(apiState.lessonsCatalog.lessonsTitle)
+        onClick: () => events.readEvent.publish(apiState.lessonsCatalog.lessonsTitle),
     }, apiState.lessonsCatalog.lessonsTitle);
 
     const buttonGoPractice = ButtonView({

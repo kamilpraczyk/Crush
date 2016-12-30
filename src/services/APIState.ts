@@ -4,7 +4,7 @@ import ReactDOM = require('react-dom');
 import components = require('../components/components');
 import { isFree } from '../lessons/helper/constants';
 import { PassState, Pass } from '../services/Pass';
-import { voice } from '../utils/utils';
+import { Voice } from '../services/voice';
 import { events, renderEvent } from '../events';
 import { RootType } from '../types';
 import { RootMenu, RootMenuState } from '../services/RootMenu';
@@ -18,6 +18,7 @@ interface State {
     apiState: APIState
     subscribers: any[],
     pass: Pass,
+    voice: Voice,
     lessonsCatalog: LessonsCatalog,
     rootMenu: RootMenu,
     cookies: CookieReturn
@@ -76,17 +77,17 @@ function onShowRootMenu() {
 
 function onNextBoard() {
     state.lessonsCatalog.board.onNextBoard();
-    voice.stopReading();
+    state.voice.stopReading();
     publishRerender();
 }
 function onNextRandomBoard() {
     state.lessonsCatalog.board.onNextRandomBoard();
-    voice.stopReading();
+    state.voice.stopReading();
     publishRerender();
 }
 function onPrevBoard() {
     state.lessonsCatalog.board.onPrevBoard();
-    voice.stopReading();
+    state.voice.stopReading();
     publishRerender();
 }
 function setUserAnswer(name: string) {
@@ -95,7 +96,7 @@ function setUserAnswer(name: string) {
     publishRerender();
 }
 function onRead(read: string) {
-    voice.read(read);
+    state.voice.read(read);
 }
 function onToogleSupportHelp() {
     state.lessonsCatalog.board.boardAnswer.toggleSupportHelp();
@@ -163,6 +164,7 @@ function init(window: Window) {
         isDirty: true,
         apiState: null,
         pass: new Pass(),
+        voice: new Voice(),
         cookies: cookies(window),
         lessonsCatalog: new LessonsCatalog(),
         rootMenu: new RootMenu(RootType.lessons),

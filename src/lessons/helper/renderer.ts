@@ -1,10 +1,10 @@
-/// <reference path="../../../typings/tsd.d.ts" />
 import _ = require('underscore');
 import React = require('react');
-import utils = require('../../utils/utils');
+import { replaceAll } from '../../utils/utils';
 import css = require('../../utils/css/css');
-const {div, button} = React.DOM;
+import { events } from '../../events';
 import rendererCss = require('./rendererCss');
+const {div, button} = React.DOM;
 
 interface List {
     l?: string //html line
@@ -22,17 +22,18 @@ interface TList {
 }
 
 const cleanText = function (l: string) {
-    l = utils.replaceAll(l, '<p>', '');
-    l = utils.replaceAll(l, '</p>', '');
-    l = utils.replaceAll(l, '<s>', '');
-    l = utils.replaceAll(l, '</s>', '');
-    l = utils.replaceAll(l, '</b>', '');
-    return utils.replaceAll(l, '<b>', '');
+    l = replaceAll(l, '<p>', '');
+    l = replaceAll(l, '</p>', '');
+    l = replaceAll(l, '<s>', '');
+    l = replaceAll(l, '</s>', '');
+    l = replaceAll(l, '</b>', '');
+    return replaceAll(l, '<b>', '');
 }
 
 function getTitle(o: TList) {
     if (!o.t) return null;
-    const onClick = () => utils.voice.read(cleanText(o.t));
+
+    const onClick = () => events.readEvent.publish(cleanText(o.t));
     return button({
         style: rendererCss.title(!!onClick),
         dangerouslySetInnerHTML: {
@@ -44,7 +45,7 @@ function getTitle(o: TList) {
 
 function getInfo(o: TList) {
     if (!o.i) return null;
-    const onClick = () => utils.voice.read(cleanText(o.i));
+    const onClick = () => events.readEvent.publish(cleanText(o.i));
     return button({
         style: rendererCss.info(!!onClick),
         dangerouslySetInnerHTML: {
@@ -56,7 +57,7 @@ function getInfo(o: TList) {
 
 function getLine(item: List, key: number) {
     if (!item.l) return null;
-    const onClick = () => utils.voice.read(cleanText(item.l));
+    const onClick = () => events.readEvent.publish(cleanText(item.l));
     return button({
         key: 'line' + key,
         style: rendererCss.item(!!onClick),
@@ -69,7 +70,7 @@ function getLine(item: List, key: number) {
 
 function getLineInfo(item: List, key: number) {
     if (!item.i) return null;
-    const onClick = () => utils.voice.read(cleanText(item.i));
+    const onClick = () => events.readEvent.publish(cleanText(item.i));
     return button({
         key: 'lineInfo' + key,
         style: rendererCss.info(!!onClick),
@@ -89,7 +90,7 @@ function getLineSeparator(item: List, key: number) {
 }
 
 function getTo(text: string, isMute: boolean) {
-    const onClick = isMute ? null : () => utils.voice.read(cleanText(text));
+    const onClick = isMute ? null : () => events.readEvent.publish(cleanText(text));
     return button({
         style: rendererCss.itemTo(!!onClick),
         dangerouslySetInnerHTML: {

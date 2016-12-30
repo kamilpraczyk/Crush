@@ -1,6 +1,5 @@
 /// <reference path="../../typings/tsd.d.ts" />
 import _ = require("underscore");
-import voice = require("./voice");
 import keys = require("./keys/keys");
 import { capital } from '../lessons/helper/constants';
 import Promise = require("bluebird");
@@ -311,7 +310,6 @@ export {
     first,
     toPercentHumanize,
     toPercent,
-    voice,
     round10,
     keys,
     replaceAll,
