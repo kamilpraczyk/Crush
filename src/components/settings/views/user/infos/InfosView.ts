@@ -1,31 +1,29 @@
-
-/// <reference path="../../../../../../typings/tsd.d.ts" />
 import dictionary = require('../../../../../utils/dictionary');
 import React = require('react');
 import CommonCss = require('../CommonCss');
-import utils = require('../../../../../utils/utils');
+import { isBrowserSupported } from '../../../../../utils/utils';
 const {div, label} = React.DOM;
 
 
-
-function render() {
-
-    function getBox() {
-
+function render(): any {
+    return null;
+    /*
+        function getBox() {
+    
+            return div({
+                style: CommonCss.getBox()
+            },
+                div({ style: CommonCss.getBoxSplit() },
+                      !isBrowserSupported() ? CommonCss.makeBoxLine(dictionary.INFO_BROWSER, null) : null
+                )
+            );
+        }
+    
         return div({
-            style: CommonCss.getBox()
-        },
-            div({ style: CommonCss.getBoxSplit() },
-                !utils.isBrowserSupported() ? CommonCss.makeBoxLine(dictionary.INFO_BROWSER, null) : null
-            )
-        );
-    }
-
-    return div({
-        style: CommonCss.getPanel()
-    }, div({
-        style: CommonCss.getContainer()
-    }, getBox()));
+            style: CommonCss.getPanel()
+        }, div({
+            style: CommonCss.getContainer()
+        }, getBox()));*/
 }
 
 

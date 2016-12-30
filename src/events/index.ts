@@ -15,6 +15,7 @@ export const events = {
 
 
     readEvent: EventFactory<string>('readEvent'),
+    onChangeVoice: EventFactory<string>('onChangeVoice'),
     saveStatusBoardEvent: EventFactory<{ uid: string, status: number }>('saveStatusBoardEvent'),
     closeStatusBoardEvent: VoidEventFactory('closeStatusBoardEvent'),
     goTest: VoidEventFactory('goTest'),

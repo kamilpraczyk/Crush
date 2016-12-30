@@ -293,9 +293,9 @@ function isBrowserSupported(): boolean {
     /*Support veriosns from Dec 2015 */
     if ((b.isChrome && b.version >= 47) ||
         (b.isFirefox && b.version >= 43) ||
-        //(b.isSafari && b.version >= 9) ||
-        // (b.isIE && b.version >= 11) ||
-        // (b.isEdge && b.version >= 25) ||
+        //(b.isSafari && b.version >= 9) || not supported
+        // (b.isIE && b.version >= 11) || not supported
+        (b.isEdge && b.version >= 25) ||
         (b.isOpera && b.version >= 34)) {
         return true;
     }

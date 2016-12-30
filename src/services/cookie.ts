@@ -9,6 +9,7 @@ interface Cookie {
     rootId: RootType,
     rootScroll: number,
     rootIsMinimalized: boolean
+    voiceName: string
 }
 
 interface CookieReturn {
@@ -54,7 +55,8 @@ function cookies(window: Window): CookieReturn {
             lessonUid: apiState.lessonsCatalog.uid,
             rootId: apiState.rootMenu.activeId,
             rootScroll: apiState.rootMenu.scrollPosition,
-            rootIsMinimalized: apiState.rootMenu.isMinimalized
+            rootIsMinimalized: apiState.rootMenu.isMinimalized,
+            voiceName: apiState.voice.current && apiState.voice.current.name
         };
 
         set('secretCookie', cookie, 7);

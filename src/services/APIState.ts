@@ -1,10 +1,8 @@
-import React = require('react');
 import _ = require('underscore');
-import ReactDOM = require('react-dom');
 import components = require('../components/components');
 import { isFree } from '../lessons/helper/constants';
 import { PassState, Pass } from '../services/Pass';
-import { Voice } from '../services/voice';
+import { Voice, ReturnVoice } from '../services/voice';
 import { events, renderEvent } from '../events';
 import { RootType } from '../types';
 import { RootMenu, RootMenuState } from '../services/RootMenu';
@@ -29,6 +27,7 @@ interface APIState {
     rootMenu: RootMenuState,
     lessonsCatalog: LessonsCatalogReturnState
     pass: PassState,
+    voice: ReturnVoice
 }
 
 let state: State = null;
@@ -36,6 +35,11 @@ let state: State = null;
 function publishRerender() {
     state.isDirty = true;
     return renderEvent.publish();
+}
+
+function onChangeVoice(name: string) {
+    state.voice.setVoice(name);
+    publishRerender();
 }
 
 function onRootMenuEvent(id: RootType) {
@@ -189,7 +193,8 @@ function init(window: Window) {
             events.onChooseOneTwoThree.subscribe(setUserAnswer),
             events.onChooseMultiRadio.subscribe(setUserAnswer),
             events.onToogleSupportHelp.subscribe(onToogleSupportHelp),
-            events.scrollPosition.subscribe(onScrollPosition)
+            events.scrollPosition.subscribe(onScrollPosition),
+            events.onChangeVoice.subscribe(onChangeVoice),
         ]
     }
 
@@ -201,6 +206,7 @@ function init(window: Window) {
             .then(() => {
                 cookie.rootId && state.rootMenu.setRootMenuTo(cookie.rootId);
                 cookie.rootScroll && state.rootMenu.setScrollPosition(cookie.rootScroll);
+                cookie.voiceName && state.voice.setVoice(cookie.voiceName);
                 state.rootMenu.showMenu(cookie.rootIsMinimalized);
                 return null;
             })
@@ -223,6 +229,7 @@ function updateAPIState(state: State) {
     const pass = state.pass.getStatus();
     state.apiState = {
         isProduction: config.isProduction,
+        voice: state.voice.getState(),
         rootMenu: state.rootMenu.getState(),
         lessonsCatalog: state.lessonsCatalog.getState(pass),
         pass,

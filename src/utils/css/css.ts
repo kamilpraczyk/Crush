@@ -149,7 +149,7 @@ const style = {
             normal: borderWidth + 'px solid #313131',
             normalGuess: borderWidth + 'px solid #313131',
             fromName: borderWidth + 'px solid transparent',
-            transparent: borderWidth + 'px solid #313131',
+            transparent: borderWidth + 'px solid transparent',
             active: borderWidth + 'px solid #2b8182',
             focus: borderWidth + 'px solid #313131',
             success: borderWidth + 'px solid #00FF00',

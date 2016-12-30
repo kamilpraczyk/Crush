@@ -1,6 +1,5 @@
 import React = require('react');
 import UserCss = require('./UserCss');
-const {div} = React.DOM;
 import LogoutView = require('./logout/LogoutView');
 import RegisteringView = require('./registering/RegisteringView');
 import LoginView = require('./login/LoginView');
@@ -9,7 +8,8 @@ import SubscribedView = require('./subscribed/SubscribedView');
 import InfosView = require('./infos/InfosView')
 import DonateView = require('./donate/DonateView');
 import StatisticsView = require('./statistics/StatisticsView');
-
+import VoicesView = require('./voices/VoicesView');
+const {div} = React.DOM;
 
 
 function render() {
@@ -23,6 +23,7 @@ function render() {
         StatisticsView(),
         SubscribingView(),
         InfosView(),
+        VoicesView(),
         DonateView()
     );
 }

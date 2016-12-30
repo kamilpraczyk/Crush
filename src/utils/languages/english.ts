@@ -60,6 +60,8 @@ const dictonary = {
     SERVER_ERROR_INVALID_DATA: 'Sorry, invalid data.',
     SERVER_ERROR_SUBSCRIBING_WENT_WRONG: 'Sorry, subscribing fail.',
 
+    ERROR_API_CRUSH: 'Oops, we have hit a snag. Please try again later.',
+    ERROR_BROWSER_NOT_SUPPORTED: 'Your browser is not supported. Please use latest Chrome, Firefox, Edge or Opera browser.',
     ERROR_LOGIN_INVALID: 'Incorrect login or password.',
     ERROR_REGISTERING_NO_MATCH_PASSWORDS: 'Passwords did not match.',
     ERROR_REGISTERING_NO_NAME: 'Please enter a name.',
@@ -70,7 +72,9 @@ const dictonary = {
     ERROR_REGISTERING_PASSWORD_TO_SHORT: 'Password is to short.',
 
 
-    INFO_BROWSER: 'Please use latest Chrome or Opera browser for an audio experience.'
+
+    // INFO_BROWSER: 'Please use latest Chrome, Firefox, Edge or Opera browser for an audio experience.',
+    AUDIO_LANGUAGE: 'Audio language'
 }
 
 export = dictonary;

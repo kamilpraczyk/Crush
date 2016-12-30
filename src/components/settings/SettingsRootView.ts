@@ -20,7 +20,7 @@ function getItem(item: RootFace) {
         backUrl: item.backUrl,
         onClick: () => events.rootMenuEvent.publish(item.id),
         isQuickClick: true,
-        isTransparent: item.id === RootType.close ? true : false,
+        isTransparent: true,//item.id === RootType.close ? true : false,
         isExpandWidth: true,
         isExpand: true,
         isActive: item.active,

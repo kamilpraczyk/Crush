@@ -1,19 +1,19 @@
-import _ = require("underscore");
 import { space } from '../lessons/helper/constants';
+import { Speech } from '../types';
 
-interface Speech {
-    lang: string,
-    name: string
+export interface ReturnVoice {
+    voices: Speech[];
+    current: Speech;
 }
 
 function isVoiceSupported() {
-    return ((<any>window).SpeechSynthesisUtterance && (<any>window).speechSynthesis);
+    return (<any>window).SpeechSynthesisUtterance && (<any>window).speechSynthesis;
 }
 
 function getVoices() {
     let voices: Speech[] = [];
     if (isVoiceSupported()) {
-        voices = (<any>window).speechSynthesis.getVoices();
+        voices = window.speechSynthesis.getVoices();
         return voices.filter(voice => voice.lang === "en-GB" || voice.lang === "en-US");
     }
     return voices;
@@ -44,6 +44,7 @@ export class Voice {
 
     constructor() {
         this.voices = getVoices();
+        console.log('this.voices', this.voices);
         this.current = this.voices[0];
     }
     stopReading() {
@@ -51,12 +52,24 @@ export class Voice {
     }
 
     read(value: string) {
-        // stopReading();
+        this.stopReading();
+        if (!this.voices.length) { //webkit not initialized on time
+            console.warn("Voices wasn't ready - reinitialize");
+            this.voices = getVoices();
+            this.current = getVoices()[0];
+        }
         read(value, this.current);
     }
 
-    getState() {
-        return this.voices;
+    setVoice(name: string) {
+        this.current = this.voices.filter(voice => voice.name === name)[0];
+    }
+
+    getState(): ReturnVoice {
+        return {
+            voices: this.voices,
+            current: this.current
+        }
     }
 }
 

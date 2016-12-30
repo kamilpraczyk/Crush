@@ -50,6 +50,11 @@ export interface BoardAnswerState {
     isSupportShowAnswer: boolean
 }
 
+export interface Speech {
+    lang: string,
+    name: string
+}
+
 export enum RootType {
     close = 1,
     lessons,

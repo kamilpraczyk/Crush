@@ -46,6 +46,7 @@ function getContentLine(state: BoardAnswerState, list: any[]) {
                 isSuccess: isSuccess,
                 isGuess: true,
                 backUrl: word ? null : name,
+                isTransparent : true,
                 isResponsibleCenter: true,
                 isTime: isId.isDigitalTime(state.board.data.id),
                 onClick: () => events.onChoosePicture.publish(name)

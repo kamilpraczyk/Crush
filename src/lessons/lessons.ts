@@ -80,17 +80,16 @@ import synonymsSW = require('./synonyms/sw/synonymsSW');
 function getLessons(lessonsCatalog: LessonsCatalog) {
     return new Promise<LessonsCatalog>((resolve) => {
 
-
         //TODO offer some for free and some when registered, and rest when subscribed
         lessonsCatalog.add(FreeType.alwaysFree_____, 'A___0', verbEndings);
         lessonsCatalog.add(FreeType.alwaysFree_____, 'A___1', speech_one);
 
         lessonsCatalog.add(FreeType.alwaysFree_____, 'PR__2', prefixes_one);
-        lessonsCatalog.add(FreeType.alwaysFree_____, 'PR__3', prefixes_two);
+        lessonsCatalog.add(FreeType.whenPrime______, 'PR__3', prefixes_two);
 
         lessonsCatalog.add(FreeType.alwaysFree_____, 'SP__1', spellingVerbsIngOne);
-        lessonsCatalog.add(FreeType.alwaysFree_____, 'SP__2', spellingVerbsIngTwo);
-        lessonsCatalog.add(FreeType.alwaysFree_____, 'SP__3', spellingVerbsIngThree);
+        lessonsCatalog.add(FreeType.whenPrime______, 'SP__2', spellingVerbsIngTwo);
+        lessonsCatalog.add(FreeType.whenPrime______, 'SP__3', spellingVerbsIngThree);
 
         lessonsCatalog.add(FreeType.whenPrime______, 'AN__1', an_a_shortOne);
         lessonsCatalog.add(FreeType.whenPrime______, 'AN__2', an_a_shortTwo);
@@ -103,22 +102,22 @@ function getLessons(lessonsCatalog: LessonsCatalog) {
 
         lessonsCatalog.add(FreeType.alwaysFree_____, 'PC_AN1', animals);
         lessonsCatalog.add(FreeType.alwaysFree_____, 'PC_OC1', occupation);
-        lessonsCatalog.add(FreeType.inProgressBlock, 'PC_FR1', fruts);
-        lessonsCatalog.add(FreeType.inProgressBlock, 'PC_VE1', vegetables);
-        lessonsCatalog.add(FreeType.inProgressBlock, 'PC_FU1', furniture);
-        lessonsCatalog.add(FreeType.inProgressBlock, 'PC_IN1', insects);
-        lessonsCatalog.add(FreeType.inProgressBlock, 'PC_CL1', clothing);
-        lessonsCatalog.add(FreeType.inProgressBlock, 'PC_TA1', tableware);
-        lessonsCatalog.add(FreeType.inProgressBlock, 'PC_TE1', technic);
-        lessonsCatalog.add(FreeType.inProgressBlock, 'PC_NA1', nature);
+        lessonsCatalog.add(FreeType.alwaysFree_____, 'PC_FU1', furniture);
+        lessonsCatalog.add(FreeType.alwaysFree_____, 'PC_CL1', clothing);
+        lessonsCatalog.add(FreeType.whenRegistered_, 'PC_FR1', fruts);
+        lessonsCatalog.add(FreeType.whenPrime______, 'PC_VE1', vegetables);
+        lessonsCatalog.add(FreeType.whenPrime______, 'PC_IN1', insects);
+        lessonsCatalog.add(FreeType.whenPrime______, 'PC_TA1', tableware);
+        lessonsCatalog.add(FreeType.whenPrime______, 'PC_TE1', technic);
+        lessonsCatalog.add(FreeType.whenPrime______, 'PC_NA1', nature);
 
 
-        lessonsCatalog.add(FreeType.whenPrime______, 'PT__01', presentTenseOneToThree);
+        lessonsCatalog.add(FreeType.whenRegistered_, 'PT__01', presentTenseOneToThree);
         lessonsCatalog.add(FreeType.whenPrime______, 'PT__02', presentTenseOneToThreePartTwo);
         lessonsCatalog.add(FreeType.whenPrime______, 'PT__03', presentTenseRadio);
         lessonsCatalog.add(FreeType.whenPrime______, 'PT__04', presentTenseMatch);
 
-        lessonsCatalog.add(FreeType.whenPrime______, 'PCT_01', presentContinuousTenseOneToThree);
+        lessonsCatalog.add(FreeType.whenRegistered_, 'PCT_01', presentContinuousTenseOneToThree);
         lessonsCatalog.add(FreeType.whenPrime______, 'PCT_02', presentContinuousTenseOneToThreePartTwo);
         lessonsCatalog.add(FreeType.whenPrime______, 'PCT_03', presentContinuousTenseRadio);
 
@@ -126,7 +125,7 @@ function getLessons(lessonsCatalog: LessonsCatalog) {
         lessonsCatalog.add(FreeType.whenPrime______, 'PPT_02', presentPerfectTenseOneToThreePartTwo);
         lessonsCatalog.add(FreeType.whenPrime______, 'PPT_03', presentPerfectTenseRadio);
 
-        lessonsCatalog.add(FreeType.whenPrime______, 'PPCT_1', presentPerfectContinuousTenseOneToThree);
+        lessonsCatalog.add(FreeType.whenRegistered_, 'PPCT_1', presentPerfectContinuousTenseOneToThree);
         lessonsCatalog.add(FreeType.whenPrime______, 'PPCT_2', presentPerfectContinuousTenseOneToThreePartTwo);
         lessonsCatalog.add(FreeType.whenPrime______, 'PPCT_3', presentPerfectContinuousTenseRadio);
 
