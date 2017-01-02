@@ -66,13 +66,11 @@ function cookies(window: Window): CookieReturn {
     function initbeforeUnload() {
         window.onbeforeunload = function (e) {
             const state = getState();
-            if (state.pass.user.email) {
-                if (!_.isEqual(getCookie(), setCookie(state))) {
-                    const confirmationMessage = "Are you sure you want to quit?";
-                    e = e || window.event;
-                    if (e) e.returnValue = confirmationMessage;
-                    return confirmationMessage;
-                }
+            if (!_.isEqual(getCookie(), setCookie(state))) {
+                const confirmationMessage = "Are you sure you want to quit?";
+                e = e || window.event;
+                if (e) e.returnValue = confirmationMessage;
+                return confirmationMessage;
             }
             return;
         }

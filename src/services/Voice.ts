@@ -9,14 +9,25 @@ export interface ReturnVoice {
 function isVoiceSupported() {
     return (<any>window).SpeechSynthesisUtterance && (<any>window).speechSynthesis;
 }
+function compare(a: Speech, b: Speech) {
+    if (a.lang < b.lang) return -1;
+    if (a.lang > b.lang) return 1;
+    return 0;
+}
 
 function getVoices() {
     let voices: Speech[] = [];
     if (isVoiceSupported()) {
         voices = window.speechSynthesis.getVoices();
-        return voices.filter(voice => voice.lang === "en-GB" || voice.lang === "en-US");
+        voices = voices.filter(voice => voice.lang === "en-GB" || voice.lang === "en-US"); //TODO set to en-gb
+        voices = voices.sort(compare);
     }
     return voices;
+}
+
+function getInitCurrentVoice(voices: Speech[]) {
+    const gb = voices.filter(voice => voice.lang === "en-GB");
+    return gb.length ? gb[0] : voices[0];
 }
 
 function read(value: string, current: Speech) {
@@ -26,9 +37,7 @@ function read(value: string, current: Speech) {
         value = value.replace('_', '');
 
         const utterance = new (<any>window).SpeechSynthesisUtterance(value);
-        const voices = getVoices();
-        const voicesEn = voices.filter(voice => voice.name === current.name);
-        utterance.voice = voicesEn[0];
+        utterance.voice = current;
         (<any>window).speechSynthesis.speak(utterance);
     }
 }
@@ -41,11 +50,11 @@ export class Voice {
 
     private voices: Speech[] = [];
     private current: Speech = null;
+    private currentNameToSet: string = null;
 
     constructor() {
         this.voices = getVoices();
-        console.log('this.voices', this.voices);
-        this.current = this.voices[0];
+        this.current = getInitCurrentVoice(this.voices);
     }
     stopReading() {
         stop();
@@ -53,16 +62,20 @@ export class Voice {
 
     read(value: string) {
         this.stopReading();
-        if (!this.voices.length) { //webkit not initialized on time
+        if (!this.current) { //webkit not initialized on time
             console.warn("Voices wasn't ready - reinitialize");
             this.voices = getVoices();
-            this.current = getVoices()[0];
+            this.setVoice(this.currentNameToSet);
         }
         read(value, this.current);
     }
 
     setVoice(name: string) {
-        this.current = this.voices.filter(voice => voice.name === name)[0];
+        this.currentNameToSet = name;
+        if (this.voices.length) {
+            const preferedCurrent = this.voices.filter(voice => voice.name === name)[0];
+            this.current = preferedCurrent || this.voices[0];
+        }
     }
 
     getState(): ReturnVoice {

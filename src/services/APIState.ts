@@ -10,6 +10,7 @@ import { getLessons } from '../lessons/lessons';
 import { LessonsCatalog, LessonsCatalogReturnState } from '../services/LessonsCatalog';
 import { cookies, CookieReturn } from './cookie';
 import config = require('../generated-config');
+import Promise = require('bluebird');
 
 interface State {
     isDirty: boolean,
@@ -158,6 +159,22 @@ function onScrollPosition(top: number) {
     //do not rerender but the state is dirty
 }
 
+function loadCookie() {
+    const cookie = state.cookies.getCookie();
+    if (cookie) {
+        cookie.rootId && state.rootMenu.setRootMenuTo(cookie.rootId);
+        cookie.rootScroll && state.rootMenu.setScrollPosition(cookie.rootScroll);
+        cookie.voiceName && state.voice.setVoice(cookie.voiceName);
+        state.rootMenu.showMenu(cookie.rootIsMinimalized);
+        if (cookie.lessonUid) {
+            const lesson = state.lessonsCatalog.getLessonByUid(cookie.lessonUid);
+            if (lesson && isFree(getState(), lesson.freeType))
+                state.lessonsCatalog.setActiveLesson(cookie.lessonUid);
+        }
+    }
+    return Promise.resolve(null);
+}
+
 
 function loadLessons() { return getLessons(state.lessonsCatalog); }
 
@@ -203,25 +220,13 @@ function init(window: Window) {
         //use strict
         return loadLessons()
             .then(() => _onLogin({ email: cookie.login, password: cookie.password }))
-            .then(() => {
-                cookie.rootId && state.rootMenu.setRootMenuTo(cookie.rootId);
-                cookie.rootScroll && state.rootMenu.setScrollPosition(cookie.rootScroll);
-                cookie.voiceName && state.voice.setVoice(cookie.voiceName);
-                state.rootMenu.showMenu(cookie.rootIsMinimalized);
-                return null;
-            })
-            .then(() => {
-                if (cookie.lessonUid) {
-                    const lesson = state.lessonsCatalog.getLessonByUid(cookie.lessonUid);
-                    if (lesson && isFree(getState(), lesson.freeType))
-                        state.lessonsCatalog.setActiveLesson(cookie.lessonUid);
-                }
-                return null;
-            })
+            .then(() => loadCookie())
             .then(() => publishRerender())
     }
 
-    return loadLessons().then(() => publishRerender());
+    return loadLessons()
+        .then(() => loadCookie())
+        .then(() => publishRerender());
 }
 
 function updateAPIState(state: State) {
