@@ -1,4 +1,3 @@
-/// <reference path="../../../../typings/tsd.d.ts" />
 import css = require('../../../utils/css/css');
 import utils = require('../../../utils/utils');
 
@@ -34,32 +33,12 @@ const menuItem: CSSProperties = {
     maxWidth: '100%'
 }
 
-
-
 export = utils.union(css, {
-
-    getPanel() {
-        return css.get(panel);
-    },
-    getProgress() {
-        return css.get(progress);
-    },
-    getMenu() {
-        return css.get(menu);
-    },
-    getMenuItem(oneOf: number) {
-        return css.get(menuItem, { maxWidth: (100 / oneOf) + '%' });
-    },
-
-    getClassNameIconSuccess() {
-        return css.icons.success;
-    },
-    getClassNameIconFail() {
-        return css.icons.fail;
-    },
-    getClassNameIconUnknown() {
-        return css.icons.menu;
-    }
-
-
+    getPanel: () => css.get(panel),
+    getProgress: () => css.get(progress),
+    getMenu: () => css.get(menu),
+    getMenuItem: (oneOf: number) => css.get(menuItem, { maxWidth: (100 / oneOf) + '%' }),
+    getClassNameIconSuccess: () => css.icons.success,
+    getClassNameIconFail: () => css.icons.fail,
+    getClassNameIconUnknown: () => css.icons.menu,
 });

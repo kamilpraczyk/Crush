@@ -279,7 +279,7 @@ function getBrowser() {
 }
 
 function isBrowserSupported(): boolean {
-
+    //return true; //?!?!?
     const b = getBrowser();
     /*var output = 'Detecting browsers:<hr>';
     output += 'isFirefox: ' + b.isFirefox + '<br>';

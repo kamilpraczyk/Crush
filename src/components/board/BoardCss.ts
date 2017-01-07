@@ -1,4 +1,3 @@
-/// <reference path="../../../typings/tsd.d.ts" />
 import css = require('../../utils/css/css');
 import utils = require('../../utils/utils');
 
@@ -18,11 +17,6 @@ const text: CSSProperties = {
 }
 
 export = utils.union(css, {
-
-    getPanel(): CSSProperties {
-        return css.get(panel);
-    },
-    getText(): CSSProperties {
-        return css.get(text);
-    }
+    getPanel: () => css.get(panel),
+    getText: () => css.get(text),
 });

@@ -28,6 +28,31 @@ const XL4 = constFont + 0.8 + constPoint;
 const mega = constFont + 1.8 + constPoint;
 
 
+// function that will do a "magic" XSS-ish trick , multi same properties!
+function multipleValues(style: CSSProperties) {
+    var result: CSSProperties = {};
+    // feel free to replace for..in+hasOwnProperty with for..of
+    for (var key in style) {
+        if (style.hasOwnProperty(key)) {
+            var value = style[key];
+            if (Array.isArray(value)) {
+                // by adding semicolon at the begging we applying
+                // a trick that ofthen used in XSS attacks
+                result[key] = ';' + key + ':' + value.join(';' + key + ':');
+            } else if (typeof value === "object" && value !== null) {
+                // here we doing recursion
+                result[key] = multipleValues(value);
+            } else {
+                // and here we simply copying everything else
+                result[key] = value;
+            }
+        }
+    }
+    return result;
+}
+
+
+
 const get = function <CSSProperties>(a: CSSProperties, b?: CSSProperties, c?: CSSProperties, d?: CSSProperties, e?: CSSProperties): CSSProperties {
     let res = {} as CSSProperties;
     for (let i = 0; i < arguments.length; i++) {
@@ -35,6 +60,59 @@ const get = function <CSSProperties>(a: CSSProperties, b?: CSSProperties, c?: CS
             _.extend(res, arguments[i]);
         }
     }
+    //instead of autoprefixer //http://autoprefixer.github.io/
+
+    if ((<any>res).flexDirection) {  //correct flex-direction for cross browsers
+        const direction: string = (<any>res).flexDirection;
+        const s = {
+            WebkitBoxOrient: direction.indexOf('row') !== -1 ? 'horizontal' : 'vertical',
+            WebkitBoxDirection: 'normal',
+            MsFlexDirection: direction,
+        }
+        _.extend(res, s);
+    }
+
+    if ((<any>res).alignItems) {  //correct align-items for cross browsers
+        const alignItems: string = (<any>res).alignItems;
+        const data: string = alignItems.indexOf('start') !== -1 ? 'start' : alignItems.indexOf('end') !== -1 ? 'end' : alignItems;
+        const s = {
+            WebkitBoxAlign: data,
+            MsFlexAlign: data
+        }
+        _.extend(res, s);
+    }
+
+    if ((<any>res).flexGrow) {  //correct flex-grow for cross browsers
+        const flexGrow = (<any>res).flexGrow;
+        const s = {
+            WebkitBoxFlex: flexGrow,
+            MsFlexPositive: flexGrow,
+        }
+        _.extend(res, s);
+    }
+    if ((<any>res).flexFlow) {  //correct flex-flow for cross browsers
+        const flexFlow = (<any>res).flexFlow;
+        const s = {
+            MsFlexFlow: flexFlow,
+            WebkitBoxOrient: flexFlow.indexOf('row') !== -1 ? 'horizontal' : 'vertical'
+        }
+        _.extend(res, s);
+    }
+
+    if ((<any>res).justifyContent) {  //correct justify-content for cross browsers
+        const justifyContent = (<any>res).justifyContent;
+        const s = {
+            WebkitBoxPack: justifyContent,
+            MsFlexPack: justifyContent,
+        }
+        _.extend(res, s);
+    }
+
+    if ((<any>res).display === 'flex') { //correct display flex for cross browsers
+        (<any>res).display = ['-webkit-box', '-moz-box', '-ms-flexbox', '-webkit-flex', 'flex'];
+        return <CSSProperties>multipleValues(res);
+    }
+
     return res;
 }
 
@@ -217,7 +295,7 @@ const style = {
                 fontSize: XL,
                 fontFamily: fontFamilyWriting
             }
-            return style;
+            return get(style);
         },
 
         getHeader: () => {
@@ -229,7 +307,7 @@ const style = {
                 flexDirection: 'column',
                 alignItems: 'center' //by default in center
             }
-            return style;
+            return get(style);
         },
 
         getBody: () => {
@@ -243,7 +321,7 @@ const style = {
                 flexDirection: 'column',
                 alignItems: 'stretch',
             }
-            return style;
+            return get(style);
         },
 
         getBodyContent: () => {
@@ -253,7 +331,7 @@ const style = {
                 flexDirection: 'column',
                 alignItems: 'stretch',// by default stretch
             }
-            return s;
+            return get(s);
         },
 
         getInstructions: (id?: TypeId[]) => {
@@ -277,7 +355,7 @@ const style = {
                 }
                 style = get(style, digitalTime);
             }
-            return style;
+            return get(style);
         },
 
 
@@ -285,7 +363,7 @@ const style = {
             const style: CSSProperties = {
                 display: 'flex'
             }
-            return style;
+            return get(style);
         }
 
     }

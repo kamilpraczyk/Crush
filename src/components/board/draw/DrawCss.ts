@@ -1,7 +1,5 @@
-/// <reference path="../../../../typings/tsd.d.ts" />
 import css = require('../../../utils/css/css');
 import utils = require('../../../utils/utils');
-
 
 const bodyContent: CSSProperties = {
     borderRadius: css.borderRadius,
@@ -29,11 +27,6 @@ export = utils.union(css, {
     getPanel: css.layout.getPanel,
     getFooter: css.layout.getFooter,
 
-    getBody() {
-        return css.get(css.layout.getBody(), body);
-    },
-
-    getBodyContent() {
-        return css.get(css.layout.getBodyContent(), bodyContent);
-    }
+    getBody: () => css.get(css.layout.getBody(), body),
+    getBodyContent: () => css.get(css.layout.getBodyContent(), bodyContent),
 });

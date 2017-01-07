@@ -1,7 +1,5 @@
-/// <reference path="../../../../../typings/tsd.d.ts" />
 import css = require('../../../../utils/css/css');
 import utils = require('../../../../utils/utils');
-
 
 const panel: CSSProperties = {
     width: '100%',
@@ -34,17 +32,8 @@ const bodyContent: CSSProperties = {
 
 
 export = utils.union(css, {
-
-    getPanel() {
-        return panel;
-    },
-    getTitle() {
-        return title;
-    },
-    getBody() {
-        return body;
-    },
-    getBodyContent() {
-        return bodyContent;
-    },
+    getPanel: () => css.get(panel),
+    getTitle: () => css.get(title),
+    getBody: () => css.get(body),
+    getBodyContent: () => css.get(bodyContent)
 });

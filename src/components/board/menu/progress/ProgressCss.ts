@@ -1,4 +1,3 @@
-/// <reference path="../../../../../typings/tsd.d.ts" />
 import css = require('../../../../utils/css/css');
 import utils = require('../../../../utils/utils');
 
@@ -33,9 +32,7 @@ const fail: CSSProperties = {
 
 export = utils.union(css, {
 
-    getPanel() {
-        return panel;
-    },
+    getPanel: () => css.get(panel),
 
     getBar(completeTrueFalseNone: boolean, isCurrent: boolean) {
         let style = item;
@@ -48,6 +45,6 @@ export = utils.union(css, {
         if (isCurrent) {
             style = css.get(style, current);
         }
-        return style;
+        return css.get(style);
     }
 });

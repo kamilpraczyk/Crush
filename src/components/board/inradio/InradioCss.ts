@@ -1,9 +1,5 @@
-/// <reference path="../../../../typings/tsd.d.ts" />
 import css = require('../../../utils/css/css');
 import utils = require('../../../utils/utils');
-import {isId} from '../../../lessons/helper/constants';
-import _ = require('underscore');
-
 
 const bodyContent: CSSProperties = {
     alignItems: 'center',
@@ -25,11 +21,6 @@ export = utils.union(css, {
     getBody: css.layout.getBody,
     getFooter: css.layout.getFooter,
 
-    getBodyContent() {
-        return css.get(css.layout.getBodyContent(), bodyContent);
-    },
-
-    getList() {
-        return css.get(list);
-    },
+    getBodyContent: () => css.get(css.layout.getBodyContent(), bodyContent),
+    getList: () => css.get(list),
 });

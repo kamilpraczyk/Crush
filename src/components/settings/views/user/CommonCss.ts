@@ -1,9 +1,7 @@
-/// <reference path="../../../../../typings/tsd.d.ts" />
 import css = require('../../../../utils/css/css');
 import utils = require('../../../../utils/utils');
 import React = require('react');
 const {div, label} = React.DOM;
-
 
 const panel: CSSProperties = {
     display: 'flex',
@@ -84,44 +82,26 @@ const boxInput: CSSProperties = {
 const error: CSSProperties = {
     color: css.font.color.fail
 }
+const getBoxLine = (isError?: boolean) => css.get(boxLine, isError ? error : null);
+const getBoxLabel = () => css.get(boxLabel);
 
 export = utils.union(css, {
-    getPanel(isHidden?: boolean) {
-        return css.get(panel, isHidden ? { display: 'none' } : null); //render as hidden - canvas statistincs rendering
-    },
-    getText() {
-        return css.get(text);
-    },
-    getContainer() {
-        return css.get(container);
-    },
-    getBox() {
-        return css.get(box);
-    },
-    getBoxSplit() {
-        return css.get(boxSplit);
-    },
-    getBoxSplitToCenter() {
-        return css.get(boxSplit, boxSplitToCenter);
-    },
-    getBoxLine(isError?: boolean) {
-        return css.get(boxLine, isError ? error : null);
-    },
-    getBoxLineRight() {
-        return css.get(boxLine, { justifyContent: 'flex-end' });
-    },
-    getBoxLabel() {
-        return css.get(boxLabel);
-    },
-    getBoxInput() {
-        return css.get(boxInput);
-    },
-    makeBoxLine(text: string, inputEl: any) {
+    getPanel: (isHidden?: boolean) => css.get(panel, isHidden ? { display: 'none' } : null), //render as hidden - canvas statistincs rendering
+    getText: () => css.get(text),
+    getContainer: () => css.get(container),
+    getBox: () => css.get(box),
+    getBoxSplit: () => css.get(boxSplit),
+    getBoxSplitToCenter: () => css.get(boxSplit, boxSplitToCenter),
+    getBoxLine,
+    getBoxLineRight: () => css.get(boxLine, { justifyContent: 'flex-end' }),
+    getBoxLabel,
+    getBoxInput: () => css.get(boxInput),
+    makeBoxLine: (text: string, inputEl: any) => {
         return div({
-            style: this.getBoxLine()
+            style: getBoxLine()
         },
             label({
-                style: this.getBoxLabel()
+                style: getBoxLabel()
             }, text),
             inputEl
         );

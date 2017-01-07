@@ -1,7 +1,5 @@
-/// <reference path="../../../typings/tsd.d.ts" />
 import css = require('../../utils/css/css');
 import utils = require('../../utils/utils');
-import React = require('react');
 
 const panel: CSSProperties = {
     position: 'absolute',
@@ -43,7 +41,6 @@ const menu: CSSProperties = {
     width: wid + '%',
 }
 
-
 const item: CSSProperties = {
     display: 'flex',
     flexGrow: 1,
@@ -53,17 +50,8 @@ const item: CSSProperties = {
 }
 
 export = utils.union(css, {
-
-    getPanel() {
-        return css.get(panel);
-    },
-    getMain() {
-        return main;
-    },
-    getMenu() {
-        return css.get(menu);
-    },
-    getItem() {
-        return item;
-    }
+    getPanel: () => css.get(panel),
+    getMain: () => css.get(main),
+    getMenu: () => css.get(menu),
+    getItem: () => css.get(item),
 });

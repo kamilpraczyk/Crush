@@ -1,4 +1,3 @@
-/// <reference path="../../../typings/tsd.d.ts" />
 import css = require('../../utils/css/css');
 import utils = require('../../utils/utils');
 
@@ -180,7 +179,7 @@ interface ButtonProps {
 
 export = utils.union(css, {
 
-    getButton(o: ButtonProps) {
+    getButton: (o: ButtonProps) => {
         let style = button;
         if (o.isExpandWidth) style = css.get(style, isExpandWidth);
         if (o.isExpand) style = css.get(style, isExpand);
@@ -195,33 +194,23 @@ export = utils.union(css, {
         if (o.isInstructions) style = css.get(style, isInstructions);
         if (o.disabled) style = css.get(style, disabled);
         if (o.isFromName) style = css.get(style, isFromName);
-        return style;
+        return css.get(style);
     },
 
-    getNameContainer(props: { isResponsibleCenter?: boolean, name: string }) {
-        return css.get(nameContainer, props.isResponsibleCenter ? isResponsibleCenter : null, props.name ? { width: '100%' } : { display: 'none' });
-    },
+    getNameContainer: (props: { isResponsibleCenter?: boolean, name: string }) =>
+        css.get(nameContainer, props.isResponsibleCenter ? isResponsibleCenter : null, props.name ? { width: '100%' } : { display: 'none' }),
 
-    getIcon(o: { isResponsibleCenter: boolean }) {
-        return css.get(icon, o.isResponsibleCenter ? isResponsibleCenter : null);
-    },
+    getIcon: (o: { isResponsibleCenter: boolean }) =>
+        css.get(icon, o.isResponsibleCenter ? isResponsibleCenter : null),
 
-    getLeftIcon(isActive: boolean, letfIconColour: string) {
-        return css.get(leftIcon, isActive ? leftIconActive : null, letfIconColour ? { color: letfIconColour } : null);
-    },
+    getLeftIcon: (isActive: boolean, letfIconColour: string) =>
+        css.get(leftIcon, isActive ? leftIconActive : null, letfIconColour ? { color: letfIconColour } : null),
 
-    getIconSets() {
-        return css.get(iconSets);
-    },
-    getIconSet(icon: string) {
-        return css.get(iconSet, { backgroundImage: `url(${icon})` });
-    },
+    getIconSets: () => css.get(iconSets),
+    getIconSet: (icon: string) => css.get(iconSet, { backgroundImage: `url(${icon})` }),
+    getNumbers: (isActive: boolean) => css.get(numbers, isActive ? numbersActive : null),
 
-    getNumbers(isActive: boolean) {
-        return css.get(numbers, isActive ? numbersActive : null);
-    },
-
-    getNumbersStatus(numb: number, length: number) {
+    getNumbersStatus: (numb: number, length: number) => {
         const percent = utils.toPercent(numb, length);
         let color: string = null;
         if (percent >= 90) {
