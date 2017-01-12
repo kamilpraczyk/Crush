@@ -1,4 +1,4 @@
-##Introduction
+## Introduction
 Learn english app. See on: http://www.clingykoala.com/
 
 - Based on Typescript, using React and Redux architecture - no Redux included, reducers spread.
