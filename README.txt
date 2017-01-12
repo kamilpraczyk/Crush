@@ -1,4 +1,2 @@
 
-tests:
-npm install tsd -g
-
+view on: http://www.clingykoala.com/
