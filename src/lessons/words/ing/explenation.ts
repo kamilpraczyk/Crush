@@ -1,14 +1,10 @@
-/// <reference path="../../../../typings/tsd.d.ts" />
-
 import {tList} from '../../helper/renderer';
 let exp: any[] = [];
-
 
 exp.push(tList({
     t: "When we add <p>ing</p> to a verb, we have to <p>take care</p> with spelling.",
     list: []
 }));
-
 
 exp.push(tList({
     t: "Remember to drop the <p>e</p> and add <p>-ing</p>.",

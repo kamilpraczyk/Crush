@@ -12,7 +12,6 @@ interface UnderscoreStatic {
     bindt<T>(
         func: T,
         context: any): T;
-
 }
 
 

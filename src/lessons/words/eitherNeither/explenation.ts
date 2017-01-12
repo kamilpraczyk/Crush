@@ -1,8 +1,5 @@
-/// <reference path="../../../../typings/tsd.d.ts" />
-
 import {tList} from '../../helper/renderer';
 let exp: any[] = [];
-
 
 exp.push(tList({
     t: "<p>Either</p>... <p>or</p> is used to offer a choice between two possibilities",

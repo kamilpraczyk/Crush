@@ -1,4 +1,3 @@
-/// <reference path="../typings/tsd.d.ts" />
 import sinon = require('sinon');
 import expect = require('expect.js');
 import _ = require("underscore");
@@ -9,12 +8,10 @@ describe('Lessons -', () => {
 
     beforeEach(() => mock());
 
-    xit('print sentences and check them ', () => {
+    xit(' ', () => {
 
         goThrough(data => {
-            //  console.log(data.title);
-            // console.log(data.name);
-            // data.correct && console.log(data.correct.join(' '));
+          
         });
     });
 

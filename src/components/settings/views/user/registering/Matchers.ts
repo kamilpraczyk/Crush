@@ -1,5 +1,3 @@
-
-/// <reference path="../../../../../../typings/tsd.d.ts" />
 import dictionary = require('../../../../../utils/dictionary');
 import utils = require('../../../../../utils/utils');
 import Promise = require("bluebird");

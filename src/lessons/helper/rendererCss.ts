@@ -1,4 +1,3 @@
-/// <reference path="../../../typings/tsd.d.ts" />
 import _ = require('underscore');
 import React = require('react');
 import utils = require('../../utils/utils');

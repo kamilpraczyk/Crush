@@ -1,4 +1,3 @@
-/// <reference path="../../../../typings/tsd.d.ts" />
 import { RawData } from '../../../types';
 import { TypeId, id } from '../../helper/constants';
 import explenation = require('./explenation');

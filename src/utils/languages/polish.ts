@@ -1,6 +1,3 @@
-/// <reference path="../../../typings/tsd.d.ts" />
-const dictonary = {
-    LOGIN_HEADER: '',
-}
+const dictonary = {}
 
 export = dictonary;

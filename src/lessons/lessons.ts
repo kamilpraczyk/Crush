@@ -1,4 +1,3 @@
-/// <reference path="../../typings/tsd.d.ts" />
 import { LessonsCatalog } from '../services/LessonsCatalog';
 import { FreeType } from '../types';
 import Promise = require('bluebird');

@@ -1,4 +1,3 @@
-/// <reference path="../../../typings/tsd.d.ts" />
 import { iconsSets } from '../../utils/css/theme';
 import _ = require('underscore');
 import { APIState } from '../../services';

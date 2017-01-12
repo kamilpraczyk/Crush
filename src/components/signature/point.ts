@@ -1,4 +1,3 @@
-/// <reference path="../../../typings/tsd.d.ts" />
 class Point {
 
     constructor(public x: any, public y: any, public time?: any) {

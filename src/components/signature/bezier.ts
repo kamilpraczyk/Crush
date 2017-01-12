@@ -1,4 +1,3 @@
-/// <reference path="../../../typings/tsd.d.ts" />
 export default class Bezier {
 
   constructor(public startPoint:any,public control1:any,public control2:any,public endPoint:any) {

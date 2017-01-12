@@ -1,4 +1,3 @@
-/// <reference path="../../../typings/tsd.d.ts" />
 import React = require('react');
 import css = require('../../utils/css/css');
 import ButtonView = require('../../components/button/ButtonView');

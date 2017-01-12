@@ -1,4 +1,3 @@
-/// <reference path="../../typings/tsd.d.ts" />
 import dictionary = require('../utils/dictionary');
 import { TypeId } from '../lessons/helper/constants';
 

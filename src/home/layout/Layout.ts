@@ -1,5 +1,4 @@
 
-/// <reference path="../../../typings/tsd.d.ts" />
 import React = require('react');
 import SettingsRootView = require('../../components/settings/SettingsRootView');
 import BoardView = require('../../components/board/BoardView');

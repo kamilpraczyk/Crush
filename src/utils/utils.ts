@@ -1,4 +1,3 @@
-/// <reference path="../../typings/tsd.d.ts" />
 import _ = require("underscore");
 import keys = require("./keys/keys");
 import { capital } from '../lessons/helper/constants';

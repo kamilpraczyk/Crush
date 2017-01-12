@@ -1,4 +1,3 @@
-/// <reference path="../../typings/tsd.d.ts" />
 import Promise = require("bluebird");
 import {TimeOutError, InvalidServerDataError, ServerRequestError}  from '../types';
 

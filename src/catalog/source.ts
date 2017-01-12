@@ -1,5 +1,3 @@
-/// <reference path="../../typings/tsd.d.ts" />
-
 const baseUrl = "http://clingykoala.com/crush";
 
 const source = {
@@ -14,7 +12,6 @@ const source = {
     cancelPage: '/cancel.html',
     successPage: '/success.html'
 }
-
 
 function getUrl(part: string): string {
     return baseUrl + part;

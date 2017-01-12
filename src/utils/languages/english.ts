@@ -1,4 +1,3 @@
-/// <reference path="../../../typings/tsd.d.ts" />
 const dictonary = {
 
     menu: {
@@ -70,8 +69,6 @@ const dictonary = {
     ERROR_REGISTERING_NO_EMAIL: 'Please enter an email.',
     ERROR_REGISTERING_INVALID_EMAIL: 'Email is invalid.',
     ERROR_REGISTERING_PASSWORD_TO_SHORT: 'Password is to short.',
-
-
 
     // INFO_BROWSER: 'Please use latest Chrome, Firefox, Edge or Opera browser for an audio experience.',
     AUDIO_LANGUAGE: 'Audio language'

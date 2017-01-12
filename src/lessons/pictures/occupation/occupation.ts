@@ -1,4 +1,3 @@
-/// <reference path="../../../../typings/tsd.d.ts" />
 import { RawData } from '../../../types';
 import _ = require('underscore');
 import { space, TypeId, id, getRest } from '../../helper/constants';
