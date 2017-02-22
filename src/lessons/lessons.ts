@@ -1,4 +1,4 @@
-import { LessonsCatalog } from '../services/LessonsCatalog';
+import { LessonsCatalogStore } from '../services/stores';
 import { FreeType } from '../types';
 import Promise = require('bluebird');
 import config = require('../generated-config');
@@ -76,8 +76,8 @@ import synonymsGL = require('./synonyms/gl/synonymsGL');
 import synonymsLS = require('./synonyms/ls/synonymsLS');
 import synonymsSW = require('./synonyms/sw/synonymsSW');
 
-function getLessons(lessonsCatalog: LessonsCatalog) {
-    return new Promise<LessonsCatalog>((resolve) => {
+function getLessons(lessonsCatalog: LessonsCatalogStore) {
+    return new Promise<LessonsCatalogStore>((resolve) => {
 
         //TODO offer some for free and some when registered, and rest when subscribed
         lessonsCatalog.add(FreeType.alwaysFree_____, 'A___0', verbEndings);

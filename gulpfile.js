@@ -80,7 +80,6 @@ gulp.task('saveConfig', function() {
 
 
 gulp.task('_compileSource', function() {
-    var mocha = require('gulp-mocha');
     var tsProject = ts.createProject('tsconfig.json');
     return gulp.src(['src/**/*.ts'])
         .pipe(ts(tsProject)).js
@@ -102,7 +101,7 @@ gulp.task('_test', function() {
 });
 
 gulp.task('openBrowser', function() {
-    gulp.src(config.www.index).pipe(open({ app: 'firefox' }));//'firefox', 'chrome'
+    gulp.src(config.www.index).pipe(open({ app: 'chrome' }));//'firefox', 'chrome'
 });
 
 gulp.task("watch", function() {

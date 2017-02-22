@@ -1,182 +1,40 @@
-import _ = require('underscore');
-import components = require('../components/components');
-import { isFree } from '../lessons/helper/constants';
-import { PassState, Pass } from '../services/Pass';
-import { Voice, ReturnVoice } from '../services/voice';
+import * as reducers from './reducers';
 import { events, renderEvent } from '../events';
 import { RootType } from '../types';
-import { RootMenu, RootMenuState } from '../services/RootMenu';
-import { getLessons } from '../lessons/lessons';
-import { LessonsCatalog, LessonsCatalogReturnState } from '../services/LessonsCatalog';
-import { cookies, CookieReturn } from './cookie';
 import config = require('../generated-config');
 import Promise = require('bluebird');
+import {
+    PassState, PassStore, RootMenuState, RootMenuStore, CookieStore, VoiceStore, VoiceState,
+    LessonsCatalogStore, LessonsCatalogState
+} from './stores';
 
 interface State {
     isDirty: boolean,
     apiState: APIState
     subscribers: any[],
-    pass: Pass,
-    voice: Voice,
-    lessonsCatalog: LessonsCatalog,
-    rootMenu: RootMenu,
-    cookies: CookieReturn
+    passStore: PassStore,
+    voiceStore: VoiceStore,
+    lessonsCatalogStore: LessonsCatalogStore,
+    rootMenuStore: RootMenuStore,
+    cookiesStore: CookieStore,
+    publishRerender: () => Promise<void>
 }
 
 interface APIState {
     isProduction: boolean,
     rootMenu: RootMenuState,
-    lessonsCatalog: LessonsCatalogReturnState
+    lessonsCatalog: LessonsCatalogState
     pass: PassState,
-    voice: ReturnVoice
+    voice: VoiceState
 }
 
 let state: State = null;
 
 function publishRerender() {
     state.isDirty = true;
-    return renderEvent.publish();
+    renderEvent.publish();
+    return Promise.resolve();
 }
-
-function onChangeVoice(name: string) {
-    state.voice.setVoice(name);
-    publishRerender();
-}
-
-function onRootMenuEvent(id: RootType) {
-    state.rootMenu.setRootMenuTo(id);
-    publishRerender();
-}
-
-function onLoadNewLessonEvent(uid: string) {
-    state.lessonsCatalog.setActiveLesson(uid);
-    state.rootMenu.setRootMenuTo(RootType.explenation);
-    state.rootMenu.resetExplenationScroll();
-    publishRerender();
-}
-
-function goTest() {
-    state.rootMenu.setRootMenuTo(RootType.close);
-    publishRerender();
-}
-
-function onSaveStatusBoardEvent(data: { uid: string, status: number }) {
-
-    state.pass.startSaveStatus(() => publishRerender())
-        .then(() => state.rootMenu.setRootMenuTo(RootType.lessons))
-        .then(() => state.pass.saveStatus(data))
-        .then(() => state.lessonsCatalog.setNumberFinished(data.uid, data.status))
-        .finally(() => onCloseStatusBoardEvent());
-}
-
-function onCloseStatusBoardEvent() {
-    state.rootMenu.setRootMenuTo(RootType.lessons);
-    state.lessonsCatalog.resetActiveLesson();
-    publishRerender();
-}
-
-function onShowRootMenu() {
-    state.rootMenu.showMenu(false);
-    publishRerender();
-}
-
-function onNextBoard() {
-    state.lessonsCatalog.board.onNextBoard();
-    state.voice.stopReading();
-    publishRerender();
-}
-function onNextRandomBoard() {
-    state.lessonsCatalog.board.onNextRandomBoard();
-    state.voice.stopReading();
-    publishRerender();
-}
-function onPrevBoard() {
-    state.lessonsCatalog.board.onPrevBoard();
-    state.voice.stopReading();
-    publishRerender();
-}
-function setUserAnswer(name: string) {
-    const isCompletedBoard = state.lessonsCatalog.board.boardAnswer.setUserAnswer(name);
-    _.isBoolean(isCompletedBoard) && state.lessonsCatalog.board.setCompletedBoard(isCompletedBoard);
-    publishRerender();
-}
-function onRead(read: string) {
-    state.voice.read(read);
-}
-function onToogleSupportHelp() {
-    state.lessonsCatalog.board.boardAnswer.toggleSupportHelp();
-    publishRerender();
-}
-
-function _onLogin(o: { email: string, password: string }) {
-    return state.pass.startLogin(() => publishRerender())
-        .then(() => state.pass.login(o))
-        .then(() => publishRerender())
-        .then(() => state.pass.updataLastLogin())
-        .then(() => state.pass.readStatus({ email: state.pass.getStatus().user.email }))
-        .then(data => {
-            if (data && data.state && data.state.length) {
-                data.state.map(item => state.lessonsCatalog.setNumberFinished(item.name, parseInt(item.value)));
-            }
-        })
-}
-
-function onLogin(o: { email: string, password: string }) {
-    return _onLogin(o).finally(() => publishRerender());
-}
-
-function onLogOut() {
-    state.pass.logout();
-    state.lessonsCatalog.resetAllNumberFinished();
-    publishRerender();
-}
-
-function onToogleRegisterView() {
-    state.pass.toogleRegister();
-    publishRerender();
-}
-
-function onRegisterOnServer(o: { name: string, email: string, password: string, retypePassword: string }) {
-
-    return state.pass.startRegister(() => publishRerender())
-        .then(() => state.pass.register(o))
-        .then(() => state.pass.sendEmailGreeting(o))
-        .then(() => state.pass.login(o))
-        .finally(() => publishRerender());
-}
-
-function onSubscribeOnServer(valid_to: string) {
-
-    return state.pass.startSubscribe(() => publishRerender())
-        .then(() => state.pass.subscribe({ email: state.pass.getStatus().user.email, valid_to: valid_to }))
-        .finally(() => publishRerender());
-}
-
-
-function onScrollPosition(top: number) {
-    state.rootMenu.setScrollPosition(top);
-    state.isDirty = true;
-    //do not rerender but the state is dirty
-}
-
-function loadCookie() {
-    const cookie = state.cookies.getCookie();
-    if (cookie) {
-        cookie.rootId && state.rootMenu.setRootMenuTo(cookie.rootId);
-        cookie.rootScroll && state.rootMenu.setScrollPosition(cookie.rootScroll);
-        cookie.voiceName && state.voice.setVoice(cookie.voiceName);
-        state.rootMenu.showMenu(cookie.rootIsMinimalized);
-        if (cookie.lessonUid) {
-            const lesson = state.lessonsCatalog.getLessonByUid(cookie.lessonUid);
-            if (lesson && isFree(getState(), lesson.freeType))
-                state.lessonsCatalog.setActiveLesson(cookie.lessonUid);
-        }
-    }
-    return Promise.resolve(null);
-}
-
-
-function loadLessons() { return getLessons(state.lessonsCatalog); }
 
 
 function init(window: Window) {
@@ -184,62 +42,59 @@ function init(window: Window) {
     state = {
         isDirty: true,
         apiState: null,
-        pass: new Pass(),
-        voice: new Voice(),
-        cookies: cookies(window),
-        lessonsCatalog: new LessonsCatalog(),
-        rootMenu: new RootMenu(RootType.lessons),
+        passStore: new PassStore(),
+        voiceStore: new VoiceStore(),
+        cookiesStore: new CookieStore(window),
+        lessonsCatalogStore: new LessonsCatalogStore(),
+        rootMenuStore: new RootMenuStore(RootType.lessons),
+        publishRerender,
         subscribers: [
-            events.onLogin.subscribe(onLogin),
-            events.onLogOut.subscribe(onLogOut),
-            events.onToogleRegisterView.subscribe(onToogleRegisterView),
-            events.onRegisterOnServer.subscribe(onRegisterOnServer),
-            events.onSubscribeOnServer.subscribe(onSubscribeOnServer),
-            events.readEvent.subscribe(onRead),
-            events.rootMenuEvent.subscribe(onRootMenuEvent),
-            events.showRootMenu.subscribe(onShowRootMenu),
-            events.loadNewLessonEvent.subscribe(onLoadNewLessonEvent), //click to load new lesson on menu
-            events.goTest.subscribe(goTest),
-            events.closeStatusBoardEvent.subscribe(onCloseStatusBoardEvent),
-            events.saveStatusBoardEvent.subscribe(onSaveStatusBoardEvent),
-            events.onNextBoard.subscribe(onNextBoard),
-            events.onNextRandomBoard.subscribe(onNextRandomBoard),
-            events.onPrevBoard.subscribe(onPrevBoard),
-            events.onChoosePicture.subscribe(setUserAnswer),
-            events.onChooseRadio.subscribe(setUserAnswer),
-            events.onChooseOneTwoThree.subscribe(setUserAnswer),
-            events.onChooseMultiRadio.subscribe(setUserAnswer),
-            events.onToogleSupportHelp.subscribe(onToogleSupportHelp),
-            events.scrollPosition.subscribe(onScrollPosition),
-            events.onChangeVoice.subscribe(onChangeVoice),
+            events.onLogin.subscribe(o => reducers.onLogin(state, o)),
+            events.onLogOut.subscribe(() => reducers.onLogOut(state)),
+            events.onToogleRegisterView.subscribe(() => reducers.onToogleRegisterView(state)),
+            events.onRegisterOnServer.subscribe(o => reducers.onRegisterOnServer(state, o)),
+            events.onSubscribeOnServer.subscribe(o => reducers.onSubscribeOnServer(state, o)),
+            events.readEvent.subscribe(o => reducers.onRead(state, o)),
+            events.rootMenuEvent.subscribe(o => reducers.onRootMenuEvent(state, o)),
+            events.showRootMenu.subscribe(() => reducers.onShowRootMenu(state)),
+            events.loadNewLessonEvent.subscribe(o => reducers.onLoadNewLessonEvent(state, o)), //click to load new lesson on menu
+            events.goTest.subscribe(() => reducers.goTest(state)),
+            events.closeStatusBoardEvent.subscribe(() => reducers.onCloseStatusBoardEvent(state)),
+            events.saveStatusBoardEvent.subscribe(o => reducers.onSaveStatusBoardEvent(state, o)),
+            events.onNextBoard.subscribe(() => reducers.onNextBoard(state)),
+            events.onNextRandomBoard.subscribe(() => reducers.onNextRandomBoard(state)),
+            events.onPrevBoard.subscribe(() => reducers.onPrevBoard(state)),
+            events.onChoosePicture.subscribe(o => reducers.setUserAnswer(state, o)),
+            events.onChooseRadio.subscribe(o => reducers.setUserAnswer(state, o)),
+            events.onChooseOneTwoThree.subscribe(o => reducers.setUserAnswer(state, o)),
+            events.onChooseMultiRadio.subscribe(o => reducers.setUserAnswer(state, o)),
+            events.onToogleSupportHelp.subscribe(() => reducers.onToogleSupportHelp(state)),
+            events.scrollPosition.subscribe(o => reducers.onScrollPosition(state, o)),
+            events.onChangeVoice.subscribe(o => reducers.onChangeVoice(state, o)),
         ]
     }
 
-    const cookie = state.cookies.getCookie();
+    const cookie = state.cookiesStore.getCookie();
     if (cookie && cookie.password && cookie.login) {
-        //use strict
-        return loadLessons()
-            .then(() => _onLogin({ email: cookie.login, password: cookie.password }))
-            .then(() => loadCookie())
-            .then(() => publishRerender())
+        return state.lessonsCatalogStore.getLessons()
+            .then(() => reducers.onLogin(state, { email: cookie.login, password: cookie.password }))
+            .then(() => reducers.loadCookie(state))
     }
 
-    return loadLessons()
-        .then(() => loadCookie())
-        .then(() => publishRerender());
+    return state.lessonsCatalogStore.getLessons().then(() => reducers.loadCookie(state))
 }
 
 function updateAPIState(state: State) {
     state.isDirty = false;
-    const pass = state.pass.getStatus();
+    const pass = state.passStore.getStatus();
     state.apiState = {
         isProduction: config.isProduction,
-        voice: state.voice.getState(),
-        rootMenu: state.rootMenu.getState(),
-        lessonsCatalog: state.lessonsCatalog.getState(pass),
+        voice: state.voiceStore.getState(),
+        rootMenu: state.rootMenuStore.getState(),
+        lessonsCatalog: state.lessonsCatalogStore.getState(pass),
         pass,
     };
-    state.cookies.setCookie(state.apiState);
+    state.cookiesStore.setCookie(state.apiState);
     return state.apiState;
 }
 
@@ -252,6 +107,7 @@ function getState(): APIState {
 export {
     init,
     getState,
+    State,
     APIState
 };
 

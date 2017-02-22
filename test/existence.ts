@@ -18,7 +18,6 @@ describe('Existence for -', () => {
 
         it('if exist then should not be empty', () => goThrough(data => {
             if (data.incorrect) {
-                if (data.incorrect.length === 0) console.log(data);
                 expect(data.incorrect.length).to.be.greaterThan(0);
             }
         }));
